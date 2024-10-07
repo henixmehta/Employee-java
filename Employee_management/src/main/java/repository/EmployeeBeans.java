@@ -4,7 +4,11 @@
  */
 package repository;
 
+import entity.UserMaster;
+import java.util.Collection;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -13,6 +17,13 @@ import javax.ejb.Stateless;
 @Stateless
 public class EmployeeBeans implements EmployeeBeansLocal {
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @PersistenceContext(unitName = "my_per_unit")
+    EntityManager em;
+    @Override
+    public Collection<UserMaster> getAllEmployee() {
+        Collection<UserMaster> emp = em.createNamedQuery("UserMaster.findAll").getResultList();
+        return emp;
+    }
+    
+    
 }

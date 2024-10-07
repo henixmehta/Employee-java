@@ -4,7 +4,7 @@
  */
 package repository;
 
-import entity.UserMaster;
+import entity.SkillsMaster;
 import java.util.Collection;
 import javax.ejb.Local;
 
@@ -13,7 +13,8 @@ import javax.ejb.Local;
  * @author Henil
  */
 @Local
-public interface EmployeeBeansLocal {
+public interface SkillMasterLocal {
 
-    Collection<UserMaster> getAllEmployee();
+    Collection<SkillsMaster> getAllSkill();
+
 }

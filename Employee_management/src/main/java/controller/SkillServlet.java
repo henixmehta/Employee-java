@@ -4,7 +4,7 @@
  */
 package controller;
 
-import entity.UserMaster;
+import entity.SkillsMaster;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -15,15 +15,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import repository.EmployeeBeansLocal;
+import repository.SkillMasterLocal;
 
 /**
  *
  * @author Henil
  */
-@WebServlet(name = "UserServlet", urlPatterns = {"/UserServlet"})
-public class UserServlet extends HttpServlet {
-    @EJB EmployeeBeansLocal empbean;
-    
+@WebServlet(name = "SkillServlet", urlPatterns = {"/SkillServlet"})
+public class SkillServlet extends HttpServlet {
+
+    @EJB
+    SkillMasterLocal SkillMasterbean;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,16 +44,20 @@ public class UserServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserServlet</title>");            
+            out.println("<title>Servlet SkillServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserServlet at " + request.getContextPath() + "</h1>");
-            
-            Collection<UserMaster> emp = empbean.getAllEmployee();
-            for(UserMaster e : emp){
-                out.println(" User Name : " + e.getUserName());
+
+            Collection<SkillsMaster> skills = SkillMasterbean.getAllSkill();
+
+            for (SkillsMaster s : skills) {
+
+                out.println("<br/> Get Skill Name : " + s.getSkillId());
+                out.println("<br/> Get Skill Name : " + s.getSkillName());
+
             }
-            
+
+            out.println("<h1>Servlet SkillServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
