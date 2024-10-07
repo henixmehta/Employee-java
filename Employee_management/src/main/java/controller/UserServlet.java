@@ -14,7 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import repository.EmployeeBeansLocal;
+import repository.EmployeeRepositoryLocal;
 
 /**
  *
@@ -22,7 +22,7 @@ import repository.EmployeeBeansLocal;
  */
 @WebServlet(name = "UserServlet", urlPatterns = {"/UserServlet"})
 public class UserServlet extends HttpServlet {
-    @EJB EmployeeBeansLocal empbean;
+    @EJB EmployeeRepositoryLocal empbean;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

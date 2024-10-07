@@ -14,8 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import repository.EmployeeBeansLocal;
-import repository.SkillMasterLocal;
+import repository.EmployeeRepositoryLocal;
+import repository.SkillMasterRepositoryLocal;
 
 /**
  *
@@ -25,7 +25,7 @@ import repository.SkillMasterLocal;
 public class SkillServlet extends HttpServlet {
 
     @EJB
-    SkillMasterLocal SkillMasterbean;
+    SkillMasterRepositoryLocal SkillMasterbean;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

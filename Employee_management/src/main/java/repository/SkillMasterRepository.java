@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Henil
  */
 @Stateless
-public class SkillMaster implements SkillMasterLocal {
+public class SkillMasterRepository implements SkillMasterRepositoryLocal {
 
     @PersistenceContext(unitName = "my_per_unit")
     EntityManager em;

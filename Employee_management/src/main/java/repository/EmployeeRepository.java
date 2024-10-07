@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
  * @author Henil
  */
 @Stateless
-public class EmployeeBeans implements EmployeeBeansLocal {
+public class EmployeeRepository implements EmployeeRepositoryLocal {
 
     @PersistenceContext(unitName = "my_per_unit")
     EntityManager em;
