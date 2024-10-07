@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/J2EE/EJB30/StatelessEjbClass.java to edit this template
- */
 package repository;
 
 import entity.SkillsMaster;
@@ -10,25 +6,19 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author Henil
- */
 @Stateless
 public class SkillMasterRepository implements SkillMasterRepositoryLocal {
 
-    @PersistenceContext(unitName = "my_per_unit")
-    EntityManager em;
-     
+     @PersistenceContext(unitName = "my_per_unit")
+    private EntityManager em;
 
     @Override
     public Collection<SkillsMaster> getAllSkill() {
-        //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-
-        Collection<SkillsMaster>  Skills = em.createNamedQuery("SkillsMaster.findAll").getResultList();
-        return Skills;
+        return em.createNamedQuery("SkillsMaster.findAll").getResultList();
     }
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    @Override
+    public void addSkill(SkillsMaster skill) {
+        em.persist(skill); // Persist the new skill
+    }
 }
