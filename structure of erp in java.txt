@@ -1,0 +1,36 @@
+|-- src
+|   |-- main
+|       |-- java
+|       |   |-- com.example.app
+|       |       |-- controller
+|       |       |   |-- EmployeeController.java
+|       |       |   |-- AdminController.java
+|       |       |   |-- ManagerController.java
+|       |       |-- service
+|       |       |   |-- EmployeeService.java
+|       |       |   |-- AdminService.java
+|       |       |   |-- ManagerService.java
+|       |       |-- entity
+|       |       |   |-- Employee.java
+|       |       |   |-- Admin.java
+|       |       |   |-- Manager.java
+|       |       |-- dao
+|       |           |-- EmployeeDAO.java
+|       |           |-- AdminDAO.java
+|       |           |-- ManagerDAO.java
+|       |-- resources
+|       |   |-- META-INF
+|       |   |   |-- persistence.xml
+|       |   |-- webapp
+|       |       |-- WEB-INF
+|       |       |   |-- web.xml
+|       |       |-- templates
+|       |       |   |-- employee
+|       |       |   |   |-- employeeDashboard.xhtml
+|       |       |   |-- admin
+|       |       |   |   |-- adminDashboard.xhtml
+|       |       |   |-- manager
+|       |       |       |-- managerDashboard.xhtml
+|       |-- webapp
+|           |-- index.xhtml
+|-- pom.xml
