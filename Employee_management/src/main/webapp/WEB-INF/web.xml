@@ -6,8 +6,8 @@
     <display-name>Employee Management</display-name>
 
     <!-- Welcome File -->
-    <welcome-file-list>
-        <welcome-file>skills.xhtml</welcome-file> <!-- Your main welcome file -->
+      <welcome-file-list>
+        <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
 
     <!-- Servlet Configuration -->
