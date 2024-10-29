@@ -1,43 +1,44 @@
-<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-         version="3.1">
-
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>Employee Management</display-name>
-
     <!-- Welcome File -->
-      <welcome-file-list>
+    <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-
     <!-- Servlet Configuration -->
     <servlet>
         <servlet-name>FacesServlet</servlet-name>
         <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>FacesServlet</servlet-name>
-        <url-pattern>*.xhtml</url-pattern> <!-- Handles JSF pages -->
+        <url-pattern>*.xhtml</url-pattern>
+        <!-- Handles JSF pages -->
     </servlet-mapping>
-
     <!-- Context Parameters (optional) -->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value> <!-- Change to Production for deployment -->
+        <param-value>Development</param-value>
+        <!-- Change to Production for deployment -->
     </context-param>
-
     <!-- Session Configuration -->
     <session-config>
-        <session-timeout>30</session-timeout> <!-- Session timeout in minutes -->
+        <session-timeout>30</session-timeout>
+        <!-- Session timeout in minutes -->
     </session-config>
-
     <!-- EJB Local Reference -->
     <ejb-local-ref>
-        <ejb-ref-name>ejb/SkillMasterRepositoryLocal</ejb-ref-name> <!-- Adjusted naming convention -->
+        <ejb-ref-name>AdminSessionBean</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
-        <local>repository.SkillMasterRepositoryLocal</local>
+        <local>ejb.AdminSessionBeanLocal</local>
+        <ejb-link>AdminSessionBean</ejb-link>
     </ejb-local-ref>
-
+    <ejb-local-ref>
+        <ejb-ref-name>ManagerSessionBean</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>ejb.ManagerSessionBeanLocal</local>
+        <ejb-link>ManagerSessionBean</ejb-link>
+    </ejb-local-ref>
+   
 </web-app>

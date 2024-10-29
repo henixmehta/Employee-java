@@ -1,5 +1,6 @@
 package com.mycompany.employee_management.resources;
 
+import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("rest")
 public class JakartaEE8Resource {
+    
     
     @GET
     public Response ping(){
