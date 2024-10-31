@@ -40,7 +40,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public void addSkill(SkillsMaster skill) {
-        em.persist(skill); // Persist the new skill
+//        System.out.println("Persisting skill: " + skill);
+        em.persist(skill);
+        em.flush(); // Ensure the data is persisted immediately
+
     }
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
@@ -59,7 +62,5 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         }
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
 }

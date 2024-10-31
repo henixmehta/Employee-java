@@ -36,9 +36,17 @@ public class ManagerClient {
         webTarget = client.target(BASE_URI).path("manager");
     }
 
-    public <T> T addSkill(GenericType<T> responseType) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    public Response addSkill(SkillsMaster newSkill) throws ClientErrorException {
+        return webTarget.request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(newSkill, MediaType.APPLICATION_JSON));
+    }
+
+//    public <T> T addSkill(GenericType<T> responseType) throws ClientErrorException {
+//        WebTarget resource = webTarget;
+//        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+//    }
+    public <T> T getAllSkills(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+        return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public Response updateSkill(int skillId, Object requestEntity) throws ClientErrorException {
@@ -48,10 +56,6 @@ public class ManagerClient {
     }
 
     // Method to get all skills (assuming it returns a collection of skills)
-    public <T> T getAllSkills(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
-        return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
-    }
-
     // Method to delete a skill by ID
     public Response deleteSkill(int skillId) throws ClientErrorException {
         return webTarget.path(String.valueOf(skillId))
@@ -61,10 +65,6 @@ public class ManagerClient {
 
     public void close() {
         client.close();
-    }
-
-    public void addSkill(SkillsMaster newSkill) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

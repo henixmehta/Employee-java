@@ -7,11 +7,13 @@ package cdi;
 import client.ManagerClient;
 import entity.SkillsMaster;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.ws.rs.core.GenericType;
 
 /**
@@ -19,12 +21,14 @@ import javax.ws.rs.core.GenericType;
  * @author Henil
  */
 @Named(value = "managerBeans")
-@Dependent
-public class ManagerBeans {
+@ViewScoped
+public class ManagerBeans implements Serializable {
 
     private ManagerClient managerClient;
     private Collection<SkillsMaster> skillsList;
     private SkillsMaster newSkill; // Declare newSkill
+    private Long selectedSkillId; // To hold the ID of the skill to update
+
     private final GenericType<Collection<SkillsMaster>> genericType = new GenericType<Collection<SkillsMaster>>() {
     };
 
@@ -37,13 +41,14 @@ public class ManagerBeans {
     public void init() {
         managerClient = new ManagerClient();
         skillsList = managerClient.getAllSkills(genericType); // Load skills list on initialization
-        managerClient.close(); // Close client after fetching data
     }
+//    display skills
 
     public Collection<SkillsMaster> getSkillsList() {
         return skillsList;
     }
 
+//    insert skill
     public SkillsMaster getNewSkill() {
         return newSkill;
     }
@@ -54,20 +59,40 @@ public class ManagerBeans {
 
     public void addSkill() throws IOException {
         try {
-            managerClient.addSkill(newSkill); // Call addSkill API
-            skillsList = managerClient.getAllSkills(genericType); // Refresh skills list
-
-            // Reset the new skill instance
-            newSkill = new SkillsMaster(); // Re-initialize newSkills after adding
-
-            // Refresh page by redirecting
-            FacesContext.getCurrentInstance().getExternalContext().redirect("skills.xhtml");
-
+            managerClient.addSkill(newSkill);
+            skillsList = managerClient.getAllSkills(genericType); // Refresh list
+            newSkill = new SkillsMaster(); // Reset form
+            FacesContext.getCurrentInstance().getExternalContext().redirect("skill.xhtml");
         } catch (Exception e) {
-            e.printStackTrace(); // Log the exception
+            e.printStackTrace();
         } finally {
-            managerClient.close(); // Ensure client is closed
+            managerClient.close();
         }
     }
 
+//    public Long getSelectedSkillId() {
+//        return selectedSkillId;
+//    }
+//
+//    public void setSelectedSkillId(Long selectedSkillId) {
+//        this.selectedSkillId = selectedSkillId;
+//        fetchSkillDetails(selectedSkillId);
+//    }
+//
+//    public void updateSkill() {
+//        if (newSkill != null && newSkill.getSkillId() != null) {
+//            skillService.updateSkill(newSkill);
+//            skillsList = skillService.getAllSkills(); // Refresh the list
+//            newSkill = new SkillsMaster(); // Reset
+//        }
+//    }
+//
+//    public void deleteSkill(Long skillId) {
+//        skillService.deleteSkill(skillId.intValue());
+//        skillsList = skillService.getAllSkills(); // Refresh the list
+//    }
+//
+//    private void fetchSkillDetails(Long skillId) {
+//        newSkill = skillService.getSkillById(skillId.intValue());
+//    }
 }

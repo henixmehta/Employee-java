@@ -47,11 +47,20 @@ public class ManagerResource {
         return msbl.getAllSkill();
     }
 
+//    @POST
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public Response addSkill(SkillsMaster skill) {
+//        msbl.addSkill(skill);
+//        return Response.status(Response.Status.CREATED).entity(skill).build();
+//    }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response addSkill(SkillsMaster skill) {
-        msbl.addSkill(skill);
-        return Response.status(Response.Status.CREATED).build();
+        // Log the incoming skill object
+        System.out.println("Received Skill: " + skill.getSkillName() + ", Description: " + skill.getDescription());
+
+        msbl.addSkill(skill); // Add skill using session bean
+        return Response.status(Response.Status.CREATED).entity(skill).build();
     }
 
     @PUT
