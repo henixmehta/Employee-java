@@ -35,32 +35,25 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         } catch (Exception e) {
             return null;
         }
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void addSkill(SkillsMaster skill) {
-//        System.out.println("Persisting skill: " + skill);
         em.persist(skill);
-        em.flush(); // Ensure the data is persisted immediately
-
+        em.flush();
     }
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
 
     @Override
     public void updateSkill(SkillsMaster skill) {
         em.merge(skill);
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void deleteskill(int skillId) {
         SkillsMaster skill = em.find(SkillsMaster.class, skillId);
         if (skill != null) {
-            em.remove(skill);
+            em.remove(skill); // Delete skill
         }
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

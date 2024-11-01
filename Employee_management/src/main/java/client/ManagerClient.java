@@ -58,7 +58,7 @@ public class ManagerClient {
     // Method to get all skills (assuming it returns a collection of skills)
     // Method to delete a skill by ID
     public Response deleteSkill(int skillId) throws ClientErrorException {
-        return webTarget.path(String.valueOf(skillId))
+        return webTarget.path(String.valueOf(skillId)) // Append the skillId to the path
                 .request()
                 .delete();
     }

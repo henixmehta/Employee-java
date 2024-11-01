@@ -85,12 +85,13 @@ public class ManagerResource {
     public Response deleteSkill(@PathParam("id") int id) {
         SkillsMaster skill = msbl.getSkillById(id);
         if (skill != null) {
-            msbl.deleteskill(id);
+            msbl.deleteskill(id); // Use session bean to delete the skill
             return Response.status(Response.Status.NO_CONTENT).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
+
     /**
      * Retrieves representation of an instance of rest.ManagerResource
      *

@@ -87,11 +87,16 @@ public class ManagerBeans implements Serializable {
 //        }
 //    }
 //
-//    public void deleteSkill(Long skillId) {
-//        skillService.deleteSkill(skillId.intValue());
-//        skillsList = skillService.getAllSkills(); // Refresh the list
-//    }
-//
+    // ManagerBeans.java
+    public void deleteSkill(Long skillId) {
+        try {
+            managerClient.deleteSkill(skillId.intValue()); // Delete skill by ID through REST client
+            skillsList = managerClient.getAllSkills(genericType); // Refresh the skills list after deletion
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 //    private void fetchSkillDetails(Long skillId) {
 //        newSkill = skillService.getSkillById(skillId.intValue());
 //    }
