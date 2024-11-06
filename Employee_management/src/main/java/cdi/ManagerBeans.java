@@ -1,102 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSF/JSFManagedBean.java to edit this template
- */
 package cdi;
 
 import client.ManagerClient;
+import entity.HolidayMaster;
 import entity.SkillsMaster;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
 
-/**
- *
- * @author Henil
- */
 @Named(value = "managerBeans")
-@ViewScoped
+@SessionScoped
 public class ManagerBeans implements Serializable {
 
     private ManagerClient managerClient;
     private Collection<SkillsMaster> skillsList;
-    private SkillsMaster newSkill; // Declare newSkill
-    private int selectedSkillId; // To hold the ID of the skill to update
-
-    private final GenericType<Collection<SkillsMaster>> genericType = new GenericType<Collection<SkillsMaster>>() {
+    private Collection<HolidayMaster> holidaysList;
+    private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
+    };
+    private final GenericType<Collection<HolidayMaster>> holidaysGenericType = new GenericType<Collection<HolidayMaster>>() {
     };
 
     public ManagerBeans() {
         managerClient = new ManagerClient();
-        newSkill = new SkillsMaster(); // Initialize newSkill here
     }
 
     @PostConstruct
     public void init() {
-        managerClient = new ManagerClient();
-        skillsList = managerClient.getAllSkills(genericType); // Load skills list on initialization
+        try {
+            managerClient = new ManagerClient();
+            skillsList = managerClient.getAllSkills(skillsGenericType);
+            holidaysList = managerClient.getAllHolidays(holidaysGenericType);
+
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
     }
-//    display skills
 
     public Collection<SkillsMaster> getSkillsList() {
         return skillsList;
     }
 
-//    insert skill
-//    public SkillsMaster getNewSkill() {
-//        return newSkill;
-//    }
-//
-//    public void setNewSkill(SkillsMaster newSkill) {
-//        this.newSkill = newSkill;
-//    }
-//
-//    public void addSkill() throws IOException {
-//        try {
-//            managerClient.addSkill(newSkill);
-////            skillsList = managerClient.getAllSkills(genericType); // Refresh list
-//            newSkill = new SkillsMaster(); // Reset form
-//            FacesContext.getCurrentInstance().getExternalContext().redirect("skill.xhtml");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-////            managerClient.close();
-//        }
-//    }
+    public Collection<HolidayMaster> getHolidaysList() {
+        return holidaysList;
+    }
 
-//    public Long getSelectedSkillId() {
-//        return selectedSkillId;
-//    }
-//
-//    public void setSelectedSkillId(Long selectedSkillId) {
-//        this.selectedSkillId = selectedSkillId;
-//        fetchSkillDetails(selectedSkillId);
-//    }
-//
-//    public void updateSkill() {
-//        if (newSkill != null && newSkill.getSkillId() != null) {
-//            skillService.updateSkill(newSkill);
-//            skillsList = skillService.getAllSkills(); // Refresh the list
-//            newSkill = new SkillsMaster(); // Reset
-//        }
-//    }
-//
-    // ManagerBeans.java
-//    public void deleteSkill(Long skillId) {
-//        try {
-////            managerClient.deleteSkill(skillId.intValue()); // Delete skill by ID through REST client
-////            skillsList = managerClient.getAllSkills(genericType); // Refresh the skills list after deletion
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void fetchSkillDetails(Long skillId) {
-//        newSkill = skillService.getSkillById(skillId.intValue());
-//    }
+    public void closeClient() {
+        managerClient.close();
+    }
 }

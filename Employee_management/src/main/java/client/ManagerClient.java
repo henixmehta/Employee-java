@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -41,7 +42,6 @@ public class ManagerClient {
 //        return webTarget.request(MediaType.APPLICATION_JSON)
 //                .post(Entity.entity(newSkill, MediaType.APPLICATION_JSON));
 //    }
-
     public <T> T getAllSkills(GenericType<T> responseType) throws ClientErrorException {
         return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
     }
@@ -62,12 +62,29 @@ public class ManagerClient {
 //    }
 //
 //    // Holiday management methods
-    public Collection<HolidayMaster> getAllHolidays() throws ClientErrorException {
-        return webTarget.path("holidays")
-                .request(MediaType.APPLICATION_JSON)
-                .get(new GenericType<Collection<HolidayMaster>>() {
-                });
+//    public Collection<HolidayMaster> getAllHolidays() throws ClientErrorException {
+//        return webTarget.path("holidays")
+//                .request(MediaType.APPLICATION_JSON)
+//                .get(new GenericType<Collection<HolidayMaster>>() {
+//                });
+//    }
+//    public Collection<HolidayMaster> getAllHolidays() {
+//        Client client = ClientBuilder.newClient();
+//        return client.target(BASE_URI)
+//                .request(MediaType.APPLICATION_JSON)
+//                .get(new GenericType<Collection<HolidayMaster>>() {
+//                });
+//    }
+    
+     public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
+         WebTarget resource = webTarget;
+        resource = resource.path("holidays");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+
     }
+
+    
+    
 //
 //    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
