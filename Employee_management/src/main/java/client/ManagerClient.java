@@ -1,10 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/WebServices/JerseyClient.java to edit this template
- */
 package client;
 
+import entity.HolidayMaster;
 import entity.SkillsMaster;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -36,29 +36,59 @@ public class ManagerClient {
         webTarget = client.target(BASE_URI).path("manager");
     }
 
+    // Skill management methods
     public Response addSkill(SkillsMaster newSkill) throws ClientErrorException {
         return webTarget.request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(newSkill, MediaType.APPLICATION_JSON));
     }
 
-//    public <T> T addSkill(GenericType<T> responseType) throws ClientErrorException {
-//        WebTarget resource = webTarget;
-//        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-//    }
-    public <T> T getAllSkills(javax.ws.rs.core.GenericType<T> responseType) throws ClientErrorException {
+    public <T> T getAllSkills(GenericType<T> responseType) throws ClientErrorException {
         return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public Response updateSkill(int skillId, Object requestEntity) throws ClientErrorException {
+    public Response updateSkill(int skillId, SkillsMaster updatedSkill) throws ClientErrorException {
         return webTarget.path(String.valueOf(skillId)) // Append the skillId to the path
                 .request(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(requestEntity, MediaType.APPLICATION_JSON), Response.class);
+                .put(Entity.entity(updatedSkill, MediaType.APPLICATION_JSON), Response.class);
     }
 
-    // Method to get all skills (assuming it returns a collection of skills)
-    // Method to delete a skill by ID
-    public Response deleteSkill(int skillId) throws ClientErrorException {
-        return webTarget.path(String.valueOf(skillId)) // Append the skillId to the path
+    public void deleteSkill(int skillId) throws ClientErrorException {
+        WebTarget target = client.target(BASE_URI).path("skills").path(String.valueOf(skillId));
+        Response response = target.request().delete(); // Make the DELETE request
+
+        if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
+            throw new ClientErrorException("Failed to delete skill, response code: " + response.getStatus(), response.getStatus());
+        }
+    }
+
+    // Holiday management methods
+    public Collection<HolidayMaster> getAllHolidays() throws ClientErrorException {
+        return webTarget.path("holidays")
+                .request(MediaType.APPLICATION_JSON)
+                .get(new GenericType<Collection<HolidayMaster>>() {
+                });
+    }
+
+    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(holidayDate);
+
+        // Construct the URL for the holiday addition endpoint with `add` subpath
+        return webTarget.path("add")
+                .path(desc)
+                .path(formattedDate)
+                .request()
+                .post(null);  // POST request without a request body
+    }
+
+    public Response updateHoliday(int holidayId, HolidayMaster holiday) throws ClientErrorException {
+        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
+                .request(MediaType.APPLICATION_JSON)
+                .put(Entity.entity(holiday, MediaType.APPLICATION_JSON));
+    }
+
+    public Response deleteHoliday(int holidayId) throws ClientErrorException {
+        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
                 .request()
                 .delete();
     }
@@ -66,5 +96,4 @@ public class ManagerClient {
     public void close() {
         client.close();
     }
-
 }

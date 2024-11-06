@@ -4,8 +4,10 @@
  */
 package ejb;
 
+import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.util.Collection;
+import java.util.Date;
 import javax.ejb.Local;
 
 /**
@@ -15,14 +17,20 @@ import javax.ejb.Local;
 @Local
 public interface ManagerSessionBeanLocal {
 
+    //===  Skills
     Collection<SkillsMaster> getAllSkill();
-
-     SkillsMaster getSkillById(int skillId);
-   
-    
+    SkillsMaster getSkillById(int skillId);
     void addSkill(SkillsMaster skill);
-
     void updateSkill(SkillsMaster skill);
-
     void deleteskill(int skillId);
+
+    //===  Holidays
+    void addHoliday(String desc, Date holidayDate);
+    void updateHoliday(Integer holidayId, String desc, Date holidayDate);
+    void removeHoliday(Integer holidayId);
+    Collection<HolidayMaster> getAllHolidays();
+    Collection<HolidayMaster> getAllHolidaysByDescription(String description);
+    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
+    HolidayMaster getHolidayById(Integer holidayId);
+
 }

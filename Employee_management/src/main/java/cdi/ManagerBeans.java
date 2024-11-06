@@ -40,7 +40,7 @@ public class ManagerBeans implements Serializable {
     @PostConstruct
     public void init() {
         managerClient = new ManagerClient();
-        skillsList = managerClient.getAllSkills(genericType); // Load skills list on initialization
+//        skillsList = managerClient.getAllSkills(responseType); // Load skills list on initialization
     }
 //    display skills
 
@@ -60,13 +60,13 @@ public class ManagerBeans implements Serializable {
     public void addSkill() throws IOException {
         try {
             managerClient.addSkill(newSkill);
-            skillsList = managerClient.getAllSkills(genericType); // Refresh list
+//            skillsList = managerClient.getAllSkills(genericType); // Refresh list
             newSkill = new SkillsMaster(); // Reset form
             FacesContext.getCurrentInstance().getExternalContext().redirect("skill.xhtml");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            managerClient.close();
+//            managerClient.close();
         }
     }
 
@@ -90,8 +90,8 @@ public class ManagerBeans implements Serializable {
     // ManagerBeans.java
     public void deleteSkill(Long skillId) {
         try {
-            managerClient.deleteSkill(skillId.intValue()); // Delete skill by ID through REST client
-            skillsList = managerClient.getAllSkills(genericType); // Refresh the skills list after deletion
+//            managerClient.deleteSkill(skillId.intValue()); // Delete skill by ID through REST client
+//            skillsList = managerClient.getAllSkills(genericType); // Refresh the skills list after deletion
         } catch (Exception e) {
             e.printStackTrace();
         }
