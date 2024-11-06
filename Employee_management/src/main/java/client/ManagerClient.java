@@ -37,61 +37,61 @@ public class ManagerClient {
     }
 
     // Skill management methods
-    public Response addSkill(SkillsMaster newSkill) throws ClientErrorException {
-        return webTarget.request(MediaType.APPLICATION_JSON)
-                .post(Entity.entity(newSkill, MediaType.APPLICATION_JSON));
-    }
+//    public Response addSkill(SkillsMaster newSkill) throws ClientErrorException {
+//        return webTarget.request(MediaType.APPLICATION_JSON)
+//                .post(Entity.entity(newSkill, MediaType.APPLICATION_JSON));
+//    }
 
     public <T> T getAllSkills(GenericType<T> responseType) throws ClientErrorException {
         return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public Response updateSkill(int skillId, SkillsMaster updatedSkill) throws ClientErrorException {
-        return webTarget.path(String.valueOf(skillId)) // Append the skillId to the path
-                .request(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(updatedSkill, MediaType.APPLICATION_JSON), Response.class);
-    }
-
-    public void deleteSkill(int skillId) throws ClientErrorException {
-        WebTarget target = client.target(BASE_URI).path("skills").path(String.valueOf(skillId));
-        Response response = target.request().delete(); // Make the DELETE request
-
-        if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-            throw new ClientErrorException("Failed to delete skill, response code: " + response.getStatus(), response.getStatus());
-        }
-    }
-
-    // Holiday management methods
+//    public Response updateSkill(int skillId, SkillsMaster updatedSkill) throws ClientErrorException {
+//        return webTarget.path(String.valueOf(skillId)) // Append the skillId to the path
+//                .request(MediaType.APPLICATION_JSON)
+//                .put(Entity.entity(updatedSkill, MediaType.APPLICATION_JSON), Response.class);
+//    }
+//
+//    public void deleteSkill(int skillId) throws ClientErrorException {
+//        WebTarget target = client.target(BASE_URI).path("skills").path(String.valueOf(skillId));
+//        Response response = target.request().delete(); // Make the DELETE request
+//
+//        if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
+//            throw new ClientErrorException("Failed to delete skill, response code: " + response.getStatus(), response.getStatus());
+//        }
+//    }
+//
+//    // Holiday management methods
     public Collection<HolidayMaster> getAllHolidays() throws ClientErrorException {
         return webTarget.path("holidays")
                 .request(MediaType.APPLICATION_JSON)
                 .get(new GenericType<Collection<HolidayMaster>>() {
                 });
     }
-
-    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = dateFormat.format(holidayDate);
-
-        // Construct the URL for the holiday addition endpoint with `add` subpath
-        return webTarget.path("add")
-                .path(desc)
-                .path(formattedDate)
-                .request()
-                .post(null);  // POST request without a request body
-    }
-
-    public Response updateHoliday(int holidayId, HolidayMaster holiday) throws ClientErrorException {
-        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
-                .request(MediaType.APPLICATION_JSON)
-                .put(Entity.entity(holiday, MediaType.APPLICATION_JSON));
-    }
-
-    public Response deleteHoliday(int holidayId) throws ClientErrorException {
-        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
-                .request()
-                .delete();
-    }
+//
+//    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
+//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        String formattedDate = dateFormat.format(holidayDate);
+//
+//        // Construct the URL for the holiday addition endpoint with `add` subpath
+//        return webTarget.path("add")
+//                .path(desc)
+//                .path(formattedDate)
+//                .request()
+//                .post(null);  // POST request without a request body
+//    }
+//
+//    public Response updateHoliday(int holidayId, HolidayMaster holiday) throws ClientErrorException {
+//        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
+//                .request(MediaType.APPLICATION_JSON)
+//                .put(Entity.entity(holiday, MediaType.APPLICATION_JSON));
+//    }
+//
+//    public Response deleteHoliday(int holidayId) throws ClientErrorException {
+//        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
+//                .request()
+//                .delete();
+//    }
 
     public void close() {
         client.close();

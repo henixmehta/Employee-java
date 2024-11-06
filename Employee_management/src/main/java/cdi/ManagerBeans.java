@@ -11,7 +11,6 @@ import java.io.Serializable;
 import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.ws.rs.core.GenericType;
@@ -27,20 +26,20 @@ public class ManagerBeans implements Serializable {
     private ManagerClient managerClient;
     private Collection<SkillsMaster> skillsList;
     private SkillsMaster newSkill; // Declare newSkill
-    private Long selectedSkillId; // To hold the ID of the skill to update
+    private int selectedSkillId; // To hold the ID of the skill to update
 
     private final GenericType<Collection<SkillsMaster>> genericType = new GenericType<Collection<SkillsMaster>>() {
     };
 
     public ManagerBeans() {
-        // Initialize newSkill in the constructor
+        managerClient = new ManagerClient();
         newSkill = new SkillsMaster(); // Initialize newSkill here
     }
 
     @PostConstruct
     public void init() {
         managerClient = new ManagerClient();
-//        skillsList = managerClient.getAllSkills(responseType); // Load skills list on initialization
+        skillsList = managerClient.getAllSkills(genericType); // Load skills list on initialization
     }
 //    display skills
 
@@ -49,26 +48,26 @@ public class ManagerBeans implements Serializable {
     }
 
 //    insert skill
-    public SkillsMaster getNewSkill() {
-        return newSkill;
-    }
-
-    public void setNewSkill(SkillsMaster newSkill) {
-        this.newSkill = newSkill;
-    }
-
-    public void addSkill() throws IOException {
-        try {
-            managerClient.addSkill(newSkill);
-//            skillsList = managerClient.getAllSkills(genericType); // Refresh list
-            newSkill = new SkillsMaster(); // Reset form
-            FacesContext.getCurrentInstance().getExternalContext().redirect("skill.xhtml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-//            managerClient.close();
-        }
-    }
+//    public SkillsMaster getNewSkill() {
+//        return newSkill;
+//    }
+//
+//    public void setNewSkill(SkillsMaster newSkill) {
+//        this.newSkill = newSkill;
+//    }
+//
+//    public void addSkill() throws IOException {
+//        try {
+//            managerClient.addSkill(newSkill);
+////            skillsList = managerClient.getAllSkills(genericType); // Refresh list
+//            newSkill = new SkillsMaster(); // Reset form
+//            FacesContext.getCurrentInstance().getExternalContext().redirect("skill.xhtml");
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+////            managerClient.close();
+//        }
+//    }
 
 //    public Long getSelectedSkillId() {
 //        return selectedSkillId;
@@ -88,14 +87,14 @@ public class ManagerBeans implements Serializable {
 //    }
 //
     // ManagerBeans.java
-    public void deleteSkill(Long skillId) {
-        try {
-//            managerClient.deleteSkill(skillId.intValue()); // Delete skill by ID through REST client
-//            skillsList = managerClient.getAllSkills(genericType); // Refresh the skills list after deletion
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void deleteSkill(Long skillId) {
+//        try {
+////            managerClient.deleteSkill(skillId.intValue()); // Delete skill by ID through REST client
+////            skillsList = managerClient.getAllSkills(genericType); // Refresh the skills list after deletion
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 //    private void fetchSkillDetails(Long skillId) {
 //        newSkill = skillService.getSkillById(skillId.intValue());

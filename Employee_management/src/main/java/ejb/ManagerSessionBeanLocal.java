@@ -19,18 +19,18 @@ public interface ManagerSessionBeanLocal {
 
     //===  Skills
     Collection<SkillsMaster> getAllSkill();
-    SkillsMaster getSkillById(int skillId);
-    void addSkill(SkillsMaster skill);
-    void updateSkill(SkillsMaster skill);
-    void deleteskill(int skillId);
+//    SkillsMaster getSkillById(int skillId);
+//    void addSkill(SkillsMaster skill);
+//    void updateSkill(SkillsMaster skill);
+//    void deleteskill(int skillId);
 
     //===  Holidays
-    void addHoliday(String desc, Date holidayDate);
-    void updateHoliday(Integer holidayId, String desc, Date holidayDate);
-    void removeHoliday(Integer holidayId);
+//    void addHoliday(String desc, Date holidayDate);
+//    void updateHoliday(Integer holidayId, String desc, Date holidayDate);
+//    void removeHoliday(Integer holidayId);
     Collection<HolidayMaster> getAllHolidays();
-    Collection<HolidayMaster> getAllHolidaysByDescription(String description);
-    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
-    HolidayMaster getHolidayById(Integer holidayId);
+//    Collection<HolidayMaster> getAllHolidaysByDescription(String description);
+//    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
+//    HolidayMaster getHolidayById(Integer holidayId);
 
 }

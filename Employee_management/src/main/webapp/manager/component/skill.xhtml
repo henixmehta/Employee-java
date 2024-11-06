@@ -25,27 +25,9 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Actions</f:facet>
-                    <h:commandButton value="Edit" action="#{managerBeans.setSelectedSkillId(skill.skillId)}" />
-                    <h:commandButton value="Delete" action="#{managerBeans.deleteSkill(skill.skillId)}" immediate="true" />
                 </h:column>
             </h:dataTable>
 
-            <!-- Form for adding and updating skills -->
-            <h3>Add / Update Skill</h3>
-            <h:panelGrid columns="2" cellpadding="5">
-                <h:outputLabel for="skillName" value="Skill Name:" />
-                <h:inputText id="skillName" value="#{managerBeans.newSkill.skillName}" required="true" />
-
-                <h:outputLabel for="description" value="Description:" />
-                <h:inputText id="description" value="#{managerBeans.newSkill.description}" required="true" />
-            </h:panelGrid>
-
-            <!-- Buttons for Add and Update actions -->
-            <h:commandButton value="Add Skill" action="#{managerBeans.addSkill}" />
-            <h:commandButton value="Update Skill" action="#{managerBeans.updateSkill}" rendered="#{not empty managerBeans.newSkill.skillId}" />
-
-            <!-- Global messages display for feedback -->
-            <h:messages globalOnly="true" />
         </h:form>
     </h:body>
 </html>
