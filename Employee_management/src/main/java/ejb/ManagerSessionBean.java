@@ -1,5 +1,6 @@
 package ejb;
 
+import entity.AssetsMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.util.Collection;
@@ -34,7 +35,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            return null;
 //        }
 //    }
-
 //    @Override
 //    public void addSkill(SkillsMaster skill) {
 //        em.persist(skill);
@@ -55,7 +55,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            System.out.println("Skill not found: " + skillId);
 //        }
 //    }
-
     //=== Holidays methods implementation
 //    @Override
 //    public void addHoliday(String desc, Date holidayDate) {
@@ -74,7 +73,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            em.merge(holiday);
 //        }
 //    }
-
 //    @Override
 //    public void removeHoliday(Integer holidayId) {
 //        HolidayMaster holiday = em.find(HolidayMaster.class, holidayId);
@@ -82,7 +80,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            em.remove(holiday);
 //        }
 //    }
-
     @Override
     public Collection<HolidayMaster> getAllHolidays() {
         return em.createNamedQuery("HolidayMaster.findAll", HolidayMaster.class).getResultList();
@@ -106,4 +103,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //    public HolidayMaster getHolidayById(Integer holidayId) {
 //        return em.find(HolidayMaster.class, holidayId);
 //    }
+    @Override
+    public Collection<AssetsMaster> getAllAssets() {
+        return em.createNamedQuery("AssetsMaster.findAll", AssetsMaster.class).getResultList();
+    }
 }

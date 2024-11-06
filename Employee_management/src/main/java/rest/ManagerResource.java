@@ -1,6 +1,7 @@
 package rest;
 
 import ejb.ManagerSessionBeanLocal;
+import entity.AssetsMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.text.ParseException;
@@ -61,7 +62,6 @@ public class ManagerResource {
 //            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
 //        }
 //    }
-
     //==== Holidays Management Endpoints ====
     @GET
     @Path("holidays")
@@ -110,4 +110,11 @@ public class ManagerResource {
 //            return Response.status(Response.Status.NOT_FOUND).entity("Holiday not found").build();
 //        }
 //    }
+     @GET
+    @Path("assets")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AssetsMaster> getAllAssets() {
+        return msbl.getAllAssets();
+    }
+
 }

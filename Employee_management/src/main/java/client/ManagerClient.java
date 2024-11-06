@@ -1,18 +1,10 @@
 package client;
 
-import entity.HolidayMaster;
-import entity.SkillsMaster;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * Jersey REST client generated for REST resource:ManagerResource [manager]<br>
@@ -75,16 +67,19 @@ public class ManagerClient {
 //                .get(new GenericType<Collection<HolidayMaster>>() {
 //                });
 //    }
-    
-     public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
-         WebTarget resource = webTarget;
+    public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
         resource = resource.path("holidays");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
 
     }
 
-    
-    
+    public <T> T getAllAssets(GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("assets");
+        return resource.request(MediaType.APPLICATION_JSON).get(responseType);
+    }
+
 //
 //    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -109,7 +104,6 @@ public class ManagerClient {
 //                .request()
 //                .delete();
 //    }
-
     public void close() {
         client.close();
     }

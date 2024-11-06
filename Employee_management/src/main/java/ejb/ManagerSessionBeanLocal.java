@@ -4,6 +4,7 @@
  */
 package ejb;
 
+import entity.AssetsMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.util.Collection;
@@ -32,5 +33,7 @@ public interface ManagerSessionBeanLocal {
 //    Collection<HolidayMaster> getAllHolidaysByDescription(String description);
 //    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
 //    HolidayMaster getHolidayById(Integer holidayId);
+
+    Collection<AssetsMaster> getAllAssets();
 
 }
