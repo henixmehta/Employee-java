@@ -18,7 +18,7 @@ import javax.ws.rs.core.GenericType;
 @SessionScoped
 public class ManagerBeans implements Serializable {
 
-    private final ManagerClient managerClient;
+    private  ManagerClient managerClient;
     private Collection<SkillsMaster> skillsList;
     private Collection<HolidayMaster> holidaysList;
     private Collection<AssetsMaster> assetsList;
@@ -48,6 +48,8 @@ public class ManagerBeans implements Serializable {
     @PostConstruct
     public void init() {
         try {
+            managerClient = new ManagerClient();
+
             skillsList = managerClient.getAllSkills(skillsGenericType);
             holidaysList = managerClient.getAllHolidays(holidaysGenericType);
             assetsList = managerClient.getAllAssets(assetsGenericType);
