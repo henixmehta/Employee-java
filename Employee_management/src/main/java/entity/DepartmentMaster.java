@@ -6,6 +6,8 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbProperty;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,9 +46,11 @@ public class DepartmentMaster implements Serializable {
     private Integer deptId;
     @Size(max = 50)
     @Column(name = "dept_name")
+//    @JsonbProperty
     private String deptName;
     @Size(max = 100)
     @Column(name = "description")
+//    @JsonbProperty
     private String description;
     @JoinColumn(name = "manager_id", referencedColumnName = "user_id")
     @ManyToOne
@@ -95,7 +99,7 @@ public class DepartmentMaster implements Serializable {
         this.managerId = managerId;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<DesignationMaster> getDesignationMasterCollection() {
         return designationMasterCollection;
     }
@@ -104,7 +108,7 @@ public class DepartmentMaster implements Serializable {
         this.designationMasterCollection = designationMasterCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<UserDetails> getUserDetailsCollection() {
         return userDetailsCollection;
     }
@@ -137,5 +141,5 @@ public class DepartmentMaster implements Serializable {
     public String toString() {
         return "com.mycompany.employee_module.DepartmentMaster[ deptId=" + deptId + " ]";
     }
-    
+
 }

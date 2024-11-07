@@ -1,5 +1,8 @@
 package client;
 
+import entity.DepartmentMaster;
+import entity.UserMaster;
+import java.util.Collection;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
@@ -38,34 +41,19 @@ public class ManagerClient {
         return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
-//    public Response updateSkill(int skillId, SkillsMaster updatedSkill) throws ClientErrorException {
-//        return webTarget.path(String.valueOf(skillId)) // Append the skillId to the path
-//                .request(MediaType.APPLICATION_JSON)
-//                .put(Entity.entity(updatedSkill, MediaType.APPLICATION_JSON), Response.class);
-//    }
-//
-//    public void deleteSkill(int skillId) throws ClientErrorException {
-//        WebTarget target = client.target(BASE_URI).path("skills").path(String.valueOf(skillId));
-//        Response response = target.request().delete(); // Make the DELETE request
-//
-//        if (response.getStatus() != Response.Status.NO_CONTENT.getStatusCode()) {
-//            throw new ClientErrorException("Failed to delete skill, response code: " + response.getStatus(), response.getStatus());
-//        }
-//    }
-//
-//    // Holiday management methods
-//    public Collection<HolidayMaster> getAllHolidays() throws ClientErrorException {
-//        return webTarget.path("holidays")
-//                .request(MediaType.APPLICATION_JSON)
-//                .get(new GenericType<Collection<HolidayMaster>>() {
-//                });
-//    }
-//    public Collection<HolidayMaster> getAllHolidays() {
-//        Client client = ClientBuilder.newClient();
-//        return client.target(BASE_URI)
-//                .request(MediaType.APPLICATION_JSON)
-//                .get(new GenericType<Collection<HolidayMaster>>() {
-//                });
+    public void addSkill(Object requestEntity, String sname, String desc) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addskill/{0}/{1}", new Object[]{sname, desc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public <T> T getAllDepartments(GenericType<T> responseType) throws ClientErrorException {
+
+        WebTarget resource = webTarget;
+        resource = resource.path("departments");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
+//    public void addDepartment(Object requestEntity, String deptname, String deptdesc) {
+//        webTarget.path(java.text.MessageFormat.format("adddepartment/{0}/{1}", new Object[]{deptname, deptdesc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
 //    }
     public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
@@ -79,12 +67,7 @@ public class ManagerClient {
         resource = resource.path("assets");
         return resource.request(MediaType.APPLICATION_JSON).get(responseType);
     }
-
-    public void addSkill(Object requestEntity, String sname, String desc) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("addskill/{0}/{1}", new Object[]{sname, desc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-    }
-
-//
+//  
 //    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        String formattedDate = dateFormat.format(holidayDate);
@@ -108,7 +91,9 @@ public class ManagerClient {
 //                .request()
 //                .delete();
 //    }
+
     public void close() {
         client.close();
     }
+
 }

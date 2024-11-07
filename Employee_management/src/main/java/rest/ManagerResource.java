@@ -2,17 +2,14 @@ package rest;
 
 import ejb.ManagerSessionBeanLocal;
 import entity.AssetsMaster;
+import entity.DepartmentMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 @Path("manager")
 @RequestScoped
@@ -34,6 +31,20 @@ public class ManagerResource {
     public void addSkill(@PathParam("sname") String sname, @PathParam("desc") String desc) {
         msbl.addSkill(sname, desc);
     }
+    
+    @GET
+    @Path("departments")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<DepartmentMaster> getAllDepartments() {
+        return msbl.getAllDepartments();
+    }
+
+//    @POST
+//    @Path("adddepartment/{deptname}/{deptdesc}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public void addDepartment(@PathParam("deptname") String dname, @PathParam("deptdesc") String deptdesc) {
+//        msbl.addDepartment(dname, deptdesc);
+//    }
 //
 //    @PUT
 //    @Path("{id}")

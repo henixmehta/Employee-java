@@ -8,6 +8,18 @@
     <h:body>
         <h:form>
             <h2>Assets List</h2>
+            <h2>Add New Asset</h2>
+
+            <!-- Skill Name Input -->
+            <h:outputLabel for="sname" value="Skill Name:" />
+            <h:inputText id="sname" value="#{managerBeans.sname}" required="true" />
+
+            <!-- Skill Description Input -->
+            <h:outputLabel for="desc" value="Description:" />
+            <h:inputText id="desc" value="#{managerBeans.desc}" required="true" />
+
+            <!-- Submit Button to Add Skill -->
+            <h:commandButton value="Add Skill" action="#{managerBeans.addSkill}" />
 
             <!-- Table for displaying skills -->
             <h:dataTable value="#{managerBeans.assetsList}" var="asset" border="1">
