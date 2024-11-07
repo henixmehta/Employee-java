@@ -29,7 +29,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         SkillsMaster skill = new SkillsMaster();
         skill.setSkillName(sname);
         skill.setDescription(desc);
-
         em.persist(skill);
     }
 
@@ -38,10 +37,21 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         return em.createNamedQuery("HolidayMaster.findAll", HolidayMaster.class).getResultList();
     }
 
+<<<<<<< HEAD
+=======
+    @Override
+    public void addHoliday(String desc, Date holidayDate) {
+        HolidayMaster h = new HolidayMaster();
+        h.setDescription(desc);
+        h.setHolidayDate(holidayDate);
+        em.persist(h);
+    }
+>>>>>>> 67364a8e6a81643c95e278c3bf07b4ae69e0c903
     @Override
     public Collection<AssetsMaster> getAllAssets() {
         return em.createNamedQuery("AssetsMaster.findAll", AssetsMaster.class).getResultList();
     }
+<<<<<<< HEAD
     
     @Override
     public Collection<DepartmentMaster> getAllDepartments() {
@@ -58,4 +68,13 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        em.persist(dept);
 //    }
 
+=======
+
+    @Override
+    public void addAsset(String assetName) {
+        AssetsMaster asset = new AssetsMaster();
+        asset.setAssetName(assetName);
+        em.persist(asset);
+    }
+>>>>>>> 67364a8e6a81643c95e278c3bf07b4ae69e0c903
 }

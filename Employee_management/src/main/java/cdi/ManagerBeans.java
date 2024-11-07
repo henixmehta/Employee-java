@@ -7,6 +7,7 @@ import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -17,14 +18,18 @@ import javax.ws.rs.core.GenericType;
 @SessionScoped
 public class ManagerBeans implements Serializable {
 
-    private ManagerClient managerClient;
+    private final ManagerClient managerClient;
     private Collection<SkillsMaster> skillsList;
     private Collection<HolidayMaster> holidaysList;
     private Collection<AssetsMaster> assetsList;
     private Collection<DepartmentMaster> departmentList;
 
-    private String sname;
-    private String desc;
+    private String sname; // Skill name
+    private String desc; // Skill description
+    private String holidayDesc; // Holiday description
+    private Date holidayDate; // Holiday date
+
+    private String assetName; // Asset name
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
     };
@@ -35,6 +40,7 @@ public class ManagerBeans implements Serializable {
     private final GenericType<Collection<DepartmentMaster>> deptGenericType = new GenericType<Collection<DepartmentMaster>>() {
     };
 
+    // Generic types for REST client responses
     public ManagerBeans() {
 //        managerClient = new ManagerClient();
     }
@@ -42,7 +48,6 @@ public class ManagerBeans implements Serializable {
     @PostConstruct
     public void init() {
         try {
-            managerClient = new ManagerClient();
             skillsList = managerClient.getAllSkills(skillsGenericType);
             holidaysList = managerClient.getAllHolidays(holidaysGenericType);
             assetsList = managerClient.getAllAssets(assetsGenericType);
@@ -54,27 +59,21 @@ public class ManagerBeans implements Serializable {
         }
     }
 
-    // Method to get the current skills list
+    // Skill management methods
     public Collection<SkillsMaster> getSkillsList() {
         return skillsList;
     }
 
-    // Add skill to the list
     public void addSkill() {
         try {
-            // Create the SkillsMaster object from the user input values
             SkillsMaster newSkill = new SkillsMaster();
             newSkill.setSkillName(sname);
             newSkill.setDescription(desc);
 
-            // Call the managerClient to send the newSkill object to the REST API
             managerClient.addSkill(newSkill, sname, desc);
-
-            // Refresh the skills list after adding the new skill
             skillsList = managerClient.getAllSkills(skillsGenericType);
-
-            sname = "";
-            desc = "";
+            sname = ""; // Clear after adding
+            desc = ""; // Clear after adding
         } catch (ClientErrorException e) {
         }
     }
@@ -83,10 +82,26 @@ public class ManagerBeans implements Serializable {
         return departmentList;
     }
 
+    // Holiday management methods
     public Collection<HolidayMaster> getHolidaysList() {
         return holidaysList;
     }
 
+    public void addHoliday() {
+        try {
+            HolidayMaster newHoliday = new HolidayMaster();
+            newHoliday.setDescription(holidayDesc);
+            newHoliday.setHolidayDate(holidayDate);
+            managerClient.addHoliday(newHoliday, holidayDesc, holidayDate);
+            holidaysList = managerClient.getAllHolidays(holidaysGenericType);
+            holidayDesc = ""; // Reset after adding
+            holidayDate = null; // Reset after adding
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Asset management methods
     public Collection<AssetsMaster> getAssetsList() {
         return assetsList;
     }
@@ -111,6 +126,20 @@ public class ManagerBeans implements Serializable {
 //    }
 //
 //    // Getters and Setters for sname and desc (used by JSF to bind form input)
+    public void addAsset() {
+        try {
+            AssetsMaster newAsset = new AssetsMaster();
+            newAsset.setAssetName(assetName);
+
+            managerClient.addAssets(newAsset, assetName);
+            assetsList = managerClient.getAllAssets(assetsGenericType);
+            assetName = ""; // Clear after adding
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Getters and setters for skill, holiday, and asset fields
     public String getSname() {
         return sname;
     }
@@ -125,6 +154,30 @@ public class ManagerBeans implements Serializable {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public String getHolidayDesc() {
+        return holidayDesc;
+    }
+
+    public void setHolidayDesc(String holidayDesc) {
+        this.holidayDesc = holidayDesc;
+    }
+
+    public Date getHolidayDate() {
+        return holidayDate;
+    }
+
+    public void setHolidayDate(Date holidayDate) {
+        this.holidayDate = holidayDate;
+    }
+
+    public String getAssetName() {
+        return assetName;
+    }
+
+    public void setAssetName(String assetName) {
+        this.assetName = assetName;
     }
 
     public void closeClient() {

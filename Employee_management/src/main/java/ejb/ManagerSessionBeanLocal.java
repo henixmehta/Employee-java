@@ -20,6 +20,7 @@ public interface ManagerSessionBeanLocal {
 
     //===  Skills
     Collection<SkillsMaster> getAllSkill();
+<<<<<<< HEAD
     void addSkill(String sname, String desc);
    
     Collection<HolidayMaster> getAllHolidays();
@@ -28,4 +29,26 @@ public interface ManagerSessionBeanLocal {
     
     Collection<DepartmentMaster> getAllDepartments();
 //    void addDepartment(String deptname, String description); 
+=======
+//    SkillsMaster getSkillById(int skillId);
+
+    void addSkill(String sname, String desc);
+//    void updateSkill(SkillsMaster skill);
+//    void deleteskill(int skillId);
+
+    //===  Holidays
+    Collection<HolidayMaster> getAllHolidays();
+
+    void addHoliday(String desc, Date holidayDate);
+//    void updateHoliday(Integer holidayId, String desc, Date holidayDate);
+//    void removeHoliday(Integer holidayId);
+//    Collection<HolidayMaster> getAllHolidaysByDescription(String description);
+//    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
+//    HolidayMaster getHolidayById(Integer holidayId);
+//===  Assets
+    Collection<AssetsMaster> getAllAssets();
+
+    void addAsset(String assetName);
+
+>>>>>>> 67364a8e6a81643c95e278c3bf07b4ae69e0c903
 }

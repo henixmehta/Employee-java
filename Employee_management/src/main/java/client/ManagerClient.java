@@ -1,13 +1,14 @@
 package client;
-
 import entity.DepartmentMaster;
 import entity.UserMaster;
 import java.util.Collection;
+import java.util.Date;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 /**
  * Jersey REST client generated for REST resource:ManagerResource [manager]<br>
@@ -32,11 +33,6 @@ public class ManagerClient {
         webTarget = client.target(BASE_URI).path("manager");
     }
 
-    // Skill management methods
-//    public Response addSkill(SkillsMaster newSkill) throws ClientErrorException {
-//        return webTarget.request(MediaType.APPLICATION_JSON)
-//                .post(Entity.entity(newSkill, MediaType.APPLICATION_JSON));
-//    }
     public <T> T getAllSkills(GenericType<T> responseType) throws ClientErrorException {
         return webTarget.request(MediaType.APPLICATION_JSON).get(responseType);
     }
@@ -55,13 +51,16 @@ public class ManagerClient {
 //    public void addDepartment(Object requestEntity, String deptname, String deptdesc) {
 //        webTarget.path(java.text.MessageFormat.format("adddepartment/{0}/{1}", new Object[]{deptname, deptdesc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
 //    }
+
     public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("holidays");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
 
     }
-
+    public Response addHoliday(Object requestEntity, String Desc, Date HolidayDate) throws ClientErrorException {
+        return webTarget.path(java.text.MessageFormat.format("addholiday/{0}/{1}", new Object[]{Desc, HolidayDate})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON), Response.class);
+    }
     public <T> T getAllAssets(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("assets");
@@ -91,6 +90,10 @@ public class ManagerClient {
 //                .request()
 //                .delete();
 //    }
+
+    public void addAssets(Object requestEntity, String assetName) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addassets/{0}", new Object[]{assetName})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
 
     public void close() {
         client.close();

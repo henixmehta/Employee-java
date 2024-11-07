@@ -81,19 +81,20 @@ public class ManagerResource {
         return msbl.getAllHolidays();
     }
 
-//    @POST
-//    @Path("add/{Desc}/{HolidayDate}")
-//    public Response addHoliday(@PathParam("Desc") String Desc, @PathParam("HolidayDate") String HolidayDate) {
-//        try {
-//            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//            Date date = dateFormat.parse(HolidayDate);
-//
-//            msbl.addHoliday(Desc, date);
-//            return Response.status(Response.Status.CREATED).entity("Holiday added successfully").build();
-//        } catch (ParseException e) {
-//            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid date format").build();
-//        }
-//    }
+    @POST
+    @Path("addholiday/{Desc}/{HolidayDate}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addHoliday(@PathParam("Desc") String Desc, @PathParam("HolidayDate") String HolidayDate) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = dateFormat.parse(HolidayDate);
+            msbl.addHoliday(Desc, date);
+            return Response.status(Response.Status.CREATED).entity("Holiday added successfully").build();
+        } catch (ParseException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid date format. Please use yyyy-MM-dd").build();
+        }
+    }
+    
 //
 //    @PUT
 //    @Path("holiday/{id}")
@@ -121,6 +122,7 @@ public class ManagerResource {
 //            return Response.status(Response.Status.NOT_FOUND).entity("Holiday not found").build();
 //        }
 //    }
+
     @GET
     @Path("assets")
     @Produces(MediaType.APPLICATION_JSON)
@@ -128,4 +130,10 @@ public class ManagerResource {
         return msbl.getAllAssets();
     }
 
+    @POST
+    @Path("addassets/{assetName}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addAsset(@PathParam("assetName") String assetName) {
+        msbl.addAsset(assetName);
+    }
 }
