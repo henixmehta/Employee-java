@@ -2,28 +2,37 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:head>
-        <title>Skills List</title>
-    </h:head>
-    <h:body>
-        <h:form>
-            <h2>Assets List</h2>
+<h:head>
+    <title>Asset List</title>
+</h:head>
+<h:body>
+    <h:form>
+        <!-- Add New Asset Section -->
+        <h2>Add New Asset</h2>
 
-            <!-- Table for displaying skills -->
-            <h:dataTable value="#{managerBeans.assetsList}" var="asset" border="1">
-                <h:column>
-                    <f:facet name="header">Asset ID</f:facet>
-                        #{asset.assetId}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Asset Name</f:facet>
-                        #{asset.assetName}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Actions</f:facet>
-                </h:column>
-            </h:dataTable>
+        <!-- Asset Name Input -->
+        <h:outputLabel for="assetName" value="Asset Name:" />
+        <h:inputText id="assetName" value="#{managerBeans.assetName}" required="true" />
 
-        </h:form>
-    </h:body>
+
+        <!-- Submit Button to Add Asset -->
+        <h:commandButton value="Add Asset" action="#{managerBeans.addAsset}" />
+
+        <hr/>
+
+        <!-- Display Assets List Section -->
+        <h2>Asset List</h2>
+        <h:dataTable value="#{managerBeans.assetsList}" var="asset" border="1">
+            <h:column>
+                <f:facet name="header">Asset ID</f:facet>
+                #{asset.assetId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Asset Name</f:facet>
+                #{asset.assetName}
+            </h:column>
+           
+        </h:dataTable>
+    </h:form>
+</h:body>
 </html>

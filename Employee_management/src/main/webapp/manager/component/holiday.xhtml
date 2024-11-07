@@ -7,15 +7,36 @@
 </h:head>
 <h:body>
     <h:form>
+        <!-- Add New Holiday Section -->
+        <h3>Add New Holiday</h3>
+
+        <!-- Holiday Description Input -->
+        <h:outputLabel for="holidayDesc" value="Holiday Description:" />
+        <h:inputText id="holidayDesc" value="#{managerBeans.holidayDesc}" required="true" />
+
+        <!-- Holiday Date Input -->
+        <h:outputLabel for="holidayDate" value="Holiday Date (yyyy-MM-dd):" />
+        <h:inputText id="holidayDate" value="#{managerBeans.holidayDate}" required="true">
+            <f:convertDateTime pattern="yyyy-MM-dd" />
+        </h:inputText>
+
+        <!-- Submit Button to Add Holiday -->
+        <h:commandButton value="Add Holiday" action="#{managerBeans.addHoliday}" />
+
+        <hr/>
+
+        <!-- Display Holidays List Section -->
         <h3>Holiday List</h3>
         <h:dataTable value="#{managerBeans.holidaysList}" var="holiday" border="1">
             <h:column>
-                <f:facet name="header">Holiday Name</f:facet>
+                <f:facet name="header">Holiday Description</f:facet>
                 #{holiday.description}
             </h:column>
             <h:column>
                 <f:facet name="header">Holiday Date</f:facet>
-                #{holiday.holidayDate}
+                <h:outputText value="#{holiday.holidayDate}">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:outputText>
             </h:column>
         </h:dataTable>
     </h:form>
