@@ -5,11 +5,15 @@ import entity.AssetsMaster;
 import entity.DepartmentMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("manager")
 @RequestScoped
@@ -31,7 +35,7 @@ public class ManagerResource {
     public void addSkill(@PathParam("sname") String sname, @PathParam("desc") String desc) {
         msbl.addSkill(sname, desc);
     }
-    
+
     @GET
     @Path("departments")
     @Produces(MediaType.APPLICATION_JSON)
@@ -73,7 +77,6 @@ public class ManagerResource {
 //        }
 //    }
     //==== Holidays Management Endpoints ====
-
     @GET
     @Path("holidays")
     @Produces(MediaType.APPLICATION_JSON)
@@ -94,7 +97,7 @@ public class ManagerResource {
             return Response.status(Response.Status.BAD_REQUEST).entity("Invalid date format. Please use yyyy-MM-dd").build();
         }
     }
-    
+
 //
 //    @PUT
 //    @Path("holiday/{id}")
@@ -122,7 +125,6 @@ public class ManagerResource {
 //            return Response.status(Response.Status.NOT_FOUND).entity("Holiday not found").build();
 //        }
 //    }
-
     @GET
     @Path("assets")
     @Produces(MediaType.APPLICATION_JSON)
@@ -136,4 +138,5 @@ public class ManagerResource {
     public void addAsset(@PathParam("assetName") String assetName) {
         msbl.addAsset(assetName);
     }
+
 }
