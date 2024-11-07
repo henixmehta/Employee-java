@@ -28,13 +28,12 @@ public class ManagerResource {
         return msbl.getAllSkill();
     }
 
-//    @POST
-//    @Consumes(MediaType.APPLICATION_JSON)
-//    public Response addSkill(SkillsMaster skill) {
-//        System.out.println("Received Skill: " + skill.getSkillName() + ", Description: " + skill.getDescription());
-//        msbl.addSkill(skill);
-//        return Response.status(Response.Status.CREATED).entity(skill).build();
-//    }
+    @POST
+    @Path("addskill/{sname}/{desc}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addSkill(@PathParam("sname") String sname, @PathParam("desc") String desc) {
+        msbl.addSkill(sname, desc);
+    }
 //
 //    @PUT
 //    @Path("{id}")
@@ -63,6 +62,7 @@ public class ManagerResource {
 //        }
 //    }
     //==== Holidays Management Endpoints ====
+
     @GET
     @Path("holidays")
     @Produces(MediaType.APPLICATION_JSON)
@@ -110,7 +110,7 @@ public class ManagerResource {
 //            return Response.status(Response.Status.NOT_FOUND).entity("Holiday not found").build();
 //        }
 //    }
-     @GET
+    @GET
     @Path("assets")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<AssetsMaster> getAllAssets() {

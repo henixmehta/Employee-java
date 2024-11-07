@@ -21,7 +21,7 @@ public interface ManagerSessionBeanLocal {
     //===  Skills
     Collection<SkillsMaster> getAllSkill();
 //    SkillsMaster getSkillById(int skillId);
-//    void addSkill(SkillsMaster skill);
+    void addSkill(String sname, String desc);
 //    void updateSkill(SkillsMaster skill);
 //    void deleteskill(int skillId);
 

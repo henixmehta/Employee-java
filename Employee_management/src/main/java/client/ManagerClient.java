@@ -80,6 +80,10 @@ public class ManagerClient {
         return resource.request(MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public void addSkill(Object requestEntity, String sname, String desc) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addskill/{0}/{1}", new Object[]{sname, desc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
 //
 //    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
 //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

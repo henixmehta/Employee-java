@@ -20,7 +20,9 @@ public class ManagerBeans implements Serializable {
     private Collection<SkillsMaster> skillsList;
     private Collection<HolidayMaster> holidaysList;
     private Collection<AssetsMaster> assetsList;
-//    private AssetsMaster newAsset; // Declare new Assets
+
+    private String sname;
+    private String desc;
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
     };
@@ -40,14 +42,52 @@ public class ManagerBeans implements Serializable {
             skillsList = managerClient.getAllSkills(skillsGenericType);
             holidaysList = managerClient.getAllHolidays(holidaysGenericType);
             assetsList = managerClient.getAllAssets(assetsGenericType);
-
         } catch (ClientErrorException e) {
             e.printStackTrace();
         }
     }
 
+    // Method to get the current skills list
     public Collection<SkillsMaster> getSkillsList() {
         return skillsList;
+    }
+
+    // Add skill to the list
+    public void addSkill() {
+        try {
+            // Create the SkillsMaster object from the user input values
+            SkillsMaster newSkill = new SkillsMaster();
+            newSkill.setSkillName(sname);
+            newSkill.setDescription(desc);
+
+            // Call the managerClient to send the newSkill object to the REST API
+            managerClient.addSkill(newSkill, sname, desc);
+
+            // Refresh the skills list after adding the new skill
+            skillsList = managerClient.getAllSkills(skillsGenericType);
+
+            sname = "";
+            desc = "";
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Getters and Setters for sname and desc (used by JSF to bind form input)
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public Collection<HolidayMaster> getHolidaysList() {

@@ -35,11 +35,14 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            return null;
 //        }
 //    }
-//    @Override
-//    public void addSkill(SkillsMaster skill) {
-//        em.persist(skill);
-//        em.flush();
-//    }
+    @Override
+    public void addSkill(String sname, String desc) {
+        SkillsMaster skill = new SkillsMaster();
+        skill.setSkillName(sname);
+        skill.setDescription(desc);
+
+        em.persist(skill);
+    }
 //
 //    @Override
 //    public void updateSkill(SkillsMaster skill) {
@@ -80,6 +83,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            em.remove(holiday);
 //        }
 //    }
+
     @Override
     public Collection<HolidayMaster> getAllHolidays() {
         return em.createNamedQuery("HolidayMaster.findAll", HolidayMaster.class).getResultList();
