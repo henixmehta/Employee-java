@@ -4,7 +4,9 @@ import entity.AssetsMaster;
 import entity.DepartmentMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
+import entity.UserMaster;
 import java.util.Collection;
+import java.util.Date;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,8 +39,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         return em.createNamedQuery("HolidayMaster.findAll", HolidayMaster.class).getResultList();
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public void addHoliday(String desc, Date holidayDate) {
         HolidayMaster h = new HolidayMaster();
@@ -46,18 +46,17 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         h.setHolidayDate(holidayDate);
         em.persist(h);
     }
->>>>>>> 67364a8e6a81643c95e278c3bf07b4ae69e0c903
+
     @Override
     public Collection<AssetsMaster> getAllAssets() {
         return em.createNamedQuery("AssetsMaster.findAll", AssetsMaster.class).getResultList();
     }
-<<<<<<< HEAD
-    
+
     @Override
     public Collection<DepartmentMaster> getAllDepartments() {
         return em.createNamedQuery("DepartmentMaster.findAll", DepartmentMaster.class).getResultList();
     }
-    
+
 //    @Override
 //    public void addDepartment(String deptname, String deptdesc) {
 //        DepartmentMaster dept = new DepartmentMaster();
@@ -67,14 +66,12 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        
 //        em.persist(dept);
 //    }
-
-=======
-
     @Override
     public void addAsset(String assetName) {
         AssetsMaster asset = new AssetsMaster();
         asset.setAssetName(assetName);
         em.persist(asset);
     }
->>>>>>> 67364a8e6a81643c95e278c3bf07b4ae69e0c903
+
+
 }

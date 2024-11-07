@@ -8,7 +8,9 @@ import entity.AssetsMaster;
 import entity.DepartmentMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
+import entity.UserMaster; // Ensure UserMaster is imported correctly
 import java.util.Collection;
+import java.util.Date;
 import javax.ejb.Local;
 
 /**
@@ -20,25 +22,24 @@ public interface ManagerSessionBeanLocal {
 
     //===  Skills
     Collection<SkillsMaster> getAllSkill();
-<<<<<<< HEAD
+
     void addSkill(String sname, String desc);
-   
+
     Collection<HolidayMaster> getAllHolidays();
-   
+
+    /**
+     *
+     * @return
+     */
     Collection<AssetsMaster> getAllAssets();
-    
+
     Collection<DepartmentMaster> getAllDepartments();
 //    void addDepartment(String deptname, String description); 
-=======
 //    SkillsMaster getSkillById(int skillId);
 
-    void addSkill(String sname, String desc);
 //    void updateSkill(SkillsMaster skill);
 //    void deleteskill(int skillId);
-
     //===  Holidays
-    Collection<HolidayMaster> getAllHolidays();
-
     void addHoliday(String desc, Date holidayDate);
 //    void updateHoliday(Integer holidayId, String desc, Date holidayDate);
 //    void removeHoliday(Integer holidayId);
@@ -46,9 +47,8 @@ public interface ManagerSessionBeanLocal {
 //    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
 //    HolidayMaster getHolidayById(Integer holidayId);
 //===  Assets
-    Collection<AssetsMaster> getAllAssets();
 
     void addAsset(String assetName);
 
->>>>>>> 67364a8e6a81643c95e278c3bf07b4ae69e0c903
+
 }
