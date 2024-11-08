@@ -2,6 +2,7 @@ package ejb;
 
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
+import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
 import entity.UserMaster;
@@ -108,5 +109,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         return em.createNamedQuery("SkillsMaster.findBySkillId", SkillsMaster.class)
                 .setParameter("skillId", SkillsId)
                 .getSingleResult();
+    }
+
+    @Override
+    public Collection<DesignationMaster> getAllDesignation() {
+        return em.createNamedQuery("DesignationMaster.findAll", DesignationMaster.class).getResultList();
     }
 }

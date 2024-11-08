@@ -6,9 +6,9 @@ package ejb;
 
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
+import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
-import entity.UserMaster; // Ensure UserMaster is imported correctly
 import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Local;
@@ -22,12 +22,13 @@ public interface ManagerSessionBeanLocal {
 
     //===  Skills
     Collection<SkillsMaster> getAllSkill();
+    Collection<DesignationMaster> getAllDesignation();
 
     void addSkill(String sname, String desc);
     void deleteSkill(Integer skillId);
 
     Collection<HolidayMaster> getAllHolidays();
-
+    
     /**
      *
      * @return
@@ -54,5 +55,5 @@ public interface ManagerSessionBeanLocal {
 
     AssetsMaster getAssetById(Integer assetId);
     SkillsMaster getSkillsById(Integer SkillsId);
-
+    
 }

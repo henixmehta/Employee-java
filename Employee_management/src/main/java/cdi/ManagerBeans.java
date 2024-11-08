@@ -3,6 +3,7 @@ package cdi;
 import client.ManagerClient;
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
+import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public class ManagerBeans implements Serializable {
     private Collection<HolidayMaster> holidaysList;
     private Collection<AssetsMaster> assetsList;
     private Collection<DepartmentMaster> departmentList;
+    private Collection<DesignationMaster> designationList;
 
     private String sname; // Skill name
     private String desc; // Skill description
@@ -39,6 +41,8 @@ public class ManagerBeans implements Serializable {
     };
     private final GenericType<Collection<DepartmentMaster>> deptGenericType = new GenericType<Collection<DepartmentMaster>>() {
     };
+    private final GenericType<Collection<DesignationMaster>> designationGenericType = new GenericType<Collection<DesignationMaster>>() {
+    };
 
     // Generic types for REST client responses
     public ManagerBeans() {
@@ -49,15 +53,17 @@ public class ManagerBeans implements Serializable {
     public void init() {
         try {
             managerClient = new ManagerClient();
-
             skillsList = managerClient.getAllSkills(skillsGenericType);
             holidaysList = managerClient.getAllHolidays(holidaysGenericType);
             assetsList = managerClient.getAllAssets(assetsGenericType);
             departmentList = managerClient.getAllDepartments(deptGenericType);
+            designationList = managerClient.getAllDesignation(designationGenericType);
         } catch (ClientErrorException e) {
-            e.printStackTrace(); // Log the exception to understand the issue
+            // Log the exception to understand the issue
+            
         } catch (Exception e) {
-            e.printStackTrace(); // Catch any other exceptions that may occur
+            // Catch any other exceptions that may occur
+            
         }
     }
 
@@ -94,6 +100,10 @@ public class ManagerBeans implements Serializable {
 
     public Collection<DepartmentMaster> getDepartmentList() {
         return departmentList;
+    }
+    
+    public Collection<DesignationMaster> getDesignationList() {
+        return designationList;
     }
 
     // Holiday management methods

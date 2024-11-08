@@ -3,6 +3,7 @@ package rest;
 import ejb.ManagerSessionBeanLocal;
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
+import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
 import java.text.ParseException;
@@ -42,7 +43,18 @@ public class ManagerResource {
     public Collection<DepartmentMaster> getAllDepartments() {
         return msbl.getAllDepartments();
     }
-
+    
+    @DELETE
+    @Path("skills/{id}")
+    public Response deleteSkills(@PathParam("id") int id) {
+        SkillsMaster skill = msbl.getSkillsById(id);
+        if (skill != null) {
+            msbl.deleteSkill(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
+        }
+    }
 //    @POST
 //    @Path("adddepartment/{deptname}/{deptdesc}")
 //    @Consumes(MediaType.APPLICATION_JSON)
@@ -150,17 +162,12 @@ public class ManagerResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Asset not found").build();
         }
     }
-
-    @DELETE
-    @Path("skills/{id}")
-    public Response deleteSkills(@PathParam("id") int id) {
-        SkillsMaster skill = msbl.getSkillsById(id);
-        if (skill != null) {
-            msbl.deleteSkill(id);
-            return Response.status(Response.Status.NO_CONTENT).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
-        }
-    }
-
+    //====== Designation Details =========
+    
+    @GET
+    @Path("designation")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<DesignationMaster> getAllDesignation() {
+        return msbl.getAllDesignation();
+    } 
 }

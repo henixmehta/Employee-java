@@ -76,30 +76,6 @@ public class ManagerClient {
         resource = resource.path("assets");
         return resource.request(MediaType.APPLICATION_JSON).get(responseType);
     }
-//  
-//    public Response addHoliday(String desc, Date holidayDate) throws ClientErrorException {
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        String formattedDate = dateFormat.format(holidayDate);
-//
-//        // Construct the URL for the holiday addition endpoint with `add` subpath
-//        return webTarget.path("add")
-//                .path(desc)
-//                .path(formattedDate)
-//                .request()
-//                .post(null);  // POST request without a request body
-//    }
-//
-//    public Response updateHoliday(int holidayId, HolidayMaster holiday) throws ClientErrorException {
-//        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
-//                .request(MediaType.APPLICATION_JSON)
-//                .put(Entity.entity(holiday, MediaType.APPLICATION_JSON));
-//    }
-//
-//    public Response deleteHoliday(int holidayId) throws ClientErrorException {
-//        return webTarget.path("holiday").path(String.valueOf(holidayId)) // Append the holidayId
-//                .request()
-//                .delete();
-//    }
 
     public void addAssets(Object requestEntity, String assetName) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("addassets/{0}", new Object[]{assetName})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
@@ -112,8 +88,13 @@ public class ManagerClient {
                 .delete();
     }
 
+    public <T> T getAllDesignation(GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("designation");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+    }
+
     public void close() {
         client.close();
     }
-
 }

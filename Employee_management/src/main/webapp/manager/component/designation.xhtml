@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Designation page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Designation List</h2>
+            <h:dataTable value="#{managerBeans.designationList}" var="desg" border="1">
+                <h:column>
+                    <f:facet name="header">Designation Id</f:facet>
+                    #{desg.designationId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Department Name</f:facet>
+                    #{desg.designation}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Responsibility</f:facet>
+                    #{desg.responsibility}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Department Id</f:facet>
+                    #{desg.departmentId} <!-- Update this if managerId is an object -->
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
