@@ -11,21 +11,21 @@
             <h:dataTable value="#{managerBeans.designationList}" var="desg" border="1">
                 <h:column>
                     <f:facet name="header">Designation Id</f:facet>
-                    #{desg.designationId}
+                        #{desg.designationId}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Department Name</f:facet>
-                    #{desg.designation}
+                        #{desg.designation}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Responsibility</f:facet>
-                    #{desg.responsibility}
+                        #{desg.responsibility}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Department Id</f:facet>
-                    #{desg.departmentId} <!-- Update this if managerId is an object -->
+                    <f:facet name="header">Department Name</f:facet>
+                        #{desg.departmentId.deptName}
                 </h:column>
             </h:dataTable>
-        </h:form>
+        </h:form>   
     </h:body>
 </html>

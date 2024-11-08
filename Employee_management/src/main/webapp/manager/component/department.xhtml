@@ -22,8 +22,8 @@
                     #{dept.description}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Manager Id</f:facet>
-                    #{dept.managerId} <!-- Update this if managerId is an object -->
+                    <f:facet name="header">User Name</f:facet>
+                    #{dept.managerId.userName} <!-- Update this if managerId is an object -->
                 </h:column>
             </h:dataTable>
         </h:form>
