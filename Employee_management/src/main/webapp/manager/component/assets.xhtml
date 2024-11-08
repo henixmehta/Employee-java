@@ -14,25 +14,35 @@
             <h:outputLabel for="assetName" value="Asset Name:" />
             <h:inputText id="assetName" value="#{managerBeans.assetName}" required="true" />
 
-
             <!-- Submit Button to Add Asset -->
             <h:commandButton value="Add Asset" action="#{managerBeans.addAsset}" />
 
             <hr/>
-
-            <!-- Display Assets List Section -->
-            <h2>Asset List</h2>
-            <h:dataTable value="#{managerBeans.assetsList}" var="asset" border="1">
-                <h:column>
-                    <f:facet name="header">Asset ID</f:facet>
-                        #{asset.assetId}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Asset Name</f:facet>
-                        #{asset.assetName}
-                </h:column>
-
-            </h:dataTable>
         </h:form>
+
+        <!-- Display Assets List Section -->
+        <h2>Asset List</h2>
+        <h:dataTable value="#{managerBeans.assetsList}" var="asset" border="1">
+            <!-- Asset ID Column -->
+            <h:column>
+                <f:facet name="header">Asset ID</f:facet>
+                    #{asset.assetId}
+            </h:column>
+
+            <!-- Asset Name Column -->
+            <h:column>
+                <f:facet name="header">Asset Name</f:facet>
+                    #{asset.assetName}
+            </h:column>
+
+            <!-- Action Column (Delete button) -->
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <!-- Separate form for delete button to bypass the validation -->
+                <h:form>
+                    <h:commandButton value="Delete" action="#{managerBeans.deleteAsset(asset.assetId)}" />
+                </h:form>
+            </h:column>
+        </h:dataTable>
     </h:body>
 </html>

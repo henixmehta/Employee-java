@@ -18,7 +18,7 @@ import javax.ws.rs.core.GenericType;
 @SessionScoped
 public class ManagerBeans implements Serializable {
 
-    private  ManagerClient managerClient;
+    private ManagerClient managerClient;
     private Collection<SkillsMaster> skillsList;
     private Collection<HolidayMaster> holidaysList;
     private Collection<AssetsMaster> assetsList;
@@ -138,6 +138,18 @@ public class ManagerBeans implements Serializable {
             assetName = ""; // Clear after adding
         } catch (ClientErrorException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void deleteAsset(int assetId) {
+        try {
+            // Call the deleteAsset method from ManagerClient to delete the asset
+            managerClient.deleteAsset(assetId);
+
+            // Refresh the asset list after deletion
+            assetsList = managerClient.getAllAssets(assetsGenericType);
+        } catch (ClientErrorException e) {
+            e.printStackTrace();  // Log the exception if the deletion fails
         }
     }
 

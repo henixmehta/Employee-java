@@ -73,5 +73,20 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         em.persist(asset);
     }
 
+    @Override
+    public void deleteAsset(Integer assetId) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        AssetsMaster asset = em.find(AssetsMaster.class, assetId);
+        if (asset != null) {
+            em.remove(asset);
+        }
 
+    }
+
+    @Override
+    public AssetsMaster getAssetById(Integer assetId) {
+        return em.createNamedQuery("AssetsMaster.findByAssetId", AssetsMaster.class)
+                .setParameter("assetId", assetId)
+                .getSingleResult();
+    }
 }

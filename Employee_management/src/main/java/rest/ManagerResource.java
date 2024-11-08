@@ -139,4 +139,15 @@ public class ManagerResource {
         msbl.addAsset(assetName);
     }
 
+    @DELETE
+    @Path("assets/{id}")
+    public Response deleteAsset(@PathParam("id") int id) {
+        AssetsMaster asset = msbl.getAssetById(id);
+        if (asset != null) {
+            msbl.deleteAsset(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Asset not found").build();
+        }
+    }
 }

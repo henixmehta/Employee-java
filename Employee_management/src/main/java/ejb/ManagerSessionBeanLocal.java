@@ -50,5 +50,8 @@ public interface ManagerSessionBeanLocal {
 
     void addAsset(String assetName);
 
+    void deleteAsset(Integer assetId);
+
+    AssetsMaster getAssetById(Integer assetId);
 
 }
