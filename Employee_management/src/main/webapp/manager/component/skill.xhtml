@@ -9,33 +9,37 @@
         <h:form>
             <h2>Add New Skill</h2>
 
-            <!-- Skill Name Input -->
             <h:outputLabel for="sname" value="Skill Name:" />
             <h:inputText id="sname" value="#{managerBeans.sname}" required="true" />
 
-            <!-- Skill Description Input -->
             <h:outputLabel for="desc" value="Description:" />
             <h:inputText id="desc" value="#{managerBeans.desc}" required="true" />
 
-            <!-- Submit Button to Add Skill -->
             <h:commandButton value="Add Skill" action="#{managerBeans.addSkill}" />
 
-            <!-- Display Skills List -->
-            <h2>Skills List</h2>
-            <h:dataTable value="#{managerBeans.skillsList}" var="skill" border="1">
-                <h:column>
-                    <f:facet name="header">Skill ID</f:facet>
-                    #{skill.skillId}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Skill Name</f:facet>
-                    #{skill.skillName}
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Description</f:facet>
-                    #{skill.description}
-                </h:column>
-            </h:dataTable>
         </h:form>
+
+        <!-- Display Skills List -->
+        <h2>Skills List</h2>
+        <h:dataTable value="#{managerBeans.skillsList}" var="skill" border="1">
+            <h:column>
+                <f:facet name="header">Skill ID</f:facet>
+                    #{skill.skillId}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Skill Name</f:facet>
+                    #{skill.skillName}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Description</f:facet>
+                    #{skill.description}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <h:form>
+                    <h:commandButton value="Delete" action="#{managerBeans.deleteSkill(skill.skillId)}" />
+                </h:form>
+            </h:column>
+        </h:dataTable>
     </h:body>
 </html>

@@ -24,6 +24,7 @@ public interface ManagerSessionBeanLocal {
     Collection<SkillsMaster> getAllSkill();
 
     void addSkill(String sname, String desc);
+    void deleteSkill(Integer skillId);
 
     Collection<HolidayMaster> getAllHolidays();
 
@@ -49,9 +50,9 @@ public interface ManagerSessionBeanLocal {
 //===  Assets
 
     void addAsset(String assetName);
-
     void deleteAsset(Integer assetId);
 
     AssetsMaster getAssetById(Integer assetId);
+    SkillsMaster getSkillsById(Integer SkillsId);
 
 }

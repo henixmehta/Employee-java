@@ -150,4 +150,17 @@ public class ManagerResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Asset not found").build();
         }
     }
+
+    @DELETE
+    @Path("skills/{id}")
+    public Response deleteSkills(@PathParam("id") int id) {
+        SkillsMaster skill = msbl.getSkillsById(id);
+        if (skill != null) {
+            msbl.deleteSkill(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
+        }
+    }
+
 }

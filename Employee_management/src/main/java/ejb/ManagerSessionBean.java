@@ -85,8 +85,28 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public AssetsMaster getAssetById(Integer assetId) {
-        return em.createNamedQuery("AssetsMaster.findByAssetId", AssetsMaster.class)
-                .setParameter("assetId", assetId)
+        try {
+            return em.createNamedQuery("AssetsMaster.findByAssetId", AssetsMaster.class)
+                    .setParameter("assetId", assetId)
+                    .getSingleResult();
+        } catch (javax.persistence.NoResultException e) {
+            // Handle the case where no result is found
+            return null; // or you could throw an exception or handle it as needed
+        }
+    }
+
+    @Override
+    public void deleteSkill(Integer skillId) {
+        SkillsMaster skill = em.find(SkillsMaster.class, skillId);
+        if (skill != null) {
+            em.remove(skill);
+        }
+    }
+
+    @Override
+    public SkillsMaster getSkillsById(Integer SkillsId) {
+        return em.createNamedQuery("SkillsMaster.findBySkillId", SkillsMaster.class)
+                .setParameter("skillId", SkillsId)
                 .getSingleResult();
     }
 }

@@ -80,6 +80,18 @@ public class ManagerBeans implements Serializable {
         }
     }
 
+    public void deleteSkill(int skillId) {
+        try {
+            // Call the deleteAsset method from ManagerClient to delete the asset
+            managerClient.deleteSkills(skillId);
+
+            // Refresh the asset list after deletion
+            skillsList = managerClient.getAllSkills(skillsGenericType);
+        } catch (ClientErrorException e) {
+            e.printStackTrace();  // Log the exception if the deletion fails
+        }
+    }
+
     public Collection<DepartmentMaster> getDepartmentList() {
         return departmentList;
     }
@@ -108,25 +120,6 @@ public class ManagerBeans implements Serializable {
         return assetsList;
     }
 
-    // Add skill to the list
-//    public void addDepartment() {
-//        try {
-//            DepartmentMaster newdept = new DepartmentMaster();
-//            newdept.setDeptName(deptname);
-//            newdept.setDescription(deptdesc);
-////            newdept.setManagerId(userId);
-//
-//            // Call the managerClient to send the newSkill object to the REST API
-//            managerClient.addDepartment(newdept, deptname, deptdesc);
-//
-//            // Refresh the skills list after adding the new skill
-//            deptList = managerClient.getAllDepartments(deptGenericType);
-//            deptname = "";
-//            deptdesc = "";
-//        } catch (ClientErrorException e) {
-//        }
-//    }
-//
 //    // Getters and Setters for sname and desc (used by JSF to bind form input)
     public void addAsset() {
         try {

@@ -42,6 +42,14 @@ public class ManagerClient {
         webTarget.path(java.text.MessageFormat.format("addskill/{0}/{1}", new Object[]{sname, desc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
+    public Response deleteSkills(int skillid) throws ClientErrorException {
+        return webTarget.path("skills/{id}")
+                .resolveTemplate("id", skillid)
+                .request()
+                .delete();
+
+    }
+
     public <T> T getAllDepartments(GenericType<T> responseType) throws ClientErrorException {
 
         WebTarget resource = webTarget;
