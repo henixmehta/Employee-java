@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -136,5 +137,5 @@ public class AssetsDetails implements Serializable {
     public String toString() {
         return "com.mycompany.employee_module.AssetsDetails[ id=" + id + " ]";
     }
-    
+
 }

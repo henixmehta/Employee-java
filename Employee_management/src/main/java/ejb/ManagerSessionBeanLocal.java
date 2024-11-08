@@ -4,6 +4,7 @@
  */
 package ejb;
 
+import entity.AssetsDetails;
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
@@ -34,6 +35,7 @@ public interface ManagerSessionBeanLocal {
      * @return
      */
     Collection<AssetsMaster> getAllAssets();
+    Collection<AssetsDetails> getAllAssetsDetails();
 
     Collection<DepartmentMaster> getAllDepartments();
 //    void addDepartment(String deptname, String description); 

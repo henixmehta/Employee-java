@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -68,7 +69,7 @@ public class AssetsMaster implements Serializable {
         this.assetName = assetName;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<AssetsDetails> getAssetsDetailsCollection() {
         return assetsDetailsCollection;
     }

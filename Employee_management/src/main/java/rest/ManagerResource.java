@@ -1,6 +1,7 @@
 package rest;
 
 import ejb.ManagerSessionBeanLocal;
+import entity.AssetsDetails;
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
@@ -43,7 +44,7 @@ public class ManagerResource {
     public Collection<DepartmentMaster> getAllDepartments() {
         return msbl.getAllDepartments();
     }
-    
+
     @DELETE
     @Path("skills/{id}")
     public Response deleteSkills(@PathParam("id") int id) {
@@ -89,6 +90,7 @@ public class ManagerResource {
 //        }
 //    }
     //==== Holidays Management Endpoints ====
+
     @GET
     @Path("holidays")
     @Produces(MediaType.APPLICATION_JSON)
@@ -162,12 +164,20 @@ public class ManagerResource {
             return Response.status(Response.Status.NOT_FOUND).entity("Asset not found").build();
         }
     }
+
+    //====== Assets Details ========
+    @GET
+    @Path("assetsdetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AssetsDetails> getAllAssetsDetails() {
+        return msbl.getAllAssetsDetails();
+    }
     //====== Designation Details =========
-    
+
     @GET
     @Path("designation")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<DesignationMaster> getAllDesignation() {
         return msbl.getAllDesignation();
-    } 
+    }
 }

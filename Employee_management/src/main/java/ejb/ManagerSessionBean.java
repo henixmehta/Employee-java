@@ -1,5 +1,6 @@
 package ejb;
 
+import entity.AssetsDetails;
 import entity.AssetsMaster;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
@@ -114,5 +115,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     @Override
     public Collection<DesignationMaster> getAllDesignation() {
         return em.createNamedQuery("DesignationMaster.findAll", DesignationMaster.class).getResultList();
+    }
+
+    @Override
+    public Collection<AssetsDetails> getAllAssetsDetails() {
+       return em.createNamedQuery("AssetsDetails.findAll", AssetsDetails.class).getResultList();
     }
 }

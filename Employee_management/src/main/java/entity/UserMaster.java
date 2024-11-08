@@ -317,7 +317,6 @@ public class UserMaster implements Serializable {
     }
 
     @JsonbTransient
-
     public Collection<TaskDetails> getTaskDetailsCollection() {
         return taskDetailsCollection;
     }
@@ -337,7 +336,6 @@ public class UserMaster implements Serializable {
     }
 
     @JsonbTransient
-
     public Collection<UserMaster> getUserMasterCollection() {
         return userMasterCollection;
     }
@@ -355,7 +353,6 @@ public class UserMaster implements Serializable {
     }
 
     @JsonbTransient
-
     public Collection<AssetsDetails> getAssetsDetailsCollection() {
         return assetsDetailsCollection;
     }
@@ -365,7 +362,6 @@ public class UserMaster implements Serializable {
     }
 
     @JsonbTransient
-
     public Collection<LeaveDetails> getLeaveDetailsCollection() {
         return leaveDetailsCollection;
     }
