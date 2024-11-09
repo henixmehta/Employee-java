@@ -11,6 +11,7 @@ import entity.DepartmentMaster;
 import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
+import entity.UserMaster;
 import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Local;
@@ -24,20 +25,27 @@ public interface ManagerSessionBeanLocal {
 
     //===  Skills
     Collection<SkillsMaster> getAllSkill();
+
     Collection<DesignationMaster> getAllDesignation();
-    
+
     void addSkill(String sname, String desc);
+
     void deleteSkill(Integer skillId);
 
     Collection<HolidayMaster> getAllHolidays();
+
     Collection<AttendanceDetails> getAllAttendanceDetails();
-    
+
+    Collection<UserMaster> getAllUsers();
+
     /**
      *
      * @return
      */
     Collection<AssetsMaster> getAllAssets();
+
     Collection<AssetsDetails> getAllAssetsDetails();
+
     Collection<DepartmentMaster> getAllDepartments();
 //    void addDepartment(String deptname, String description); 
 //    SkillsMaster getSkillById(int skillId);
@@ -54,8 +62,10 @@ public interface ManagerSessionBeanLocal {
 //===  Assets
 
     void addAsset(String assetName);
+
     void deleteAsset(Integer assetId);
 
     AssetsMaster getAssetById(Integer assetId);
+
     SkillsMaster getSkillsById(Integer SkillsId);
- }
+}

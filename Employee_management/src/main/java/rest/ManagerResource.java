@@ -8,6 +8,7 @@ import entity.DepartmentMaster;
 import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
+import entity.UserMaster;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -173,7 +174,7 @@ public class ManagerResource {
     public Collection<AssetsDetails> getAllAssetsDetails() {
         return msbl.getAllAssetsDetails();
     }
-    
+
     //====== Designation Details =========
     @GET
     @Path("designation")
@@ -181,12 +182,19 @@ public class ManagerResource {
     public Collection<DesignationMaster> getAllDesignation() {
         return msbl.getAllDesignation();
     }
-    
+
     //====== Attendence Details =========
     @GET
     @Path("attendencedetails")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<AttendanceDetails> getAllAttendanceDetails() {
         return msbl.getAllAttendanceDetails();
+    }
+
+    @GET
+    @Path("users")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<UserMaster> getAllUsers() {
+        return msbl.getAllUsers();
     }
 }

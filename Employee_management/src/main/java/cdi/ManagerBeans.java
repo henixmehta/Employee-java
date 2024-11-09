@@ -8,6 +8,7 @@ import entity.DepartmentMaster;
 import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
+import entity.UserMaster;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -29,7 +30,7 @@ public class ManagerBeans implements Serializable {
     private Collection<DesignationMaster> designationList;
     private Collection<AssetsDetails> assetdetailsList;
     private Collection<AttendanceDetails> attendanceDetailsList;
-    
+    private Collection<UserMaster> usersList;
 
     private String sname; // Skill name
     private String desc; // Skill description
@@ -48,9 +49,12 @@ public class ManagerBeans implements Serializable {
     };
     private final GenericType<Collection<DesignationMaster>> designationGenericType = new GenericType<Collection<DesignationMaster>>() {
     };
-     private final GenericType<Collection<AssetsDetails>> assetdetailsGenericType = new GenericType<Collection<AssetsDetails>>() {
+    private final GenericType<Collection<AssetsDetails>> assetdetailsGenericType = new GenericType<Collection<AssetsDetails>>() {
     };
-      private final GenericType<Collection<AttendanceDetails>> attendanceDetailsGenericType = new GenericType<Collection<AttendanceDetails>>() {
+    private final GenericType<Collection<AttendanceDetails>> attendanceDetailsGenericType = new GenericType<Collection<AttendanceDetails>>() {
+    };
+
+    private final GenericType<Collection<UserMaster>> usersGenericType = new GenericType<Collection<UserMaster>>() {
     };
 
     // Generic types for REST client responses
@@ -69,13 +73,11 @@ public class ManagerBeans implements Serializable {
             designationList = managerClient.getAllDesignation(designationGenericType);
             assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
             attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType);
-            
+            usersList = managerClient.getAllUsers(usersGenericType);
         } catch (ClientErrorException e) {
-            // Log the exception to understand the issue
-            
+            e.printStackTrace();
         } catch (Exception e) {
-            // Catch any other exceptions that may occur
-            
+            e.printStackTrace();
         }
     }
 
@@ -100,20 +102,21 @@ public class ManagerBeans implements Serializable {
 
     public void deleteSkill(int skillId) {
         try {
-            // Call the deleteAsset method from ManagerClient to delete the asset
             managerClient.deleteSkills(skillId);
-
-            // Refresh the asset list after deletion
             skillsList = managerClient.getAllSkills(skillsGenericType);
         } catch (ClientErrorException e) {
             e.printStackTrace();  // Log the exception if the deletion fails
         }
     }
 
+    public Collection<UserMaster> getUsersList() {
+        return usersList;
+    }
+
     public Collection<DepartmentMaster> getDepartmentList() {
         return departmentList;
     }
-    
+
     public Collection<DesignationMaster> getDesignationList() {
         return designationList;
     }
@@ -140,13 +143,16 @@ public class ManagerBeans implements Serializable {
     public Collection<AssetsMaster> getAssetsList() {
         return assetsList;
     }
+
     public Collection<AssetsDetails> getAssetsDetailsList() {
         return assetdetailsList;
     }
+
     public Collection<AttendanceDetails> getAttendanceDetailsList() {
         return attendanceDetailsList;
     }
 //    // Getters and Setters for sname and desc (used by JSF to bind form input)
+
     public void addAsset() {
         try {
             AssetsMaster newAsset = new AssetsMaster();
