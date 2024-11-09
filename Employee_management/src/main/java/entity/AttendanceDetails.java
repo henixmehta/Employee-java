@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -93,7 +94,7 @@ public class AttendanceDetails implements Serializable {
     public void setCheckOut(Date checkOut) {
         this.checkOut = checkOut;
     }
-
+//    @JsonbTransient
     public UserMaster getUserId() {
         return userId;
     }

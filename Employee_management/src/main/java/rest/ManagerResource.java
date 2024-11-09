@@ -3,6 +3,7 @@ package rest;
 import ejb.ManagerSessionBeanLocal;
 import entity.AssetsDetails;
 import entity.AssetsMaster;
+import entity.AttendanceDetails;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
 import entity.HolidayMaster;
@@ -172,12 +173,20 @@ public class ManagerResource {
     public Collection<AssetsDetails> getAllAssetsDetails() {
         return msbl.getAllAssetsDetails();
     }
+    
     //====== Designation Details =========
-
     @GET
     @Path("designation")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<DesignationMaster> getAllDesignation() {
         return msbl.getAllDesignation();
+    }
+    
+    //====== Attendence Details =========
+    @GET
+    @Path("attendencedetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<AttendanceDetails> getAllAttendanceDetails() {
+        return msbl.getAllAttendanceDetails();
     }
 }

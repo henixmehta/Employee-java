@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Attendance Details Page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <!-- Display Assets List Section -->
+            <h2>Attendance Details List</h2>
+            <h:dataTable value="#{managerBeans.attendanceDetailsList}" var="attendancedetails" border="1">
+                <!-- Asset ID Column -->
+                <h:column>
+                    <f:facet name="header">Attendance ID</f:facet>
+                        #{attendancedetails.attendanceId}
+                </h:column>
+
+                <!-- Asset Name Column -->
+                <h:column>
+                    <f:facet name="header">Attendance Date</f:facet>
+                        #{attendancedetails.date}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Attendance Check In</f:facet>
+                        #{attendancedetails.checkIn}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Attendance Check Out</f:facet>
+                        #{attendancedetails.checkOut}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Employee Name</f:facet>
+                        #{attendancedetails.userId.userName}
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>

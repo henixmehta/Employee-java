@@ -3,6 +3,7 @@ package cdi;
 import client.ManagerClient;
 import entity.AssetsDetails;
 import entity.AssetsMaster;
+import entity.AttendanceDetails;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
 import entity.HolidayMaster;
@@ -26,7 +27,8 @@ public class ManagerBeans implements Serializable {
     private Collection<AssetsMaster> assetsList;
     private Collection<DepartmentMaster> departmentList;
     private Collection<DesignationMaster> designationList;
-    private Collection<AssetsDetails> assetdetailsList;;
+    private Collection<AssetsDetails> assetdetailsList;
+    private Collection<AttendanceDetails> attendanceDetailsList;
     
 
     private String sname; // Skill name
@@ -48,6 +50,8 @@ public class ManagerBeans implements Serializable {
     };
      private final GenericType<Collection<AssetsDetails>> assetdetailsGenericType = new GenericType<Collection<AssetsDetails>>() {
     };
+      private final GenericType<Collection<AttendanceDetails>> attendanceDetailsGenericType = new GenericType<Collection<AttendanceDetails>>() {
+    };
 
     // Generic types for REST client responses
     public ManagerBeans() {
@@ -64,6 +68,7 @@ public class ManagerBeans implements Serializable {
             departmentList = managerClient.getAllDepartments(deptGenericType);
             designationList = managerClient.getAllDesignation(designationGenericType);
             assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
+            attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType);
             
         } catch (ClientErrorException e) {
             // Log the exception to understand the issue
@@ -137,6 +142,9 @@ public class ManagerBeans implements Serializable {
     }
     public Collection<AssetsDetails> getAssetsDetailsList() {
         return assetdetailsList;
+    }
+    public Collection<AttendanceDetails> getAttendanceDetailsList() {
+        return attendanceDetailsList;
     }
 //    // Getters and Setters for sname and desc (used by JSF to bind form input)
     public void addAsset() {

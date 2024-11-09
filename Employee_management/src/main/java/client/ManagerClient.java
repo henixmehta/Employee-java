@@ -98,6 +98,11 @@ public class ManagerClient {
             resource = resource.path("assetsdetails");
             return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
         }
+    public <T> T getAllAttendenceDetails(GenericType<T> responseType) throws ClientErrorException {
+            WebTarget resource = webTarget;
+            resource = resource.path("attendencedetails");
+            return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+        }
     public void close() {
         client.close();
     }

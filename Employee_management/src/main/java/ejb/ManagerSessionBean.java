@@ -2,11 +2,11 @@ package ejb;
 
 import entity.AssetsDetails;
 import entity.AssetsMaster;
+import entity.AttendanceDetails;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
 import entity.HolidayMaster;
 import entity.SkillsMaster;
-import entity.UserMaster;
 import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -120,5 +120,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     @Override
     public Collection<AssetsDetails> getAllAssetsDetails() {
        return em.createNamedQuery("AssetsDetails.findAll", AssetsDetails.class).getResultList();
+    }
+
+    @Override
+    public Collection<AttendanceDetails> getAllAttendanceDetails() {
+        return em.createNamedQuery("AttendanceDetails.findAll", AttendanceDetails.class).getResultList();
     }
 }
