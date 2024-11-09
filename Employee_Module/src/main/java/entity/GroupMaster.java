@@ -80,7 +80,7 @@ public class GroupMaster implements Serializable {
         this.userName = userName;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<UserDetails> getUserDetailsCollection() {
         return userDetailsCollection;
     }

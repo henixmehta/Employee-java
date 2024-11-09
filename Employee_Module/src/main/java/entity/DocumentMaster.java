@@ -68,7 +68,7 @@ public class DocumentMaster implements Serializable {
         this.docName = docName;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<DocumentDetails> getDocumentDetailsCollection() {
         return documentDetailsCollection;
     }

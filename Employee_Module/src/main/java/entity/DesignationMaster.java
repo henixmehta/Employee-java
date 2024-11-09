@@ -93,7 +93,7 @@ public class DesignationMaster implements Serializable {
         this.departmentId = departmentId;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<UserDetails> getUserDetailsCollection() {
         return userDetailsCollection;
     }

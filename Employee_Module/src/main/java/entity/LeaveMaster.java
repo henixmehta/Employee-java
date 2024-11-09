@@ -68,7 +68,7 @@ public class LeaveMaster implements Serializable {
         this.leaveType = leaveType;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<LeaveDetails> getLeaveDetailsCollection() {
         return leaveDetailsCollection;
     }

@@ -68,7 +68,7 @@ public class AssetsMaster implements Serializable {
         this.assetName = assetName;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<AssetsDetails> getAssetsDetailsCollection() {
         return assetsDetailsCollection;
     }

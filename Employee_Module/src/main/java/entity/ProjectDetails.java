@@ -154,7 +154,7 @@ public class ProjectDetails implements Serializable {
         this.onHoldReason = onHoldReason;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<TaskMaster> getTaskMasterCollection() {
         return taskMasterCollection;
     }

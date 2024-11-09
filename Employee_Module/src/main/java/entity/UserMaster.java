@@ -261,7 +261,7 @@ public class UserMaster implements Serializable {
         this.currentExperience = currentExperience;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<DepartmentMaster> getDepartmentMasterCollection() {
         return departmentMasterCollection;
     }
@@ -270,7 +270,7 @@ public class UserMaster implements Serializable {
         this.departmentMasterCollection = departmentMasterCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<DocumentDetails> getDocumentDetailsCollection() {
         return documentDetailsCollection;
     }
@@ -279,7 +279,7 @@ public class UserMaster implements Serializable {
         this.documentDetailsCollection = documentDetailsCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<PerformanceDetails> getPerformanceDetailsCollection() {
         return performanceDetailsCollection;
     }
@@ -288,7 +288,7 @@ public class UserMaster implements Serializable {
         this.performanceDetailsCollection = performanceDetailsCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<PerformanceDetails> getPerformanceDetailsCollection1() {
         return performanceDetailsCollection1;
     }
@@ -297,7 +297,7 @@ public class UserMaster implements Serializable {
         this.performanceDetailsCollection1 = performanceDetailsCollection1;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<UserDetails> getUserDetailsCollection() {
         return userDetailsCollection;
     }
@@ -306,7 +306,7 @@ public class UserMaster implements Serializable {
         this.userDetailsCollection = userDetailsCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<AttendanceDetails> getAttendanceDetailsCollection() {
         return attendanceDetailsCollection;
     }
@@ -315,7 +315,7 @@ public class UserMaster implements Serializable {
         this.attendanceDetailsCollection = attendanceDetailsCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<TaskDetails> getTaskDetailsCollection() {
         return taskDetailsCollection;
     }
@@ -324,7 +324,7 @@ public class UserMaster implements Serializable {
         this.taskDetailsCollection = taskDetailsCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<TaskDetails> getTaskDetailsCollection1() {
         return taskDetailsCollection1;
     }
@@ -333,7 +333,7 @@ public class UserMaster implements Serializable {
         this.taskDetailsCollection1 = taskDetailsCollection1;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<UserMaster> getUserMasterCollection() {
         return userMasterCollection;
     }
@@ -350,7 +350,7 @@ public class UserMaster implements Serializable {
         this.reportingTo = reportingTo;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<AssetsDetails> getAssetsDetailsCollection() {
         return assetsDetailsCollection;
     }
@@ -359,7 +359,7 @@ public class UserMaster implements Serializable {
         this.assetsDetailsCollection = assetsDetailsCollection;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<LeaveDetails> getLeaveDetailsCollection() {
         return leaveDetailsCollection;
     }

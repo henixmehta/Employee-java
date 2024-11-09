@@ -7,6 +7,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -124,7 +125,7 @@ public class TaskMaster implements Serializable {
         this.taskStatus = taskStatus;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<TaskDetails> getTaskDetailsCollection() {
         return taskDetailsCollection;
     }

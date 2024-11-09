@@ -124,7 +124,7 @@ public class TaskMaster implements Serializable {
         this.taskStatus = taskStatus;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<TaskDetails> getTaskDetailsCollection() {
         return taskDetailsCollection;
     }

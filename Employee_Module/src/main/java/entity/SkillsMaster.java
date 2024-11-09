@@ -80,7 +80,7 @@ public class SkillsMaster implements Serializable {
         this.description = description;
     }
 
-    @XmlTransient
+    @JsonbTransient
     public Collection<UserDetails> getUserDetailsCollection() {
         return userDetailsCollection;
     }
