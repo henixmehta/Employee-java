@@ -6,8 +6,17 @@ import entity.AssetsMaster;
 import entity.AttendanceDetails;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
+import entity.DocumentDetails;
+import entity.DocumentMaster;
+import entity.GroupMaster;
 import entity.HolidayMaster;
+import entity.LeaveDetails;
+import entity.LeaveMaster;
+import entity.PerformanceDetails;
+import entity.ProjectDetails;
 import entity.SkillsMaster;
+import entity.TaskDetails;
+import entity.TaskMaster;
 import entity.UserMaster;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -196,5 +205,67 @@ public class ManagerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<UserMaster> getAllUsers() {
         return msbl.getAllUsers();
+    }
+
+    @GET
+    @Path("documents")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<DocumentMaster> getAllDocuments() {
+        return msbl.getAllDocuments();
+    }
+
+    @GET
+    @Path("documentdetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<DocumentDetails> getAllDocumentDetails() {
+        return msbl.getAllDocumentDetails();
+    }
+
+    @GET
+    @Path("groupdetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<GroupMaster> getAllGroups() {
+        return msbl.getAllGroups();
+    }
+
+    @GET
+    @Path("leaves")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<LeaveMaster> getAllLeaves() {
+        return msbl.getAllLeaves();
+    }
+
+    @GET
+    @Path("leavedetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<LeaveDetails> getAllLeaveDetails() {
+        return msbl.getAllLeaveDetails();
+    }
+
+    @GET
+    @Path("projectdetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<ProjectDetails> getAllProjectDetails() {
+        return msbl.getAllProjectDetails();
+    }
+
+    @GET
+    @Path("task")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<TaskMaster> getAllTask() {
+        return msbl.getAllTask();
+    }
+
+    @GET
+    @Path("taskdetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<TaskDetails> getAllTaskDetails() {
+        return msbl.getAllTaskDetails();
+    }
+    @GET
+    @Path("performancedetails")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<PerformanceDetails> getPerformanceDetails() {
+        return msbl.getPerformanceDetails();
     }
 }

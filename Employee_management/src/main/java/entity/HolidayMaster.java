@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "holiday_master")
@@ -100,7 +100,7 @@ public class HolidayMaster implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.HolidayMaster[ holidayId=" + holidayId + " ]";
+        return "entity.HolidayMaster[ holidayId=" + holidayId + " ]";
     }
     
 }

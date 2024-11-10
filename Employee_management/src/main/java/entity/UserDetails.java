@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -21,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "user_details")
@@ -29,6 +27,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "UserDetails.findAll", query = "SELECT u FROM UserDetails u"),
     @NamedQuery(name = "UserDetails.findById", query = "SELECT u FROM UserDetails u WHERE u.id = :id"),
+    @NamedQuery(name = "UserDetails.findByUserId", query = "SELECT u FROM UserDetails u WHERE u.userId = :userId"),
+    @NamedQuery(name = "UserDetails.findByGroupId", query = "SELECT u FROM UserDetails u WHERE u.groupId = :groupId"),
+    @NamedQuery(name = "UserDetails.findByDeptId", query = "SELECT u FROM UserDetails u WHERE u.deptId = :deptId"),
+    @NamedQuery(name = "UserDetails.findBySkillId", query = "SELECT u FROM UserDetails u WHERE u.skillId = :skillId"),
+    @NamedQuery(name = "UserDetails.findByDesignationId", query = "SELECT u FROM UserDetails u WHERE u.designationId = :designationId"),
     @NamedQuery(name = "UserDetails.findByActive", query = "SELECT u FROM UserDetails u WHERE u.active = :active")})
 public class UserDetails implements Serializable {
 
@@ -38,24 +41,19 @@ public class UserDetails implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+    @Column(name = "user_id")
+    private Integer userId;
+    @Column(name = "group_id")
+    private Integer groupId;
+    @Column(name = "dept_id")
+    private Integer deptId;
+    @Column(name = "skill_id")
+    private Integer skillId;
+    @Column(name = "designation_id")
+    private Integer designationId;
     @Size(max = 3)
     @Column(name = "active")
     private String active;
-    @JoinColumn(name = "dept_id", referencedColumnName = "dept_id")
-    @ManyToOne
-    private DepartmentMaster deptId;
-    @JoinColumn(name = "designation_id", referencedColumnName = "designation_id")
-    @ManyToOne
-    private DesignationMaster designationId;
-    @JoinColumn(name = "group_id", referencedColumnName = "group_id")
-    @ManyToOne
-    private GroupMaster groupId;
-    @JoinColumn(name = "skill_id", referencedColumnName = "skill_id")
-    @ManyToOne
-    private SkillsMaster skillId;
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ManyToOne
-    private UserMaster userId;
 
     public UserDetails() {
     }
@@ -72,52 +70,52 @@ public class UserDetails implements Serializable {
         this.id = id;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
+    }
+
+    public Integer getSkillId() {
+        return skillId;
+    }
+
+    public void setSkillId(Integer skillId) {
+        this.skillId = skillId;
+    }
+
+    public Integer getDesignationId() {
+        return designationId;
+    }
+
+    public void setDesignationId(Integer designationId) {
+        this.designationId = designationId;
+    }
+
     public String getActive() {
         return active;
     }
 
     public void setActive(String active) {
         this.active = active;
-    }
-
-    public DepartmentMaster getDeptId() {
-        return deptId;
-    }
-
-    public void setDeptId(DepartmentMaster deptId) {
-        this.deptId = deptId;
-    }
-
-    public DesignationMaster getDesignationId() {
-        return designationId;
-    }
-
-    public void setDesignationId(DesignationMaster designationId) {
-        this.designationId = designationId;
-    }
-
-    public GroupMaster getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(GroupMaster groupId) {
-        this.groupId = groupId;
-    }
-
-    public SkillsMaster getSkillId() {
-        return skillId;
-    }
-
-    public void setSkillId(SkillsMaster skillId) {
-        this.skillId = skillId;
-    }
-
-    public UserMaster getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UserMaster userId) {
-        this.userId = userId;
     }
 
     @Override
@@ -142,7 +140,7 @@ public class UserDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.UserDetails[ id=" + id + " ]";
+        return "entity.UserDetails[ id=" + id + " ]";
     }
     
 }

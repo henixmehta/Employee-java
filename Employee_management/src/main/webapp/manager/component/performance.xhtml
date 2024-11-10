@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Performance page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Performances List</h2>
+            <h:dataTable value="#{managerBeans.performaneDetailsList}" var="perform" border="1">
+                <h:column>
+                    <f:facet name="header">Performance Id</f:facet>
+                        #{perform.performanceId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Name</f:facet>
+                        #{perform.userId.userName}
+                </h:column>
+                 <h:column>
+                     <f:facet name="header">Rating</f:facet>
+                        #{perform.rating}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Review By</f:facet>
+                        #{perform.reviewBy.userName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Review Date</f:facet>
+                        #{perform.reviewDate}
+                </h:column>
+            </h:dataTable>
+        </h:form>   
+    </h:body>
+</html>

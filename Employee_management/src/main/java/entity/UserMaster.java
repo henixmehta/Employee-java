@@ -15,8 +15,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -25,11 +23,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "user_master")
@@ -49,6 +46,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "UserMaster.findByProfileImage", query = "SELECT u FROM UserMaster u WHERE u.profileImage = :profileImage"),
     @NamedQuery(name = "UserMaster.findByCompanyEmail", query = "SELECT u FROM UserMaster u WHERE u.companyEmail = :companyEmail"),
     @NamedQuery(name = "UserMaster.findByPassword", query = "SELECT u FROM UserMaster u WHERE u.password = :password"),
+    @NamedQuery(name = "UserMaster.findByReportingTo", query = "SELECT u FROM UserMaster u WHERE u.reportingTo = :reportingTo"),
     @NamedQuery(name = "UserMaster.findBySalary", query = "SELECT u FROM UserMaster u WHERE u.salary = :salary"),
     @NamedQuery(name = "UserMaster.findByQualification", query = "SELECT u FROM UserMaster u WHERE u.qualification = :qualification"),
     @NamedQuery(name = "UserMaster.findByCurrentExperience", query = "SELECT u FROM UserMaster u WHERE u.currentExperience = :currentExperience")})
@@ -93,6 +91,8 @@ public class UserMaster implements Serializable {
     @Size(max = 100)
     @Column(name = "password")
     private String password;
+    @Column(name = "reporting_to")
+    private Integer reportingTo;
     @Column(name = "salary")
     private BigInteger salary;
     @Size(max = 100)
@@ -110,18 +110,11 @@ public class UserMaster implements Serializable {
     @OneToMany(mappedBy = "reviewBy")
     private Collection<PerformanceDetails> performanceDetailsCollection1;
     @OneToMany(mappedBy = "userId")
-    private Collection<UserDetails> userDetailsCollection;
-    @OneToMany(mappedBy = "userId")
     private Collection<AttendanceDetails> attendanceDetailsCollection;
     @OneToMany(mappedBy = "assignBy")
     private Collection<TaskDetails> taskDetailsCollection;
     @OneToMany(mappedBy = "assignTo")
     private Collection<TaskDetails> taskDetailsCollection1;
-    @OneToMany(mappedBy = "reportingTo")
-    private Collection<UserMaster> userMasterCollection;
-    @JoinColumn(name = "reporting_to", referencedColumnName = "user_id")
-    @ManyToOne
-    private UserMaster reportingTo;
     @OneToMany(mappedBy = "userId")
     private Collection<AssetsDetails> assetsDetailsCollection;
     @OneToMany(mappedBy = "userId")
@@ -238,6 +231,14 @@ public class UserMaster implements Serializable {
         this.password = password;
     }
 
+    public Integer getReportingTo() {
+        return reportingTo;
+    }
+
+    public void setReportingTo(Integer reportingTo) {
+        this.reportingTo = reportingTo;
+    }
+
     public BigInteger getSalary() {
         return salary;
     }
@@ -299,15 +300,6 @@ public class UserMaster implements Serializable {
     }
 
     @JsonbTransient
-    public Collection<UserDetails> getUserDetailsCollection() {
-        return userDetailsCollection;
-    }
-
-    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
-        this.userDetailsCollection = userDetailsCollection;
-    }
-
-    @JsonbTransient
     public Collection<AttendanceDetails> getAttendanceDetailsCollection() {
         return attendanceDetailsCollection;
     }
@@ -326,30 +318,12 @@ public class UserMaster implements Serializable {
     }
 
     @JsonbTransient
-
     public Collection<TaskDetails> getTaskDetailsCollection1() {
         return taskDetailsCollection1;
     }
 
     public void setTaskDetailsCollection1(Collection<TaskDetails> taskDetailsCollection1) {
         this.taskDetailsCollection1 = taskDetailsCollection1;
-    }
-
-    @JsonbTransient
-    public Collection<UserMaster> getUserMasterCollection() {
-        return userMasterCollection;
-    }
-
-    public void setUserMasterCollection(Collection<UserMaster> userMasterCollection) {
-        this.userMasterCollection = userMasterCollection;
-    }
-
-    public UserMaster getReportingTo() {
-        return reportingTo;
-    }
-
-    public void setReportingTo(UserMaster reportingTo) {
-        this.reportingTo = reportingTo;
     }
 
     @JsonbTransient
@@ -392,7 +366,7 @@ public class UserMaster implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.UserMaster[ userId=" + userId + " ]";
+        return "entity.UserMaster[ userId=" + userId + " ]";
     }
-
+    
 }

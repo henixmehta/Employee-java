@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Task page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Tasks List</h2>
+            <h:dataTable value="#{managerBeans.allTasksList}" var="task" border="1">
+                <h:column>
+                    <f:facet name="header">Task Id</f:facet>
+                        #{task.taskId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Task Title</f:facet>
+                        #{task.taskTitle}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Project Name</f:facet>
+                        #{task.projectId.projectName}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Task Status</f:facet>
+                        #{task.taskStatus}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Description</f:facet>
+                        #{task.description}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Priority</f:facet>
+                        #{task.priority}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Due Date</f:facet>
+                        #{task.dueDate}
+                </h:column>
+            </h:dataTable>
+        </h:form>   
+    </h:body>
+</html>

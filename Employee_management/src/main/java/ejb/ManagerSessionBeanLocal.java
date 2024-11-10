@@ -9,8 +9,17 @@ import entity.AssetsMaster;
 import entity.AttendanceDetails;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
+import entity.DocumentDetails;
+import entity.DocumentMaster;
+import entity.GroupMaster;
 import entity.HolidayMaster;
+import entity.LeaveDetails;
+import entity.LeaveMaster;
+import entity.PerformanceDetails;
+import entity.ProjectDetails;
 import entity.SkillsMaster;
+import entity.TaskDetails;
+import entity.TaskMaster;
 import entity.UserMaster;
 import java.util.Collection;
 import java.util.Date;
@@ -47,19 +56,21 @@ public interface ManagerSessionBeanLocal {
     Collection<AssetsDetails> getAllAssetsDetails();
 
     Collection<DepartmentMaster> getAllDepartments();
-//    void addDepartment(String deptname, String description); 
-//    SkillsMaster getSkillById(int skillId);
-
-//    void updateSkill(SkillsMaster skill);
-//    void deleteskill(int skillId);
+    Collection<DocumentMaster> getAllDocuments();
+    Collection<DocumentDetails> getAllDocumentDetails();
+    Collection<GroupMaster> getAllGroups();
+    Collection<LeaveMaster> getAllLeaves();
+    Collection<LeaveDetails> getAllLeaveDetails();
+    Collection<ProjectDetails> getAllProjectDetails();
+    Collection<TaskMaster> getAllTask();
+    Collection<TaskDetails> getAllTaskDetails();
+    Collection<PerformanceDetails> getPerformanceDetails();
+    
+    
     //===  Holidays
     void addHoliday(String desc, Date holidayDate);
-//    void updateHoliday(Integer holidayId, String desc, Date holidayDate);
-//    void removeHoliday(Integer holidayId);
-//    Collection<HolidayMaster> getAllHolidaysByDescription(String description);
-//    Collection<HolidayMaster> getAllHolidaysByDate(Date holidayDate);
-//    HolidayMaster getHolidayById(Integer holidayId);
-//===  Assets
+
+    //===  Assets
 
     void addAsset(String assetName);
 

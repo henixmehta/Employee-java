@@ -5,8 +5,17 @@ import entity.AssetsMaster;
 import entity.AttendanceDetails;
 import entity.DepartmentMaster;
 import entity.DesignationMaster;
+import entity.DocumentDetails;
+import entity.DocumentMaster;
+import entity.GroupMaster;
 import entity.HolidayMaster;
+import entity.LeaveDetails;
+import entity.LeaveMaster;
+import entity.PerformanceDetails;
+import entity.ProjectDetails;
 import entity.SkillsMaster;
+import entity.TaskDetails;
+import entity.TaskMaster;
 import entity.UserMaster;
 import java.util.Collection;
 import java.util.Date;
@@ -131,5 +140,50 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     @Override
     public Collection<UserMaster> getAllUsers() {
         return em.createNamedQuery("UserMaster.findAll", UserMaster.class).getResultList();
+    }
+
+    @Override
+    public Collection<DocumentMaster> getAllDocuments() {
+        return em.createNamedQuery("DocumentMaster.findAll", DocumentMaster.class).getResultList();
+    }
+
+    @Override
+    public Collection<DocumentDetails> getAllDocumentDetails() {
+        return em.createNamedQuery("DocumentDetails.findAll", DocumentDetails.class).getResultList();
+    }
+
+    @Override
+    public Collection<GroupMaster> getAllGroups() {
+       return em.createNamedQuery("GroupMaster.findAll", GroupMaster.class).getResultList();
+    }
+
+    @Override
+    public Collection<LeaveMaster> getAllLeaves() {
+        return em.createNamedQuery("LeaveMaster.findAll", LeaveMaster.class).getResultList();
+    }
+
+    @Override
+    public Collection<LeaveDetails> getAllLeaveDetails() {
+         return em.createNamedQuery("LeaveDetails.findAll", LeaveDetails.class).getResultList();
+    }
+
+    @Override
+    public Collection<ProjectDetails> getAllProjectDetails() {
+         return em.createNamedQuery("ProjectDetails.findAll", ProjectDetails.class).getResultList();
+    }
+
+    @Override
+    public Collection<TaskMaster> getAllTask() {
+         return em.createNamedQuery("TaskMaster.findAll", TaskMaster.class).getResultList();
+    }
+
+    @Override
+    public Collection<TaskDetails> getAllTaskDetails() {
+         return em.createNamedQuery("TaskDetails.findAll", TaskDetails.class).getResultList();
+    }
+
+    @Override
+    public Collection<PerformanceDetails> getPerformanceDetails() {
+        return em.createNamedQuery("PerformanceDetails.findAll", PerformanceDetails.class).getResultList();
     }
 }

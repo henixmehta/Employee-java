@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Document page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Documents List</h2>
+            <h:dataTable value="#{managerBeans.documentDetailsList}" var="docdetails" border="1">
+                <h:column>
+                    <f:facet name="header">Document Id</f:facet>
+                        #{docdetails.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Document Name</f:facet>
+                        #{docdetails.docId.docName}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Document Path</f:facet>
+                        #{docdetails.documentPath}
+                </h:column>
+                 <h:column>
+                    <f:facet name="header">Document Number</f:facet>
+                        #{docdetails.documentNumber}
+                </h:column>
+            </h:dataTable>
+        </h:form>   
+    </h:body>
+</html>

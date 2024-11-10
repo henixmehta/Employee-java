@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "document_details")
@@ -45,12 +45,12 @@ public class DocumentDetails implements Serializable {
     @Size(max = 50)
     @Column(name = "document_path")
     private String documentPath;
-    @JoinColumn(name = "doc_id", referencedColumnName = "doc_id")
-    @ManyToOne
-    private DocumentMaster docId;
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     @ManyToOne
     private UserMaster userId;
+    @JoinColumn(name = "doc_id", referencedColumnName = "doc_id")
+    @ManyToOne
+    private DocumentMaster docId;
 
     public DocumentDetails() {
     }
@@ -83,20 +83,20 @@ public class DocumentDetails implements Serializable {
         this.documentPath = documentPath;
     }
 
-    public DocumentMaster getDocId() {
-        return docId;
-    }
-
-    public void setDocId(DocumentMaster docId) {
-        this.docId = docId;
-    }
-
     public UserMaster getUserId() {
         return userId;
     }
 
     public void setUserId(UserMaster userId) {
         this.userId = userId;
+    }
+
+    public DocumentMaster getDocId() {
+        return docId;
+    }
+
+    public void setDocId(DocumentMaster docId) {
+        this.docId = docId;
     }
 
     @Override
@@ -121,7 +121,7 @@ public class DocumentDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.DocumentDetails[ id=" + id + " ]";
+        return "entity.DocumentDetails[ id=" + id + " ]";
     }
     
 }

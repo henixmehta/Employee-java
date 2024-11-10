@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "leave_details")
@@ -160,7 +160,7 @@ public class LeaveDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.LeaveDetails[ id=" + id + " ]";
+        return "entity.LeaveDetails[ id=" + id + " ]";
     }
     
 }

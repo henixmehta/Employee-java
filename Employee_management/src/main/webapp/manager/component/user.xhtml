@@ -9,59 +9,6 @@
         <h:form>
             <h2>Users List</h2>
 
-            <!-- Insert Form for New User -->
-            <h3>Insert New User</h3>
-            <h:panelGrid columns="2">
-                <h:outputLabel value="User Name:" />
-                <h:inputText value="#{managerBeans.newUser.userName}" />
-
-                <h:outputLabel value="Email:" />
-                <h:inputText value="#{managerBeans.newUser.emailId}" />
-
-                <h:outputLabel value="Phone No:" />
-                <h:inputText value="#{managerBeans.newUser.phoneNo}" />
-
-                <h:outputLabel value="Date of Birth:" />
-                <h:inputText value="#{managerBeans.newUser.dateOfBirth}" />
-
-                <h:outputLabel value="Age:" />
-                <h:inputText value="#{managerBeans.newUser.age}" />
-
-                <h:outputLabel value="Gender:" />
-                <h:inputText value="#{managerBeans.newUser.gender}" />
-
-                <h:outputLabel value="Joining Date:" />
-                <h:inputText value="#{managerBeans.newUser.joiningDate}" />
-
-                <h:outputLabel value="Address:" />
-                <h:inputText value="#{managerBeans.newUser.address}" />
-
-                <h:outputLabel value="Emergency Contact:" />
-                <h:inputText value="#{managerBeans.newUser.emergencyContact}" />
-
-                <h:outputLabel value="Profile Image:" />
-                <h:inputText value="#{managerBeans.newUser.profileImage}" />
-
-                <h:outputLabel value="Company Email:" />
-                <h:inputText value="#{managerBeans.newUser.companyEmail}" />
-
-                <h:outputLabel value="Password:" />
-                <h:inputText value="#{managerBeans.newUser.password}" />
-
-                <h:outputLabel value="Salary:" />
-                <h:inputText value="#{managerBeans.newUser.salary}" />
-
-                <h:outputLabel value="Qualification:" />
-                <h:inputText value="#{managerBeans.newUser.qualification}" />
-
-                <h:outputLabel value="Current Experience:" />
-                <h:inputText value="#{managerBeans.newUser.currentExperience}" />
-
-                <!-- Submit button -->
-                <h:commandButton value="Insert User" action="#{managerBeans.insertUser}" />
-            </h:panelGrid>
-
-            <!-- Users Data Table -->
             <h:dataTable value="#{managerBeans.usersList}" var="user" border="1">
                 <h:column>
                     <f:facet name="header">User ID</f:facet>

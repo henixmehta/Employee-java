@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Leave Details page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Leave Details List</h2>
+            <h:dataTable value="#{managerBeans.leaveDetailsList}" var="leavedetails" border="1">
+                <h:column>
+                    <f:facet name="header">Leave Id</f:facet>
+                        #{leavedetails.id}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Name</f:facet>
+                        #{leavedetails.userId.userName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Leave Type</f:facet>
+                        #{leavedetails.leaveTypeId.leaveType}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">From Date</f:facet>
+                        #{leavedetails.fromDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">To Date</f:facet>
+                        #{leavedetails.toDate}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                        #{leavedetails.status}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Rejected Reason</f:facet>
+                        #{leavedetails.rejectReason}
+                </h:column>
+            </h:dataTable>
+        </h:form>   
+    </h:body>
+</html>

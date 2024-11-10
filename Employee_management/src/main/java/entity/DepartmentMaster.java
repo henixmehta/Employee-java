@@ -6,7 +6,6 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.json.bind.annotation.JsonbProperty;
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -22,11 +21,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "department_master")
@@ -46,19 +44,15 @@ public class DepartmentMaster implements Serializable {
     private Integer deptId;
     @Size(max = 50)
     @Column(name = "dept_name")
-//    @JsonbProperty
     private String deptName;
     @Size(max = 100)
     @Column(name = "description")
-//    @JsonbProperty
     private String description;
     @JoinColumn(name = "manager_id", referencedColumnName = "user_id")
     @ManyToOne
     private UserMaster managerId;
     @OneToMany(mappedBy = "departmentId")
     private Collection<DesignationMaster> designationMasterCollection;
-    @OneToMany(mappedBy = "deptId")
-    private Collection<UserDetails> userDetailsCollection;
 
     public DepartmentMaster() {
     }
@@ -108,15 +102,6 @@ public class DepartmentMaster implements Serializable {
         this.designationMasterCollection = designationMasterCollection;
     }
 
-    @JsonbTransient
-    public Collection<UserDetails> getUserDetailsCollection() {
-        return userDetailsCollection;
-    }
-
-    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
-        this.userDetailsCollection = userDetailsCollection;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -139,7 +124,7 @@ public class DepartmentMaster implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.DepartmentMaster[ deptId=" + deptId + " ]";
+        return "entity.DepartmentMaster[ deptId=" + deptId + " ]";
     }
-
+    
 }

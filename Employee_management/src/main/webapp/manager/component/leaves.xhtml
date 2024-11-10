@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Leave page</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>All Leaves List</h2>
+            <h:dataTable value="#{managerBeans.allLeavesList}" var="leave" border="1">
+                <h:column>
+                    <f:facet name="header">Leave Id</f:facet>
+                        #{leave.leaveTypeId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Leave Name</f:facet>
+                        #{leave.leaveType}
+                </h:column>
+            </h:dataTable>
+        </h:form>   
+    </h:body>
+</html>

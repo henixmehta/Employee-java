@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "performance_details")
@@ -122,7 +122,7 @@ public class PerformanceDetails implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.PerformanceDetails[ performanceId=" + performanceId + " ]";
+        return "entity.PerformanceDetails[ performanceId=" + performanceId + " ]";
     }
     
 }

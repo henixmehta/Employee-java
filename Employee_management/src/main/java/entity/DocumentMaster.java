@@ -19,11 +19,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Henil
+ * @author ABC
  */
 @Entity
 @Table(name = "document_master")
@@ -100,7 +99,7 @@ public class DocumentMaster implements Serializable {
 
     @Override
     public String toString() {
-        return "com.mycompany.employee_module.DocumentMaster[ docId=" + docId + " ]";
+        return "entity.DocumentMaster[ docId=" + docId + " ]";
     }
     
 }
