@@ -6,6 +6,24 @@
         <title>Designation page</title>
     </h:head>
     <h:body>
+
+        <h:form>
+            <h:outputLabel value="Designation Name:" />
+            <h:inputText value="#{managerBeans.designationName}" />
+
+            <h:outputLabel value="Responsibility:" />
+            <h:inputText value="#{managerBeans.responsibility}" />
+
+            <h:outputLabel value="Department:" />
+            <h:selectOneMenu value="#{managerBeans.departmentId}">
+                <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
+                <f:selectItems value="#{managerBeans.departmentList}" var="dept"
+                               itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />
+            </h:selectOneMenu>
+
+            <h:commandButton value="Add Designation" action="#{managerBeans.addDesignation}" />
+        </h:form>
+
         <h:form>
             <h2>Designation List</h2>
             <h:dataTable value="#{managerBeans.designationList}" var="desg" border="1">

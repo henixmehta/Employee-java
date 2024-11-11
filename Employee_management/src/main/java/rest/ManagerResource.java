@@ -262,10 +262,25 @@ public class ManagerResource {
     public Collection<TaskDetails> getAllTaskDetails() {
         return msbl.getAllTaskDetails();
     }
+
     @GET
     @Path("performancedetails")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<PerformanceDetails> getPerformanceDetails() {
         return msbl.getPerformanceDetails();
     }
+
+    @POST
+    @Path("adddesignation/{designationName}/{responsibility}/{departmentId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response addDesignation(@PathParam("designationName") String designationName, @PathParam("responsibility") String responsibility, @PathParam("departmentId") Integer departmentId) {
+        try {
+            msbl.addDesig(designationName, responsibility, departmentId);
+            return Response.status(Response.Status.CREATED).entity("Designation added successfully").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
+                    .entity("Error adding designation: " + e.getMessage()).build();
+        }
+    }
+
 }

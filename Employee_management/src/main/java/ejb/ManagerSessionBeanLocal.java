@@ -75,6 +75,8 @@ public interface ManagerSessionBeanLocal {
     void addAsset(String assetName);
 
     void deleteAsset(Integer assetId);
+    
+    void addDesig(String desginame , String desgirepo, Integer deptid);
 
     AssetsMaster getAssetById(Integer assetId);
 

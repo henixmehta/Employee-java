@@ -154,7 +154,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public Collection<GroupMaster> getAllGroups() {
-       return em.createNamedQuery("GroupMaster.findAll", GroupMaster.class).getResultList();
+        return em.createNamedQuery("GroupMaster.findAll", GroupMaster.class).getResultList();
     }
 
     @Override
@@ -164,26 +164,37 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public Collection<LeaveDetails> getAllLeaveDetails() {
-         return em.createNamedQuery("LeaveDetails.findAll", LeaveDetails.class).getResultList();
+        return em.createNamedQuery("LeaveDetails.findAll", LeaveDetails.class).getResultList();
     }
 
     @Override
     public Collection<ProjectDetails> getAllProjectDetails() {
-         return em.createNamedQuery("ProjectDetails.findAll", ProjectDetails.class).getResultList();
+        return em.createNamedQuery("ProjectDetails.findAll", ProjectDetails.class).getResultList();
     }
 
     @Override
     public Collection<TaskMaster> getAllTask() {
-         return em.createNamedQuery("TaskMaster.findAll", TaskMaster.class).getResultList();
+        return em.createNamedQuery("TaskMaster.findAll", TaskMaster.class).getResultList();
     }
 
     @Override
     public Collection<TaskDetails> getAllTaskDetails() {
-         return em.createNamedQuery("TaskDetails.findAll", TaskDetails.class).getResultList();
+        return em.createNamedQuery("TaskDetails.findAll", TaskDetails.class).getResultList();
     }
 
     @Override
     public Collection<PerformanceDetails> getPerformanceDetails() {
         return em.createNamedQuery("PerformanceDetails.findAll", PerformanceDetails.class).getResultList();
+    }
+
+    @Override
+    public void addDesig(String desginame, String desgirepo, Integer deptid) {
+        DepartmentMaster dept_id = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
+        DesignationMaster d = new DesignationMaster();
+        d.setDesignation(desginame);
+        d.setResponsibility(desgirepo);
+        d.setDepartmentId(dept_id);
+        em.persist(d);
+
     }
 }

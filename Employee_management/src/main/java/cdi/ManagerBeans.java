@@ -54,8 +54,11 @@ public class ManagerBeans implements Serializable {
     private String desc; // Skill description
     private String holidayDesc; // Holiday description
     private Date holidayDate; // Holiday date
-
     private String assetName; // Asset name
+
+    private String designationName;
+    private String responsibility;
+    private Integer departmentId;
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
     };
@@ -165,6 +168,49 @@ public class ManagerBeans implements Serializable {
 
     public Collection<DesignationMaster> getDesignationList() {
         return designationList;
+    }
+
+    public void addDesignation() {
+        try {
+
+            if (responsibility == null || responsibility.trim().isEmpty()) {
+                responsibility = null;
+            }
+
+            managerClient.addDesignation(designationName, responsibility, departmentId);
+
+            designationList = managerClient.getAllDesignation(designationGenericType);
+
+            designationName = "";
+            responsibility = "";
+            departmentId = null;
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getDesignationName() {
+        return designationName;
+    }
+
+    public void setDesignationName(String designationName) {
+        this.designationName = designationName;
+    }
+
+    public String getResponsibility() {
+        return responsibility;
+    }
+
+    public void setResponsibility(String responsibility) {
+        this.responsibility = responsibility;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     // Holiday management methods

@@ -166,6 +166,14 @@ public class ManagerClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public Response addDesignation(String designationName, String responsibility, Integer departmentId) throws ClientErrorException {
+        return webTarget
+                .path(java.text.MessageFormat.format("adddesignation/{0}/{1}/{2}",
+                        new Object[]{designationName, responsibility, departmentId}))
+                .request(MediaType.APPLICATION_JSON)
+                .post(null, Response.class);
+    }
+
     public void close() {
         client.close();
     }
