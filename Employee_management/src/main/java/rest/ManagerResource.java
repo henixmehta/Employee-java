@@ -282,5 +282,10 @@ public class ManagerResource {
                     .entity("Error adding designation: " + e.getMessage()).build();
         }
     }
-
+    @POST
+    @Path("addusers")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addUser(UserMaster usermaster) {
+        msbl.addUser(usermaster);
+    }
 }

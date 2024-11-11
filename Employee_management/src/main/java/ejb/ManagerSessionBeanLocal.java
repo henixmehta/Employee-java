@@ -56,27 +56,36 @@ public interface ManagerSessionBeanLocal {
     Collection<AssetsDetails> getAllAssetsDetails();
 
     Collection<DepartmentMaster> getAllDepartments();
+
     Collection<DocumentMaster> getAllDocuments();
+
     Collection<DocumentDetails> getAllDocumentDetails();
+
     Collection<GroupMaster> getAllGroups();
+
     Collection<LeaveMaster> getAllLeaves();
+
     Collection<LeaveDetails> getAllLeaveDetails();
+
     Collection<ProjectDetails> getAllProjectDetails();
+
     Collection<TaskMaster> getAllTask();
+
     Collection<TaskDetails> getAllTaskDetails();
+
     Collection<PerformanceDetails> getPerformanceDetails();
-    
-    
+
     //===  Holidays
     void addHoliday(String desc, Date holidayDate);
 
     //===  Assets
-
     void addAsset(String assetName);
 
     void deleteAsset(Integer assetId);
-    
-    void addDesig(String desginame , String desgirepo, Integer deptid);
+
+    void addDesig(String desginame, String desgirepo, Integer deptid);
+
+    void addUser(UserMaster usermaster);
 
     AssetsMaster getAssetById(Integer assetId);
 

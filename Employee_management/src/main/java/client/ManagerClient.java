@@ -173,6 +173,9 @@ public class ManagerClient {
                 .request(MediaType.APPLICATION_JSON)
                 .post(null, Response.class);
     }
+    public void addUser(Object requestEntity) throws ClientErrorException {
+        webTarget.path("addusers").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
 
     public void close() {
         client.close();

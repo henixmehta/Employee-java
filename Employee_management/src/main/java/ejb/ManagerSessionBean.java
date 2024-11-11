@@ -197,4 +197,9 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         em.persist(d);
 
     }
+    @Override
+    public void addUser(UserMaster usermaster) {
+        em.persist(usermaster);
+    }
+  
 }

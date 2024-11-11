@@ -188,6 +188,41 @@ public class ManagerBeans implements Serializable {
             e.printStackTrace();
         }
     }
+    private UserMaster usermaster = new UserMaster();
+
+    public UserMaster getUsermaster() {
+        return usermaster;
+    }
+
+    public void setUsermaster(UserMaster usermaster) {
+        this.usermaster = usermaster;
+    }
+
+    public void addUser() {
+        try {
+
+            managerClient.addUser(usermaster);
+            usersList = managerClient.getAllUsers(usersGenericType);
+            usermaster.setAddress(null);
+            usermaster.setAge(null);
+            usermaster.setCompanyEmail(null);
+            usermaster.setCurrentExperience(null);
+            usermaster.setDateOfBirth(null);
+            usermaster.setUserName(null);
+            usermaster.setProfileImage(null);
+            usermaster.setSalary(null);
+            usermaster.setReportingTo(null);
+            usermaster.setQualification(null);
+            usermaster.setGender(null);
+            usermaster.setJoiningDate(null);
+            usermaster.setPassword(null);
+            usermaster.setEmergencyContact(null);
+            usermaster.setPhoneNo(null);
+            usermaster.setEmailId(null);
+                  
+        } catch (ClientErrorException e) {
+        }
+    }
 
     public String getDesignationName() {
         return designationName;
