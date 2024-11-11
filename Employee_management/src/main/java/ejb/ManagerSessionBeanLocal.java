@@ -32,62 +32,64 @@ import javax.ejb.Local;
 @Local
 public interface ManagerSessionBeanLocal {
 
-    //===  Skills
+    //=== All SKILL Methods 
     Collection<SkillsMaster> getAllSkill();
-
-    Collection<DesignationMaster> getAllDesignation();
-
     void addSkill(String sname, String desc);
-
     void deleteSkill(Integer skillId);
+    SkillsMaster getSkillsById(Integer SkillsId);
 
-    Collection<HolidayMaster> getAllHolidays();
-
-    Collection<AttendanceDetails> getAllAttendanceDetails();
-
-    Collection<UserMaster> getAllUsers();
-
-    /**
-     *
-     * @return
-     */
-    Collection<AssetsMaster> getAllAssets();
-
-    Collection<AssetsDetails> getAllAssetsDetails();
-
-    Collection<DepartmentMaster> getAllDepartments();
-
-    Collection<DocumentMaster> getAllDocuments();
-
-    Collection<DocumentDetails> getAllDocumentDetails();
-
-    Collection<GroupMaster> getAllGroups();
-
-    Collection<LeaveMaster> getAllLeaves();
-
-    Collection<LeaveDetails> getAllLeaveDetails();
-
-    Collection<ProjectDetails> getAllProjectDetails();
-
-    Collection<TaskMaster> getAllTask();
-
-    Collection<TaskDetails> getAllTaskDetails();
-
-    Collection<PerformanceDetails> getPerformanceDetails();
-
-    //===  Holidays
-    void addHoliday(String desc, Date holidayDate);
-
-    //===  Assets
-    void addAsset(String assetName);
-
-    void deleteAsset(Integer assetId);
-
+    //=== All Designation Methods 
+    Collection<DesignationMaster> getAllDesignation();
     void addDesig(String desginame, String desgirepo, Integer deptid);
 
+    //=== All Holidays Methods
+    Collection<HolidayMaster> getAllHolidays();
+    void addHoliday(String desc, Date holidayDate);
+    
+    //===  Add Attendance Methods
+    Collection<AttendanceDetails> getAllAttendanceDetails();
+
+    //===  All Users Methods
+    Collection<UserMaster> getAllUsers();
     void addUser(UserMaster usermaster);
-
+    
+    //===  All Assets Methods
+    Collection<AssetsMaster> getAllAssets();
+    void addAsset(String assetName);
+    void deleteAsset(Integer assetId);
     AssetsMaster getAssetById(Integer assetId);
+   
+    //===  All Asset Details Methods
+    Collection<AssetsDetails> getAllAssetsDetails();
+    
+    //===  Add All Methods
+    Collection<DepartmentMaster> getAllDepartments();
+   
+    //===  All Documnets Methods
+    Collection<DocumentMaster> getAllDocuments();
+    
+    //===  All Document Details Methods
+    Collection<DocumentDetails> getAllDocumentDetails();
+    
+    //===  All Grpups Methods
+    Collection<GroupMaster> getAllGroups();
+   
+    //===  All Leaves Methods
+    Collection<LeaveMaster> getAllLeaves();
+    
+    //===  All Leave Details Methods
+    Collection<LeaveDetails> getAllLeaveDetails();
+    
+    //===  All Project Details Methods
+    Collection<ProjectDetails> getAllProjectDetails();
+    
+    //===  All Task Methods
+    Collection<TaskMaster> getAllTask();
 
-    SkillsMaster getSkillsById(Integer SkillsId);
+    //===  All Task Details Methods
+    Collection<TaskDetails> getAllTaskDetails();
+
+    //===  All Performance Methods
+    Collection<PerformanceDetails> getPerformanceDetails();
+  
 }
