@@ -19,6 +19,7 @@ import entity.TaskDetails;
 import entity.TaskMaster;
 import entity.UserMaster;
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 import javax.annotation.PostConstruct;
@@ -59,6 +60,12 @@ public class ManagerBeans implements Serializable {
     private String designationName;
     private String responsibility;
     private Integer departmentId;
+
+    private BigInteger assetNumber;
+    private String assignDate;
+    private String returnDate;
+    private Integer assetId;
+    private Integer userId;
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
     };
@@ -219,7 +226,7 @@ public class ManagerBeans implements Serializable {
             usermaster.setEmergencyContact(null);
             usermaster.setPhoneNo(null);
             usermaster.setEmailId(null);
-                  
+
         } catch (ClientErrorException e) {
         }
     }
@@ -314,7 +321,20 @@ public class ManagerBeans implements Serializable {
     public Collection<AssetsDetails> getAssetsDetailsList() {
         return assetdetailsList;
     }
-    // Getters and Setters for sname and desc (used by JSF to bind form input)
+
+    public void addAssetDetails() {
+        try {
+            managerClient.addAssetDetails(assetNumber, assignDate, returnDate, assetId, userId);
+            assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType); // Refresh list
+            assetNumber = null;
+            assignDate = null;
+            returnDate = null;
+            assetId = null;
+            userId = null;
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void addAsset() {
         try {
@@ -380,6 +400,46 @@ public class ManagerBeans implements Serializable {
 
     public void setAssetName(String assetName) {
         this.assetName = assetName;
+    }
+
+    public BigInteger getAssetNumber() {
+        return assetNumber;
+    }
+
+    public void setAssetNumber(BigInteger assetNumber) {
+        this.assetNumber = assetNumber;
+    }
+
+    public String getAssignDate() {
+        return assignDate;
+    }
+
+    public void setAssignDate(String assignDate) {
+        this.assignDate = assignDate;
+    }
+
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
+    }
+
+    public Integer getAssetId() {
+        return assetId;
+    }
+
+    public void setAssetId(Integer assetId) {
+        this.assetId = assetId;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     public void closeClient() {

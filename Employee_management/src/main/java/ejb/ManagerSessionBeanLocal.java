@@ -21,6 +21,7 @@ import entity.SkillsMaster;
 import entity.TaskDetails;
 import entity.TaskMaster;
 import entity.UserMaster;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Local;
@@ -34,55 +35,66 @@ public interface ManagerSessionBeanLocal {
 
     //=== All SKILL Methods 
     Collection<SkillsMaster> getAllSkill();
+
     void addSkill(String sname, String desc);
+
     void deleteSkill(Integer skillId);
+
     SkillsMaster getSkillsById(Integer SkillsId);
 
     //=== All Designation Methods 
     Collection<DesignationMaster> getAllDesignation();
+
     void addDesig(String desginame, String desgirepo, Integer deptid);
 
     //=== All Holidays Methods
     Collection<HolidayMaster> getAllHolidays();
+
     void addHoliday(String desc, Date holidayDate);
-    
+
     //===  Add Attendance Methods
     Collection<AttendanceDetails> getAllAttendanceDetails();
 
     //===  All Users Methods
     Collection<UserMaster> getAllUsers();
+
     void addUser(UserMaster usermaster);
-    
+
     //===  All Assets Methods
     Collection<AssetsMaster> getAllAssets();
+
     void addAsset(String assetName);
+
     void deleteAsset(Integer assetId);
+
     AssetsMaster getAssetById(Integer assetId);
-   
+
     //===  All Asset Details Methods
     Collection<AssetsDetails> getAllAssetsDetails();
-    
+
+    void addAssetsDetails(BigInteger assetNumber, Date assignDate, Date returnDate, Integer assetId, Integer userId);
+
     //===  Add All Methods
     Collection<DepartmentMaster> getAllDepartments();
-   
+
     //===  All Documnets Methods
     Collection<DocumentMaster> getAllDocuments();
-    
+
     //===  All Document Details Methods
     Collection<DocumentDetails> getAllDocumentDetails();
-    
+
     //===  All Grpups Methods
     Collection<GroupMaster> getAllGroups();
-   
+
     //===  All Leaves Methods
     Collection<LeaveMaster> getAllLeaves();
-    
+
     //===  All Leave Details Methods
     Collection<LeaveDetails> getAllLeaveDetails();
-    
+
     //===  All Project Details Methods
     Collection<ProjectDetails> getAllProjectDetails();
-    
+
     //===  All Task Methods
     Collection<TaskMaster> getAllTask();
 
@@ -91,5 +103,5 @@ public interface ManagerSessionBeanLocal {
 
     //===  All Performance Methods
     Collection<PerformanceDetails> getPerformanceDetails();
-  
+
 }

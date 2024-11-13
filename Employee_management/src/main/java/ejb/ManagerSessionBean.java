@@ -17,6 +17,7 @@ import entity.SkillsMaster;
 import entity.TaskDetails;
 import entity.TaskMaster;
 import entity.UserMaster;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 import javax.ejb.Stateless;
@@ -197,9 +198,30 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         em.persist(d);
 
     }
+
     @Override
     public void addUser(UserMaster usermaster) {
         em.persist(usermaster);
     }
-  
+
+    @Override
+    public void addAssetsDetails(BigInteger assetNumber, Date assignDate, Date returnDate, Integer assetId, Integer userId) {
+        // Find the related AssetsMaster and UserMaster entities
+        AssetsMaster asset = em.find(AssetsMaster.class, assetId);
+        UserMaster user = em.find(UserMaster.class, userId);
+
+        // Create a new instance of AssetsDetails
+        AssetsDetails assetsDetails = new AssetsDetails();
+
+        // Set properties
+        assetsDetails.setAssetNumber(assetNumber);
+        assetsDetails.setAssignDate(assignDate);
+        assetsDetails.setReturnDate(returnDate);
+        assetsDetails.setAssetId(asset); // Many-to-one association with AssetsMaster
+        assetsDetails.setUserId(user);   // Many-to-one association with UserMaster
+
+        // Persist the new AssetsDetails entity
+        em.persist(assetsDetails);
+    }
+
 }

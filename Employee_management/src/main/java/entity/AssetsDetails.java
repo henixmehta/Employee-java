@@ -5,6 +5,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -42,8 +43,8 @@ public class AssetsDetails implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "asset_number")
-    private Integer assetNumber;
+    @Column(name = "asset_number", precision = 25, scale = 0)
+    private BigInteger assetNumber;
     @Column(name = "assign_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date assignDate;
@@ -72,11 +73,11 @@ public class AssetsDetails implements Serializable {
         this.id = id;
     }
 
-    public Integer getAssetNumber() {
+    public BigInteger getAssetNumber() {
         return assetNumber;
     }
 
-    public void setAssetNumber(Integer assetNumber) {
+    public void setAssetNumber(BigInteger assetNumber) {
         this.assetNumber = assetNumber;
     }
 
@@ -136,5 +137,5 @@ public class AssetsDetails implements Serializable {
     public String toString() {
         return "entity.AssetsDetails[ id=" + id + " ]";
     }
-    
+
 }

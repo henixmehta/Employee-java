@@ -18,6 +18,7 @@ import entity.SkillsMaster;
 import entity.TaskDetails;
 import entity.TaskMaster;
 import entity.UserMaster;
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -184,6 +185,28 @@ public class ManagerResource {
         return msbl.getAllAssetsDetails();
     }
 
+    @POST
+    @Path("/addassetsdetails/{assetNumber}/{assignDate}/{returnDate}/{assetId}/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addAssetDetails(
+            @PathParam("assetNumber") BigInteger assetNumber,
+            @PathParam("assignDate") String assignDate,
+            @PathParam("returnDate") String returnDate,
+            @PathParam("assetId") Integer assetId,
+            @PathParam("userId") Integer userId
+    ) {
+        try {
+            Date assignDateParsed = javax.xml.bind.DatatypeConverter.parseDateTime(assignDate).getTime();
+            Date returnDateParsed = javax.xml.bind.DatatypeConverter.parseDateTime(returnDate).getTime();
+
+            // Call the session bean method
+            msbl.addAssetsDetails(assetNumber, assignDateParsed, returnDateParsed, assetId, userId);
+            return Response.ok("Asset details added successfully").build();
+        } catch (Exception e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Error adding asset details: " + e.getMessage()).build();
+        }
+    }
+
     //====== Designation Details =========
     @GET
     @Path("designation")
@@ -282,6 +305,7 @@ public class ManagerResource {
                     .entity("Error adding designation: " + e.getMessage()).build();
         }
     }
+
     @POST
     @Path("addusers")
     @Consumes(MediaType.APPLICATION_JSON)

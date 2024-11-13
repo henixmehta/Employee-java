@@ -2,6 +2,7 @@ package client;
 
 import entity.DepartmentMaster;
 import entity.UserMaster;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
 import javax.ws.rs.ClientErrorException;
@@ -173,8 +174,20 @@ public class ManagerClient {
                 .request(MediaType.APPLICATION_JSON)
                 .post(null, Response.class);
     }
+
     public void addUser(Object requestEntity) throws ClientErrorException {
         webTarget.path("addusers").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public Response addAssetDetails(BigInteger assetNumber, String assignDate, String returnDate, Integer assetId, Integer userId
+    ) throws ClientErrorException {
+        return webTarget
+                .path(java.text.MessageFormat.format(
+                        "addassetsdetails/{0}/{1}/{2}/{3}/{4}",
+                        new Object[]{assetNumber, assignDate, returnDate, assetId, userId}
+                ))
+                .request(MediaType.APPLICATION_JSON)
+                .post(null, Response.class);
     }
 
     public void close() {

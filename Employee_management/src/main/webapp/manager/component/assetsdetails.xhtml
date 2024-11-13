@@ -6,33 +6,68 @@
         <title>Asset Details List</title>
     </h:head>
     <h:body>
+        <!-- Form to Add Asset Details -->
         <h:form>
-            <!-- Display Assets List Section -->
-            <h2>Asset List</h2>
+            <h2>Add Asset Details</h2>
+
+            <h:outputLabel value="Asset Number:" />
+            <h:inputText value="#{managerBeans.assetNumber}" />
+
+            <h:outputLabel for="assignDate" value="Assign Date:" />
+            <h:inputText id="assignDate" value="#{managerBeans.assignDate}" required="true">
+                <f:passThroughAttribute name="type" value="date" />
+            </h:inputText>
+
+            <h:outputLabel for="returnDate" value="Return Date:" />
+            <h:inputText id="returnDate" value="#{managerBeans.returnDate}" required="true">
+                <f:passThroughAttribute name="type" value="date" />
+            </h:inputText>
+
+
+            <h:outputLabel value="Asset ID:" />
+            <h:selectOneMenu value="#{managerBeans.assetId}">
+                <f:selectItems value="#{managerBeans.assetsList}" var="asset" itemLabel="#{asset.assetName}" itemValue="#{asset.assetId}" />
+            </h:selectOneMenu>
+
+            <h:outputLabel value="User ID:" />
+            <h:selectOneMenu value="#{managerBeans.userId}">
+                <f:selectItems value="#{managerBeans.usersList}" var="user" itemLabel="#{user.userName}" itemValue="#{user.userId}" />
+            </h:selectOneMenu>
+
+
+            <h:commandButton value="Add Asset Details" action="#{managerBeans.addAssetDetails}" />
+        </h:form>
+
+        <!-- Display Assets List Section -->
+        <h:form>
+            <h2>Asset Details List</h2>
             <h:dataTable value="#{managerBeans.assetsDetailsList}" var="assetdetails" border="1">
-                <!-- Asset ID Column -->
+
                 <h:column>
                     <f:facet name="header">Details ID</f:facet>
                         #{assetdetails.id}
                 </h:column>
 
-                <!-- Asset Name Column -->
                 <h:column>
                     <f:facet name="header">Asset ID</f:facet>
                         #{assetdetails.assetId.assetName}
                 </h:column>
+
                 <h:column>
-                    <f:facet name="header">Asset Name</f:facet>
+                    <f:facet name="header">Asset Number</f:facet>
                         #{assetdetails.assetNumber}
                 </h:column>
+
                 <h:column>
                     <f:facet name="header">Assign To</f:facet>
                         #{assetdetails.userId.userName}
                 </h:column>
+
                 <h:column>
                     <f:facet name="header">Assign Date</f:facet>
                         #{assetdetails.assignDate}
                 </h:column>
+
                 <h:column>
                     <f:facet name="header">Return Date</f:facet>
                         #{assetdetails.returnDate}
