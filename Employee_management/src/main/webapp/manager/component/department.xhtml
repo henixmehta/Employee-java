@@ -8,47 +8,64 @@
     <h:body>
         <f:view>
             <h:form>
-                <h2>Add New Asset</h2>
+                <h2>#{managerBeans.selectedDeptId == null ? 'Add New Department' : 'Update Department'}</h2>
 
+                <!-- Department Name -->
                 <h:outputLabel for="DepartmentName" value="Department Name:" />
                 <h:inputText id="DepartmentName" value="#{managerBeans.deptName}" required="true" />
 
-
-                <h:outputLabel for="deptDesc" value="Dept desc" />
+                <!-- Department Description -->
+                <h:outputLabel for="deptDesc" value="Department Description:" />
                 <h:inputText id="deptDesc" value="#{managerBeans.deptDesc}" required="true" />
 
-
-                <h:outputLabel value="Manager" />
-                <h:selectOneMenu value="#{managerBeans.managerId}">
-                    <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{managerBeans.usersList}" var="User"
-                                   itemValue="#{User.userId}" itemLabel="#{User.userName}" />
+                <!-- Manager Selection -->
+                <h:outputLabel value="Manager:" />
+                <h:selectOneMenu id="managerId" value="#{managerBeans.managerId}" required="true">
+                    <f:selectItem itemLabel="Select Manager" itemValue="" noSelectionOption="true" />
+                    <f:selectItems value="#{managerBeans.usersList}" var="user"
+                                   itemValue="#{user.userId}" itemLabel="#{user.userName}" />
                 </h:selectOneMenu>
 
-                <h:commandButton value="Add Department" action="#{managerBeans.addDepartment}" />
+                <!-- Submit Button -->
+                <h:commandButton value="#{managerBeans.selectedDeptId == null ? 'Add Department' : 'Update Department'}" 
+                                 action="#{managerBeans.addOrUpdateDepartment}" />
 
-                <hr/>
+                <hr />
             </h:form>
         </f:view>
 
+        <!-- Department List -->
         <h:form>
             <h2>Department List</h2>
             <h:dataTable value="#{managerBeans.departmentList}" var="dept" border="1">
+                <!-- Department Id -->
                 <h:column>
                     <f:facet name="header">Department Id</f:facet>
                         #{dept.deptId}
                 </h:column>
+                <!-- Department Name -->
                 <h:column>
                     <f:facet name="header">Department Name</f:facet>
                         #{dept.deptName}
                 </h:column>
+                <!-- Description -->
                 <h:column>
                     <f:facet name="header">Description</f:facet>
                         #{dept.description}
                 </h:column>
+                <!-- Manager Name -->
                 <h:column>
-                    <f:facet name="header">User Name</f:facet>
-                    #{dept.managerId.userName} <!-- Update this if managerId is an object -->
+                    <f:facet name="header">Manager Name</f:facet>
+                        #{dept.managerId.userName}
+                </h:column>
+                <!-- Edit Link -->
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:commandLink value="Edit" action="#{managerBeans.editDepartment(dept)}" /> /
+                    <h:commandLink value="Delete" action="#{managerBeans.deleteDepartment()}">
+                        <f:setPropertyActionListener value="#{dept.deptId}" target="#{managerBeans.deptId}"/>
+                    </h:commandLink>
+
                 </h:column>
             </h:dataTable>
         </h:form>

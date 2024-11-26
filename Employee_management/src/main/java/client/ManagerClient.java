@@ -58,8 +58,14 @@ public class ManagerClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-    public void addDepartment(Object requestEntity, String deptName, String deptDesc, int managerId) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("adddept/{0}/{1}/{2}", new Object[]{deptName, deptDesc, managerId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+//    public void addOrUpdateDepartment(Object requestEntity, String deptId, String deptName, String deptDesc, String managerId) throws ClientErrorException {
+//        webTarget.path(java.text.MessageFormat.format("addOrUpdateDept/{0}/{1}/{2}/{3}", new Object[]{deptId, deptName, deptDesc, managerId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+//    }
+    public void addOrUpdateDepartment(Object requestEntity, Integer deptId, String deptName, String deptDesc, int managerId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addOrUpdateDept/{0}/{1}/{2}/{3}",
+                new Object[]{deptId != null ? deptId : 0, deptName, deptDesc, managerId}))
+                .request(javax.ws.rs.core.MediaType.APPLICATION_JSON)
+                .post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
     public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
@@ -189,6 +195,10 @@ public class ManagerClient {
                 ))
                 .request(MediaType.APPLICATION_JSON)
                 .post(null, Response.class);
+    }
+
+    public void deleteDepartment(Integer deptid) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteDepartment/{0}", new Object[]{deptid})).request().delete();
     }
 
     public void close() {

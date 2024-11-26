@@ -14,7 +14,7 @@
             <h:inputText value="#{managerBeans.responsibility}" />
 
             <h:outputLabel value="Department:" />
-            <h:selectOneMenu value="#{managerBeans.departmentId}">
+            <h:selectOneMenu value="#{managerBeans.deptId}">
                 <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
                 <f:selectItems value="#{managerBeans.departmentList}" var="dept"
                                itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />

@@ -76,8 +76,10 @@ public interface ManagerSessionBeanLocal {
 
     //===  Add All Methods
     Collection<DepartmentMaster> getAllDepartments();
-    
-    void addDepartment(String deptName , String deptDesc , int managerId);
+
+    void addOrUpdateDepartment(Integer deptId, String deptName, String deptDesc, int managerId);
+
+    void deleteDepartment(Integer deptid);
 
     //===  All Documnets Methods
     Collection<DocumentMaster> getAllDocuments();

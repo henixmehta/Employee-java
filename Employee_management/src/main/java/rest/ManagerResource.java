@@ -58,11 +58,17 @@ public class ManagerResource {
     }
 
     @POST
-    @Path("adddept/{deptName}/{deptDesc}/{managerId}")
+    @Path("addOrUpdateDept/{deptId}/{deptName}/{deptDesc}/{managerId}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addDepartment(@PathParam("deptName") String deptName, @PathParam("deptDesc") String deptDesc, @PathParam("managerId") int managerId) {
-        msbl.addDepartment(deptName, deptDesc, managerId);
+    public void addOrUpdateDepartment(@PathParam("deptId") Integer deptId, @PathParam("deptName") String deptName, @PathParam("deptDesc") String deptDesc, @PathParam("managerId") int managerId) {
+        msbl.addOrUpdateDepartment(deptId, deptName, deptDesc, managerId);
+    }
+
+    @DELETE
+    @Path("deleteDepartment/{deptid}")
+    public void deleteDepartment(@PathParam("deptid") Integer deptid) {
+        msbl.deleteDepartment(deptid);
     }
 
     @DELETE

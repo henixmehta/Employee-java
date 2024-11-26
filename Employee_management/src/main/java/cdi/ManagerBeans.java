@@ -60,10 +60,13 @@ public class ManagerBeans implements Serializable {
     private String designationName;
     private String responsibility;
     private Integer departmentId;
+    private Integer deptId;
 
     private String deptName;
     private String deptDesc;
     private int managerId;
+
+    private Integer selectedDeptId; // edit department
 
     private BigInteger assetNumber;
     private String assignDate;
@@ -177,10 +180,67 @@ public class ManagerBeans implements Serializable {
         return departmentList;
     }
 
-    public void addDepartment() {
-        DepartmentMaster newDept = new DepartmentMaster();
-        managerClient.addDepartment(newDept, deptName, deptDesc, managerId);
+    private DepartmentMaster selectedDept;
+
+    public DepartmentMaster getSelectedDept() {
+        return selectedDept;
+    }
+
+    public void setSelectedDept(DepartmentMaster selectedDept) {
+        this.selectedDept = selectedDept;
+    }
+
+    public void editDepartment(DepartmentMaster dept) {
+        this.selectedDept = dept;
+        this.selectedDeptId = dept.getDeptId();
+        this.deptName = dept.getDeptName();
+        this.deptDesc = dept.getDescription();
+        this.managerId = dept.getManagerId().getUserId();
+    }
+
+    public Integer getSelectedDeptId() {
+        return selectedDeptId;
+    }
+
+    public void setSelectedDeptId(Integer selectedDeptId) {
+        this.selectedDeptId = selectedDeptId;
+    }
+
+    public void addOrUpdateDepartment() {
+        try {
+            DepartmentMaster dept = new DepartmentMaster();
+
+            // Determine if this is an update or add operation based on selectedDeptId
+            if (selectedDeptId != null && selectedDeptId > 0) {
+                dept.setDeptId(selectedDeptId); // Update
+            } else {
+                dept.setDeptId(null); // Add
+            }
+            dept.setDeptName(deptName);
+            dept.setDescription(deptDesc);
+            dept.setManagerId(usersList.stream()
+                    .filter(u -> u.getUserId() == managerId)
+                    .findFirst()
+                    .orElse(null)); // Set manager from users list
+            managerClient.addOrUpdateDepartment(dept, selectedDeptId, deptName, deptDesc, managerId);
+            departmentList = managerClient.getAllDepartments(deptGenericType);
+            resetDepartmentForm();
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteDepartment() {
+        managerClient.deleteDepartment(deptId);
         departmentList = managerClient.getAllDepartments(deptGenericType);
+
+    }
+
+    private void resetDepartmentForm() {
+        selectedDeptId = null;
+        deptName = "";
+        deptDesc = "";
+        managerId = 0;
     }
 
     public String getDeptName() {
@@ -218,13 +278,13 @@ public class ManagerBeans implements Serializable {
                 responsibility = null;
             }
 
-            managerClient.addDesignation(designationName, responsibility, departmentId);
+            managerClient.addDesignation(designationName, responsibility, deptId);
 
             designationList = managerClient.getAllDesignation(designationGenericType);
 
             designationName = "";
             responsibility = "";
-            departmentId = null;
+            deptId = null;
         } catch (ClientErrorException e) {
             e.printStackTrace();
         }
@@ -279,6 +339,14 @@ public class ManagerBeans implements Serializable {
 
     public void setResponsibility(String responsibility) {
         this.responsibility = responsibility;
+    }
+
+    public Integer getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 
     public Integer getDepartmentId() {
