@@ -61,6 +61,10 @@ public class ManagerBeans implements Serializable {
     private String responsibility;
     private Integer departmentId;
 
+    private String deptName;
+    private String deptDesc;
+    private int managerId;
+
     private BigInteger assetNumber;
     private String assignDate;
     private String returnDate;
@@ -171,6 +175,36 @@ public class ManagerBeans implements Serializable {
 
     public Collection<DepartmentMaster> getDepartmentList() {
         return departmentList;
+    }
+
+    public void addDepartment() {
+        DepartmentMaster newDept = new DepartmentMaster();
+        managerClient.addDepartment(newDept, deptName, deptDesc, managerId);
+        departmentList = managerClient.getAllDepartments(deptGenericType);
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getDeptDesc() {
+        return deptDesc;
+    }
+
+    public void setDeptDesc(String deptDesc) {
+        this.deptDesc = deptDesc;
+    }
+
+    public int getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
     }
 
     public Collection<DesignationMaster> getDesignationList() {

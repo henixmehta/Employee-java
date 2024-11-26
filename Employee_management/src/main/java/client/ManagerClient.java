@@ -58,9 +58,10 @@ public class ManagerClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-//    public void addDepartment(Object requestEntity, String deptname, String deptdesc) {
-//        webTarget.path(java.text.MessageFormat.format("adddepartment/{0}/{1}", new Object[]{deptname, deptdesc})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-//    }
+    public void addDepartment(Object requestEntity, String deptName, String deptDesc, int managerId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("adddept/{0}/{1}/{2}", new Object[]{deptName, deptDesc, managerId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
     public <T> T getAllHolidays(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("holidays");

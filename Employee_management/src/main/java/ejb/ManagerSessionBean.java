@@ -70,6 +70,16 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         return em.createNamedQuery("DepartmentMaster.findAll", DepartmentMaster.class).getResultList();
     }
 
+    @Override
+    public void addDepartment(String deptName, String deptDesc, int managerId) {
+        UserMaster manager_id = (UserMaster) em.find(UserMaster.class, managerId);
+        DepartmentMaster dep = new DepartmentMaster();
+        dep.setDeptName(deptName);
+        dep.setDescription(deptDesc);
+        dep.setManagerId(manager_id);
+        em.persist(dep);
+    }
+
 //    @Override
 //    public void addDepartment(String deptname, String deptdesc) {
 //        DepartmentMaster dept = new DepartmentMaster();
