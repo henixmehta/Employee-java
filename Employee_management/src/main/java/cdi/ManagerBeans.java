@@ -62,6 +62,8 @@ public class ManagerBeans implements Serializable {
     private Integer departmentId;
     private Integer deptId;
 
+    private Integer designationId;
+
     private String deptName;
     private String deptDesc;
     private int managerId;
@@ -277,11 +279,8 @@ public class ManagerBeans implements Serializable {
             if (responsibility == null || responsibility.trim().isEmpty()) {
                 responsibility = null;
             }
-
             managerClient.addDesignation(designationName, responsibility, deptId);
-
             designationList = managerClient.getAllDesignation(designationGenericType);
-
             designationName = "";
             responsibility = "";
             deptId = null;
@@ -289,6 +288,69 @@ public class ManagerBeans implements Serializable {
             e.printStackTrace();
         }
     }
+
+    //edit Desgination
+    private DesignationMaster selectedDesgination;
+
+    public DesignationMaster getSelectedDesgination() {
+        return selectedDesgination;
+    }
+
+    public void setSelectedDesgination(DesignationMaster selectedDesgination) {
+        this.selectedDesgination = selectedDesgination;
+    }
+
+    public void editDesgination(DesignationMaster desg) {
+        this.selectedDesgination = desg;
+        this.designationId = desg.getDesignationId();
+        this.designationName = desg.getDesignation();
+        this.responsibility = desg.getResponsibility();
+        this.deptId = desg.getDepartmentId().getDeptId();
+    }
+
+    public void updateDesignation() {
+        try {
+
+            DesignationMaster desgi = new DesignationMaster();
+            // Ensure `responsibility` is set to null if it is empty
+            if (responsibility == null || responsibility.trim().isEmpty()) {
+                responsibility = null;
+            }
+
+            // Call the client method to update the designation
+            managerClient.updateDesignation(
+                    desgi, // RequestEntity is not used in this scenario
+                    designationId.toString(),
+                    designationName,
+                    responsibility,
+                    deptId.toString()
+            );
+
+            // Refresh the designation list
+            designationList = managerClient.getAllDesignation(designationGenericType);
+
+            // Reset fields after update
+            resetDesignationForm();
+        } catch (ClientErrorException e) {
+            e.printStackTrace(); // Handle exceptions appropriately
+        }
+    }
+
+// Reset the designation form fields
+    private void resetDesignationForm() {
+        designationId = null;
+        designationName = "";
+        responsibility = "";
+        deptId = null;
+    }
+
+    //delete Desgination
+    public void deleteDesgination() {
+        managerClient.deleteDesgination(designationId);
+        designationList = managerClient.getAllDesignation(designationGenericType);
+    }
+
+    //Display User
     private UserMaster usermaster = new UserMaster();
 
     public UserMaster getUsermaster() {
@@ -320,7 +382,6 @@ public class ManagerBeans implements Serializable {
             usermaster.setEmergencyContact(null);
             usermaster.setPhoneNo(null);
             usermaster.setEmailId(null);
-
         } catch (ClientErrorException e) {
         }
     }
@@ -547,4 +608,13 @@ public class ManagerBeans implements Serializable {
     public void closeClient() {
         managerClient.close();
     }
+
+    public Integer getDesignationId() {
+        return designationId;
+    }
+
+    public void setDesignationId(Integer designationId) {
+        this.designationId = designationId;
+    }
+
 }

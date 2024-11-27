@@ -259,6 +259,19 @@ public class ManagerResource {
         }
     }
 
+    @DELETE
+    @Path("deleteDesgination/{designationId}")
+    public void deleteDesgination(@PathParam("designationId") int designationId) {
+        msbl.deleteDesgination(designationId);
+    }
+
+    @PUT
+    @Path("updateDesignation/{designationId}/{designationName}/{responsibility}/{deptId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateDesignation(@PathParam("designationId") Integer designationId, @PathParam("designationName") String designationName, @PathParam("responsibility") String responsibility, @PathParam("deptId") Integer deptId) {
+        msbl.updateDesignation(designationId, designationName, responsibility, deptId);
+    }
+
     @POST
     @Path("addusers")
     @Consumes(MediaType.APPLICATION_JSON)

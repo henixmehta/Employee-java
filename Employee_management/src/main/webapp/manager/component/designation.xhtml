@@ -7,6 +7,8 @@
     </h:head>
     <h:body>
         <h:form>
+            <h2>#{managerBeans.designationId == null ? 'Add New Desgination' : 'Update Desgination'}</h2>
+
             <h:outputLabel value="Designation Name:" />
             <h:inputText value="#{managerBeans.designationName}" />
 
@@ -20,7 +22,16 @@
                                itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />
             </h:selectOneMenu>
 
-            <h:commandButton value="Add Designation" action="#{managerBeans.addDesignation}" />
+            <h:commandButton 
+                value="Add Designation" 
+                rendered="#{managerBeans.designationId == null}" 
+                action="#{managerBeans.addDesignation}" />
+
+            <!-- Update Designation Button -->
+            <h:commandButton 
+                value="Update Designation" 
+                rendered="#{managerBeans.designationId != null}" 
+                action="#{managerBeans.updateDesignation}" />
         </h:form>
 
         <h:form>
@@ -41,6 +52,13 @@
                 <h:column>
                     <f:facet name="header">Department Name</f:facet>
                         #{desg.departmentId.deptName}
+                </h:column>        
+                <h:column>
+                    <f:facet name="header">Actions</f:facet>
+                    <h:commandLink value="Edit" action="#{managerBeans.editDesgination(desg)}" /> /
+                    <h:commandLink value="Delete" action="#{managerBeans.deleteDesgination()}">
+                        <f:setPropertyActionListener value="#{desg.designationId}" target="#{managerBeans.designationId}"/>
+                    </h:commandLink>
                 </h:column>
             </h:dataTable>
         </h:form>   

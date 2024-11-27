@@ -201,6 +201,14 @@ public class ManagerClient {
         webTarget.path(java.text.MessageFormat.format("deleteDepartment/{0}", new Object[]{deptid})).request().delete();
     }
 
+    public void deleteDesgination(Integer designationId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteDesgination/{0}", new Object[]{designationId})).request().delete();
+    }
+
+    public void updateDesignation(Object requestEntity, String designationId, String designationName, String responsibility, String deptId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("updateDesignation/{0}/{1}/{2}/{3}", new Object[]{designationId, designationName, responsibility, deptId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
     public void close() {
         client.close();
     }
