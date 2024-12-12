@@ -20,6 +20,7 @@ import entity.ProjectDetails;
 import entity.SkillsMaster;
 import entity.TaskDetails;
 import entity.TaskMaster;
+import entity.UserDetails;
 import entity.UserMaster;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -57,14 +58,24 @@ public interface ManagerSessionBeanLocal {
     void addHoliday(String desc, Date holidayDate
     );
 
+    void deleteHoliday(Integer holidayInteger);
+
     //===  Add Attendance Methods
     Collection<AttendanceDetails> getAllAttendanceDetails();
 
     //===  All Users Methods
     Collection<UserMaster> getAllUsers();
 
-    void addUser(UserMaster usermaster
-    );
+    void addUser(UserMaster usermaster);
+
+    void deleteUser(Integer userId);
+
+    //=== User Details
+    Collection<UserDetails> getAllUsersDetails();
+
+    void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e);
+
+    void deleteUserDetails(Integer userId);
 
     //===  All Assets Methods
     Collection<AssetsMaster> getAllAssets();
@@ -82,15 +93,17 @@ public interface ManagerSessionBeanLocal {
     Collection<AssetsDetails> getAllAssetsDetails();
 
     void addAssetsDetails(BigInteger assetNumber, Date assignDate,
-             Date returnDate, Integer assetId,
-             Integer userId
+            Date returnDate, Integer assetId,
+            Integer userId
     );
+
+    void deleteAssetsDetails(Integer assetsDetailsId);
 
     //===  Add All Methods
     Collection<DepartmentMaster> getAllDepartments();
 
     void addOrUpdateDepartment(Integer deptId, String deptName,
-             String deptDesc, int managerId
+            String deptDesc, int managerId
     );
 
     void deleteDepartment(Integer deptid
@@ -99,28 +112,51 @@ public interface ManagerSessionBeanLocal {
     //===  All Documnets Methods
     Collection<DocumentMaster> getAllDocuments();
 
+    void deleteDocument(Integer docid);
+
     //===  All Document Details Methods
     Collection<DocumentDetails> getAllDocumentDetails();
+
+    void deleteDocumentDetails(Integer DocDetId);
 
     //===  All Grpups Methods
     Collection<GroupMaster> getAllGroups();
 
+    void deleteGroup(Integer GrpId);
+
     //===  All Leaves Methods
     Collection<LeaveMaster> getAllLeaves();
+
+    void addLeaves(Integer leaveTypeId, String leaveType);
+
+    void deleteLeaves(Integer LeaveId);
 
     //===  All Leave Details Methods
     Collection<LeaveDetails> getAllLeaveDetails();
 
+//    void addLeaveDetails(Date fromeDate, Date toDate, String status, String reactReason, Integer userId, Integer leaveTypeId);
+
+    void deleteLeaveDetails(Integer leaveDetailsId);
+
     //===  All Project Details Methods
     Collection<ProjectDetails> getAllProjectDetails();
+
+    
+    public void updateProjectStatus(Integer projectId, String newStatus) ;
+    void deleteProjectDetails(Integer proDetailsId);
 
     //===  All Task Methods
     Collection<TaskMaster> getAllTask();
 
+    void deleteTask(Integer taskId);
+
     //===  All Task Details Methods
     Collection<TaskDetails> getAllTaskDetails();
+
+    void deleteTaskDetails(Integer taskDeteId);
 
     //===  All Performance Methods
     Collection<PerformanceDetails> getPerformanceDetails();
 
+    void deletePrform(Integer performnceDetailsId);
 }

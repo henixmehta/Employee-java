@@ -57,23 +57,23 @@ public class ManagerBeans implements Serializable {
     private Date holidayDate; // Holiday date
     private String assetName; // Asset name
 
+    private Integer designationId;
     private String designationName;
     private String responsibility;
     private Integer departmentId;
+
     private Integer deptId;
-
-    private Integer designationId;
-
     private String deptName;
     private String deptDesc;
     private int managerId;
 
     private Integer selectedDeptId; // edit department
 
+    Integer assetsdetailsId;
+    private Integer assetId;
     private BigInteger assetNumber;
     private String assignDate;
     private String returnDate;
-    private Integer assetId;
     private Integer userId;
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
@@ -496,6 +496,7 @@ public class ManagerBeans implements Serializable {
         return assetdetailsList;
     }
 
+    //AddAssetsDetails
     public void addAssetDetails() {
         try {
             managerClient.addAssetDetails(assetNumber, assignDate, returnDate, assetId, userId);
@@ -510,6 +511,28 @@ public class ManagerBeans implements Serializable {
         }
     }
 
+    //edit assets Detail
+//    AssetsDetails selectedAssetsDetails;
+//
+//    public void editAsstsDetails(AssetsDetails assetsdetails) {
+//        this.selectedAssetsDetails = assetsdetails;
+//        this.assetsdetailsId = assetsdetails.getId();
+//        this.assetNumber = assetsdetails.getAssetNumber();
+//     
+//        this.assetId = assetsdetails.getAssetId().getAssetId();
+//
+//    }
+    
+   
+//    public AssetsDetails getSelectedAssetsDetails() {
+//        return selectedAssetsDetails;
+//    }
+//
+//    public void setSelectedAssetsDetails(AssetsDetails selectedAssetsDetails) {
+//        this.selectedAssetsDetails = selectedAssetsDetails;
+//    }
+
+//addAssets
     public void addAsset() {
         try {
             AssetsMaster newAsset = new AssetsMaster();
@@ -533,6 +556,23 @@ public class ManagerBeans implements Serializable {
             // Log the exception if the deletion fails
 
         }
+    }
+
+    //edit assets
+    AssetsMaster selectedAssests;
+
+    public void editAssts(AssetsMaster assetsMaster) {
+        this.selectedAssests = assetsMaster;
+        this.assetId = assetsMaster.getAssetId();
+        this.assetName = assetsMaster.getAssetName();
+    }
+
+    public AssetsMaster getSelectedAssests() {
+        return selectedAssests;
+    }
+
+    public void setSelectedAssests(AssetsMaster selectedAssests) {
+        this.selectedAssests = selectedAssests;
     }
 
     // Getters and setters for skill, holiday, and asset fields
@@ -606,6 +646,14 @@ public class ManagerBeans implements Serializable {
 
     public void setAssetId(Integer assetId) {
         this.assetId = assetId;
+    }
+
+    public Integer getAssetsdetailsId() {
+        return assetsdetailsId;
+    }
+
+    public void setAssetsdetailsId(Integer assetsdetailsId) {
+        this.assetsdetailsId = assetsdetailsId;
     }
 
     public Integer getUserId() {
