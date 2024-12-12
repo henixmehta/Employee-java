@@ -155,7 +155,6 @@ public class ManagerBeans implements Serializable {
             SkillsMaster newSkill = new SkillsMaster();
             newSkill.setSkillName(sname);
             newSkill.setDescription(desc);
-
             managerClient.addSkill(newSkill, sname, desc);
             skillsList = managerClient.getAllSkills(skillsGenericType);
             sname = ""; // Clear after adding
@@ -164,16 +163,30 @@ public class ManagerBeans implements Serializable {
         }
     }
 
+    //Delete Skill
     public void deleteSkill(int skillId) {
-        try {
-            managerClient.deleteSkills(skillId);
-            skillsList = managerClient.getAllSkills(skillsGenericType);
-        } catch (ClientErrorException e) {
-            // Log the exception if the deletion fails
-
-        }
+        managerClient.deleteSkills(skillId);
+        skillsList = managerClient.getAllSkills(skillsGenericType);
     }
 
+    // Edit  Skill
+    SkillsMaster SelectedKill;
+
+    public void editsKill(SkillsMaster skillMaster) {
+        this.SelectedKill = skillMaster;
+        this.sname = skillMaster.getSkillName();
+        this.desc = skillMaster.getDescription();
+    }
+
+    public SkillsMaster getSelectedKill() {
+        return SelectedKill;
+    }
+
+    public void setSelectedKill(SkillsMaster SelectedKill) {
+        this.SelectedKill = SelectedKill;
+    }
+
+    //skill  Display
     public Collection<UserMaster> getUsersList() {
         return usersList;
     }
@@ -212,7 +225,6 @@ public class ManagerBeans implements Serializable {
         try {
             DepartmentMaster dept = new DepartmentMaster();
 
-            // Determine if this is an update or add operation based on selectedDeptId
             if (selectedDeptId != null && selectedDeptId > 0) {
                 dept.setDeptId(selectedDeptId); // Update
             } else {
@@ -318,8 +330,7 @@ public class ManagerBeans implements Serializable {
             }
 
             // Call the client method to update the designation
-            managerClient.updateDesignation(
-                    desgi, // RequestEntity is not used in this scenario
+            managerClient.updateDesignation(desgi, // RequestEntity is not used in this scenario
                     designationId.toString(),
                     designationName,
                     responsibility,

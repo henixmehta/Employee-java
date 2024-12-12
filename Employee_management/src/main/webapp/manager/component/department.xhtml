@@ -10,26 +10,19 @@
             <h:form>
                 <h2>#{managerBeans.selectedDeptId == null ? 'Add New Department' : 'Update Department'}</h2>
 
-                <!-- Department Name -->
                 <h:outputLabel for="DepartmentName" value="Department Name:" />
                 <h:inputText id="DepartmentName" value="#{managerBeans.deptName}" required="true" />
 
-                <!-- Department Description -->
                 <h:outputLabel for="deptDesc" value="Department Description:" />
                 <h:inputText id="deptDesc" value="#{managerBeans.deptDesc}" required="true" />
 
-                <!-- Manager Selection -->
                 <h:outputLabel value="Manager:" />
                 <h:selectOneMenu id="managerId" value="#{managerBeans.managerId}" required="true">
                     <f:selectItem itemLabel="Select Manager" itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{managerBeans.usersList}" var="user"
-                                   itemValue="#{user.userId}" itemLabel="#{user.userName}" />
+                    <f:selectItems value="#{managerBeans.usersList}" var="user"    itemValue="#{user.userId}" itemLabel="#{user.userName}" />
                 </h:selectOneMenu>
 
-                <!-- Submit Button -->
-                <h:commandButton value="#{managerBeans.selectedDeptId == null ? 'Add Department' : 'Update Department'}" 
-                                 action="#{managerBeans.addOrUpdateDepartment}" />
-
+                <h:commandButton value="Update Designation" rendered="#{managerBeans.departmentId != null}" action="#{managerBeans.updateDesignation}" />
                 <hr />
             </h:form>
         </f:view>
