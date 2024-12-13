@@ -27,6 +27,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 
 @Named(value = "managerBeans")
 @SessionScoped
@@ -164,10 +167,10 @@ public class ManagerBeans implements Serializable {
     }
 
     //Delete Skill
-    public void deleteSkill(int skillId) {
-        managerClient.deleteSkills(skillId);
-        skillsList = managerClient.getAllSkills(skillsGenericType);
-    }
+//    public void deleteSkill(int skillId) {
+//        managerClient.deleteSkills(skillId);
+//        skillsList = managerClient.getAllSkills(skillsGenericType);
+//    }
 
     // Edit  Skill
     SkillsMaster SelectedKill;
@@ -186,7 +189,7 @@ public class ManagerBeans implements Serializable {
         this.SelectedKill = SelectedKill;
     }
 
-    //skill  Display
+    //================================================user Master================================================
     public Collection<UserMaster> getUsersList() {
         return usersList;
     }
@@ -194,6 +197,43 @@ public class ManagerBeans implements Serializable {
     public Collection<DepartmentMaster> getDepartmentList() {
         return departmentList;
     }
+
+    //add userMaster
+    public void addUser() {
+        try {
+
+            managerClient.addUser(usermaster);
+            usersList = managerClient.getAllUsers(usersGenericType);
+            resetUserMasterFields();
+        } catch (ClientErrorException e) {
+        }
+    }
+
+    public void resetUserMasterFields() {
+        usermaster.setAddress(null);
+        usermaster.setAge(null);
+        usermaster.setCompanyEmail(null);
+        usermaster.setCurrentExperience(null);
+        usermaster.setDateOfBirth(null);
+        usermaster.setUserName(null);
+        usermaster.setProfileImage(null);
+        usermaster.setSalary(null);
+        usermaster.setReportingTo(null);
+        usermaster.setQualification(null);
+        usermaster.setGender(null);
+        usermaster.setJoiningDate(null);
+        usermaster.setPassword(null);
+        usermaster.setEmergencyContact(null);
+        usermaster.setPhoneNo(null);
+        usermaster.setEmailId(null);
+    }
+
+    // delete usermaster  
+//    public void deleteUser(Integer userMId) {
+//        managerClient.deleteUser(userMId);
+//        usersList = managerClient.getAllUsers(usersGenericType);
+//        resetUserMasterFields();
+//    }
 
     private DepartmentMaster selectedDept;
 
@@ -244,11 +284,11 @@ public class ManagerBeans implements Serializable {
         }
     }
 
-    public void deleteDepartment() {
-        managerClient.deleteDepartment(deptId);
-        departmentList = managerClient.getAllDepartments(deptGenericType);
-
-    }
+//    public void deleteDepartment() {
+//        managerClient.deleteDepartment(deptId);
+//        departmentList = managerClient.getAllDepartments(deptGenericType);
+//
+//    }
 
     private void resetDepartmentForm() {
         selectedDeptId = null;
@@ -356,10 +396,10 @@ public class ManagerBeans implements Serializable {
     }
 
     //delete Desgination
-    public void deleteDesgination() {
-        managerClient.deleteDesgination(designationId);
-        designationList = managerClient.getAllDesignation(designationGenericType);
-    }
+//    public void deleteDesgination() {
+//        managerClient.deleteDesgination(designationId);
+//        designationList = managerClient.getAllDesignation(designationGenericType);
+//    }
 
     //Display User
     private UserMaster usermaster = new UserMaster();
@@ -370,31 +410,6 @@ public class ManagerBeans implements Serializable {
 
     public void setUsermaster(UserMaster usermaster) {
         this.usermaster = usermaster;
-    }
-
-    public void addUser() {
-        try {
-
-            managerClient.addUser(usermaster);
-            usersList = managerClient.getAllUsers(usersGenericType);
-            usermaster.setAddress(null);
-            usermaster.setAge(null);
-            usermaster.setCompanyEmail(null);
-            usermaster.setCurrentExperience(null);
-            usermaster.setDateOfBirth(null);
-            usermaster.setUserName(null);
-            usermaster.setProfileImage(null);
-            usermaster.setSalary(null);
-            usermaster.setReportingTo(null);
-            usermaster.setQualification(null);
-            usermaster.setGender(null);
-            usermaster.setJoiningDate(null);
-            usermaster.setPassword(null);
-            usermaster.setEmergencyContact(null);
-            usermaster.setPhoneNo(null);
-            usermaster.setEmailId(null);
-        } catch (ClientErrorException e) {
-        }
     }
 
     public String getDesignationName() {
@@ -522,8 +537,6 @@ public class ManagerBeans implements Serializable {
 //        this.assetId = assetsdetails.getAssetId().getAssetId();
 //
 //    }
-    
-   
 //    public AssetsDetails getSelectedAssetsDetails() {
 //        return selectedAssetsDetails;
 //    }
@@ -531,7 +544,6 @@ public class ManagerBeans implements Serializable {
 //    public void setSelectedAssetsDetails(AssetsDetails selectedAssetsDetails) {
 //        this.selectedAssetsDetails = selectedAssetsDetails;
 //    }
-
 //addAssets
     public void addAsset() {
         try {
@@ -674,6 +686,20 @@ public class ManagerBeans implements Serializable {
 
     public void setDesignationId(Integer designationId) {
         this.designationId = designationId;
+    }
+
+    //========================================calculate Age========================================
+//    private UserMaster usermaster;
+    // Getter and setter for usermaster
+    public void calculateAge() {
+        if (usermaster.getDateOfBirth() != null) {
+            LocalDate birthDate = usermaster.getDateOfBirth().toInstant()
+                    .atZone(java.time.ZoneId.systemDefault())
+                    .toLocalDate();
+            LocalDate currentDate = LocalDate.now();
+            int age = Period.between(birthDate, currentDate).getYears();
+            usermaster.setAge(age);
+        }
     }
 
 }

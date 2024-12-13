@@ -39,26 +39,25 @@ public interface ManagerSessionBeanLocal {
 
     void addSkill(String sname, String desc);
 
-    void deleteSkill(Integer skillId);
-
     SkillsMaster getSkillsById(Integer SkillsId);
+//    SkillsMaster getSkillsByName(String sname);
 
     //=== All Designation Methods 
     Collection<DesignationMaster> getAllDesignation();
 
     void addDesig(String desginame, String desgirepo, Integer deptid);
 
-    void deleteDesgination(int designationId);
-
     public void updateDesignation(Integer designationId, String designationName, String responsibility, Integer deptId);
 
+//    DesignationMaster getDesignationById(Integer designationId);
+//    DesignationMaster getDesignationByName(String desginame);
+//    DesignationMaster getDesignationByDeptartment(Integer deptid);
+//            
     //=== All Holidays Methods
     Collection<HolidayMaster> getAllHolidays();
 
     void addHoliday(String desc, Date holidayDate
     );
-
-    void deleteHoliday(Integer holidayInteger);
 
     //===  Add Attendance Methods
     Collection<AttendanceDetails> getAllAttendanceDetails();
@@ -68,22 +67,15 @@ public interface ManagerSessionBeanLocal {
 
     void addUser(UserMaster usermaster);
 
-    void deleteUser(Integer userId);
-
     //=== User Details
     Collection<UserDetails> getAllUsersDetails();
 
     void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e);
 
-    void deleteUserDetails(Integer userId);
-
     //===  All Assets Methods
     Collection<AssetsMaster> getAllAssets();
 
     void addAsset(String assetName
-    );
-
-    void deleteAsset(Integer assetId
     );
 
     AssetsMaster getAssetById(Integer assetId
@@ -97,8 +89,6 @@ public interface ManagerSessionBeanLocal {
             Integer userId
     );
 
-    void deleteAssetsDetails(Integer assetsDetailsId);
-
     //===  Add All Methods
     Collection<DepartmentMaster> getAllDepartments();
 
@@ -106,57 +96,57 @@ public interface ManagerSessionBeanLocal {
             String deptDesc, int managerId
     );
 
-    void deleteDepartment(Integer deptid
-    );
-
     //===  All Documnets Methods
     Collection<DocumentMaster> getAllDocuments();
-
-    void deleteDocument(Integer docid);
 
     //===  All Document Details Methods
     Collection<DocumentDetails> getAllDocumentDetails();
 
-    void deleteDocumentDetails(Integer DocDetId);
-
     //===  All Grpups Methods
     Collection<GroupMaster> getAllGroups();
-
-    void deleteGroup(Integer GrpId);
 
     //===  All Leaves Methods
     Collection<LeaveMaster> getAllLeaves();
 
     void addLeaves(Integer leaveTypeId, String leaveType);
 
-    void deleteLeaves(Integer LeaveId);
-
     //===  All Leave Details Methods
     Collection<LeaveDetails> getAllLeaveDetails();
 
 //    void addLeaveDetails(Date fromeDate, Date toDate, String status, String reactReason, Integer userId, Integer leaveTypeId);
-
-    void deleteLeaveDetails(Integer leaveDetailsId);
-
     //===  All Project Details Methods
     Collection<ProjectDetails> getAllProjectDetails();
 
-    
-    public void updateProjectStatus(Integer projectId, String newStatus) ;
-    void deleteProjectDetails(Integer proDetailsId);
+    public void updateProjectStatus(Integer projectId, String newStatus);
 
     //===  All Task Methods
     Collection<TaskMaster> getAllTask();
 
-    void deleteTask(Integer taskId);
-
     //===  All Task Details Methods
     Collection<TaskDetails> getAllTaskDetails();
-
-    void deleteTaskDetails(Integer taskDeteId);
 
     //===  All Performance Methods
     Collection<PerformanceDetails> getPerformanceDetails();
 
-    void deletePrform(Integer performnceDetailsId);
+    //=========delete alll methods =======================
+//    void deletePrform(Integer performnceDetailsId); //optional
+//    void deleteTaskDetails(Integer taskDeteId);    
+//    void deleteSkill(Integer skillId);
+//    void deleteDesgination(int designationId);
+//    void deleteHoliday(Integer holidayInteger);
+//    void deleteUser(Integer userId); ////// status active in active
+//    void deleteUserDetails(Integer userId);
+    void deleteAsset(Integer assetId);
+
+//    void deleteAssetsDetails(Integer assetsDetailsId);  /// status 
+//    void deleteTask(Integer taskId);
+//    public void deleteTaskDetails(Integer taskDeteId); ////set status
+//    void deleteDepartment(Integer deptid
+//    );
+//    void deleteDocument(Integer docid);
+//    void deleteProjectDetails(Integer proDetailsId);
+//    void deleteLeaves(Integer LeaveId);
+//    void deleteLeaveDetails(Integer leaveDetailsId);    ///approve reacject
+//    void deleteGroup(Integer GrpId);
+//    void deleteDocumentDetails(Integer DocDetId);
 }

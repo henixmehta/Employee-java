@@ -21,11 +21,20 @@
 
                 <h:inputText id="address" value="#{managerBeans.usermaster.address}" required="true" pt:placeholder="Enter Address"/>
 
-                <h:inputText id="dateOfBirth" value="#{managerBeans.usermaster.dateOfBirth}" required="true" pt:placeholder="Enter Date Of Birth">
+                <h:inputText id="dateOfBirth" 
+                             value="#{managerBeans.usermaster.dateOfBirth}" 
+                             required="true" 
+                             pt:placeholder="Enter Date Of Birth">
                     <f:convertDateTime pattern="yyyy-MM-dd" />
+                    <f:passThroughAttribute name="type" value="date" />
+                    <f:ajax event="change" listener="#{managerBeans.calculateAge}" render="age" />
                 </h:inputText>
 
-                <h:inputText id="age" value="#{managerBeans.usermaster.age}" required="true" pt:placeholder="Enter Your Age"/>
+                <h:inputText id="age" 
+                             value="#{managerBeans.usermaster.age}" 
+                             required="true" 
+                             pt:placeholder="Enter Your Age" 
+                             disabled="true" />
 
                 <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true">
                     <f:selectItem itemLabel="Male" itemValue="Male" />
@@ -33,6 +42,7 @@
                 </h:selectOneRadio>
                 <h:inputText id="joiningDate" value="#{managerBeans.usermaster.joiningDate}" required="true" pt:placeholder="Enter Joining Date">
                     <f:convertDateTime pattern="yyyy-MM-dd" />
+                    <f:passThroughAttribute name="type" value="date" />
                 </h:inputText>
 
                 <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" required="true" pt:placeholder="Enter Emergency No" />
@@ -77,8 +87,11 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">Date Of Birth</f:facet>
-                        #{user.dateOfBirth}
-                </h:column>  
+                    <h:outputText value="#{user.dateOfBirth}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </h:column>
+
                 <h:column>
                     <f:facet name="header">Age</f:facet>
                         #{user.age}
@@ -120,8 +133,17 @@
                         #{user.qualification}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">CurrentExp</f:facet>
-                        #{user.currentExperience}
+                    <f:facet name="header">Current Exp</f:facet>
+                        #{user.currentExperience} 
+                    <!--setresume-->
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:form>
+                    
+                        <h:commandLink value="Delete" action="#{managerBeans.deleteUser(user.userId)}" /> /
+                        <h:commandLink value="Edit" action="#{managerBeans.editUser(user)}" />
+                    </h:form>
                 </h:column>
             </h:dataTable>
         </h:form>
