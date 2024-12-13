@@ -82,7 +82,7 @@ public class ManagerClient {
     }
 
     public Response deleteAsset(int assetId) throws ClientErrorException {
-        return webTarget.path("assets/{id}")
+        return webTarget.path("deleteassets/{id}")
                 .resolveTemplate("id", assetId)
                 .request()
                 .delete();
@@ -196,26 +196,29 @@ public class ManagerClient {
 //    public void deleteDesgination(Integer designationId) throws ClientErrorException {
 //        webTarget.path(java.text.MessageFormat.format("deleteDesgination/{0}", new Object[]{designationId})).request().delete();
 //    }
-
     public void updateDesignation(Object requestEntity, String designationId, String designationName, String responsibility, String deptId) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("updateDesignation/{0}/{1}/{2}/{3}", new Object[]{designationId, designationName, responsibility, deptId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
-//    public Response deleteSkills(int skillid) throws ClientErrorException {
-//        return webTarget.path("skills/{id}")
-//                .resolveTemplate("id", skillid)
-//                .request()
-//                .delete();
-//
-//    }
-//
-//    public void deleteUser(Integer userId) throws ClientErrorException {
-//        webTarget.path(java.text.MessageFormat.format("deleteUser/{0}", new Object[]{userId})).request().delete();
-//    }
-//
-//    public void deleteUserDetails(Integer userId) throws ClientErrorException {
-//        webTarget.path(java.text.MessageFormat.format("deleteUserDetails/{0}", new Object[]{userId})).request().delete();
-//    }
+    public Response deleteSkills(int skillid) throws ClientErrorException {
+        return webTarget.path("skills/{id}")
+                .resolveTemplate("id", skillid)
+                .request()
+                .delete();
+
+    }
+
+    public void deleteUser(Integer userId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteUser/{0}", new Object[]{userId})).request().delete();
+    }
+
+    public void deleteUserDetails(Integer userId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteUserDetails/{0}", new Object[]{userId})).request().delete();
+    }
+
+    public void deleteAssetsDetails(Integer assetsDetailsId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteAssetsDetails/{0}", new Object[]{assetsDetailsId})).request().delete();
+    }
 
     public void close() {
         client.close();

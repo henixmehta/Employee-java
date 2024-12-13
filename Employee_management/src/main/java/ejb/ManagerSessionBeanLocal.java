@@ -138,7 +138,7 @@ public interface ManagerSessionBeanLocal {
 //    void deleteUserDetails(Integer userId);
     void deleteAsset(Integer assetId);
 
-//    void deleteAssetsDetails(Integer assetsDetailsId);  /// status 
+    void deleteAssetsDetails(Integer assetsDetailsId);  /// status 
 //    void deleteTask(Integer taskId);
 //    public void deleteTaskDetails(Integer taskDeteId); ////set status
 //    void deleteDepartment(Integer deptid

@@ -46,10 +46,9 @@
                     <f:facet name="header">Details ID</f:facet>
                         #{assetdetails.id}
                 </h:column>
-
                 <h:column>
                     <f:facet name="header">Asset ID</f:facet>
-                        #{assetdetails.assetId.assetName}
+                        #{assetdetails.assetId.assetName == null ? 'N/A' : assetdetails.assetId.assetName}
                 </h:column>
 
                 <h:column>
@@ -74,8 +73,8 @@
 
                 <h:column>
                     <f:facet name="header">Action</f:facet>
-                    <h:commandLink value="Delete" action="#{managerBeans.deleteAssetDetails(asset.assetId)}" />/                    
-                    <h:commandLink value="Edit" action="#{managerBeans.deleteAssetDetails(asset)}" />
+                    <h:commandLink value="Delete" action="#{managerBeans.deleteAssetsDetails(assetdetails.id)}" />/                    
+                    <h:commandLink value="Edit" action="#{managerBeans.editAsstsDetails(assetdetails)}" />
                 </h:column>
             </h:dataTable>
         </h:form>

@@ -171,7 +171,6 @@ public class ManagerBeans implements Serializable {
 //        managerClient.deleteSkills(skillId);
 //        skillsList = managerClient.getAllSkills(skillsGenericType);
 //    }
-
     // Edit  Skill
     SkillsMaster SelectedKill;
 
@@ -234,7 +233,6 @@ public class ManagerBeans implements Serializable {
 //        usersList = managerClient.getAllUsers(usersGenericType);
 //        resetUserMasterFields();
 //    }
-
     private DepartmentMaster selectedDept;
 
     public DepartmentMaster getSelectedDept() {
@@ -289,7 +287,6 @@ public class ManagerBeans implements Serializable {
 //        departmentList = managerClient.getAllDepartments(deptGenericType);
 //
 //    }
-
     private void resetDepartmentForm() {
         selectedDeptId = null;
         deptName = "";
@@ -400,7 +397,6 @@ public class ManagerBeans implements Serializable {
 //        managerClient.deleteDesgination(designationId);
 //        designationList = managerClient.getAllDesignation(designationGenericType);
 //    }
-
     //Display User
     private UserMaster usermaster = new UserMaster();
 
@@ -527,23 +523,37 @@ public class ManagerBeans implements Serializable {
     }
 
     //edit assets Detail
-//    AssetsDetails selectedAssetsDetails;
-//
-//    public void editAsstsDetails(AssetsDetails assetsdetails) {
-//        this.selectedAssetsDetails = assetsdetails;
-//        this.assetsdetailsId = assetsdetails.getId();
-//        this.assetNumber = assetsdetails.getAssetNumber();
-//     
-//        this.assetId = assetsdetails.getAssetId().getAssetId();
-//
-//    }
-//    public AssetsDetails getSelectedAssetsDetails() {
-//        return selectedAssetsDetails;
-//    }
-//
-//    public void setSelectedAssetsDetails(AssetsDetails selectedAssetsDetails) {
-//        this.selectedAssetsDetails = selectedAssetsDetails;
-//    }
+    AssetsDetails selectedAssetsDetails;
+
+    public void editAsstsDetails(AssetsDetails assetsdetails) {
+        this.selectedAssetsDetails = assetsdetails;
+        this.assetsdetailsId = assetsdetails.getId();
+        this.assetNumber = assetsdetails.getAssetNumber();
+
+        if (assetsdetails.getAssetId() != null) {
+            this.assetId = assetsdetails.getAssetId().getAssetId();
+        } else {
+            this.assetId = null;
+        }
+
+    }
+
+    public AssetsDetails getSelectedAssetsDetails() {
+        return selectedAssetsDetails;
+    }
+
+    public void setSelectedAssetsDetails(AssetsDetails selectedAssetsDetails) {
+        this.selectedAssetsDetails = selectedAssetsDetails;
+    }
+
+    // delete assets details
+    public void deleteAssetsDetails(Integer assetsDetailsid) {
+
+        managerClient.deleteAssetsDetails(assetsDetailsid);
+        assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
+
+    }
+
 //addAssets
     public void addAsset() {
         try {

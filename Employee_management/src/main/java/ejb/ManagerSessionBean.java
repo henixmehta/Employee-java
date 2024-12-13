@@ -109,26 +109,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void deleteAsset(Integer assetId) {
-        // Fetch the AssetsMaster object by its ID
-        AssetsMaster asset = em.find(AssetsMaster.class, assetId);
-
-        if (asset != null) {
-            // Query AssetsDetails by the AssetsMaster object
-            Query query = em.createQuery("SELECT a FROM AssetsDetails a WHERE a.assetId = :assetId");
-            query.setParameter("assetId", asset);
-
-            Collection<AssetsDetails> detailsList = query.getResultList();
-            for (AssetsDetails detail : detailsList) {
-                detail.setAssetId(null); // Set the assetId to null
-                em.merge(detail); // Persist changes
-            }
-
-            em.remove(asset); // Delete the AssetsMaster object
-        }
-    }
-
-    @Override
     public AssetsMaster getAssetById(Integer assetId) {
         try {
             return em.createNamedQuery("AssetsMaster.findByAssetId", AssetsMaster.class)
@@ -307,14 +287,33 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        em.remove(ud);
 //        
 //    }
-//    
-//    @Override
-//    public void deleteAssetsDetails(Integer assetsDetailsId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        AssetsDetails ad = em.find(AssetsDetails.class, assetsDetailsId);
-//        em.remove(ad);
-//    }
-//    
+    @Override
+    public void deleteAssetsDetails(Integer assetsDetailsId) {
+        //     throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        AssetsDetails ad = em.find(AssetsDetails.class, assetsDetailsId);
+        em.remove(ad);
+    }
+
+    @Override
+    public void deleteAsset(Integer assetId) {
+        // Fetch the AssetsMaster object by its ID
+        AssetsMaster asset = em.find(AssetsMaster.class, assetId);
+
+        if (asset != null) {
+            // Query AssetsDetails by the AssetsMaster object
+            Query query = em.createQuery("SELECT a FROM AssetsDetails a WHERE a.assetId = :assetId");
+            query.setParameter("assetId", asset);
+
+            Collection<AssetsDetails> detailsList = query.getResultList();
+            for (AssetsDetails detail : detailsList) {
+                detail.setAssetId(null); // Set the assetId to null
+                em.merge(detail); // Persist changes
+            }
+
+            em.remove(asset); // Delete the AssetsMaster object
+        }
+    }
+
 //    @Override
 //    public void deleteDocument(Integer docid) {
 ////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
