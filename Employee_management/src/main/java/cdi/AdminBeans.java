@@ -67,4 +67,35 @@ public class AdminBeans {
 //            e.getException();
 //        }
 //}
+    //===============================set count ===============================================
+//      private int projectCount;
+//    private int departmentCount;
+//    private int designationCount;
+//    private int userCount;
+//
+//    // Add methods to fetch the counts (e.g., from database or services)
+//    public void loadCounts() {
+//        // Replace with actual logic to fetch counts
+//        userCount = (usersList != null) ? usersList.size() : 0;
+//        departmentCount = (departmentList != null) ? departmentList.size() : 0;
+//        designationCount = (designationList != null) ? designationList.size() : 0;
+//        projectCount = (projectdetailsList != null) ? projectdetailsList.size() : 0;
+//    }
+//
+//    // Getters
+//    public int getProjectCount() {
+//        return projectCount;
+//    }
+//
+//    public int getDepartmentCount() {
+//        return departmentCount;
+//    }
+//
+//    public int getDesignationCount() {
+//        return designationCount;
+//    }
+//
+//    public int getUserCount() {
+//        return userCount;
+//    }
 }

@@ -126,6 +126,7 @@ public class ManagerBeans implements Serializable {
             projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
             tasksList = managerClient.getAllTask(tasksGenericType);
             taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+            loadCounts();
 
         } catch (ClientErrorException e) {
             e.printStackTrace();
@@ -616,6 +617,7 @@ public class ManagerBeans implements Serializable {
         managerClient.deleteTaskDetails(taskdetailid);
         taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
     }
+
     // Leave Master 
     //addAssets
     public void addLeaves() {
@@ -768,6 +770,37 @@ public class ManagerBeans implements Serializable {
             int age = Period.between(birthDate, currentDate).getYears();
             usermaster.setAge(age);
         }
+    }
+
+    private int projectCount;
+    private int departmentCount;
+    private int designationCount;
+    private int userCount;
+
+    // Add methods to fetch the counts (e.g., from database or services)
+    public void loadCounts() {
+        // Replace with actual logic to fetch counts
+        userCount = (usersList != null) ? usersList.size() : 0;
+        departmentCount = (departmentList != null) ? departmentList.size() : 0;
+        designationCount = (designationList != null) ? designationList.size() : 0;
+        projectCount = (projectdetailsList != null) ? projectdetailsList.size() : 0;
+    }
+
+    // Getters
+    public int getProjectCount() {
+        return projectCount;
+    }
+
+    public int getDepartmentCount() {
+        return departmentCount;
+    }
+
+    public int getDesignationCount() {
+        return designationCount;
+    }
+
+    public int getUserCount() {
+        return userCount;
     }
 
 }
