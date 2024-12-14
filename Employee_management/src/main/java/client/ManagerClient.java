@@ -1,7 +1,6 @@
 package client;
 
-import entity.DepartmentMaster;
-import entity.UserMaster;
+import entity.*;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
@@ -228,7 +227,11 @@ public class ManagerClient {
         webTarget.path(java.text.MessageFormat.format("deletetask/{0}", new Object[]{taskid})).request().delete();
     }
 
+    public void addGroups(Object requestEntity, String gname) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addgroups/{0}", new Object[]{gname})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
     public void close() {
         client.close();
-    }
+   }
 }

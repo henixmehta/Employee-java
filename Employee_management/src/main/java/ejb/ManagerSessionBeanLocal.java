@@ -86,7 +86,7 @@ public interface ManagerSessionBeanLocal {
 
     //===  All Grpups Methods
     Collection<GroupMaster> getAllGroups();
-//    public void addGroups(String gname,String username);
+    public void addGroups(String gname);
 
     //===  All Leaves Methods
     Collection<LeaveMaster> getAllLeaves();

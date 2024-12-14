@@ -186,6 +186,13 @@ public class ManagerResource {
         return msbl.getAllGroups();
     }
 
+    @POST
+    @Path("addgroups/{gname}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addGroups(@PathParam("gname")String gname) {
+        msbl.addGroups(gname);
+    }
+
     @GET
     @Path("leaves")
     @Produces(MediaType.APPLICATION_JSON)
@@ -271,7 +278,6 @@ public class ManagerResource {
 //    public void deleteTask(@PathParam("taskid") Integer taskid) {
 //        msbl.deleteTask(taskid);
 //    }
-
     @DELETE
     @Path("deleteTaskDetails/{taskDetailsId}")
     public void deleteTaskDetails(@PathParam("taskDetailsId") Integer taskDetailsId) {

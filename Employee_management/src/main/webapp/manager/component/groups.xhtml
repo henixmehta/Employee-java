@@ -7,6 +7,15 @@
     </h:head>
     <h:body>
         <h:form>
+            <h2>Add New Group</h2>
+
+            <h:outputLabel for="groupName" value="Group Name:" />
+            <h:inputText id="groupName" value="#{managerBeans.groupname}" required="true" />
+
+            <h:commandButton value="Add Group" action="#{managerBeans.addGroups()}" />
+            <hr/>
+        </h:form>
+        <h:form>
             <h2>Group Details List</h2>
             <h:dataTable value="#{managerBeans.allGroupsList}" var="group" border="1">
                 <h:column>
@@ -17,9 +26,9 @@
                     <f:facet name="header">Group Name</f:facet>
                         #{group.groupName}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">User Name</f:facet>
-                        #{group.userName}
+                        #{group.userId}
                 </h:column>
             </h:dataTable>
         </h:form>   

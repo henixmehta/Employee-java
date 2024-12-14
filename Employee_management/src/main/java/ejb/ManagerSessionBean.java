@@ -237,14 +237,13 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         em.persist(assetsDetails);
     }
 
-//    @Override
-//    public void addGroups(String gname) {
-////        UserMaster user = (UserMaster) em.find(UserMaster.class, username);
-//        GroupMaster g = new GroupMaster();
-//        d.setDesignation(desginame);
-//       
-//        em.persist(d);
-//    }
+    @Override
+    public void addGroups(String gname) {
+        GroupMaster group = new GroupMaster();
+        group.setGroupName(gname);
+
+        em.persist(group);
+    }
 //    @Override
 //    public void deleteHoliday(Integer holidayInteger) {
 ////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

@@ -62,6 +62,16 @@ public class ManagerBeans implements Serializable {
     private String returnDate;
     private Integer userId;
 
+    private String groupname;
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
+    }
+
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
     };
     private final GenericType<Collection<HolidayMaster>> holidaysGenericType = new GenericType<Collection<HolidayMaster>>() {
@@ -169,6 +179,20 @@ public class ManagerBeans implements Serializable {
 
     public void setSelectedKill(SkillsMaster SelectedKill) {
         this.SelectedKill = SelectedKill;
+    }
+
+    //========================================Group Master=======================================================
+    public void addGroups() {
+        try {
+            GroupMaster group = new GroupMaster();
+            group.setGroupName(groupname);
+
+            managerClient.addGroups(group, groupname);
+            groupsList = managerClient.getAllGroups(groupsGenericType);
+            groupname = ""; // Clear after adding
+        } catch (ClientErrorException e) {
+        }
+
     }
 
     //================================================user Master================================================
@@ -599,7 +623,7 @@ public class ManagerBeans implements Serializable {
     public void setTaskdetailsList(Collection<TaskDetails> taskdetailsList) {
         this.taskdetailsList = taskdetailsList;
     }
-    
+
     // GETTER AND SETTER 
     public AssetsMaster getSelectedAssests() {
         return selectedAssests;
