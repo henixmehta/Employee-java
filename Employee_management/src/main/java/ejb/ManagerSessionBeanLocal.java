@@ -36,17 +36,13 @@ public interface ManagerSessionBeanLocal {
 
     //=== All SKILL Methods 
     Collection<SkillsMaster> getAllSkill();
-
     void addSkill(String sname, String desc);
-
     SkillsMaster getSkillsById(Integer SkillsId);
 //    SkillsMaster getSkillsByName(String sname);
 
     //=== All Designation Methods 
     Collection<DesignationMaster> getAllDesignation();
-
     void addDesig(String desginame, String desgirepo, Integer deptid);
-
     public void updateDesignation(Integer designationId, String designationName, String responsibility, Integer deptId);
 
 //    DesignationMaster getDesignationById(Integer designationId);
@@ -55,7 +51,6 @@ public interface ManagerSessionBeanLocal {
 //            
     //=== All Holidays Methods
     Collection<HolidayMaster> getAllHolidays();
-
     void addHoliday(String desc, Date holidayDate
     );
 
@@ -64,37 +59,24 @@ public interface ManagerSessionBeanLocal {
 
     //===  All Users Methods
     Collection<UserMaster> getAllUsers();
-
     void addUser(UserMaster usermaster);
 
     //=== User Details
     Collection<UserDetails> getAllUsersDetails();
-
     void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e);
 
     //===  All Assets Methods
     Collection<AssetsMaster> getAllAssets();
-
-    void addAsset(String assetName
-    );
-
-    AssetsMaster getAssetById(Integer assetId
-    );
+    void addAsset(String assetName);
+    AssetsMaster getAssetById(Integer assetId);
 
     //===  All Asset Details Methods
     Collection<AssetsDetails> getAllAssetsDetails();
-
-    void addAssetsDetails(BigInteger assetNumber, Date assignDate,
-            Date returnDate, Integer assetId,
-            Integer userId
-    );
+    void addAssetsDetails(BigInteger assetNumber, Date assignDate,Date returnDate, Integer assetId,Integer userId);
 
     //===  Add All Methods
     Collection<DepartmentMaster> getAllDepartments();
-
-    void addOrUpdateDepartment(Integer deptId, String deptName,
-            String deptDesc, int managerId
-    );
+    void addOrUpdateDepartment(Integer deptId, String deptName,String deptDesc, int managerId);
 
     //===  All Documnets Methods
     Collection<DocumentMaster> getAllDocuments();
@@ -104,10 +86,10 @@ public interface ManagerSessionBeanLocal {
 
     //===  All Grpups Methods
     Collection<GroupMaster> getAllGroups();
+//    public void addGroups(String gname,String username);
 
     //===  All Leaves Methods
     Collection<LeaveMaster> getAllLeaves();
-
     void addLeaves(Integer leaveTypeId, String leaveType);
 
     //===  All Leave Details Methods
@@ -116,7 +98,6 @@ public interface ManagerSessionBeanLocal {
 //    void addLeaveDetails(Date fromeDate, Date toDate, String status, String reactReason, Integer userId, Integer leaveTypeId);
     //===  All Project Details Methods
     Collection<ProjectDetails> getAllProjectDetails();
-
     public void updateProjectStatus(Integer projectId, String newStatus);
 
     //===  All Task Methods
@@ -136,11 +117,10 @@ public interface ManagerSessionBeanLocal {
 //    void deleteHoliday(Integer holidayInteger);
 //    void deleteUser(Integer userId); ////// status active in active
 //    void deleteUserDetails(Integer userId);
-    void deleteAsset(Integer assetId);
-
-    void deleteAssetsDetails(Integer assetsDetailsId);  /// status 
+      void deleteAsset(Integer assetId);
+      void deleteAssetsDetails(Integer assetsDetailsId);  /// status 
 //    void deleteTask(Integer taskId);
-//    public void deleteTaskDetails(Integer taskDeteId); ////set status
+      void deleteTaskDetails(Integer taskDetatilsId); ////set status
 //    void deleteDepartment(Integer deptid
 //    );
 //    void deleteDocument(Integer docid);

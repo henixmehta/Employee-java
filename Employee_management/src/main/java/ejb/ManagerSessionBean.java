@@ -1,23 +1,6 @@
 package ejb;
 
-import entity.AssetsDetails;
-import entity.AssetsMaster;
-import entity.AttendanceDetails;
-import entity.DepartmentMaster;
-import entity.DesignationMaster;
-import entity.DocumentDetails;
-import entity.DocumentMaster;
-import entity.GroupMaster;
-import entity.HolidayMaster;
-import entity.LeaveDetails;
-import entity.LeaveMaster;
-import entity.PerformanceDetails;
-import entity.ProjectDetails;
-import entity.SkillsMaster;
-import entity.TaskDetails;
-import entity.TaskMaster;
-import entity.UserDetails;
-import entity.UserMaster;
+import entity.*;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
@@ -255,6 +238,14 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
 //    @Override
+//    public void addGroups(String gname) {
+////        UserMaster user = (UserMaster) em.find(UserMaster.class, username);
+//        GroupMaster g = new GroupMaster();
+//        d.setDesignation(desginame);
+//       
+//        em.persist(d);
+//    }
+//    @Override
 //    public void deleteHoliday(Integer holidayInteger) {
 ////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //        HolidayMaster h = em.find(HolidayMaster.class, holidayInteger);
@@ -289,7 +280,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //    }
     @Override
     public void deleteAssetsDetails(Integer assetsDetailsId) {
-        //     throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         AssetsDetails ad = em.find(AssetsDetails.class, assetsDetailsId);
         em.remove(ad);
     }
@@ -303,7 +293,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
             // Query AssetsDetails by the AssetsMaster object
             Query query = em.createQuery("SELECT a FROM AssetsDetails a WHERE a.assetId = :assetId");
             query.setParameter("assetId", asset);
-
             Collection<AssetsDetails> detailsList = query.getResultList();
             for (AssetsDetails detail : detailsList) {
                 detail.setAssetId(null); // Set the assetId to null
@@ -314,88 +303,12 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         }
     }
 
-//    @Override
-//    public void deleteDocument(Integer docid) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        DocumentMaster d = em.find(DocumentMaster.class, docid);
-//        em.remove(d);
-//    }
-//    
-//    @Override
-//    public void deleteDocumentDetails(Integer DocDetId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        DocumentDetails dd = em.find(DocumentDetails.class, DocDetId);
-//        em.remove(dd);
-//    }
-//    
-//    @Override
-//    public void deleteGroup(Integer GrpId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        GroupMaster g = em.find(GroupMaster.class, GrpId);
-//        em.remove(g);
-//    }
-//    
-//    @Override
-//    public void addLeaves(Integer leaveTypeId, String leaveType) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//
-//    }
-//    
-//    @Override
-//    public void deleteLeaves(Integer LeaveId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//
-//        LeaveMaster lv = em.find(LeaveMaster.class, LeaveId);
-//        em.remove(lv);
-//    }
-//    
-//    @Override
-//    public void deleteLeaveDetails(Integer leaveDetailsId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        LeaveDetails lvd = em.find(LeaveDetails.class, leaveDetailsId);
-//        em.remove(lvd);
-//    }
-//    
-//    @Override
-//    public void deleteProjectDetails(Integer proDetailsId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        ProjectDetails projDetails = em.find(ProjectDetails.class, proDetailsId);
-//        em.remove(projDetails);
-//    }
-//    
-//    @Override
-//    public void deleteTask(Integer taskId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        TaskMaster tm = em.find(TaskMaster.class, taskId);
-//        em.remove(tm);
-//    }
-//    
-//    @Override
-//        public void deleteTaskDetails(Integer taskDeteId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        TaskDetails td = em.find(TaskDetails.class, taskDeteId);
-//        
-//        em.remove(td);
-//    }
-//    
-//    @Override
-//    public void deletePrform(Integer performnceDetailsId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        PerformanceDetails perdetails = em.find(PerformanceDetails.class, performnceDetailsId);
-//        em.remove(perdetails);
-//    }
-//    @Override
-//    public void deleteDesgination(int designationId) {
-//        DesignationMaster desg = (DesignationMaster) em.find(DesignationMaster.class, designationId);
-//        em.remove(desg);
-//    }
-//     @Override
-//    public void deleteSkill(Integer skillId) {
-//        SkillsMaster skill = em.find(SkillsMaster.class, skillId);
-//        if (skill != null) {
-//            em.remove(skill);
-//        }
-//    }
+    @Override
+    public void deleteTaskDetails(Integer taskDetatilsId) {
+        TaskDetails task = em.find(TaskDetails.class, taskDetatilsId);
+        em.remove(task);
+    }
+
     @Override
     public Collection<UserDetails> getAllUsersDetails() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

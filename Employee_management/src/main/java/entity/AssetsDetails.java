@@ -43,7 +43,7 @@ public class AssetsDetails implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "asset_number", precision = 25, scale = 0)
+    @Column(name = "asset_number")
     private BigInteger assetNumber;
     @Column(name = "assign_date")
     @Temporal(TemporalType.TIMESTAMP)
@@ -137,5 +137,5 @@ public class AssetsDetails implements Serializable {
     public String toString() {
         return "entity.AssetsDetails[ id=" + id + " ]";
     }
-
+    
 }

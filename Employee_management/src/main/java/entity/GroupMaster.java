@@ -28,7 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "GroupMaster.findAll", query = "SELECT g FROM GroupMaster g"),
     @NamedQuery(name = "GroupMaster.findByGroupId", query = "SELECT g FROM GroupMaster g WHERE g.groupId = :groupId"),
     @NamedQuery(name = "GroupMaster.findByGroupName", query = "SELECT g FROM GroupMaster g WHERE g.groupName = :groupName"),
-    @NamedQuery(name = "GroupMaster.findByUserName", query = "SELECT g FROM GroupMaster g WHERE g.userName = :userName")})
+    @NamedQuery(name = "GroupMaster.findByUserId", query = "SELECT g FROM GroupMaster g WHERE g.userId = :userId")})
 public class GroupMaster implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,9 +40,8 @@ public class GroupMaster implements Serializable {
     @Size(max = 50)
     @Column(name = "group_name")
     private String groupName;
-    @Size(max = 50)
-    @Column(name = "user_name")
-    private String userName;
+    @Column(name = "user_id")
+    private Integer userId;
 
     public GroupMaster() {
     }
@@ -67,12 +66,12 @@ public class GroupMaster implements Serializable {
         this.groupName = groupName;
     }
 
-    public String getUserName() {
-        return userName;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
     @Override

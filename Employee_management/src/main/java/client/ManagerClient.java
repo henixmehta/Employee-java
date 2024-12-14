@@ -220,6 +220,14 @@ public class ManagerClient {
         webTarget.path(java.text.MessageFormat.format("deleteAssetsDetails/{0}", new Object[]{assetsDetailsId})).request().delete();
     }
 
+    public void deleteTaskDetails(Integer taskDetailsId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteTaskDetails/{0}", new Object[]{taskDetailsId})).request().delete();
+    }
+
+    public void deleteTask(Integer taskid) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deletetask/{0}", new Object[]{taskid})).request().delete();
+    }
+
     public void close() {
         client.close();
     }

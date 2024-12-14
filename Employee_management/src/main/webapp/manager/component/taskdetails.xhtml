@@ -17,11 +17,11 @@
                     <f:facet name="header">Task Title</f:facet>
                         #{taskdetails.taskId.taskTitle}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">Assign By</f:facet>
                         #{taskdetails.assignBy.userName}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">Assign To</f:facet>
                         #{taskdetails.assignTo.userName}
                 </h:column>
@@ -29,7 +29,7 @@
                     <f:facet name="header">Start Date</f:facet>
                         #{taskdetails.startDate}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">End Date</f:facet>
                         #{taskdetails.endDate}
                 </h:column>
@@ -40,6 +40,12 @@
                 <h:column>
                     <f:facet name="header">On-Hold Reason</f:facet>
                         #{taskdetails.onHoldReason}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:form>
+                        <h:commandLink value="Delete" action="#{managerBeans.deleteTaskDetails(taskdetails.id)}" /> 
+                    </h:form>
                 </h:column>
             </h:dataTable>
         </h:form>   

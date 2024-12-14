@@ -17,15 +17,15 @@
                     <f:facet name="header">Task Title</f:facet>
                         #{task.taskTitle}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">Project Name</f:facet>
                         #{task.projectId}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">Task Status</f:facet>
                         #{task.taskStatus}
                 </h:column>
-                 <h:column>
+                <h:column>
                     <f:facet name="header">Description</f:facet>
                         #{task.description}
                 </h:column>
@@ -37,7 +37,12 @@
                     <f:facet name="header">Due Date</f:facet>
                         #{task.dueDate}
                 </h:column>
-                
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:form>
+                        <h:commandLink value="Delete" action="#{managerBeans.deleteTask(taskid)}" /> 
+                    </h:form>
+                </h:column>
             </h:dataTable>
         </h:form>   
     </h:body>

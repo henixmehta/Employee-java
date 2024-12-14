@@ -1,23 +1,7 @@
 package cdi;
 
 import client.ManagerClient;
-import entity.AssetsDetails;
-import entity.AssetsMaster;
-import entity.AttendanceDetails;
-import entity.DepartmentMaster;
-import entity.DesignationMaster;
-import entity.DocumentDetails;
-import entity.DocumentMaster;
-import entity.GroupMaster;
-import entity.HolidayMaster;
-import entity.LeaveDetails;
-import entity.LeaveMaster;
-import entity.PerformanceDetails;
-import entity.ProjectDetails;
-import entity.SkillsMaster;
-import entity.TaskDetails;
-import entity.TaskMaster;
-import entity.UserMaster;
+import entity.*;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -29,7 +13,6 @@ import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
 import java.time.LocalDate;
 import java.time.Period;
-import java.time.format.DateTimeFormatter;
 
 @Named(value = "managerBeans")
 @SessionScoped
@@ -554,7 +537,7 @@ public class ManagerBeans implements Serializable {
 
     }
 
-//addAssets
+    //addAssets
     public void addAsset() {
         try {
             AssetsMaster newAsset = new AssetsMaster();
@@ -589,6 +572,35 @@ public class ManagerBeans implements Serializable {
         this.assetName = assetsMaster.getAssetName();
     }
 
+    // Task Master 
+    public void deleteTask(Integer taskid) {
+        managerClient.deleteTask(taskid);
+        tasksList = managerClient.getAllTask(tasksGenericType);
+    }
+
+    // Task Details
+    public void deleteTaskDetails(Integer taskdetailid) {
+        managerClient.deleteTaskDetails(taskdetailid);
+        taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+    }
+
+    public Collection<TaskMaster> getTasksList() {
+        return tasksList;
+    }
+
+    public void setTasksList(Collection<TaskMaster> tasksList) {
+        this.tasksList = tasksList;
+    }
+
+    public Collection<TaskDetails> getTaskdetailsList() {
+        return taskdetailsList;
+    }
+
+    public void setTaskdetailsList(Collection<TaskDetails> taskdetailsList) {
+        this.taskdetailsList = taskdetailsList;
+    }
+    
+    // GETTER AND SETTER 
     public AssetsMaster getSelectedAssests() {
         return selectedAssests;
     }
