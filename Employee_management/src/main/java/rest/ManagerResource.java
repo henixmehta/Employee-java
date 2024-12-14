@@ -189,16 +189,26 @@ public class ManagerResource {
     @POST
     @Path("addgroups/{gname}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addGroups(@PathParam("gname")String gname) {
+    public void addGroups(@PathParam("gname") String gname) {
         msbl.addGroups(gname);
     }
 
+    //================Leave Master Methods====================
     @GET
     @Path("leaves")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<LeaveMaster> getAllLeaves() {
         return msbl.getAllLeaves();
     }
+
+    @POST
+    @Path("addleaves/{leavetype}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addLeaves(@PathParam("leavetype") String leavetype) {
+        msbl.addLeaves(leavetype);
+    }
+    
+    //================Leave Details Methods====================
 
     @GET
     @Path("leavedetails")

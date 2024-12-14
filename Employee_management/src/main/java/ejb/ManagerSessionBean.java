@@ -277,6 +277,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        em.remove(ud);
 //        
 //    }
+
     @Override
     public void deleteAssetsDetails(Integer assetsDetailsId) {
         AssetsDetails ad = em.find(AssetsDetails.class, assetsDetailsId);
@@ -319,7 +320,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addLeaves(Integer leaveTypeId, String leaveType) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addLeaves(String leaveType) {
+        LeaveMaster leave = new LeaveMaster();
+        leave.setLeaveType(leaveType);
+
+        em.persist(leave);
     }
 }

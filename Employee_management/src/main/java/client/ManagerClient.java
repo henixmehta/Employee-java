@@ -231,7 +231,11 @@ public class ManagerClient {
         webTarget.path(java.text.MessageFormat.format("addgroups/{0}", new Object[]{gname})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
+    public void addLeaves(Object requestEntity, String leavetype) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("addleaves/{0}", new Object[]{leavetype})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
     public void close() {
         client.close();
-   }
+    }
 }

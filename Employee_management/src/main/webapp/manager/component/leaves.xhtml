@@ -7,6 +7,15 @@
     </h:head>
     <h:body>
         <h:form>
+            <h2>Add New Leaves</h2>
+
+            <h:outputLabel for="lname" value="Leave Type:" />
+            <h:inputText id="lname" value="#{managerBeans.leavetype}" required="true" />
+            
+            <h:commandButton value="Add Leaves" action="#{managerBeans.addLeaves()}" />
+
+        </h:form>
+        <h:form>
             <h2>All Leaves List</h2>
             <h:dataTable value="#{managerBeans.allLeavesList}" var="leave" border="1">
                 <h:column>

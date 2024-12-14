@@ -90,7 +90,7 @@ public interface ManagerSessionBeanLocal {
 
     //===  All Leaves Methods
     Collection<LeaveMaster> getAllLeaves();
-    void addLeaves(Integer leaveTypeId, String leaveType);
+    void addLeaves(String leaveType);
 
     //===  All Leave Details Methods
     Collection<LeaveDetails> getAllLeaveDetails();

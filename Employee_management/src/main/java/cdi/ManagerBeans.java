@@ -63,14 +63,7 @@ public class ManagerBeans implements Serializable {
     private Integer userId;
 
     private String groupname;
-
-    public String getGroupname() {
-        return groupname;
-    }
-
-    public void setGroupname(String groupname) {
-        this.groupname = groupname;
-    }
+    private String leavetype;
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
     };
@@ -299,6 +292,22 @@ public class ManagerBeans implements Serializable {
         deptName = "";
         deptDesc = "";
         managerId = 0;
+    }
+
+    public String getLeavetype() {
+        return leavetype;
+    }
+
+    public void setLeavetype(String leavetype) {
+        this.leavetype = leavetype;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
     }
 
     public String getDeptName() {
@@ -606,6 +615,19 @@ public class ManagerBeans implements Serializable {
     public void deleteTaskDetails(Integer taskdetailid) {
         managerClient.deleteTaskDetails(taskdetailid);
         taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+    }
+    // Leave Master 
+    //addAssets
+    public void addLeaves() {
+        try {
+            LeaveMaster leave = new LeaveMaster();
+            leave.setLeaveType(leavetype);
+
+            managerClient.addLeaves(leave, leavetype);
+            leavesList = managerClient.getAllLeaves(leavesGenericType);
+            leavetype = ""; // Clear after adding
+        } catch (ClientErrorException e) {
+        }
     }
 
     public Collection<TaskMaster> getTasksList() {
