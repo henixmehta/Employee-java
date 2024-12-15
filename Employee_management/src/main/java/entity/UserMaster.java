@@ -127,13 +127,16 @@ public class UserMaster implements Serializable {
     }
 
     private String hashPassword(String password) {
+        if (password == null) {
+            throw new IllegalArgumentException("Password cannot be null");
+        }
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
             byte[] hashedBytes = messageDigest.digest(password.getBytes());
             return new BigInteger(1, hashedBytes).toString(16);
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return null;  // You may want to handle this differently (throw exception)
+            return null;
         }
     }
 
@@ -242,7 +245,11 @@ public class UserMaster implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = hashPassword(password);
+        if (password != null && !password.isEmpty()) {
+            this.password = hashPassword(password);
+        } else {
+            this.password = null;
+        }
     }
 
     public Integer getReportingTo() {
