@@ -6,6 +6,8 @@ package entity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.Date;
 import javax.json.bind.annotation.JsonbTransient;
@@ -124,6 +126,17 @@ public class UserMaster implements Serializable {
     public UserMaster() {
     }
 
+    private String hashPassword(String password) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = messageDigest.digest(password.getBytes());
+            return new BigInteger(1, hashedBytes).toString(16);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;  // You may want to handle this differently (throw exception)
+        }
+    }
+
     public UserMaster(Integer userId) {
         this.userId = userId;
     }
@@ -229,7 +242,7 @@ public class UserMaster implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = hashPassword(password);
     }
 
     public Integer getReportingTo() {
@@ -369,5 +382,5 @@ public class UserMaster implements Serializable {
     public String toString() {
         return "entity.UserMaster[ userId=" + userId + " ]";
     }
-    
+
 }
