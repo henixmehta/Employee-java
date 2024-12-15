@@ -326,4 +326,43 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
         em.persist(leave);
     }
+
+//    @Override
+//    public void UpdateUser(Integer userId, String userName, String emailId, BigInteger phoneNo, Date dateOfBirth,
+//            Integer age, String gender, Date joiningDate, String address, BigInteger emergencyContact,
+//            String profileImage, String companyEmail, String password, Integer reportingTo, BigInteger salary,
+//            String qualification, String currentExperience) {
+//
+//        if (userId != null) {
+//            UserMaster user = em.find(UserMaster.class, userId);
+//            if (user != null) {
+//                user.setUserId(userId);
+//                user.setUserName(userName);
+//                user.setAddress(address);
+//                user.setAge(age);
+//                user.setEmailId(emailId);
+//                user.setEmergencyContact(emergencyContact);
+//                user.setCurrentExperience(currentExperience);
+//                user.setDateOfBirth(dateOfBirth);
+//                user.setGender(gender);
+//                user.setJoiningDate(joiningDate);
+//                user.setPassword(password);
+//                user.setProfileImage(profileImage);
+//                user.setSalary(salary);
+//                user.setPhoneNo(phoneNo);
+//                user.setReportingTo(reportingTo);
+//                user.setQualification(qualification);
+//                em.merge(user);
+//            } else {
+//                System.out.println("Id not found ");
+//            }
+//        } else {
+//            System.out.println("Id Is Empty..Please Select Valid Id");
+//        }
+//    }
+
+    @Override
+    public void UpddateUser(UserMaster user) {
+        
+    }
 }

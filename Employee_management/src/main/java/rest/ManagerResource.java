@@ -207,9 +207,8 @@ public class ManagerResource {
     public void addLeaves(@PathParam("leavetype") String leavetype) {
         msbl.addLeaves(leavetype);
     }
-    
-    //================Leave Details Methods====================
 
+    //================Leave Details Methods====================
     @GET
     @Path("leavedetails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -276,6 +275,19 @@ public class ManagerResource {
     public void addUser(UserMaster usermaster) {
         msbl.addUser(usermaster);
     }
+
+//    @PUT
+//    @Path("UpdateUser/{userId}/{userName}/{address}/{age}/{emailId}/{emergencyContact}/{currentExperience}/"
+//            + "{dateOfBirth}/{gender}/{joiningDate}/{password}/{profileImage}/{salary}/{phoneNo}/{reportingTo}/{qualification}")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    public void updateUser(@PathParam("userId") Integer userId, @PathParam("userName") String userName,
+//        @PathParam("address") String address, @PathParam("age") Integer age, @PathParam("emailId") String emailId,
+//        @PathParam("emergencyContact") BigInteger emergencyContact, @PathParam("currentExperience") String currentExperience,
+//        @PathParam("dateOfBirth") Date dateOfBirth, @PathParam("gender") String gender, @PathParam("joiningDate") Date joiningDate,
+//        @PathParam("password") String password, @PathParam("profileImage") String profileImage, @PathParam("salary") Integer salary,
+//        @PathParam("phoneNo") BigInteger phoneNo, @PathParam("reportingTo") Integer reportingTo, @PathParam("qualification") String qualification) {
+//       msbl.UpdateUser(userId, userName, emailId, phoneNo, dateOfBirth, age, gender, joiningDate, address, emergencyContact, profileImage, emailId, password, reportingTo, phoneNo, qualification, currentExperience);
+//    }
 
     @DELETE
     @Path("deleteAssetsDetails/{assetsDetailsId}")

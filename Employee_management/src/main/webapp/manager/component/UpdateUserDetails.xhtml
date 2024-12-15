@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>Users List</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h2>Update Register User</h2>
+
+            <!-- Tabular format with 2 columns (label and input) -->
+            <h:panelGrid columns="1" cellpadding="1px" style="border:1px solid #ccc;width:30%;">
+                <!-- User Name Input -->
+                <h:inputText id="userName" value="#{managerBeans.usermaster.userName}" required="true" pt:placeholder="Enter User Name"/>
+
+                <h:inputText id="emailId" value="#{managerBeans.usermaster.emailId}" required="true" pt:placeholder="Enter Email ID"/>
+
+                <h:inputText id="phoneNo" value="#{managerBeans.usermaster.phoneNo}" required="true" pt:placeholder="Enter Mobile No"/>
+
+                <h:inputText id="address" value="#{managerBeans.usermaster.address}" required="true" pt:placeholder="Enter Address"/>
+
+                <h:inputText id="dateOfBirth" 
+                             value="#{managerBeans.usermaster.dateOfBirth}" 
+                             required="true" 
+                             pt:placeholder="Enter Date Of Birth">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                    <f:passThroughAttribute name="type" value="date" />
+                    <f:ajax event="change" listener="#{managerBeans.calculateAge}" render="age" />
+                </h:inputText>
+
+                <h:inputText id="age" 
+                             value="#{managerBeans.usermaster.age}" 
+                             required="true" 
+                             pt:placeholder="Enter Your Age" 
+                             disabled="true" />
+
+                <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true">
+                    <f:selectItem itemLabel="Male" itemValue="Male" />
+                    <f:selectItem itemLabel="Female" itemValue="Female" />
+                </h:selectOneRadio>
+                <h:inputText id="joiningDate" value="#{managerBeans.usermaster.joiningDate}" required="true" pt:placeholder="Enter Joining Date">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                    <f:passThroughAttribute name="type" value="date" />
+                </h:inputText>
+
+                <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" required="true" pt:placeholder="Enter Emergency No" />
+
+                <h:inputText id="profileImage" value="#{managerBeans.usermaster.profileImage}" required="true" pt:placeholder="Profile Image"/>
+
+                <h:inputText id="companyEmail" value="#{managerBeans.usermaster.companyEmail}" required="true" pt:placeholder="Enter Company Email"/>
+
+                <h:inputSecret id="password" value="#{managerBeans.usermaster.password}" required="true" pt:placeholder="Enter Password"/>
+
+                <h:inputText id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" required="true" pt:placeholder="Reporting To"/>
+
+                <h:inputText id="salary" value="#{managerBeans.usermaster.salary}" required="true" pt:placeholder="Enter Salary"/>
+
+                <h:inputText id="qualification" value="#{managerBeans.usermaster.qualification}" required="true" pt:placeholder="Qualification"/>
+
+                <h:inputText id="currentExperience" value="#{managerBeans.usermaster.currentExperience}" required="true" pt:placeholder="Current Experience"/>
+
+                <!-- Submit Button to Add User -->
+                <h:commandButton value="Update User" action="#{managerBeans.addUser}" />
+            </h:panelGrid>
+        </h:form>
+        <h:form>
+            <h2>Users List</h2>
+
+            <h:dataTable value="#{managerBeans.usersList}" var="user" border="1">
+                <h:column>
+                    <f:facet name="header">User ID</f:facet>
+                        #{user.userId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">User Name</f:facet>
+                        #{user.userName}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                        #{user.emailId}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Phone</f:facet>
+                        #{user.phoneNo}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Date Of Birth</f:facet>
+                    <h:outputText value="#{user.dateOfBirth}">
+                        <f:convertDateTime pattern="yyyy-MM-dd" />
+                    </h:outputText>
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Age</f:facet>
+                        #{user.age}
+                </h:column>  
+                <h:column>
+                    <f:facet name="header">Gender</f:facet>
+                        #{user.gender}
+                </h:column>  
+                <h:column>
+                    <f:facet name="header">Joining Date</f:facet>
+                        #{user.joiningDate}
+                </h:column>  
+                <h:column>
+                    <f:facet name="header">Address</f:facet>
+                        #{user.address}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">EPhone</f:facet>
+                        #{user.emergencyContact}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Profile</f:facet>
+                        #{user.profileImage}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Cemail</f:facet>
+                        #{user.companyEmail}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Pass</f:facet>
+                        #{user.password}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Salary</f:facet>
+                        #{user.salary}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Qualification</f:facet>
+                        #{user.qualification}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Current Exp</f:facet>
+                        #{user.currentExperience} 
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                        <h:commandLink value="Edit" action="#{managerBeans.loadUser(user.userId)}" />
+                </h:column>
+            </h:dataTable>
+        </h:form>
+    </h:body>
+</html>

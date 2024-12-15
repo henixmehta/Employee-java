@@ -60,7 +60,11 @@ public interface ManagerSessionBeanLocal {
     //===  All Users Methods
     Collection<UserMaster> getAllUsers();
     void addUser(UserMaster usermaster);
-
+//    void UpdateUser(Integer userId,String userName,String emailId,BigInteger phoneNo,Date dateOfBirth,
+//    Integer age,String gender,Date joiningDate,String address,BigInteger emergencyContact,String profileImage,
+//    String companyEmail,String password,Integer reportingTo,BigInteger salary,String qualification,String currentExperience);
+    void UpddateUser(UserMaster user);
+    
     //=== User Details
     Collection<UserDetails> getAllUsersDetails();
     void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e);
