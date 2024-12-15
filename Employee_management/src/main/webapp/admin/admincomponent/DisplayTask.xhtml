@@ -33,7 +33,7 @@
             <div class="navbar-wrapper">
                 <div class="m-header">
                     <a href="../adminDashboard.xhtml" class="b-brand text-primary">
-                        <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
+                        <img src="../../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
                     </a>
                 </div>
                 <div class="navbar-content">
@@ -59,17 +59,17 @@
                             </a>
                             <ul class="pc-submenu">
                                 <li class="pc-item pc-hasmenu">
-                                    <a href="../admincomponent/DisplayUser.xhtml" class="pc-link">
+                                    <a href="DisplayUser.xhtml" class="pc-link">
                                         Registration Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
                                 <li class="pc-item pc-hasmenu">
-                                    <a href="../admincomponent/DisplayAttendance.xhtml" class="pc-link">
+                                    <a href="DisplayAttendance.xhtml" class="pc-link">
                                         Attendance Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
                                 <li class="pc-item pc-hasmenu">
-                                    <a href="../admincomponent/DisplayTask.xhtml" class="pc-link">
+                                    <a href="DisplayTask.xhtml" class="pc-link">
                                         Task Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
@@ -112,11 +112,6 @@
         <!-- [ Sidebar Menu ] end -->
         <!-- [ Header Topbar ] start -->
         <header class="pc-header">
-            <!--            <div class="m-header">
-                            <a href="../dashboard/index.html" class="b-brand text-primary">
-                                <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
-                            </a>
-                        </div>-->
             <div class="header-wrapper">
                 <!-- [Mobile Media Block] start -->
                 <div class="me-auto pc-mob-drp">
@@ -222,32 +217,57 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <h:form>
-                    <h2>Holiday List</h2>
+                    <h2>Task List</h2>
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Holiday Details</h5>
+                            <h5>Task Details</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.holidaysList}" var="holiday" class="table">
+                                <h:dataTable value="#{managerBeans.tasksList}" var="task" class="table">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Holiday ID</span>
+                                            <span>Task ID</span>
                                         </f:facet>
-                                        #{holiday.holidayId}
+                                        #{task.taskId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Task Title</span>
+                                        </f:facet>
+                                        #{task.taskTitle}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
                                             <span>Description</span>
                                         </f:facet>
-                                        #{holiday.description}
+                                        #{task.description}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Holiday Date</span>
+                                            <span>Project</span>
                                         </f:facet>
-                                        #{holiday.holidayDate}
+                                        #{task.projectId}
                                     </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Task Priority</span>
+                                        </f:facet>
+                                        #{task.priority}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Due Date</span>
+                                        </f:facet>
+                                        #{task.dueDate}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Status</span>
+                                        </f:facet>
+                                        #{task.taskStatus}
+                                    </h:column>
+
                                 </h:dataTable>
                             </div>
                         </div>

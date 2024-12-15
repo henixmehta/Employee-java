@@ -33,7 +33,7 @@
             <div class="navbar-wrapper">
                 <div class="m-header">
                     <a href="../adminDashboard.xhtml" class="b-brand text-primary">
-                        <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
+                        <img src="../../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
                     </a>
                 </div>
                 <div class="navbar-content">
@@ -59,17 +59,17 @@
                             </a>
                             <ul class="pc-submenu">
                                 <li class="pc-item pc-hasmenu">
-                                    <a href="../admincomponent/DisplayUser.xhtml" class="pc-link">
+                                    <a href="DisplayUser.xhtml" class="pc-link">
                                         Registration Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
                                 <li class="pc-item pc-hasmenu">
-                                    <a href="../admincomponent/DisplayAttendance.xhtml" class="pc-link">
+                                    <a href="DisplayAttendance.xhtml" class="pc-link">
                                         Attendance Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
                                 <li class="pc-item pc-hasmenu">
-                                    <a href="../admincomponent/DisplayTask.xhtml" class="pc-link">
+                                    <a href="DisplayTask.xhtml" class="pc-link">
                                         Task Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
@@ -112,11 +112,6 @@
         <!-- [ Sidebar Menu ] end -->
         <!-- [ Header Topbar ] start -->
         <header class="pc-header">
-            <!--            <div class="m-header">
-                            <a href="../dashboard/index.html" class="b-brand text-primary">
-                                <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
-                            </a>
-                        </div>-->
             <div class="header-wrapper">
                 <!-- [Mobile Media Block] start -->
                 <div class="me-auto pc-mob-drp">
@@ -222,31 +217,43 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <h:form>
-                    <h2>Holiday List</h2>
+                    <h2>Attendance Details</h2>
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Holiday Details</h5>
+                            <h5>Attendance Details</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.holidaysList}" var="holiday" class="table">
+                                <h:dataTable value="#{managerBeans.attendanceDetailsList}" var="attendance" class="table">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Holiday ID</span>
+                                            <span>Attendance ID</span>
                                         </f:facet>
-                                        #{holiday.holidayId}
+                                        #{attendance.attendanceId}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Description</span>
+                                            <span>Assign Date</span>
                                         </f:facet>
-                                        #{holiday.description}
+                                        #{attendance.userId.userName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Holiday Date</span>
+                                            <span>Check In</span>
                                         </f:facet>
-                                        #{holiday.holidayDate}
+                                        #{attendance.checkIn}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Check Out</span>
+                                        </f:facet>
+                                        #{attendance.checkOut}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Date</span>
+                                        </f:facet>
+                                        #{attendance.date}
                                     </h:column>
                                 </h:dataTable>
                             </div>
