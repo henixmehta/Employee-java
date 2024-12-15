@@ -11,14 +11,14 @@
         <meta name="description" content="Gradient Able is trending dashboard template made using Bootstrap 5 design framework. Gradient Able is available in Bootstrap, React, CodeIgniter, Angular, and .net Technologies." />
         <meta name="keywords" content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
         <meta name="author" content="codedthemes" />
-        <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon" />
-        <link rel="stylesheet" href="../assets/css/plugins/jsvectormap.min.css" />
-        <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" />
-        <link rel="stylesheet" href="../assets/fonts/feather.css" />
-        <link rel="stylesheet" href="../assets/fonts/fontawesome.css" />
-        <link rel="stylesheet" href="../assets/fonts/material.css" />
-        <link rel="stylesheet" href="../assets/css/style.css" id="main-style-link" />
-        <link rel="stylesheet" href="../assets/css/style-preset.css" />
+        <link rel="icon" href="../../assets/images/favicon.svg" type="image/x-icon" />
+        <link rel="stylesheet" href="../../assets/css/plugins/jsvectormap.min.css" />
+        <link rel="stylesheet" href="../../assets/fonts/tabler-icons.min.css" />
+        <link rel="stylesheet" href="../../assets/fonts/feather.css" />
+        <link rel="stylesheet" href="../../assets/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="../../assets/fonts/material.css" />
+        <link rel="stylesheet" href="../../assets/css/style.css" id="main-style-link" />
+        <link rel="stylesheet" href="../../assets/css/style-preset.css" />
     </h:head>
     <h:body>
         <!-- [ Pre-loader ] start -->
@@ -73,34 +73,32 @@
                                         Task Details<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                                     </a>
                                 </li>
-
-
                             </ul>
                             <li class="pc-item pc-caption">
                                 <label>Other</label>
                                 <i class="ph ph-devices"></i>
                             </li>
                             <li class="pc-item">
-                                <a href="../admin/admincomponent/DisplayAsset.xhtml" class="pc-link">
+                                <a href="DisplayAsset.xhtml" class="pc-link">
                                     <span class="pc-micon"><i class="ph ph-lock"></i></span>
                                     <span class="pc-mtext">Assets</span>
                                 </a>
                             </li>
                             <li class="pc-item">
                                 <li class="pc-item">
-                                    <a href="../admin/admincomponent/DisplayHoliday.xhtml" class="pc-link">
+                                    <a href="DisplayHoliday.xhtml" class="pc-link">
                                         <span class="pc-micon"><i class="ph ph-user-circle-plus"></i></span>
                                         <span class="pc-mtext">Holiday</span>
                                     </a>
                                 </li>
-                                 <li class="pc-item">
-                                    <a href="../admin/admincomponent/DisplayDepartment.xhtml" class="pc-link">
+                                <li class="pc-item">
+                                    <a href="DisplayDepartment.xhtml" class="pc-link">
                                         <span class="pc-micon"><i class="ph ph-user-circle-plus"></i></span>
                                         <span class="pc-mtext">Department</span>
                                     </a>
                                 </li>
-                                 <li class="pc-item">
-                                    <a href="../admin/admincomponent/DisplayDesignation.xhtml" class="pc-link">
+                                <li class="pc-item">
+                                    <a href="DisplayDesignation.xhtml" class="pc-link">
                                         <span class="pc-micon"><i class="ph ph-user-circle-plus"></i></span>
                                         <span class="pc-mtext">Designation</span>
                                     </a>
@@ -114,11 +112,6 @@
         <!-- [ Sidebar Menu ] end -->
         <!-- [ Header Topbar ] start -->
         <header class="pc-header">
-            <!--            <div class="m-header">
-                            <a href="../dashboard/index.html" class="b-brand text-primary">
-                                <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
-                            </a>
-                        </div>-->
             <div class="header-wrapper">
                 <!-- [Mobile Media Block] start -->
                 <div class="me-auto pc-mob-drp">
@@ -176,7 +169,7 @@
                                 data-bs-auto-close="outside" 
                                 aria-expanded="false">
                                 <img 
-                                    src="../assets/images/user/avatar-2.jpg" 
+                                    src="../../assets/images/user/avatar-2.jpg" 
                                     alt="user-image" 
                                     class="user-avtar" 
                                     />
@@ -223,124 +216,26 @@
         <div class="pc-container">
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
-                <div class="row">
-                    <!-- Projects Count -->
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card bg-grd-primary order-card">
-                            <div class="card-body">
-                                <h6 class="text-white">Projects</h6>
-                                <h2 class="text-end text-white">
-                                    <i class="feather icon-shopping-cart float-start"></i>
-                                    <span>#{managerBeans.projectCount}</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Completed Projects<span class="float-end">#{managerBeans.projectCount}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Departments Count -->
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card bg-grd-success order-card">
-                            <div class="card-body">
-                                <h6 class="text-white">Departments</h6>
-                                <h2 class="text-end text-white">
-                                    <i class="feather icon-tag float-start"></i>
-                                    <span>#{managerBeans.departmentCount}</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Active Departments<span class="float-end">#{managerBeans.departmentCount}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Designations Count -->
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card bg-grd-warning order-card">
-                            <div class="card-body">
-                                <h6 class="text-white">Designations</h6>
-                                <h2 class="text-end text-white">
-                                    <i class="feather icon-repeat float-start"></i>
-                                    <span>#{managerBeans.designationCount}</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Total Designations<span class="float-end">#{managerBeans.designationCount}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Users Count -->
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card bg-grd-danger order-card">
-                            <div class="card-body">
-                                <h6 class="text-white">Employee</h6>
-                                <h2 class="text-end text-white">
-                                    <i class="feather icon-award float-start"></i>
-                                    <span>#{managerBeans.userCount}</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Employee Details<span class="float-end">#{managerBeans.userCount}</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <h:form>
-                    <h2>Projects List</h2>
+                    <h2>Assets List</h2>
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Recent Projects</h5>
+                            <h5>Assets</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.projectDetailsList}" var="project" class="table">
+                                <h:dataTable value="#{managerBeans.assetsList}" var="asset" class="table">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Project ID</span>
+                                            <span>Asset ID</span>
                                         </f:facet>
-                                        #{project.projectId}
+                                        #{asset.assetId}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Project Name</span>
+                                            <span>Asset Name</span>
                                         </f:facet>
-                                        #{project.projectName}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Description</span>
-                                        </f:facet>
-                                        #{project.description}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Due Date</span>
-                                        </f:facet>
-                                        #{project.dueDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Start Date</span>
-                                        </f:facet>
-                                        #{project.startDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>End Date</span>
-                                        </f:facet>
-                                        #{project.endDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Days</span>
-                                        </f:facet>
-                                        #{project.onHoldDays}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Reason</span>
-                                        </f:facet>
-                                        #{project.onHoldReason}
+                                        #{asset.assetName}
                                     </h:column>
                                 </h:dataTable>
                             </div>
@@ -348,54 +243,65 @@
                     </div>
                 </h:form>
                 <h:form>
-                    <h2>Department List</h2>
+                    <h2>Assets Details List</h2>
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Department Details</h5>
+                            <h5>Assets Details</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.departmentList}" var="dept" class="table">
+                                <h:dataTable value="#{managerBeans.assetsDetailsList}" var="assetdetails" class="table">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Department ID</span>
+                                            <span>Asset ID</span>
                                         </f:facet>
-                                        #{dept.deptId}
+                                        #{assetdetails.id}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Department Name</span>
+                                            <span>Asset Name</span>
                                         </f:facet>
-                                        #{dept.deptName}
+                                        #{assetdetails.assetId.assetName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Description</span>
+                                            <span>Employee Name</span>
                                         </f:facet>
-                                        #{dept.description}
+                                        #{assetdetails.userId.userName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Manager Name</span>
+                                            <span>Asset Number</span>
                                         </f:facet>
-                                        #{dept.managerId.userName}
+                                        #{assetdetails.assetNumber}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Assign Date</span>
+                                        </f:facet>
+                                        #{assetdetails.assignDate}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Return Date</span>
+                                        </f:facet>
+                                        #{assetdetails.returnDate}
                                     </h:column>
                                 </h:dataTable>
                             </div>
                         </div>
                     </div>
                 </h:form>
-
                 <!-- Recent Orders end -->
             </div>
             <!-- [ Main Content ] end -->
         </div>
 
-        <script src="../assets/js/plugins/apexcharts.min.js"></script>
-        <script src="../assets/js/plugins/jsvectormap.min.js"></script>
-        <script src="../assets/js/plugins/world.js"></script>
-        <script src="../assets/js/plugins/world-merc.js"></script>
-        <script src="../assets/js/pages/dashboard-sales.js"></script>
+        <script src="../../assets/js/plugins/apexcharts.min.js"></script>
+        <script src="../../assets/js/plugins/jsvectormap.min.js"></script>
+        <script src="../../assets/js/plugins/world.js"></script>
+        <script src="../../assets/js/plugins/world-merc.js"></script>
+        <script src="../../assets/js/pages/dashboard-sales.js"></script>
         <!-- [Page Specific JS] end -->
         <!-- Required Js -->
         <script src="../assets/js/plugins/popper.min.js"></script>
