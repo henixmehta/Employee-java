@@ -11,7 +11,7 @@
         <meta name="description" content="Gradient Able is trending dashboard template made using Bootstrap 5 design framework. Gradient Able is available in Bootstrap, React, CodeIgniter, Angular, and .net Technologies." />
         <meta name="keywords" content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
         <meta name="author" content="codedthemes" />
-        <link rel="icon" href="../assets/images/favicon.svg" type="image/x-icon" />
+        <link rel="icon" href="../../assets/images/favicon.svg" type="image/x-icon" />
         <link rel="stylesheet" href="../assets/css/plugins/jsvectormap.min.css" />
         <link rel="stylesheet" href="../assets/fonts/tabler-icons.min.css" />
         <link rel="stylesheet" href="../assets/fonts/feather.css" />
@@ -51,6 +51,12 @@
                             <label>Components</label>
                             <i class="ph ph-suitcase"></i>
                         </li>
+                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayProject.xhtml">Project</a></li>
+                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayTask.xhtml">Daily Task</a></li>
+                        <li class="pc-item pc-caption">
+                            <label>Components</label>
+                            <i class="ph ph-suitcase"></i>
+                        </li>
                         <li class="pc-item pc-hasmenu">
                             <a href="#" class="pc-link">
                                 <span class="pc-micon"><i class="ph ph-tree-structure"></i></span>
@@ -58,25 +64,29 @@
                                 <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                             </a>
                             <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayProject.xhtml">Project</a></li>
                                 <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayGroups.xhtml">Groups</a></li>
                                 <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayDepartment.xhtml">Department</a></li>
                                 <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayDesignation.xhtml">Designation</a></li>
-                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayTask.xhtml">Daily Task</a></li>
                                 <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayAssets.xhtml">Assets</a></li>
-                                <li class="pc-item pc-hasmenu">
-                                    <a href="#" class="pc-link">Employee
-                                        <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
-                                    </a>
-                                    <ul class="pc-submenu">
-                                        <li class="pc-item"><a class="pc-link" href="managercomponent/UserRegistration.xhtml">Registration Details</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayAttendance.html">Attendance</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayDocument.xhtml">Document</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayLeave.xhtml">Leave Details</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayPerformance.xhtml">Performance</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="managercomponent/DisplaySkill.xhtml">Skills</a></li>
-                                    </ul>
-                                </li>
+                            </ul>
+                        </li>
+                        <li class="pc-item pc-caption">
+                            <label>Pages</label>
+                            <i class="ph ph-suitcase"></i>
+                        </li>
+                        <li class="pc-item pc-hasmenu">
+                            <a href="#" class="pc-link">
+                                <span class="pc-micon"><i class="ph ph-tree-structure"></i></span>
+                                <span class="pc-mtext">Employee</span>
+                                <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
+                            </a>
+                            <ul class="pc-submenu">
+                                <li class="pc-item"><a class="pc-link" href="managercomponent/UserRegistration.xhtml">Registration</a></li>
+                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayAttendance.xhtml">Attendance</a></li>
+                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayDocument.xhtml">Document</a></li>
+                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayLeave.xhtml">Leave Details</a></li>
+                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplayPerformance.xhtml">Performance</a></li>
+                                <li class="pc-item"><a class="pc-link" href="managercomponent/DisplaySkill.xhtml">Skills</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -196,6 +206,21 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <div class="row">
+                    <!-- Task Count -->
+                    <div class="col-md-6 col-xl-3">
+                        <div class="card bg-grd-warning order-card">
+                            <div class="card-body">
+                                <h6 class="text-white">Task</h6>
+                                <h2 class="text-end text-white">
+                                    <i class="feather icon-repeat float-start"></i>
+                                    <span>#{managerBeans.designationCount}</span>
+                                </h2>
+                                <p class="m-b-0">
+                                    Total Task<span class="float-end">#{managerBeans.designationCount}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <!-- Projects Count -->
                     <div class="col-md-6 col-xl-3">
                         <div class="card bg-grd-primary order-card">
@@ -257,7 +282,6 @@
                         </div>
                     </div>
                 </div>
-
                 <h:form>
                     <h2>Projects List</h2>
                     <div class="card table-card">

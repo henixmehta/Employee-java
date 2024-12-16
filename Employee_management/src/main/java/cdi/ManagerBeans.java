@@ -776,6 +776,7 @@ public class ManagerBeans implements Serializable {
     private int departmentCount;
     private int designationCount;
     private int userCount;
+    private int taskCount;
 
     // Add methods to fetch the counts (e.g., from database or services)
     public void loadCounts() {
@@ -784,9 +785,14 @@ public class ManagerBeans implements Serializable {
         departmentCount = (departmentList != null) ? departmentList.size() : 0;
         designationCount = (designationList != null) ? designationList.size() : 0;
         projectCount = (projectdetailsList != null) ? projectdetailsList.size() : 0;
+        taskCount = (taskdetailsList != null) ? taskdetailsList.size() : 0;
+    }
+    
+    // Getters
+    public int getTaskCount() {
+        return taskCount;
     }
 
-    // Getters
     public int getProjectCount() {
         return projectCount;
     }
