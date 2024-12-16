@@ -45,7 +45,14 @@
                     <f:passThroughAttribute name="type" value="date" />
                 </h:inputText>
 
-                <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" required="true" pt:placeholder="Enter Emergency No" />
+                <h:inputText id="emergencyContact" 
+                             value="#{managerBeans.usermaster.emergencyContact}" 
+                             required="true" 
+                             pt:placeholder="Enter Emergency No" 
+                             pt:type="number" 
+                             />
+                <h:message for="emergencyContact" style="color: red;" />
+
 
                 <h:inputText id="profileImage" value="#{managerBeans.usermaster.profileImage}" required="true" pt:placeholder="Profile Image"/>
 
@@ -53,7 +60,17 @@
 
                 <h:inputSecret id="password" value="#{managerBeans.usermaster.password}" required="true" pt:placeholder="Enter Password"/>
 
-                <h:inputText id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" required="true" pt:placeholder="Reporting To"/>
+                <h:selectOneMenu id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" 
+                                 class="form-control">
+                    <!-- Null option for "No Selection" -->
+                    <f:selectItem itemLabel="-- Select User --" itemValue="#{null}" />
+
+                    <!-- Populate dropdown with users -->
+                    <f:selectItems value="#{managerBeans.usersList}" var="user"
+                                   itemValue="#{user.userId}" itemLabel="#{user.userName}" />
+                </h:selectOneMenu>
+                <h:message for="reportingTo" style="color: red;" />
+
 
                 <h:inputText id="salary" value="#{managerBeans.usermaster.salary}" required="true" pt:placeholder="Enter Salary"/>
 
@@ -121,8 +138,8 @@
                         #{user.companyEmail}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Pass</f:facet>
-                        #{user.password}
+                    <f:facet name="header">Reporting</f:facet>
+                        #{user.reportingTo}
                 </h:column>
                 <h:column>
                     <f:facet name="header">Salary</f:facet>
