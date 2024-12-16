@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <!-- [Head] start -->
+    <h:head>
+        <title>Registration Page</title>
+        <!-- [Meta] -->
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="Gradient Able is trending dashboard template made using Bootstrap 5 design framework." />
+        <meta name="keywords" content="Bootstrap admin template, Dashboard UI Kit, Dashboard Template, Backend Panel, react dashboard, angular dashboard" />
+        <meta name="author" content="codedthemes" />
+
+        <!-- [Favicon] icon -->
+        <link rel="icon" href="../../assets/images/favicon.svg" type="image/x-icon" />
+        <!-- [Google Font : Poppins] -->
+
+        <!-- [CSS Files] -->
+        <link rel="stylesheet" href="../../assets/fonts/tabler-icons.min.css" />
+        <link rel="stylesheet" href="../../assets/fonts/feather.css" />
+        <link rel="stylesheet" href="../../assets/fonts/fontawesome.css" />
+        <link rel="stylesheet" href="../../assets/fonts/material.css" />
+        <link rel="stylesheet" href="../../assets/css/style.css" id="main-style-link" />
+        <link rel="stylesheet" href="../../assets/css/style-preset.css" />
+    </h:head>
+    <!-- [Head] end -->
+
+    <!-- [Body] start -->
+    <h:body>
+        <!-- [Pre-loader] start -->
+        <div class="loader-bg">
+            <div class="loader-track">
+                <div class="loader-fill"></div>
+            </div>
+        </div>
+        <!-- [Pre-loader] end -->
+
+        <div class="auth-main v1 bg-grd-primary">
+            <div class="auth-wrapper">
+                <div class="auth-form">
+                    <div class="card my-5">
+                        <div class="card-body">
+                            <h:form>
+                                <h2 align="center">User Registration</h2>
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.userName}" styleClass="form-control" pt:placeholder="Full Name" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.emailId}" styleClass="form-control" pt:placeholder="Email Id" />
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.phoneNo}" styleClass="form-control" pt:placeholder="Mobile Number" />
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <h:inputText id="dateOfBirth" 
+                                                 value="#{managerBeans.usermaster.dateOfBirth}" styleClass="form-control" required="true" 
+                                                 pt:placeholder="Date Of Birth">
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        <f:passThroughAttribute name="type" value="date" />
+                                        <f:ajax event="change" listener="#{managerBeans.calculateAge}" render="age" />
+                                    </h:inputText>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                                </div>
+                                <div class="form-group mb-3">
+                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                                </div>
+
+                                <div class="d-flex mt-1 justify-content-between">
+                                    <div class="form-check">
+                                        <h:selectBooleanCheckbox value="#{registerBean.agreeToTerms}" styleClass="form-check-input input-primary" />
+                                        <label class="form-check-label text-muted">I agree to all the Terms &amp; Condition</label>
+                                    </div>
+                                </div>
+
+                                <div class="d-grid mt-4">
+                                    <h:commandButton value="Create Account" action="#{registerBean.register}" styleClass="btn btn-primary" />
+                                </div>
+
+                                <div class="saprator my-3">
+                                    <span>Or continue with</span>
+                                </div>
+                                <div class="text-center">
+                                    <ul class="list-inline mx-auto mt-3 mb-0">
+                                        <li class="list-inline-item">
+                                            <a href="https://www.facebook.com/" class="avtar avtar-s rounded-circle bg-facebook" target="_blank">
+                                                <i class="fab fa-facebook-f text-white"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="https://twitter.com/" class="avtar avtar-s rounded-circle bg-twitter" target="_blank">
+                                                <i class="fab fa-twitter text-white"></i>
+                                            </a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="https://myaccount.google.com/" class="avtar avtar-s rounded-circle bg-googleplus" target="_blank">
+                                                <i class="fab fa-google text-white"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Required JS -->
+        <h:outputScript library="js" name="plugins/popper.min.js" />
+        <h:outputScript library="js" name="plugins/simplebar.min.js" />
+        <h:outputScript library="js" name="plugins/bootstrap.min.js" />
+        <h:outputScript library="js" name="fonts/custom-font.js" />
+        <h:outputScript library="js" name="pcoded.js" />
+        <h:outputScript library="js" name="plugins/feather.min.js" />
+    </h:body>
+    <!-- [Body] end -->
+
+</html>
