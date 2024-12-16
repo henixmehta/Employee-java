@@ -82,7 +82,7 @@
                             </a>
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="UserRegistration.xhtml">Registration Details</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayAttendance.html">Attendance</a></li>
+                                <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>
@@ -222,6 +222,12 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
+                                            <span>Employee Name</span>
+                                        </f:facet>
+                                        #{attend.userId.userName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
                                             <span>Check In</span>
                                         </f:facet>
                                         #{attend.checkIn}
@@ -234,33 +240,9 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Due Date</span>
+                                            <span>Check Out</span>
                                         </f:facet>
-                                        #{project.dueDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Start Date</span>
-                                        </f:facet>
-                                        #{project.startDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>End Date</span>
-                                        </f:facet>
-                                        #{project.endDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Days</span>
-                                        </f:facet>
-                                        #{project.onHoldDays}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Reason</span>
-                                        </f:facet>
-                                        #{project.onHoldReason}
+                                        #{attend.date}
                                     </h:column>
                                 </h:dataTable>
                             </div>

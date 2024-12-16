@@ -82,7 +82,7 @@
                             </a>
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="UserRegistration.xhtml">Registration Details</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayAttendance.html">Attendance</a></li>
+                                <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>
@@ -206,61 +206,28 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <h:form>
-                    <h2>Projects List</h2>
+                    <h2>Skill Details</h2>
                     <div class="card table-card">
-                        <div class="card-header">
-                            <h5>Recent Projects</h5>
-                        </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.projectDetailsList}" var="project" class="table">
+                                <h:dataTable value="#{managerBeans.skillsList}" var="skill" class="table">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Project ID</span>
+                                            <span>Skill ID</span>
                                         </f:facet>
-                                        #{project.projectId}
+                                        #{skill.skillId}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Project Name</span>
+                                            <span>Skill Name</span>
                                         </f:facet>
-                                        #{project.projectName}
+                                        #{skill.skillName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
                                             <span>Description</span>
                                         </f:facet>
-                                        #{project.description}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Due Date</span>
-                                        </f:facet>
-                                        #{project.dueDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Start Date</span>
-                                        </f:facet>
-                                        #{project.startDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>End Date</span>
-                                        </f:facet>
-                                        #{project.endDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Days</span>
-                                        </f:facet>
-                                        #{project.onHoldDays}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Reason</span>
-                                        </f:facet>
-                                        #{project.onHoldReason}
+                                        #{skill.description}
                                     </h:column>
                                 </h:dataTable>
                             </div>

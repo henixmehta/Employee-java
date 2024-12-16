@@ -82,7 +82,7 @@
                             </a>
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="UserRegistration.xhtml">Registration Details</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayAttendance.html">Attendance</a></li>
+                                <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>
@@ -206,61 +206,40 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <h:form>
-                    <h2>Projects List</h2>
+                    <h2>Performance Details</h2>
                     <div class="card table-card">
-                        <div class="card-header">
-                            <h5>Recent Projects</h5>
-                        </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.projectDetailsList}" var="project" class="table">
+                                <h:dataTable value="#{managerBeans.performaneDetailsList}" var="perform" class="table">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Project ID</span>
+                                            <span>Performance ID</span>
                                         </f:facet>
-                                        #{project.projectId}
+                                        #{perform.performanceId}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Project Name</span>
+                                            <span>Employee Name</span>
                                         </f:facet>
-                                        #{project.projectName}
+                                        #{perform.userId.userName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Description</span>
+                                            <span>Rating</span>
                                         </f:facet>
-                                        #{project.description}
+                                        #{perform.rating}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Due Date</span>
+                                            <span>Review By</span>
                                         </f:facet>
-                                        #{project.dueDate}
+                                        #{perform.reviewBy.userName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Start Date</span>
+                                            <span>Review Date</span>
                                         </f:facet>
-                                        #{project.startDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>End Date</span>
-                                        </f:facet>
-                                        #{project.endDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Days</span>
-                                        </f:facet>
-                                        #{project.onHoldDays}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Reason</span>
-                                        </f:facet>
-                                        #{project.onHoldReason}
+                                        #{perform.reviewDate}
                                     </h:column>
                                 </h:dataTable>
                             </div>
