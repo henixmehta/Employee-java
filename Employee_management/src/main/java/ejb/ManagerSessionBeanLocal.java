@@ -67,7 +67,7 @@ public interface ManagerSessionBeanLocal {
     
     //=== User Details
     Collection<UserDetails> getAllUsersDetails();
-    void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e);
+    void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId);
 
     //===  All Assets Methods
     Collection<AssetsMaster> getAllAssets();

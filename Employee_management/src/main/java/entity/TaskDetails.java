@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ABC
+ * @author Henil
  */
 @Entity
 @Table(name = "task_details")
@@ -55,15 +55,15 @@ public class TaskDetails implements Serializable {
     @Size(max = 50)
     @Column(name = "on_hold_reason")
     private String onHoldReason;
+    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
+    @ManyToOne
+    private TaskMaster taskId;
     @JoinColumn(name = "assign_by", referencedColumnName = "user_id")
     @ManyToOne
     private UserMaster assignBy;
     @JoinColumn(name = "assign_to", referencedColumnName = "user_id")
     @ManyToOne
     private UserMaster assignTo;
-    @JoinColumn(name = "task_id", referencedColumnName = "task_id")
-    @ManyToOne
-    private TaskMaster taskId;
 
     public TaskDetails() {
     }
@@ -112,6 +112,14 @@ public class TaskDetails implements Serializable {
         this.onHoldReason = onHoldReason;
     }
 
+    public TaskMaster getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(TaskMaster taskId) {
+        this.taskId = taskId;
+    }
+
     public UserMaster getAssignBy() {
         return assignBy;
     }
@@ -126,14 +134,6 @@ public class TaskDetails implements Serializable {
 
     public void setAssignTo(UserMaster assignTo) {
         this.assignTo = assignTo;
-    }
-
-    public TaskMaster getTaskId() {
-        return taskId;
-    }
-
-    public void setTaskId(TaskMaster taskId) {
-        this.taskId = taskId;
     }
 
     @Override

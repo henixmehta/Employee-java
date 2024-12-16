@@ -315,8 +315,29 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId) {
+//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //foregin keys    
+//        UserMaster user = (UserMaster) em.find(UserMaster.class, userId);
+//        GroupMaster gp = (GroupMaster) em.find(GroupMaster.class, grpId);
+//        DepartmentMaster dp = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
+//        DesignationMaster dg = (DesignationMaster) em.find(DesignationMaster.class, designationId);
+//        SkillsMaster sk = (SkillsMaster) em.find(SkillsMaster.class, skillId);
+//
+//        
+//        
+////        Collection<UserMaster> userMaster = user.get
+//        
+//        //insert
+//        UserDetails ud = new UserDetails();
+//        ud.setUserId(user);
+//        ud.setGroupId(gp);
+//        ud.setDeptId(dp);
+//        ud.setDesignationId(dg);
+//        ud.setSkillId(sk);
+//        ud.setActive("1");
+//        em.persist(ud);
+
     }
 
     @Override
@@ -360,9 +381,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //            System.out.println("Id Is Empty..Please Select Valid Id");
 //        }
 //    }
-
     @Override
     public void UpddateUser(UserMaster user) {
-        
+
     }
 }

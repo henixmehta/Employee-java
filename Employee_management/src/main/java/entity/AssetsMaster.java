@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ABC
+ * @author Henil
  */
 @Entity
 @Table(name = "assets_master")

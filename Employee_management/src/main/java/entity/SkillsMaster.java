@@ -5,6 +5,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,13 +15,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ABC
+ * @author Henil
  */
 @Entity
 @Table(name = "skills_master")
@@ -43,6 +47,8 @@ public class SkillsMaster implements Serializable {
     @Size(max = 100)
     @Column(name = "description")
     private String description;
+    @OneToMany(mappedBy = "skillId")
+    private Collection<UserDetails> userDetailsCollection;
 
     public SkillsMaster() {
     }
@@ -73,6 +79,15 @@ public class SkillsMaster implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @JsonbTransient
+    public Collection<UserDetails> getUserDetailsCollection() {
+        return userDetailsCollection;
+    }
+
+    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
+        this.userDetailsCollection = userDetailsCollection;
     }
 
     @Override

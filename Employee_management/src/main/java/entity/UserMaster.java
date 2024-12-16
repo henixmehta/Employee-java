@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ABC
+ * @author Henil
  */
 @Entity
 @Table(name = "user_master")
@@ -91,7 +91,7 @@ public class UserMaster implements Serializable {
     @Size(max = 100)
     @Column(name = "company_email")
     private String companyEmail;
-    @Size(max = 100)
+    @Size(max = 255)
     @Column(name = "password")
     private String password;
     @Column(name = "reporting_to")
@@ -112,6 +112,8 @@ public class UserMaster implements Serializable {
     private Collection<PerformanceDetails> performanceDetailsCollection;
     @OneToMany(mappedBy = "reviewBy")
     private Collection<PerformanceDetails> performanceDetailsCollection1;
+    @OneToMany(mappedBy = "userId")
+    private Collection<UserDetails> userDetailsCollection;
     @OneToMany(mappedBy = "userId")
     private Collection<AttendanceDetails> attendanceDetailsCollection;
     @OneToMany(mappedBy = "assignBy")
@@ -318,6 +320,15 @@ public class UserMaster implements Serializable {
 
     public void setPerformanceDetailsCollection1(Collection<PerformanceDetails> performanceDetailsCollection1) {
         this.performanceDetailsCollection1 = performanceDetailsCollection1;
+    }
+
+    @JsonbTransient
+    public Collection<UserDetails> getUserDetailsCollection() {
+        return userDetailsCollection;
+    }
+
+    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
+        this.userDetailsCollection = userDetailsCollection;
     }
 
     @JsonbTransient

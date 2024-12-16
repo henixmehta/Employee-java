@@ -5,6 +5,8 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Collection;
+import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +17,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author ABC
+ * @author Henil
  */
 @Entity
 @Table(name = "designation_master")
@@ -48,6 +52,8 @@ public class DesignationMaster implements Serializable {
     @JoinColumn(name = "department_id", referencedColumnName = "dept_id")
     @ManyToOne
     private DepartmentMaster departmentId;
+    @OneToMany(mappedBy = "designationId")
+    private Collection<UserDetails> userDetailsCollection;
 
     public DesignationMaster() {
     }
@@ -86,6 +92,15 @@ public class DesignationMaster implements Serializable {
 
     public void setDepartmentId(DepartmentMaster departmentId) {
         this.departmentId = departmentId;
+    }
+
+    @JsonbTransient
+    public Collection<UserDetails> getUserDetailsCollection() {
+        return userDetailsCollection;
+    }
+
+    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
+        this.userDetailsCollection = userDetailsCollection;
     }
 
     @Override

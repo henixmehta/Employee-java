@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author ABC
+ * @author Henil
  */
 @Entity
 @Table(name = "assets_details")
@@ -137,5 +137,5 @@ public class AssetsDetails implements Serializable {
     public String toString() {
         return "entity.AssetsDetails[ id=" + id + " ]";
     }
-    
+
 }
