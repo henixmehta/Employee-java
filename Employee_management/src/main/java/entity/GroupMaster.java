@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,8 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "GroupMaster.findAll", query = "SELECT g FROM GroupMaster g"),
     @NamedQuery(name = "GroupMaster.findByGroupId", query = "SELECT g FROM GroupMaster g WHERE g.groupId = :groupId"),
-    @NamedQuery(name = "GroupMaster.findByGroupName", query = "SELECT g FROM GroupMaster g WHERE g.groupName = :groupName"),
-    @NamedQuery(name = "GroupMaster.findByUserId", query = "SELECT g FROM GroupMaster g WHERE g.userId = :userId")})
+    @NamedQuery(name = "GroupMaster.findByGroupName", query = "SELECT g FROM GroupMaster g WHERE g.groupName = :groupName")})
 public class GroupMaster implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,10 +45,11 @@ public class GroupMaster implements Serializable {
     @Size(max = 50)
     @Column(name = "group_name")
     private String groupName;
-    @Column(name = "user_id")
-    private Integer userId;
     @OneToMany(mappedBy = "groupId")
     private Collection<UserDetails> userDetailsCollection;
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @ManyToOne
+    private UserMaster userId;
 
     public GroupMaster() {
     }
@@ -72,14 +74,6 @@ public class GroupMaster implements Serializable {
         this.groupName = groupName;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
     @JsonbTransient
     public Collection<UserDetails> getUserDetailsCollection() {
         return userDetailsCollection;
@@ -87,6 +81,14 @@ public class GroupMaster implements Serializable {
 
     public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
         this.userDetailsCollection = userDetailsCollection;
+    }
+
+    public UserMaster getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UserMaster userId) {
+        this.userId = userId;
     }
 
     @Override

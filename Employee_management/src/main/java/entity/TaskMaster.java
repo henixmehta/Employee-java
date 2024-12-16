@@ -14,6 +14,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,7 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "TaskMaster.findByDescription", query = "SELECT t FROM TaskMaster t WHERE t.description = :description"),
     @NamedQuery(name = "TaskMaster.findByPriority", query = "SELECT t FROM TaskMaster t WHERE t.priority = :priority"),
     @NamedQuery(name = "TaskMaster.findByDueDate", query = "SELECT t FROM TaskMaster t WHERE t.dueDate = :dueDate"),
-    @NamedQuery(name = "TaskMaster.findByProjectId", query = "SELECT t FROM TaskMaster t WHERE t.projectId = :projectId"),
     @NamedQuery(name = "TaskMaster.findByTaskStatus", query = "SELECT t FROM TaskMaster t WHERE t.taskStatus = :taskStatus")})
 public class TaskMaster implements Serializable {
 
@@ -60,13 +61,14 @@ public class TaskMaster implements Serializable {
     @Column(name = "due_date")
     @Temporal(TemporalType.DATE)
     private Date dueDate;
-    @Column(name = "project_id")
-    private Integer projectId;
     @Size(max = 50)
     @Column(name = "task_status")
     private String taskStatus;
     @OneToMany(mappedBy = "taskId")
     private Collection<TaskDetails> taskDetailsCollection;
+    @JoinColumn(name = "project_id", referencedColumnName = "project_id")
+    @ManyToOne
+    private ProjectDetails projectId;
 
     public TaskMaster() {
     }
@@ -115,14 +117,6 @@ public class TaskMaster implements Serializable {
         this.dueDate = dueDate;
     }
 
-    public Integer getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Integer projectId) {
-        this.projectId = projectId;
-    }
-
     public String getTaskStatus() {
         return taskStatus;
     }
@@ -138,6 +132,14 @@ public class TaskMaster implements Serializable {
 
     public void setTaskDetailsCollection(Collection<TaskDetails> taskDetailsCollection) {
         this.taskDetailsCollection = taskDetailsCollection;
+    }
+
+    public ProjectDetails getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(ProjectDetails projectId) {
+        this.projectId = projectId;
     }
 
     @Override
