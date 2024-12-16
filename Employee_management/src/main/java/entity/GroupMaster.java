@@ -5,23 +5,17 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,7 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "GroupMaster.findAll", query = "SELECT g FROM GroupMaster g"),
     @NamedQuery(name = "GroupMaster.findByGroupId", query = "SELECT g FROM GroupMaster g WHERE g.groupId = :groupId"),
-    @NamedQuery(name = "GroupMaster.findByGroupName", query = "SELECT g FROM GroupMaster g WHERE g.groupName = :groupName")})
+    @NamedQuery(name = "GroupMaster.findByGroupName", query = "SELECT g FROM GroupMaster g WHERE g.groupName = :groupName"),
+    @NamedQuery(name = "GroupMaster.findByUserId", query = "SELECT g FROM GroupMaster g WHERE g.userId = :userId")})
 public class GroupMaster implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,11 +40,8 @@ public class GroupMaster implements Serializable {
     @Size(max = 50)
     @Column(name = "group_name")
     private String groupName;
-    @OneToMany(mappedBy = "groupId")
-    private Collection<UserDetails> userDetailsCollection;
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
-    @ManyToOne
-    private UserMaster userId;
+    @Column(name = "user_id")
+    private Integer userId;
 
     public GroupMaster() {
     }
@@ -74,20 +66,11 @@ public class GroupMaster implements Serializable {
         this.groupName = groupName;
     }
 
-    @JsonbTransient
-    public Collection<UserDetails> getUserDetailsCollection() {
-        return userDetailsCollection;
-    }
-
-    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
-        this.userDetailsCollection = userDetailsCollection;
-    }
-
-    public UserMaster getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(UserMaster userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

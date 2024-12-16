@@ -54,8 +54,6 @@ public class DepartmentMaster implements Serializable {
     private UserMaster managerId;
     @OneToMany(mappedBy = "departmentId")
     private Collection<DesignationMaster> designationMasterCollection;
-    @OneToMany(mappedBy = "deptId")
-    private Collection<UserDetails> userDetailsCollection;
 
     public DepartmentMaster() {
     }
@@ -103,15 +101,6 @@ public class DepartmentMaster implements Serializable {
 
     public void setDesignationMasterCollection(Collection<DesignationMaster> designationMasterCollection) {
         this.designationMasterCollection = designationMasterCollection;
-    }
-
-    @JsonbTransient
-    public Collection<UserDetails> getUserDetailsCollection() {
-        return userDetailsCollection;
-    }
-
-    public void setUserDetailsCollection(Collection<UserDetails> userDetailsCollection) {
-        this.userDetailsCollection = userDetailsCollection;
     }
 
     @Override
