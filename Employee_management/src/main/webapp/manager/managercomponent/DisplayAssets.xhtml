@@ -206,6 +206,21 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <h:form>
+                    <h2>Add New Asset</h2>
+                    <h:panelGrid columns="2" border="1">
+                        <h:column>
+                            <h:outputLabel for="assetName" value="Asset Name:" />
+                        </h:column>
+                        <h:column>
+                            <h:inputText id="assetName" value="#{managerBeans.assetName}" required="true" />
+                        </h:column>
+                        <h:column>
+                            <h:commandButton value="Add Asset" action="#{managerBeans.addAsset}" />
+                        </h:column>
+                    </h:panelGrid>
+                </h:form>
+                <hr/>
+                <h:form>
                     <h2>Assets List</h2>
                     <div class="card table-card">
                         <div class="card-header">
@@ -219,6 +234,12 @@
                                             <span>Asset ID</span>
                                         </f:facet>
                                         #{asset.assetId.assetId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Asset Name</span>
+                                        </f:facet>
+                                        #{asset.assetId.assetName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
