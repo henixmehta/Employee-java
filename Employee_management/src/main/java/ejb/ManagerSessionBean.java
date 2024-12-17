@@ -33,6 +33,31 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
+    public void deleteSkill(Integer skillId) {
+        try {
+            // Find the skill in SkillsMaster table
+            SkillsMaster skillToDelete = em.find(SkillsMaster.class, skillId);
+
+            if (skillToDelete != null) {
+                // Use EntityManager to update the UserDetails table and set skillId to NULL
+                String jpql = "UPDATE UserDetails u SET u.skillId = NULL WHERE u.skillId = :skillId";
+                em.createQuery(jpql)
+                  .setParameter("skillId", skillId)
+                  .executeUpdate();
+
+                // Now remove the skill from SkillsMaster table
+                em.remove(skillToDelete);
+
+                System.out.println("Skill deleted and references in UserDetails set to null.");
+            } else {
+                System.out.println("Skill not found with ID: " + skillId);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public Collection<HolidayMaster> getAllHolidays() {
         return em.createNamedQuery("HolidayMaster.findAll", HolidayMaster.class).getResultList();
     }

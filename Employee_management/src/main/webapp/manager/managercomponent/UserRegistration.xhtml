@@ -203,85 +203,110 @@
             </div>
         </header>
         <!-- [ Main Content ] start -->
-        <div class="auth-main" style="padding-left: 20% " >
-            <div class="auth-wrapper" >
-                <!--<div class="auth-form" >-->
-                    <div class="card "  style="width: 95%; margin-top: 7%" >
-                        <div class="card-body my-12"  >
-                            <h:form>
-                                <h2 align="center">User Registration</h2>
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.userName}" styleClass="form-control" pt:placeholder="Full Name" />
-                                </div>
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.emailId}" styleClass="form-control" pt:placeholder="Email Id" />
-                                </div>
+        <div class="auth-main" style="padding-left: 20%;">
+            <div class="auth-wrapper">
+                <div class="card" style="width: 95%; margin-top: 7%;">
+                    <div class="card-body my-12">
+                        <h:form>
+                            <h2 align="center">User Registration</h2>
+                            <hr style="border: 2px solid black; width: 100%; opacity: 1;" />
 
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.phoneNo}" styleClass="form-control" pt:placeholder="Mobile Number" />
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:inputText id="userName" value="#{managerBeans.usermaster.userName}" styleClass="form-control" required="true" pt:placeholder="Full Name" />
                                 </div>
+                                <div class="col-md-6">
+                                    <h:inputText id="emailId" value="#{managerBeans.usermaster.emailId}" styleClass="form-control" required="true" pt:placeholder="Email ID" />
+                                </div>
+                            </div>
 
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:inputText id="phoneNo" value="#{managerBeans.usermaster.phoneNo}" styleClass="form-control" required="true" pt:placeholder="Mobile Number" />
                                 </div>
-                                <div class="form-group mb-3">
-                                    <h:inputText id="dateOfBirth" 
-                                                 value="#{managerBeans.usermaster.dateOfBirth}" styleClass="form-control" required="true" 
-                                                 pt:placeholder="Date Of Birth">
+                                <div class="col-md-6">
+                                    <h:inputText id="address" value="#{managerBeans.usermaster.address}" styleClass="form-control" required="true" pt:placeholder="Address" />
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-3">
+                                    <h:outputLabel for="dateOfBirth" value="Date of Birth:" />
+                                    <h:inputText id="dateOfBirth" value="#{managerBeans.usermaster.dateOfBirth}" styleClass="form-control" required="true" pt:placeholder="Date of Birth">
                                         <f:convertDateTime pattern="yyyy-MM-dd"/>
                                         <f:passThroughAttribute name="type" value="date" />
                                         <f:ajax event="change" listener="#{managerBeans.calculateAge}" render="age" />
                                     </h:inputText>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                                <div class="col-md-3">
+                                    <h:outputLabel for="age" value="Age:" />
+                                    <h:inputText id="age" value="#{managerBeans.usermaster.age}" styleClass="form-control" pt:placeholder="Age" disabled="true" />
                                 </div>
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                                <div class="col-md-3">
+                                    Gender:
+                                    <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true">
+                                        <f:selectItem itemLabel="Male" itemValue="Male" />
+                                        <f:selectItem itemLabel="Female" itemValue="Female" />
+                                    </h:selectOneRadio>
                                 </div>
-                                <div class="form-group mb-3">
-                                    <h:inputText value="#{managerBeans.usermaster.address}" styleClass="form-control" pt:placeholder="Address" />
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-3">
+                                    <h:outputLabel for="joiningDate" value="Joining Date:" />
+                                    <h:inputText id="joiningDate" value="#{managerBeans.usermaster.joiningDate}" styleClass="form-control" required="true" pt:placeholder="Joining Date">
+                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                        <f:passThroughAttribute name="type" value="date" />
+                                    </h:inputText>
                                 </div>
+                                <div class="col-md-3" style="padding-top: 25px">
+                                    <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" styleClass="form-control" required="true" pt:placeholder="Emergency Contact" pt:type="number" />
+                                </div>
+                                <div class="col-md-6" style="padding-top: 25px">
+                                    <h:inputText id="profileImage" value="#{managerBeans.usermaster.profileImage}" styleClass="form-control" required="true" pt:placeholder="Profile Image URL" />
+                                </div>
+                            </div>
 
-                                <div class="d-flex mt-1 justify-content-between">
-                                    <div class="form-check">
-                                        <h:selectBooleanCheckbox value="#{registerBean.agreeToTerms}" styleClass="form-check-input input-primary" />
-                                        <label class="form-check-label text-muted">I agree to all the Terms &amp; Condition</label>
-                                    </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:inputText id="companyEmail" value="#{managerBeans.usermaster.companyEmail}" styleClass="form-control" required="true" pt:placeholder="Company Email" />
                                 </div>
+                                <div class="col-md-6">
+                                    <h:inputSecret id="password" value="#{managerBeans.usermaster.password}" styleClass="form-control" required="true" pt:placeholder="Password" />
+                                </div>
+                            </div>
 
-                                <div class="d-grid mt-4">
-                                    <h:commandButton value="Create Account" action="#{registerBean.register}" styleClass="btn btn-primary" />
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:selectOneMenu id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" styleClass="form-control" required="true">
+                                        <f:selectItem itemLabel="-- Select User --" itemValue="#{null}" />
+                                        <f:selectItems value="#{managerBeans.usersList}" var="user" itemValue="#{user.userId}" itemLabel="#{user.userName}" />
+                                    </h:selectOneMenu>
                                 </div>
+                                <div class="col-md-6">
+                                    <h:inputText id="salary" value="#{managerBeans.usermaster.salary}" styleClass="form-control" required="true" pt:placeholder="Salary" />
+                                </div>
+                            </div>
 
-                                <div class="saprator my-3">
-                                    <span>Or continue with</span>
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:inputText id="qualification" value="#{managerBeans.usermaster.qualification}" styleClass="form-control" required="true" pt:placeholder="Qualification" />
                                 </div>
-                                <div class="text-center">
-                                    <ul class="list-inline mx-auto mt-3 mb-0">
-                                        <li class="list-inline-item">
-                                            <a href="https://www.facebook.com/" class="avtar avtar-s rounded-circle bg-facebook" target="_blank">
-                                                <i class="fab fa-facebook-f text-white"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="https://twitter.com/" class="avtar avtar-s rounded-circle bg-twitter" target="_blank">
-                                                <i class="fab fa-twitter text-white"></i>
-                                            </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="https://myaccount.google.com/" class="avtar avtar-s rounded-circle bg-googleplus" target="_blank">
-                                                <i class="fab fa-google text-white"></i>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div class="col-md-6">
+                                    <h:inputText id="currentExperience" value="#{managerBeans.usermaster.currentExperience}" styleClass="form-control" required="true" pt:placeholder="Current Experience" />
                                 </div>
-                            </h:form>
-                        </div>
-                    <!--</div>-->
+                            </div>
+
+                            <hr style="border: 2px solid black; width: 100%; opacity: 1;" />
+
+                            <div class="d-grid mt-4">
+                                <h:commandButton value="Add User" action="#{managerBeans.addUser}" styleClass="btn btn-primary" />
+                            </div>
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </div>
+
         <script src="../../assets/js/plugins/apexcharts.min.js"></script>
         <script src="../../assets/js/plugins/jsvectormap.min.js"></script>
         <script src="../../assets/js/plugins/world.js"></script>

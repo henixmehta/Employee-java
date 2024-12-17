@@ -2,6 +2,8 @@ package cdi;
 
 import client.ManagerClient;
 import entity.*;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -140,24 +142,38 @@ public class ManagerBeans implements Serializable {
         return skillsList;
     }
 
-    public void addSkill() {
+    public String addSkill() {
         try {
+            boolean skillExists = skillsList.stream()
+                    .anyMatch(skill -> skill.getSkillName().equalsIgnoreCase(sname));
+
+            if (skillExists) {
+                System.out.println("Skill name already exists.");
+                return "Skill name already exists.";
+            }
+
             SkillsMaster newSkill = new SkillsMaster();
             newSkill.setSkillName(sname);
             newSkill.setDescription(desc);
             managerClient.addSkill(newSkill, sname, desc);
             skillsList = managerClient.getAllSkills(skillsGenericType);
-            sname = ""; // Clear after adding
-            desc = ""; // Clear after adding
+            sname = "";
+            desc = "";
+
+//            System.out.println("Skill added successfully.");
+            return "Skill added successfully.";
         } catch (ClientErrorException e) {
+            System.out.println("Failed to add skill.");
+            return "Failed to add skill.";
         }
     }
 
     //Delete Skill
-//    public void deleteSkill(int skillId) {
-//        managerClient.deleteSkills(skillId);
-//        skillsList = managerClient.getAllSkills(skillsGenericType);
-//    }
+    public void deleteSkill(int skillId) {
+        managerClient.deleteSkills(skillId);
+        skillsList = managerClient.getAllSkills(skillsGenericType);
+    }
+
     // Edit  Skill
     SkillsMaster SelectedKill;
 
@@ -787,7 +803,7 @@ public class ManagerBeans implements Serializable {
         projectCount = (projectdetailsList != null) ? projectdetailsList.size() : 0;
         taskCount = (taskdetailsList != null) ? taskdetailsList.size() : 0;
     }
-    
+
     // Getters
     public int getTaskCount() {
         return taskCount;

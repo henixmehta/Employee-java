@@ -116,7 +116,7 @@ public interface ManagerSessionBeanLocal {
     //=========delete alll methods =======================
 //    void deletePrform(Integer performnceDetailsId); //optional
 //    void deleteTaskDetails(Integer taskDeteId);    
-//    void deleteSkill(Integer skillId);
+    void deleteSkill(Integer skillId);
 //    void deleteDesgination(int designationId);
 //    void deleteHoliday(Integer holidayInteger);
 //    void deleteUser(Integer userId); ////// status active in active

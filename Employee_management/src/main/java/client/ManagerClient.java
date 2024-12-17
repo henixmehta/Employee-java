@@ -200,7 +200,7 @@ public class ManagerClient {
     }
 
     public Response deleteSkills(int skillid) throws ClientErrorException {
-        return webTarget.path("skills/{id}")
+        return webTarget.path("deleteskills/{id}")
                 .resolveTemplate("id", skillid)
                 .request()
                 .delete();

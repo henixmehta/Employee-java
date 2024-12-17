@@ -54,17 +54,17 @@ public class ManagerResource {
 //    public void deleteDepartment(@PathParam("deptid") Integer deptid) {
 //        msbl.deleteDepartment(deptid);
 //    }
-//    @DELETE
-//    @Path("skills/{id}")
-//    public Response deleteSkills(@PathParam("id") int id) {
-//        SkillsMaster skill = msbl.getSkillsById(id);
-//        if (skill != null) {
-//            msbl.deleteSkill(id);
-//            return Response.status(Response.Status.NO_CONTENT).build();
-//        } else {
-//            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
-//        }
-//    }
+    @DELETE
+    @Path("deleteskills/{id}")
+    public Response deleteSkills(@PathParam("id") int id) {
+        SkillsMaster skill = msbl.getSkillsById(id);
+        if (skill != null) {
+            msbl.deleteSkill(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
+        }
+    }
     @GET
     @Path("holidays")
     @Produces(MediaType.APPLICATION_JSON)
