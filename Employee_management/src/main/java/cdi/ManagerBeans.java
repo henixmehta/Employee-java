@@ -215,14 +215,11 @@ public class ManagerBeans implements Serializable {
     }
 
     //add userMaster
-    public void addUser() {
-        try {
-
-            managerClient.addUser(usermaster);
-            usersList = managerClient.getAllUsers(usersGenericType);
-            resetUserMasterFields();
-        } catch (ClientErrorException e) {
-        }
+    public String addUser() {
+        managerClient.addUser(usermaster);
+        usersList = managerClient.getAllUsers(usersGenericType);
+        resetUserMasterFields();
+        return "ViewUserDetails.xhtml";
     }
 
     public void resetUserMasterFields() {

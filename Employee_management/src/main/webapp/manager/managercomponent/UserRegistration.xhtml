@@ -243,11 +243,11 @@
                                     <h:inputText id="age" value="#{managerBeans.usermaster.age}" styleClass="form-control" pt:placeholder="Age" disabled="true" />
                                 </div>
                                 <div class="col-md-3">
-                                    Gender:
-                                    <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true">
-                                        <f:selectItem itemLabel="Male" itemValue="Male" />
-                                        <f:selectItem itemLabel="Female" itemValue="Female" />
-                                    </h:selectOneRadio>
+                                 <div style="margin-bottom:10px;">Gender:</div>
+                                <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true" style="padding:10px;">   
+                                            <f:selectItem itemLabel="Male" itemValue="Male" />
+                                            <f:selectItem itemLabel="Female" itemValue="Female" />
+                                         </h:selectOneRadio>
                                 </div>
                             </div>
                             <div class="form-group mb-3 row">
