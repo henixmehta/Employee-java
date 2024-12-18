@@ -61,7 +61,7 @@ public class ProjectDetails implements Serializable {
     @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
     private Date endDate;
-    @Size(max = 11)
+    @Size(max = 50)
     @Column(name = "status")
     private String status;
     @Column(name = "on_hold_days")

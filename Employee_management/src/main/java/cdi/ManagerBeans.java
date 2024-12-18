@@ -2,8 +2,6 @@ package cdi;
 
 import client.ManagerClient;
 import entity.*;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -39,32 +37,36 @@ public class ManagerBeans implements Serializable {
     private Collection<TaskMaster> tasksList;
     private Collection<TaskDetails> taskdetailsList;
 
-    private String sname; // Skill name
-    private String desc; // Skill description
-    private String holidayDesc; // Holiday description
-    private Date holidayDate; // Holiday date
-    private String assetName; // Asset name
-
+    //============== Skill variables ===============
+    private String sname;
+    private String desc;
+    //============== Holiday variables ===============
+    private String holidayDesc;
+    private Date holidayDate;
+    //============== Asset variables ===============
+    private String assetName;
+    //============== Designation variables ===============
     private Integer designationId;
     private String designationName;
     private String responsibility;
     private Integer departmentId;
-
+    //============== Department variables ===============
     private Integer deptId;
     private String deptName;
     private String deptDesc;
     private int managerId;
 
-    private Integer selectedDeptId; // edit department
-
+    private Integer selectedDeptId;
+    //============== Asset Details variables ===============
     Integer assetsdetailsId;
     private Integer assetId;
     private BigInteger assetNumber;
     private String assignDate;
     private String returnDate;
     private Integer userId;
-
+    //============== Group variables ===============
     private String groupname;
+    //============== Leave variables ===============
     private String leavetype;
 
     private final GenericType<Collection<SkillsMaster>> skillsGenericType = new GenericType<Collection<SkillsMaster>>() {
@@ -137,21 +139,15 @@ public class ManagerBeans implements Serializable {
         }
     }
 
-    // Skill management methods
-    public Collection<SkillsMaster> getSkillsList() {
-        return skillsList;
-    }
-
-    public String addSkill() {
+    //======================== Skill management methods ==================================================
+    public void addSkill() {
         try {
             boolean skillExists = skillsList.stream()
                     .anyMatch(skill -> skill.getSkillName().equalsIgnoreCase(sname));
 
             if (skillExists) {
                 System.out.println("Skill name already exists.");
-                return "Skill name already exists.";
             }
-
             SkillsMaster newSkill = new SkillsMaster();
             newSkill.setSkillName(sname);
             newSkill.setDescription(desc);
@@ -159,12 +155,8 @@ public class ManagerBeans implements Serializable {
             skillsList = managerClient.getAllSkills(skillsGenericType);
             sname = "";
             desc = "";
-
-//            System.out.println("Skill added successfully.");
-            return "Skill added successfully.";
         } catch (ClientErrorException e) {
             System.out.println("Failed to add skill.");
-            return "Failed to add skill.";
         }
     }
 
@@ -183,14 +175,6 @@ public class ManagerBeans implements Serializable {
         this.desc = skillMaster.getDescription();
     }
 
-    public SkillsMaster getSelectedKill() {
-        return SelectedKill;
-    }
-
-    public void setSelectedKill(SkillsMaster SelectedKill) {
-        this.SelectedKill = SelectedKill;
-    }
-
     //========================================Group Master=======================================================
     public void addGroups() {
         try {
@@ -202,17 +186,9 @@ public class ManagerBeans implements Serializable {
             groupname = ""; // Clear after adding
         } catch (ClientErrorException e) {
         }
-
     }
-
     //================================================user Master================================================
-    public Collection<UserMaster> getUsersList() {
-        return usersList;
-    }
-
-    public Collection<DepartmentMaster> getDepartmentList() {
-        return departmentList;
-    }
+    private UserMaster usermaster = new UserMaster();
 
     //add userMaster
     public String addUser() {
@@ -247,6 +223,11 @@ public class ManagerBeans implements Serializable {
 //        usersList = managerClient.getAllUsers(usersGenericType);
 //        resetUserMasterFields();
 //    }
+    //================================================ Department Details ================================================
+    public Collection<DepartmentMaster> getDepartmentList() {
+        return departmentList;
+    }
+
     private DepartmentMaster selectedDept;
 
     public DepartmentMaster getSelectedDept() {
@@ -296,11 +277,12 @@ public class ManagerBeans implements Serializable {
         }
     }
 
-//    public void deleteDepartment() {
-//        managerClient.deleteDepartment(deptId);
-//        departmentList = managerClient.getAllDepartments(deptGenericType);
-//
-//    }
+    public void deleteDepartment(Integer deptId) {
+        managerClient.deleteDepartment(deptId);
+        departmentList = managerClient.getAllDepartments(deptGenericType);
+
+    }
+
     private void resetDepartmentForm() {
         selectedDeptId = null;
         deptName = "";
@@ -308,50 +290,7 @@ public class ManagerBeans implements Serializable {
         managerId = 0;
     }
 
-    public String getLeavetype() {
-        return leavetype;
-    }
-
-    public void setLeavetype(String leavetype) {
-        this.leavetype = leavetype;
-    }
-
-    public String getGroupname() {
-        return groupname;
-    }
-
-    public void setGroupname(String groupname) {
-        this.groupname = groupname;
-    }
-
-    public String getDeptName() {
-        return deptName;
-    }
-
-    public void setDeptName(String deptName) {
-        this.deptName = deptName;
-    }
-
-    public String getDeptDesc() {
-        return deptDesc;
-    }
-
-    public void setDeptDesc(String deptDesc) {
-        this.deptDesc = deptDesc;
-    }
-
-    public int getManagerId() {
-        return managerId;
-    }
-
-    public void setManagerId(int managerId) {
-        this.managerId = managerId;
-    }
-
-    public Collection<DesignationMaster> getDesignationList() {
-        return designationList;
-    }
-
+    //=============================================== Designation Details ================================================
     public void addDesignation() {
         try {
 
@@ -368,16 +307,7 @@ public class ManagerBeans implements Serializable {
         }
     }
 
-    //edit Desgination
     private DesignationMaster selectedDesgination;
-
-    public DesignationMaster getSelectedDesgination() {
-        return selectedDesgination;
-    }
-
-    public void setSelectedDesgination(DesignationMaster selectedDesgination) {
-        this.selectedDesgination = selectedDesgination;
-    }
 
     public void editDesgination(DesignationMaster desg) {
         this.selectedDesgination = desg;
@@ -404,10 +334,7 @@ public class ManagerBeans implements Serializable {
                     deptId.toString()
             );
 
-            // Refresh the designation list
             designationList = managerClient.getAllDesignation(designationGenericType);
-
-            // Reset fields after update
             resetDesignationForm();
         } catch (ClientErrorException e) {
             e.printStackTrace(); // Handle exceptions appropriately
@@ -423,12 +350,173 @@ public class ManagerBeans implements Serializable {
     }
 
     //delete Desgination
-//    public void deleteDesgination() {
-//        managerClient.deleteDesgination(designationId);
-//        designationList = managerClient.getAllDesignation(designationGenericType);
-//    }
-    //Display User
-    private UserMaster usermaster = new UserMaster();
+    public void deleteDesgination(Integer designationId) {
+        managerClient.deleteDesgination(designationId);
+        designationList = managerClient.getAllDesignation(designationGenericType);
+    }
+
+    public void addHoliday() {
+        try {
+            HolidayMaster newHoliday = new HolidayMaster();
+            newHoliday.setDescription(holidayDesc);
+            newHoliday.setHolidayDate(holidayDate);
+            managerClient.addHoliday(newHoliday, holidayDesc, holidayDate);
+            holidaysList = managerClient.getAllHolidays(holidaysGenericType);
+            holidayDesc = ""; // Reset after adding
+            holidayDate = null; // Reset after adding
+        } catch (ClientErrorException e) {
+        }
+    }
+
+    //=================================================== AssetsDetails ===================================
+    public void addAssetDetails() {
+        try {
+            managerClient.addAssetDetails(assetNumber, assignDate, returnDate, assetId, userId);
+            assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType); // Refresh list
+            assetNumber = null;
+            assignDate = null;
+            returnDate = null;
+            assetId = null;
+            userId = null;
+        } catch (ClientErrorException e) {
+            e.printStackTrace();
+        }
+    }
+    //edit assets Detail
+    AssetsDetails selectedAssetsDetails;
+
+    public void editAsstsDetails(AssetsDetails assetsdetails) {
+        this.selectedAssetsDetails = assetsdetails;
+        this.assetsdetailsId = assetsdetails.getId();
+        this.assetNumber = assetsdetails.getAssetNumber();
+
+        if (assetsdetails.getAssetId() != null) {
+            this.assetId = assetsdetails.getAssetId().getAssetId();
+        } else {
+            this.assetId = null;
+        }
+    }
+
+    // delete assets details
+    public void deleteAssetsDetails(Integer assetsDetailsid) {
+        managerClient.deleteAssetsDetails(assetsDetailsid);
+        assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
+    }
+
+    //=============================================== Assets Master =========================================
+    public void addAsset() {
+        try {
+            AssetsMaster newAsset = new AssetsMaster();
+            newAsset.setAssetName(assetName);
+
+            managerClient.addAssets(newAsset, assetName);
+            assetsList = managerClient.getAllAssets(assetsGenericType);
+            assetName = ""; // Clear after adding
+        } catch (ClientErrorException e) {
+        }
+    }
+
+    public void deleteAsset(int assetId) {
+        try {
+            // Call the deleteAsset method from ManagerClient to delete the asset
+            managerClient.deleteAsset(assetId);
+
+            // Refresh the asset list after deletion
+            assetsList = managerClient.getAllAssets(assetsGenericType);
+        } catch (ClientErrorException e) {
+            // Log the exception if the deletion fails
+
+        }
+    }
+
+    //edit assets
+    AssetsMaster selectedAssests;
+
+    public void editAssts(AssetsMaster assetsMaster) {
+        this.selectedAssests = assetsMaster;
+        this.assetId = assetsMaster.getAssetId();
+        this.assetName = assetsMaster.getAssetName();
+    }
+
+    //========================================== Task Master ============================================
+    public void deleteTask(Integer taskid) {
+        managerClient.deleteTask(taskid);
+        tasksList = managerClient.getAllTask(tasksGenericType);
+    }
+
+    //=========================================== Task Details ============================================
+    public void deleteTaskDetails(Integer taskdetailid) {
+        managerClient.deleteTaskDetails(taskdetailid);
+        taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+    }
+
+    // Leave Master 
+    //addAssets
+    public void addLeaves() {
+        try {
+            LeaveMaster leave = new LeaveMaster();
+            leave.setLeaveType(leavetype);
+
+            managerClient.addLeaves(leave, leavetype);
+            leavesList = managerClient.getAllLeaves(leavesGenericType);
+            leavetype = ""; // Clear after adding
+        } catch (ClientErrorException e) {
+        }
+    }
+
+    // ========================================== Project Details =========================================
+    ProjectDetails project = new ProjectDetails();
+
+    public void addProject() {
+        managerClient.addProject(project);
+        projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
+        resetprojectfield();
+    }
+
+    public void resetprojectfield() {
+        project.setProjectId(null);
+        project.setProjectName(null);
+        project.setDescription(null);
+        project.setEndDate(null);
+        project.setStartDate(null);
+        project.setDueDate(null);
+        project.setOnHoldDays(null);
+        project.setOnHoldReason(null);
+        project.setStatus(null);
+    }
+
+    // ====================================== GETTER AND SETTER ===============================================
+    public ProjectDetails getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectDetails project) {
+        this.project = project;
+    }
+
+    public Collection<UserMaster> getUsersList() {
+        return usersList;
+    }
+
+    public SkillsMaster getSelectedKill() {
+        return SelectedKill;
+    }
+
+    public void setSelectedKill(SkillsMaster SelectedKill) {
+        this.SelectedKill = SelectedKill;
+    }
+
+    public Collection<SkillsMaster> getSkillsList() {
+        return skillsList;
+    }
+
+    public AssetsDetails getSelectedAssetsDetails() {
+        return selectedAssetsDetails;
+    }
+
+    public void setSelectedAssetsDetails(AssetsDetails selectedAssetsDetails) {
+        this.selectedAssetsDetails = selectedAssetsDetails;
+    }
 
     public UserMaster getUsermaster() {
         return usermaster;
@@ -470,7 +558,10 @@ public class ManagerBeans implements Serializable {
         this.departmentId = departmentId;
     }
 
-    // Holiday management methods
+    public Collection<TaskMaster> getTasksList() {
+        return tasksList;
+    }
+
     public Collection<HolidayMaster> getHolidaysList() {
         return holidaysList;
     }
@@ -515,138 +606,12 @@ public class ManagerBeans implements Serializable {
         return taskdetailsList;
     }
 
-    public void addHoliday() {
-        try {
-            HolidayMaster newHoliday = new HolidayMaster();
-            newHoliday.setDescription(holidayDesc);
-            newHoliday.setHolidayDate(holidayDate);
-            managerClient.addHoliday(newHoliday, holidayDesc, holidayDate);
-            holidaysList = managerClient.getAllHolidays(holidaysGenericType);
-            holidayDesc = ""; // Reset after adding
-            holidayDate = null; // Reset after adding
-        } catch (ClientErrorException e) {
-        }
-    }
-
-    // Asset management methods
     public Collection<AssetsMaster> getAssetsList() {
         return assetsList;
     }
 
     public Collection<AssetsDetails> getAssetsDetailsList() {
         return assetdetailsList;
-    }
-
-    //AddAssetsDetails
-    public void addAssetDetails() {
-        try {
-            managerClient.addAssetDetails(assetNumber, assignDate, returnDate, assetId, userId);
-            assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType); // Refresh list
-            assetNumber = null;
-            assignDate = null;
-            returnDate = null;
-            assetId = null;
-            userId = null;
-        } catch (ClientErrorException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //edit assets Detail
-    AssetsDetails selectedAssetsDetails;
-
-    public void editAsstsDetails(AssetsDetails assetsdetails) {
-        this.selectedAssetsDetails = assetsdetails;
-        this.assetsdetailsId = assetsdetails.getId();
-        this.assetNumber = assetsdetails.getAssetNumber();
-
-        if (assetsdetails.getAssetId() != null) {
-            this.assetId = assetsdetails.getAssetId().getAssetId();
-        } else {
-            this.assetId = null;
-        }
-
-    }
-
-    public AssetsDetails getSelectedAssetsDetails() {
-        return selectedAssetsDetails;
-    }
-
-    public void setSelectedAssetsDetails(AssetsDetails selectedAssetsDetails) {
-        this.selectedAssetsDetails = selectedAssetsDetails;
-    }
-
-    // delete assets details
-    public void deleteAssetsDetails(Integer assetsDetailsid) {
-
-        managerClient.deleteAssetsDetails(assetsDetailsid);
-        assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
-
-    }
-
-    //addAssets
-    public void addAsset() {
-        try {
-            AssetsMaster newAsset = new AssetsMaster();
-            newAsset.setAssetName(assetName);
-
-            managerClient.addAssets(newAsset, assetName);
-            assetsList = managerClient.getAllAssets(assetsGenericType);
-            assetName = ""; // Clear after adding
-        } catch (ClientErrorException e) {
-        }
-    }
-
-    public void deleteAsset(int assetId) {
-        try {
-            // Call the deleteAsset method from ManagerClient to delete the asset
-            managerClient.deleteAsset(assetId);
-
-            // Refresh the asset list after deletion
-            assetsList = managerClient.getAllAssets(assetsGenericType);
-        } catch (ClientErrorException e) {
-            // Log the exception if the deletion fails
-
-        }
-    }
-
-    //edit assets
-    AssetsMaster selectedAssests;
-
-    public void editAssts(AssetsMaster assetsMaster) {
-        this.selectedAssests = assetsMaster;
-        this.assetId = assetsMaster.getAssetId();
-        this.assetName = assetsMaster.getAssetName();
-    }
-
-    // Task Master 
-    public void deleteTask(Integer taskid) {
-        managerClient.deleteTask(taskid);
-        tasksList = managerClient.getAllTask(tasksGenericType);
-    }
-
-    // Task Details
-    public void deleteTaskDetails(Integer taskdetailid) {
-        managerClient.deleteTaskDetails(taskdetailid);
-        taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
-    }
-
-    // Leave Master 
-    //addAssets
-    public void addLeaves() {
-        try {
-            LeaveMaster leave = new LeaveMaster();
-            leave.setLeaveType(leavetype);
-
-            managerClient.addLeaves(leave, leavetype);
-            leavesList = managerClient.getAllLeaves(leavesGenericType);
-            leavetype = ""; // Clear after adding
-        } catch (ClientErrorException e) {
-        }
-    }
-
-    public Collection<TaskMaster> getTasksList() {
-        return tasksList;
     }
 
     public void setTasksList(Collection<TaskMaster> tasksList) {
@@ -661,7 +626,6 @@ public class ManagerBeans implements Serializable {
         this.taskdetailsList = taskdetailsList;
     }
 
-    // GETTER AND SETTER 
     public AssetsMaster getSelectedAssests() {
         return selectedAssests;
     }
@@ -759,8 +723,48 @@ public class ManagerBeans implements Serializable {
         this.userId = userId;
     }
 
-    public void closeClient() {
-        managerClient.close();
+    public String getLeavetype() {
+        return leavetype;
+    }
+
+    public void setLeavetype(String leavetype) {
+        this.leavetype = leavetype;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
+    }
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getDeptDesc() {
+        return deptDesc;
+    }
+
+    public void setDeptDesc(String deptDesc) {
+        this.deptDesc = deptDesc;
+    }
+
+    public int getManagerId() {
+        return managerId;
+    }
+
+    public void setManagerId(int managerId) {
+        this.managerId = managerId;
+    }
+
+    public Collection<DesignationMaster> getDesignationList() {
+        return designationList;
     }
 
     public Integer getDesignationId() {
@@ -771,8 +775,16 @@ public class ManagerBeans implements Serializable {
         this.designationId = designationId;
     }
 
-    //========================================calculate Age========================================
-//    private UserMaster usermaster;
+    public DesignationMaster getSelectedDesgination() {
+        return selectedDesgination;
+    }
+
+    public void setSelectedDesgination(DesignationMaster selectedDesgination) {
+        this.selectedDesgination = selectedDesgination;
+    }
+
+    //======================================== calculate Age ================================================
+    //  private UserMaster usermaster;
     // Getter and setter for usermaster
     public void calculateAge() {
         if (usermaster.getDateOfBirth() != null) {
@@ -784,7 +796,7 @@ public class ManagerBeans implements Serializable {
             usermaster.setAge(age);
         }
     }
-
+    //======================================== ALL DisplayCount Details =======================================
     private int projectCount;
     private int departmentCount;
     private int designationCount;
@@ -801,7 +813,7 @@ public class ManagerBeans implements Serializable {
         taskCount = (taskdetailsList != null) ? taskdetailsList.size() : 0;
     }
 
-    // Getters
+    //  All Count Getters
     public int getTaskCount() {
         return taskCount;
     }
@@ -822,4 +834,7 @@ public class ManagerBeans implements Serializable {
         return userCount;
     }
 
+    public void closeClient() {
+        managerClient.close();
+    }
 }

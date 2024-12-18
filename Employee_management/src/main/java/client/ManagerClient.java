@@ -1,8 +1,6 @@
 package client;
 
-import entity.*;
 import java.math.BigInteger;
-import java.util.Collection;
 import java.util.Date;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
@@ -188,13 +186,14 @@ public class ManagerClient {
                 .post(null, Response.class);
     }
 
-//    public void deleteDepartment(Integer deptid) throws ClientErrorException {
-//        webTarget.path(java.text.MessageFormat.format("deleteDepartment/{0}", new Object[]{deptid})).request().delete();
-//    }
-//
-//    public void deleteDesgination(Integer designationId) throws ClientErrorException {
-//        webTarget.path(java.text.MessageFormat.format("deleteDesgination/{0}", new Object[]{designationId})).request().delete();
-//    }
+    public void deleteDepartment(Integer deptid) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteDepartment/{0}", new Object[]{deptid})).request().delete();
+    }
+
+    public void deleteDesgination(Integer designationId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteDesgination/{0}", new Object[]{designationId})).request().delete();
+    }
+
     public void updateDesignation(Object requestEntity, String designationId, String designationName, String responsibility, String deptId) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("updateDesignation/{0}/{1}/{2}/{3}", new Object[]{designationId, designationName, responsibility, deptId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
@@ -233,6 +232,10 @@ public class ManagerClient {
 
     public void addLeaves(Object requestEntity, String leavetype) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("addleaves/{0}", new Object[]{leavetype})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public void addProject(Object requestEntity) throws ClientErrorException {
+        webTarget.path("addproject").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
     public void close() {

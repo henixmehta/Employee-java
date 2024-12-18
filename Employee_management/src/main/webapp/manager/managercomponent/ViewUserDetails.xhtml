@@ -214,69 +214,73 @@
                         <!--styleClass="btn btn-primary"--> 
                     </div>
                 </h:form>
-                <h:form class="mt-2 ">
-                    <h2>User Details List</h2>
-                    <div class="card table-card">
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.projectDetailsList}" var="project" class="table">
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>User ID</span>
-                                        </f:facet>
-                                        #{project.projectId}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Project Name</span>
-                                        </f:facet>
-                                        #{project.projectName}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Description</span>
-                                        </f:facet>
-                                        #{project.description}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Due Date</span>
-                                        </f:facet>
-                                        #{project.dueDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Start Date</span>
-                                        </f:facet>
-                                        #{project.startDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>End Date</span>
-                                        </f:facet>
-                                        #{project.endDate}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Days</span>
-                                        </f:facet>
-                                        #{project.onHoldDays}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>On-Hold Reason</span>
-                                        </f:facet>
-                                        #{project.onHoldReason}
-                                    </h:column>
-                                </h:dataTable>
+                <h2>User Details List</h2>
+                <div class="card table-card">
+                    <div class="card-body p-0">
+                        <div class="card table-card" style="max-height: 200px; overflow-y: auto;">
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <h:dataTable value="#{managerBeans.usersList}" var="user" class="table table-striped table-hover">
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <span>User ID</span>
+                                            </f:facet>
+                                            #{user.userId}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <span>User Name</span>
+                                            </f:facet>
+                                            #{user.userName}
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">
+                                                <span>Age</span>
+                                            </f:facet>
+                                            #{user.age}
+                                        </h:column>
+                                         <h:column>
+                                            <f:facet name="header">
+                                                <span>Experience</span>
+                                            </f:facet>
+                                            #{user.currentExperience}
+                                        </h:column>
+                                         <h:column>
+                                            <f:facet name="header">
+                                                <span>Email ID</span>
+                                            </f:facet>
+                                            #{user.emailId}
+                                        </h:column>
+                                         <h:column>
+                                            <f:facet name="header">
+                                                <span>Emergency Contact</span>
+                                            </f:facet>
+                                            #{user.emergencyContact}
+                                        </h:column>
+                                         <h:column>
+                                            <f:facet name="header">
+                                                <span>Department</span>
+                                            </f:facet>
+                                        </h:column>
+                                         <h:column>
+                                            <f:facet name="header">
+                                                <span>Designation</span>
+                                            </f:facet>
+                                        </h:column>
+                                        <h:column>
+                                            <f:facet name="header">Action</f:facet>
+                                            <h:form>
+                                                <h:commandLink value="Delete" action="#{managerBeans.deleteSkill(skill.skillId)}" /> /
+                                                <h:commandLink value="Edit" action="#{managerBeans.editsKill(skill)}" />
+                                            </h:form>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </h:form>
-
-                <!-- Recent Orders end -->
+                </div>
             </div>
-            <!-- [ Main Content ] end -->
         </div>
         <script src="../../assets/js/plugins/apexcharts.min.js"></script>
         <script src="../../assets/js/plugins/jsvectormap.min.js"></script>

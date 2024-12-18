@@ -20,7 +20,7 @@ public class ManagerResource {
     @EJB
     ManagerSessionBeanLocal msbl;
 
-    //==== Skills Management Endpoints ====
+    //======================= Skills Master Methods ============================
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<SkillsMaster> getAllSkills() {
@@ -34,6 +34,19 @@ public class ManagerResource {
         msbl.addSkill(sname, desc);
     }
 
+    @DELETE
+    @Path("deleteskills/{id}")
+    public Response deleteSkills(@PathParam("id") int id) {
+        SkillsMaster skill = msbl.getSkillsById(id);
+        if (skill != null) {
+            msbl.deleteSkill(id);
+            return Response.status(Response.Status.NO_CONTENT).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
+        }
+    }
+
+    //========================= Department Details =============================
     @GET
     @Path("departments")
     @Produces(MediaType.APPLICATION_JSON)
@@ -49,22 +62,13 @@ public class ManagerResource {
         msbl.addOrUpdateDepartment(deptId, deptName, deptDesc, managerId);
     }
 
-//    @DELETE
-//    @Path("deleteDepartment/{deptid}")
-//    public void deleteDepartment(@PathParam("deptid") Integer deptid) {
-//        msbl.deleteDepartment(deptid);
-//    }
     @DELETE
-    @Path("deleteskills/{id}")
-    public Response deleteSkills(@PathParam("id") int id) {
-        SkillsMaster skill = msbl.getSkillsById(id);
-        if (skill != null) {
-            msbl.deleteSkill(id);
-            return Response.status(Response.Status.NO_CONTENT).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).entity("Skill not found").build();
-        }
+    @Path("deleteDepartment/{deptid}")
+    public void deleteDepartment(@PathParam("deptid") Integer deptid) {
+        msbl.deleteDepartment(deptid);
     }
+
+    //========================= Holiday Details ================================
     @GET
     @Path("holidays")
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,6 +89,7 @@ public class ManagerResource {
             return Response.status(Response.Status.BAD_REQUEST).entity("Invalid date format. Please use yyyy-MM-dd").build();
         }
     }
+    //=========================== Assets Masters ===============================
 
     @GET
     @Path("assets")
@@ -112,7 +117,7 @@ public class ManagerResource {
         }
     }
 
-    //====== Assets Details ========
+    //======================= Assets Details ===================================
     @GET
     @Path("assetsdetails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -121,7 +126,7 @@ public class ManagerResource {
     }
 
     @POST
-    @Path("/addassetsdetails/{assetNumber}/{assignDate}/{returnDate}/{assetId}/{userId}")
+    @Path("addassetsdetails/{assetNumber}/{assignDate}/{returnDate}/{assetId}/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addAssetDetails(
             @PathParam("assetNumber") BigInteger assetNumber,
@@ -142,15 +147,13 @@ public class ManagerResource {
         }
     }
 
-    //====== Designation Details =========
-    @GET
-    @Path("designation")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Collection<DesignationMaster> getAllDesignation() {
-        return msbl.getAllDesignation();
+    @DELETE
+    @Path("deleteAssetsDetails/{assetsDetailsId}")
+    public void deleteAssetsDetails(@PathParam("assetsDetailsId") Integer assetsDetailsId) {
+        msbl.deleteAssetsDetails(assetsDetailsId);
     }
 
-    //====== Attendence Details =========
+    //======================= Attendence Details ===============================
     @GET
     @Path("attendencedetails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -158,12 +161,21 @@ public class ManagerResource {
         return msbl.getAllAttendanceDetails();
     }
 
+    //============== User Master Methods========================================
     @GET
     @Path("users")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<UserMaster> getAllUsers() {
         return msbl.getAllUsers();
     }
+
+    @POST
+    @Path("addusers")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addUser(UserMaster usermaster) {
+        msbl.addUser(usermaster);
+    }
+    //====================== Document Details ==================================
 
     @GET
     @Path("documents")
@@ -179,6 +191,7 @@ public class ManagerResource {
         return msbl.getAllDocumentDetails();
     }
 
+    //========================== Group Details =================================
     @GET
     @Path("groupdetails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -193,7 +206,7 @@ public class ManagerResource {
         msbl.addGroups(gname);
     }
 
-    //================Leave Master Methods====================
+    //======================= Leave Master Methods =============================
     @GET
     @Path("leaves")
     @Produces(MediaType.APPLICATION_JSON)
@@ -208,12 +221,20 @@ public class ManagerResource {
         msbl.addLeaves(leavetype);
     }
 
-    //================Leave Details Methods====================
+    //========================= Leave Details Methods ==========================
     @GET
     @Path("leavedetails")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<LeaveDetails> getAllLeaveDetails() {
         return msbl.getAllLeaveDetails();
+    }
+
+    //=======================  Project Details Methods =========================
+    @POST
+    @Path("addproject")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addProject(ProjectDetails project) {
+        msbl.addProject(project);
     }
 
     @GET
@@ -222,6 +243,7 @@ public class ManagerResource {
     public Collection<ProjectDetails> getAllProjectDetails() {
         return msbl.getAllProjectDetails();
     }
+    //================== Task & Task Details Methods ===========================
 
     @GET
     @Path("task")
@@ -237,6 +259,13 @@ public class ManagerResource {
         return msbl.getAllTaskDetails();
     }
 
+    @DELETE
+    @Path("deleteTaskDetails/{taskDetailsId}")
+    public void deleteTaskDetails(@PathParam("taskDetailsId") Integer taskDetailsId) {
+        msbl.deleteTaskDetails(taskDetailsId);
+    }
+
+    //===================== Performance Details Methods ========================
     @GET
     @Path("performancedetails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -244,10 +273,20 @@ public class ManagerResource {
         return msbl.getPerformanceDetails();
     }
 
+    //====================== Designation Details Methods =======================
+    @GET
+    @Path("designation")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Collection<DesignationMaster> getAllDesignation() {
+        return msbl.getAllDesignation();
+    }
+
     @POST
     @Path("adddesignation/{designationName}/{responsibility}/{departmentId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response addDesignation(@PathParam("designationName") String designationName, @PathParam("responsibility") String responsibility, @PathParam("departmentId") Integer departmentId) {
+    public Response addDesignation(@PathParam("designationName") String designationName,
+            @PathParam("responsibility") String responsibility,
+            @PathParam("departmentId") Integer departmentId) {
         try {
             msbl.addDesig(designationName, responsibility, departmentId);
             return Response.status(Response.Status.CREATED).entity("Designation added successfully").build();
@@ -257,23 +296,20 @@ public class ManagerResource {
         }
     }
 
-//    @DELETE
-//    @Path("deleteDesgination/{designationId}")
-//    public void deleteDesgination(@PathParam("designationId") int designationId) {
-//        msbl.deleteDesgination(designationId);
-//    }
+    @DELETE
+    @Path("deleteDesgination/{designationId}")
+    public void deleteDesgination(@PathParam("designationId") Integer designationId) {
+        msbl.deleteDesiination(designationId);
+    }
+
     @PUT
     @Path("updateDesignation/{designationId}/{designationName}/{responsibility}/{deptId}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updateDesignation(@PathParam("designationId") Integer designationId, @PathParam("designationName") String designationName, @PathParam("responsibility") String responsibility, @PathParam("deptId") Integer deptId) {
+    public void updateDesignation(@PathParam("designationId") Integer designationId,
+            @PathParam("designationName") String designationName,
+            @PathParam("responsibility") String responsibility,
+            @PathParam("deptId") Integer deptId) {
         msbl.updateDesignation(designationId, designationName, responsibility, deptId);
-    }
-
-    @POST
-    @Path("addusers")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void addUser(UserMaster usermaster) {
-        msbl.addUser(usermaster);
     }
 
 //    @PUT
@@ -288,23 +324,11 @@ public class ManagerResource {
 //        @PathParam("phoneNo") BigInteger phoneNo, @PathParam("reportingTo") Integer reportingTo, @PathParam("qualification") String qualification) {
 //       msbl.UpdateUser(userId, userName, emailId, phoneNo, dateOfBirth, age, gender, joiningDate, address, emergencyContact, profileImage, emailId, password, reportingTo, phoneNo, qualification, currentExperience);
 //    }
-
-    @DELETE
-    @Path("deleteAssetsDetails/{assetsDetailsId}")
-    public void deleteAssetsDetails(@PathParam("assetsDetailsId") Integer assetsDetailsId) {
-        msbl.deleteAssetsDetails(assetsDetailsId);
-    }
-
 //    @DELETE
 //    @Path("deletetask/{taskid}")
 //    public void deleteTask(@PathParam("taskid") Integer taskid) {
 //        msbl.deleteTask(taskid);
 //    }
-    @DELETE
-    @Path("deleteTaskDetails/{taskDetailsId}")
-    public void deleteTaskDetails(@PathParam("taskDetailsId") Integer taskDetailsId) {
-        msbl.deleteTaskDetails(taskDetailsId);
-    }
 //    @DELETE
 //    @Path("deleteUser/{userId}")
 //    public void deleteUser(@PathParam("userId") Integer userId) {

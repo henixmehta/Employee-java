@@ -42,8 +42,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
                 // Use EntityManager to update the UserDetails table and set skillId to NULL
                 String jpql = "UPDATE UserDetails u SET u.skillId = NULL WHERE u.skillId = :skillId";
                 em.createQuery(jpql)
-                  .setParameter("skillId", skillId)
-                  .executeUpdate();
+                        .setParameter("skillId", skillId)
+                        .executeUpdate();
 
                 // Now remove the skill from SkillsMaster table
                 em.remove(skillToDelete);
@@ -104,11 +104,18 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         }
     }
 
-//    @Override
-//    public void deleteDepartment(Integer deptid) {
-//        DepartmentMaster dept = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
-//        em.remove(dept);
-//    } 
+    @Override
+    public void deleteDepartment(Integer deptid) {
+        DepartmentMaster dept = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
+        em.remove(dept);
+    }
+
+    @Override
+    public void deleteDesiination(Integer designationId) {
+        DesignationMaster desg = (DesignationMaster) em.find(DesignationMaster.class, designationId);
+        em.remove(desg);
+    }
+
     @Override
     public void addAsset(String assetName) {
         AssetsMaster asset = new AssetsMaster();
@@ -339,9 +346,9 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//    @Override
+//    public void addUserDetails(UserDetails user) {
+////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
         //foregin keys    
 //        UserMaster user = (UserMaster) em.find(UserMaster.class, userId);
 //        GroupMaster gp = (GroupMaster) em.find(GroupMaster.class, grpId);
@@ -363,7 +370,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        ud.setActive("1");
 //        em.persist(ud);
 
-    }
+//    }
 
     @Override
     public void addLeaves(String leaveType) {
@@ -409,5 +416,15 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     @Override
     public void UpddateUser(UserMaster user) {
 
+    }
+
+    @Override
+    public void addProject(ProjectDetails project) {
+        em.persist(project);
+    }
+
+    @Override
+    public void updateProject(ProjectDetails project) {
+       
     }
 }
