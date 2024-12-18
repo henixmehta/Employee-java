@@ -29,7 +29,7 @@
         </div>
         <!-- [ Pre-loader ] End -->
         <!-- [ Sidebar Menu ] start -->
-       <nav class="pc-sidebar">
+        <nav class="pc-sidebar">
             <div class="navbar-wrapper">
                 <div class="m-header">
                     <a href="../managerDashboard.xhtml" class="b-brand text-primary">
@@ -81,7 +81,7 @@
                                 <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                             </a>
                             <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="UserRegistration.xhtml">Registration Details</a></li>
+                                <li class="pc-item"><a class="pc-link" href="ViewUserDetails.xhtml">Registration Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
@@ -93,7 +93,7 @@
                 </div>
             </div>
         </nav>
- <!-- [ Sidebar Menu ] end -->
+        <!-- [ Sidebar Menu ] end -->
         <!-- [ Header Topbar ] start -->
         <header class="pc-header">
             <!--            <div class="m-header">
@@ -206,65 +206,132 @@
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
                 <h:form>
-                    <h2>Task List</h2>
+                    <h2>Users List</h2>
+
                     <div class="card table-card">
                         <div class="card-header">
-                            <h5>Recent Task</h5>
+                            <h5>Recent Users</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="table-responsive">
-                                <h:dataTable value="#{managerBeans.taskDetailsList}" var="task" class="table">
+                                <h:dataTable value="#{managerBeans.usersList}" var="user" border="1" styleClass="table table-bordered">
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Task ID</span>
+                                            <span>User ID</span>
                                         </f:facet>
-                                        #{task.id}
+                                        #{user.userId}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Task Title</span>
+                                            <span>User Name</span>
                                         </f:facet>
-                                        #{task.taskId.taskTitle}
+                                        #{user.userName}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Assign By</span>
+                                            <span>Email</span>
                                         </f:facet>
-                                        #{task.assignBy.userName}
+                                        #{user.emailId}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Assign To</span>
+                                            <span>Phone</span>
                                         </f:facet>
-                                        #{task.assignTo.userName}
+                                        #{user.phoneNo}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Start Date</span>
+                                            <span>Date Of Birth</span>
                                         </f:facet>
-                                        #{task.startDate}
+                                        <h:outputText value="#{user.dateOfBirth}" styleClass="text-center">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        </h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>End Date</span>
+                                            <span>Age</span>
                                         </f:facet>
-                                        #{task.endDate}
+                                        #{user.age}
+                                    </h:column>  
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Gender</span>
+                                        </f:facet>
+                                        #{user.gender}
+                                    </h:column>  
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Joining Date</span>
+                                        </f:facet>
+                                        <h:outputText value="#{user.joiningDate}" styleClass="text-center">
+                                            <f:convertDateTime pattern="yyyy-MM-dd" />
+                                        </h:outputText>
+                                    </h:column>  
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Address</span>
+                                        </f:facet>
+                                        #{user.address}
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Status</span>
+                                            <span>Emergency Phone</span>
                                         </f:facet>
-                                        #{task.taskId.taskStatus}
+                                        #{user.emergencyContact}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Profile Image</span>
+                                        </f:facet>
+                                        #{user.profileImage}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Company Email</span>
+                                        </f:facet>
+                                        #{user.companyEmail}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Reporting To</span>
+                                        </f:facet>
+                                        #{user.reportingTo}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Salary</span>
+                                        </f:facet>
+                                        #{user.salary}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Qualification</span>
+                                        </f:facet>
+                                        #{user.qualification}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Current Experience</span>
+                                        </f:facet>
+                                        #{user.currentExperience}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Action</span>
+                                        </f:facet>
+                                        <h:form>
+                                            <h:commandLink value="Delete" action="#{managerBeans.deleteUser(user.userId)}" styleClass="btn btn-danger" />
+                                            /
+                                            <h:commandLink value="Edit" action="#{managerBeans.editUser(user)}" styleClass="btn btn-warning" />
+                                        </h:form>
                                     </h:column>
                                 </h:dataTable>
                             </div>
                         </div>
                     </div>
                 </h:form>
-
-                <!-- Recent Orders end -->
+                <!-- [ Main Content ] end -->
             </div>
-            <!-- [ Main Content ] end -->
         </div>
 
         <script src="../../assets/js/plugins/apexcharts.min.js"></script>

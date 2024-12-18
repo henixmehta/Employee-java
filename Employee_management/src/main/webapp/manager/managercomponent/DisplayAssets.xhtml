@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Manager Dashboard</title>
         <meta charset="UTF-8" />
@@ -81,7 +82,7 @@
                                 <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                             </a>
                             <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="UserRegistration.xhtml">Registration Details</a></li>
+                                <li class="pc-item"><a class="pc-link" href="ViewUserDetails.xhtml">Registration Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
@@ -205,23 +206,112 @@
         <div class="pc-container">
             <div class="pc-content">
                 <!-- [ Main Content ] start -->
+                <h:form style="border: 2px solid gainsboro; padding: 20px; border-radius: 5px; background-color: whitesmoke;">
+                    <h2 align="center">Add New Asset</h2>
+                    <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+
+                    <div class="form-group mb-3">
+                        <h:inputText id="assetName" value="#{managerBeans.assetName}" 
+                                     styleClass="form-control" required="true" pt:placeholder="Asset Name" />
+                    </div>
+
+                    <div class="d-grid mt">
+                        <h:commandButton value="Add Asset" action="#{managerBeans.addAsset}" 
+                                         styleClass="btn btn-primary ms-2" />
+                    </div>
+                </h:form>
+
+
+                <hr />
                 <h:form>
-                    <h2>Add New Asset</h2>
-                    <h:panelGrid columns="2" border="1">
-                        <h:column>
-                            <h:outputLabel for="assetName" value="Asset Name:" />
-                        </h:column>
-                        <h:column>
-                            <h:inputText id="assetName" value="#{managerBeans.assetName}" required="true" />
-                        </h:column>
-                        <h:column>
-                            <h:commandButton value="Add Asset" action="#{managerBeans.addAsset}" />
-                        </h:column>
-                    </h:panelGrid>
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>Asset List</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive" style="max-height: 200px; overflow-y: auto;">
+                                <h:dataTable value="#{managerBeans.assetsList}" var="asset" class="table">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Asset ID</span>
+                                        </f:facet>
+                                        #{asset.assetId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Asset Name</span>
+                                        </f:facet>
+                                        #{asset.assetName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Action</span>
+                                        </f:facet>
+                                        <h:form>
+                                            <h:commandLink value="Delete" action="#{managerBeans.deleteAsset(asset.assetId)}" 
+                                                           styleClass="btn btn-danger btn-sm me-2" />
+                                            <h:commandLink value="Edit" action="#{managerBeans.editAssts(asset)}" 
+                                                           styleClass="btn btn-warning btn-sm" />
+                                        </h:form>
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </h:form>
+
+
+                <hr/>
+                <h:form style="border: 2px solid gainsboro; padding: 20px; border-radius: 5px; background-color: whitesmoke;">
+                    <h2 align="center">Add Asset Details</h2>
+                    <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel value="Asset Number:" for="assetNumber" />
+                        <h:inputText id="assetNumber" value="#{managerBeans.assetNumber}" 
+                                     styleClass="form-control" pt:placeholder="Enter Asset Number" />
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel for="assignDate" value="Assign Date:" />
+                        <h:inputText id="assignDate" value="#{managerBeans.assignDate}" required="true" 
+                                     styleClass="form-control">
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel for="returnDate" value="Return Date:" />
+                        <h:inputText id="returnDate" value="#{managerBeans.returnDate}" required="true" 
+                                     styleClass="form-control">
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel value="Asset ID:" for="assetId" />
+                        <h:selectOneMenu id="assetId" value="#{managerBeans.assetId}" styleClass="form-select">
+                            <f:selectItems value="#{managerBeans.assetsList}" var="asset" 
+                                           itemLabel="#{asset.assetName}" itemValue="#{asset.assetId}" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel value="User ID:" for="userId" />
+                        <h:selectOneMenu id="userId" value="#{managerBeans.userId}" styleClass="form-select">
+                            <f:selectItems value="#{managerBeans.usersList}" var="user" 
+                                           itemLabel="#{user.userName}" itemValue="#{user.userId}" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="d-grid mt">
+                        <h:commandButton value="Add Asset Details" action="#{managerBeans.addAssetDetails}" 
+                                         styleClass="btn btn-primary ms-2" />
+                    </div>
                 </h:form>
                 <hr/>
                 <h:form>
-                    <h2>Assets List</h2>
+                    <h2>Assign  Assets  List</h2>
                     <div class="card table-card">
                         <div class="card-header">
                             <h5>Asset Details</h5>
@@ -317,6 +407,5 @@
         <script type="text/javascript">
             header_change("header-1");
         </script>
-
     </h:body>
 </html>
