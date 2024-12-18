@@ -82,7 +82,7 @@
                                 <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
                             </a>
                             <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="UserRegistration.xhtml">Registration Details</a></li>
+                                <li class="pc-item"><a class="pc-link" href="ViewUserDetails.xhtml">Registration Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
@@ -207,6 +207,12 @@
             <div class="auth-wrapper">
                 <div class="card" style="width: 95%; margin-top: 7%;">
                     <div class="card-body my-12">
+                        <h:form  style="padding-left: 90%">
+                            <div class="d-grid ">
+                                <a class="btn btn-primary" href="ViewUserDetails.xhtml">Employee List</a>
+                                <!--styleClass="btn btn-primary"--> 
+                            </div>
+                        </h:form>
                         <h:form>
                             <h2 align="center">User Registration</h2>
                             <hr style="border: 2px solid black; width: 100%; opacity: 1;" />
@@ -243,11 +249,11 @@
                                     <h:inputText id="age" value="#{managerBeans.usermaster.age}" styleClass="form-control" pt:placeholder="Age" disabled="true" />
                                 </div>
                                 <div class="col-md-3">
-                                 <div style="margin-bottom:10px;">Gender:</div>
-                                <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true" style="padding:10px;">   
-                                            <f:selectItem itemLabel="Male" itemValue="Male" />
-                                            <f:selectItem itemLabel="Female" itemValue="Female" />
-                                         </h:selectOneRadio>
+                                    <div style="margin-bottom:10px;">Gender:</div>
+                                    <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true" style="padding:10px;">   
+                                        <f:selectItem itemLabel="Male" itemValue="Male" />
+                                        <f:selectItem itemLabel="Female" itemValue="Female" />
+                                    </h:selectOneRadio>
                                 </div>
                             </div>
                             <div class="form-group mb-3 row">
@@ -279,7 +285,7 @@
                                 <div class="col-md-6">
                                     <h:selectOneMenu id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" styleClass="form-control" required="true">
                                         <f:selectItem itemLabel="-- Select User --" itemValue="#{null}" />
-                                        <f:selectItems value="#{managerBeans.usersList}" var="user" itemValue="#{user.userId}" itemLabel="#{user.userName}" />
+                                        <f:selectItems value="#{managerBeans.usersList}" var="user" itemValue="#{user.userId}" itemLabel="#{user.userId}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="col-md-6">
