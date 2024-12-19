@@ -2,6 +2,8 @@ package cdi;
 
 import client.ManagerClient;
 import entity.*;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Collection;
@@ -256,8 +258,18 @@ public class ManagerBeans implements Serializable {
 
     public void addOrUpdateDepartment() {
         try {
-            DepartmentMaster dept = new DepartmentMaster();
+            // Check if the department name already exists
+            boolean nameExists = departmentList.stream()
+                    .anyMatch(dept -> dept.getDeptName().equalsIgnoreCase(deptName)
+                    && !dept.getDeptId().equals(selectedDeptId)); // Exclude the current department being edited
 
+            if (nameExists) {
+                addMessage(FacesMessage.SEVERITY_ERROR, "Error", "Department name already exists.");
+                return; // Stop further processing
+            }
+
+            // Create or update the department
+            DepartmentMaster dept = new DepartmentMaster();
             if (selectedDeptId != null && selectedDeptId > 0) {
                 dept.setDeptId(selectedDeptId); // Update
             } else {
@@ -269,11 +281,29 @@ public class ManagerBeans implements Serializable {
                     .filter(u -> u.getUserId() == managerId)
                     .findFirst()
                     .orElse(null)); // Set manager from users list
+
+            // Call REST client to add or update the department
             managerClient.addOrUpdateDepartment(dept, selectedDeptId, deptName, deptDesc, managerId);
+
+            // Refresh the department list
             departmentList = managerClient.getAllDepartments(deptGenericType);
+
+            // Reset form fields
             resetDepartmentForm();
+
+            addMessage(FacesMessage.SEVERITY_INFO, "Success", "Department saved successfully.");
         } catch (ClientErrorException e) {
             e.printStackTrace();
+            addMessage(FacesMessage.SEVERITY_ERROR, "Error", "An unexpected error occurred.");
+        }
+    }
+
+    private void addMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        if (facesContext != null) {
+            facesContext.addMessage(null, new FacesMessage(severity, summary, detail));
+        } else {
+            System.err.println("FacesContext is null. Cannot display message: " + summary + " - " + detail);
         }
     }
 
@@ -439,14 +469,16 @@ public class ManagerBeans implements Serializable {
     }
 
     //========================================== Task Master ============================================
-    public void deleteTask(Integer taskid) {
-        managerClient.deleteTask(taskid);
-        tasksList = managerClient.getAllTask(tasksGenericType);
-    }
-
+//    public void deleteTask(Integer taskid) {
+//        managerClient.deleteTask(taskid);
+//        tasksList = managerClient.getAllTask(tasksGenericType);
+//        taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+//
+//    }
     //=========================================== Task Details ============================================
     public void deleteTaskDetails(Integer taskdetailid) {
         managerClient.deleteTaskDetails(taskdetailid);
+        tasksList = managerClient.getAllTask(tasksGenericType);
         taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
     }
 
