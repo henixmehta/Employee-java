@@ -4,8 +4,9 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
     <h:head>
-        <title>Manager Dashboard</title>
+        <title>add task</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -22,7 +23,6 @@
         <link rel="stylesheet" href="../../assets/css/style-preset.css" />
     </h:head>
     <h:body>
-        <!-- [ Pre-loader ] start -->
         <div class="loader-bg">
             <div class="loader-track">
                 <div class="loader-fill"></div>
@@ -202,109 +202,71 @@
                 </div>
             </div>
         </header>
-        <!-- [ Main Content ] start -->
+
         <div class="pc-container">
             <div class="pc-content">
-                <h:form style="padding-left:  94%">
 
+                <h:form style="padding-left:  92%">
                     <h:button styleClass="btn btn-primary ms-2" 
                               style="border-radius: 5px" 
-                              value="Add Task" 
-                              outcome="AddTask.xhtml" />
+                              value="Display Task " 
+                              outcome="DisplayTask.xhtml" />
                 </h:form>
 
-                <h2>Task Details</h2>
-                <div class="card table-card">
-                    <div class="card-body p-0">
-                        <div class="card table-card" style="max-height: 200px; overflow-y: auto;">
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <h:dataTable value="#{managerBeans.taskdetailsList}" var="task" class="table table-striped table-hover">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Task ID</span>
-                                            </f:facet>
-                                            #{task.taskId.taskId}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Project ID</span>
-                                            </f:facet>
-                                            #{task.taskId.projectId}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Task Title</span>
-                                            </f:facet>
-                                            #{task.taskId.taskTitle}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Description</span>
-                                            </f:facet>
-                                            #{task.taskId.description}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Status</span>
-                                            </f:facet>
-                                            #{task.taskId.taskStatus}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Priority</span>
-                                            </f:facet>
-                                            #{task.taskId.priority}
-                                        </h:column>
-
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Assign By</span>
-                                            </f:facet>
-                                            #{task.assignBy.userName}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Assign To</span>
-                                            </f:facet>
-                                            #{task.assignTo.userName}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Start Date</span>
-                                            </f:facet>
-                                            #{task.startDate}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>End Date</span>
-                                            </f:facet>
-                                            #{task.endDate}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>End Date</span>
-                                            </f:facet>
-                                            #{task.taskId.taskStatus}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Action</f:facet>
-                                            <h:form>
-                                                <h:commandLink value="Delete" action="#{managerBeans.deleteTaskDetails(task.taskId.taskId)}" /> /
-                                                <h:commandLink value="Edit" action="#{managerBeans.editProject(project)}" />
-                                            </h:form>
-                                        </h:column>
-                                    </h:dataTable>
-                                </div>
-                            </div>
-                        </div>
-
+                <h2 align="center">Add Task</h2>
+                <h:form style="border: 2px solid gainsboro; padding: 20px;border-radius: 5px;background-color:whitesmoke;">
+                    <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+                    <div class="form-group mb-3">
+                        <h:inputText id="title" value="#{managerBeans.project.description}" 
+                                     styleClass="form-control" required="true" pt:placeholder="Project Name" />
                     </div>
-                </div>
 
+                    <div class="form-group mb-3">
+                        <h:inputText id="desc" value="#{managerBeans.project.description}" 
+                                     styleClass="form-control" required="true" pt:placeholder="Description" />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Start Date</label>
+                        <h:inputText id="startdate" value="#{managerBeans.project.startDate}" styleClass="form-control" required="true" pt:placeholder="Start Date">
+                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>End Date</label>
+                        <h:inputText id="enddate" value="#{managerBeans.project.endDate}" styleClass="form-control" required="true" pt:placeholder="End Date">
+                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Due Date</label>
+                        <h:inputText id="duedate" value="#{managerBeans.project.dueDate}" styleClass="form-control" required="true" pt:placeholder="Due Date">
+                            <f:convertDateTime pattern="yyyy-MM-dd"/>
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
+                    </div>
+                    <div class="form-group mb-3">
+                        <h:selectOneMenu id="status" value="#{managerBeans.project.status}" required="true" styleClass="form-control">
+                            <f:selectItem itemLabel="Select Status" itemValue="" noSelectionOption="true" />
+                            <f:selectItem itemLabel="Submitted" itemValue="Submitted" />
+                            <f:selectItem itemLabel="In Progress" itemValue="In Progress" />
+                            <f:selectItem itemLabel="Onhold" itemValue="Onhold" />
+                            <f:selectItem itemLabel="Completed" itemValue="Completed" />
+                        </h:selectOneMenu>
+                    </div>
+                    <!--                    <div class="form-group mb-3">
+                                            <h:inputText id="status" value="#{managerBeans.project.status}" 
+                                                         styleClass="form-control" required="true" pt:placeholder="Status" />
+                                        </div>-->
+                    <div class="d-grid mt">
+                        <h:commandButton value="Add Department" action="#{managerBeans.addProject()}" 
+                                         styleClass="btn btn-primary ms-2" />
+                    </div>
+
+                </h:form>
             </div>
         </div>
-
         <script src="../../assets/js/plugins/apexcharts.min.js"></script>
         <script src="../../assets/js/plugins/jsvectormap.min.js"></script>
         <script src="../../assets/js/plugins/world.js"></script>
