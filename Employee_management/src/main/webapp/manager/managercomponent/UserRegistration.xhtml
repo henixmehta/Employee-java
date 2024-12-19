@@ -34,11 +34,11 @@
             #{managerBeans.usermaster.salary="03452"}
             #{managerBeans.usermaster.qualification="bca"}
             #{managerBeans.usermaster.profileImage="bsdfca"}
-            
+
         </script>
     </h:head>
     <h:body>
-        
+
         <!-- [ Pre-loader ] start -->
         <div class="loader-bg">
             <div class="loader-track">
@@ -318,7 +318,38 @@
                                     <h:inputText id="currentExperience" value="#{managerBeans.usermaster.currentExperience}" styleClass="form-control" required="true" pt:placeholder="Current Experience" />
                                 </div>
                             </div>
-
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:selectOneMenu id="deptId" value="#{managerBeans.departmentId}" styleClass="form-control" required="true">
+                                        <f:selectItem itemLabel="-- Select Department --" itemValue="#{null}" />
+                                        <f:selectItems value="#{managerBeans.departmentList}" var="dept" itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:selectOneMenu id="desgId" value="#{managerBeans.designationId}" styleClass="form-control" required="true">
+                                        <f:selectItem itemLabel="-- Select Designation --" itemValue="#{null}" />
+                                        <f:selectItems value="#{managerBeans.designationList}" var="desg" itemValue="#{desg.designationId}" itemLabel="#{desg.designation}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:selectOneMenu id="groupId" value="#{managerBeans.groupId}" styleClass="form-control" required="true">
+                                        <f:selectItem itemLabel="-- Select Group --" itemValue="#{null}" />
+                                        <f:selectItems value="#{managerBeans.allGroupsList}" var="group" itemValue="#{group.groupId}" itemLabel="#{group.groupName}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="form-group mb-3 row">
+                                <div class="col-md-6">
+                                    <h:selectOneMenu id="skillId" value="#{managerBeans.skillId}" styleClass="form-control" required="true">
+                                        <f:selectItem itemLabel="-- Select Skill --" itemValue="#{null}" />
+                                        <f:selectItems value="#{managerBeans.skillsList}" var="skill" itemValue="#{skill.skillId}" itemLabel="#{skill.skillName}" />
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
                             <hr style="border: 2px solid black; width: 100%; opacity: 1;" />
 
                             <div class="d-grid mt-4">

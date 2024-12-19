@@ -245,8 +245,12 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addUser(UserMaster usermaster) {
+    public void addUser(UserMaster usermaster,UserDetails userdetails) {
         em.persist(usermaster);
+        em.persist(userdetails);
+        em.flush();
+        userdetails.setUserId(usermaster.getUserId());
+        System.out.println(" userMaster.id  :" + usermaster.getUserId());
     }
 
     @Override

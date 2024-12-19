@@ -175,10 +175,6 @@ public class ManagerClient {
                 .post(null, Response.class);
     }
 
-    public void addUser(Object requestEntity) throws ClientErrorException {
-        webTarget.path("addusers").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-    }
-
     public Response addAssetDetails(BigInteger assetNumber, String assignDate, String returnDate, Integer assetId, Integer userId
     ) throws ClientErrorException {
         return webTarget
@@ -244,6 +240,10 @@ public class ManagerClient {
 
     public void updateProject(Object requestEntity) throws ClientErrorException {
         webTarget.path("updateproject").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public void addUser(Object requestEntity) throws ClientErrorException {
+        webTarget.path("addusers").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
     public void close() {

@@ -38,6 +38,7 @@ public class ManagerBeans implements Serializable {
     private Collection<ProjectDetails> projectdetailsList;
     private Collection<TaskMaster> tasksList;
     private Collection<TaskDetails> taskdetailsList;
+//    private Collection<UserDetails> userDetails;
 
     //============== Skill variables ===============
     private String sname;
@@ -105,6 +106,8 @@ public class ManagerBeans implements Serializable {
     };
     private final GenericType<Collection<TaskDetails>> taskdetailsGenericType = new GenericType<Collection<TaskDetails>>() {
     };
+//    private final GenericType<Collection<UserDetails>> userDetailsGenericType = new GenericType<Collection<UserDetails>>() {
+//    };
 
     // Generic types for REST client responses
     public ManagerBeans() {
@@ -191,10 +194,24 @@ public class ManagerBeans implements Serializable {
     }
     //================================================user Master================================================
     private UserMaster usermaster = new UserMaster();
+    private UserDetails userdetails = new UserDetails();
+    private UserRequestWrapper wrapper = new UserRequestWrapper();
+    private Integer groupId;
+    private Integer skillId;
 
     //add userMaster
     public String addUser() {
-        managerClient.addUser(usermaster);
+        System.out.println("departmentId variable: " + departmentId);
+        System.out.println("Designation Id : " + designationId);
+        System.out.println("Group Id : " + groupId);
+        System.out.println("Skill Id : " + skillId);
+        userdetails.setDeptId(departmentId);
+        userdetails.setDesignationId(designationId);
+        userdetails.setGroupId(groupId);
+        userdetails.setSkillId(skillId);
+        wrapper.setUserDetails(userdetails);
+        wrapper.setUserMaster(usermaster);
+        managerClient.addUser(wrapper);
         usersList = managerClient.getAllUsers(usersGenericType);
         resetUserMasterFields();
         return "ViewUserDetails.xhtml";
@@ -851,6 +868,102 @@ public class ManagerBeans implements Serializable {
 
     public void setSelectedDesgination(DesignationMaster selectedDesgination) {
         this.selectedDesgination = selectedDesgination;
+    }
+
+    public ManagerClient getManagerClient() {
+        return managerClient;
+    }
+
+    public void setManagerClient(ManagerClient managerClient) {
+        this.managerClient = managerClient;
+    }
+
+    public Collection<AssetsDetails> getAssetdetailsList() {
+        return assetdetailsList;
+    }
+
+    public void setAssetdetailsList(Collection<AssetsDetails> assetdetailsList) {
+        this.assetdetailsList = assetdetailsList;
+    }
+
+    public Collection<DocumentDetails> getDocumentsdetailsList() {
+        return documentsdetailsList;
+    }
+
+    public void setDocumentsdetailsList(Collection<DocumentDetails> documentsdetailsList) {
+        this.documentsdetailsList = documentsdetailsList;
+    }
+
+    public Collection<GroupMaster> getGroupsList() {
+        return groupsList;
+    }
+
+    public void setGroupsList(Collection<GroupMaster> groupsList) {
+        this.groupsList = groupsList;
+    }
+
+    public Collection<LeaveMaster> getLeavesList() {
+        return leavesList;
+    }
+
+    public void setLeavesList(Collection<LeaveMaster> leavesList) {
+        this.leavesList = leavesList;
+    }
+
+    public Collection<LeaveDetails> getLeavedetailsList() {
+        return LeavedetailsList;
+    }
+
+    public void setLeavedetailsList(Collection<LeaveDetails> LeavedetailsList) {
+        this.LeavedetailsList = LeavedetailsList;
+    }
+
+    public Collection<PerformanceDetails> getPerformanceList() {
+        return performanceList;
+    }
+
+    public void setPerformanceList(Collection<PerformanceDetails> performanceList) {
+        this.performanceList = performanceList;
+    }
+
+    public Collection<ProjectDetails> getProjectdetailsList() {
+        return projectdetailsList;
+    }
+
+    public void setProjectdetailsList(Collection<ProjectDetails> projectdetailsList) {
+        this.projectdetailsList = projectdetailsList;
+    }
+
+    public UserDetails getUserdetails() {
+        return userdetails;
+    }
+
+    public void setUserdetails(UserDetails userdetails) {
+        this.userdetails = userdetails;
+    }
+
+    public UserRequestWrapper getWrapper() {
+        return wrapper;
+    }
+
+    public void setWrapper(UserRequestWrapper wrapper) {
+        this.wrapper = wrapper;
+    }
+
+    public Integer getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(Integer groupId) {
+        this.groupId = groupId;
+    }
+
+    public Integer getSkillId() {
+        return skillId;
+    }
+
+    public void setSkillId(Integer skillId) {
+        this.skillId = skillId;
     }
 
     //======================================== calculate Age ================================================

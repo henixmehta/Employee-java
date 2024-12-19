@@ -172,8 +172,10 @@ public class ManagerResource {
     @POST
     @Path("addusers")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void addUser(UserMaster usermaster) {
-        msbl.addUser(usermaster);
+    public void addUser(UserRequestWrapper wrapper) {
+        UserMaster user = wrapper.getUserMaster();
+        UserDetails userdetails = wrapper.getUserDetails();
+        msbl.addUser(user, userdetails);
     }
     //====================== Document Details ==================================
 
