@@ -248,13 +248,11 @@
                             <f:selectItem itemLabel="Completed" itemValue="Completed" />
                         </h:selectOneMenu>
                     </div>
-                    <!--                    <div class="form-group mb-3">
-                                            <h:inputText id="status" value="#{managerBeans.project.status}" 
-                                                         styleClass="form-control" required="true" pt:placeholder="Status" />
-                                        </div>-->
+
                     <div class="d-grid mt">
                         <h:commandButton value="Add Department" action="#{managerBeans.addProject()}" 
                                          styleClass="btn btn-primary ms-2" />
+
                     </div>
                 </h:form>
                 <br/>
@@ -317,7 +315,7 @@
                                             <f:facet name="header">Action</f:facet>
                                             <h:form>
                                                 <h:commandLink value="Delete" action="#{managerBeans.deleteDesgination(desg.designationId)}" /> /
-                                                <h:commandLink value="Edit" action="#{managerBeans.editDesgination(desg)}" />
+                                                <h:commandLink value="Edit" action="#{managerBeans.editProject(project)}" />
                                             </h:form>
                                         </h:column>
                                     </h:dataTable>
@@ -336,8 +334,7 @@
         <script src="../../assets/js/plugins/world.js"></script>
         <script src="../../assets/js/plugins/world-merc.js"></script>
         <script src="../../assets/js/pages/dashboard-sales.js"></script>
-        <!-- [Page Specific JS] end -->
-        <!-- Required Js -->
+
         <script src="../../assets/js/plugins/popper.min.js"></script>
         <script src="../../assets/js/plugins/simplebar.min.js"></script>
         <script src="../../assets/js/plugins/bootstrap.min.js"></script>

@@ -237,6 +237,13 @@ public class ManagerResource {
         msbl.addProject(project);
     }
 
+    @POST
+    @Path("updateproject")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateProject(ProjectDetails project) {
+        msbl.updateProject(project);
+    }
+
     @GET
     @Path("projectdetails")
     @Produces(MediaType.APPLICATION_JSON)

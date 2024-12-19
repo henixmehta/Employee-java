@@ -484,8 +484,43 @@ public class ManagerBeans implements Serializable {
         project.setOnHoldReason(null);
         project.setStatus(null);
     }
+    ProjectDetails selectedproject = new ProjectDetails();
+
+//    public void editProject(ProjectDetails project) {
+//        this.selectedproject = project;
+//        project.getProjectId();
+//        project.getProjectName();
+//        project.getStatus();
+//        project.getDescription();
+//        project.getStartDate();
+//        project.getEndDate();
+//        project.getDueDate();
+//        project.getOnHoldDays();
+//        project.getOnHoldReason();
+//    }
+
+//    public void updateProject(ProjectDetails project) {
+//        try {
+//       
+//            // Call the client method to update the designation
+//            managerClient.updateProject(project);
+//
+//            projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
+//            resetprojectfield();
+//        } catch (ClientErrorException e) {
+//            e.printStackTrace(); // Handle exceptions appropriately
+//        }
+//    }
 
     // ====================================== GETTER AND SETTER ===============================================
+    public ProjectDetails getSelectedproject() {
+        return selectedproject;
+    }
+
+    public void setSelectedproject(ProjectDetails selectedproject) {
+        this.selectedproject = selectedproject;
+    }
+
     public ProjectDetails getProject() {
         return project;
     }

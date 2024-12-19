@@ -238,6 +238,10 @@ public class ManagerClient {
         webTarget.path("addproject").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
+    public void updateProject(Object requestEntity) throws ClientErrorException {
+        webTarget.path("updateproject").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
     public void close() {
         client.close();
     }

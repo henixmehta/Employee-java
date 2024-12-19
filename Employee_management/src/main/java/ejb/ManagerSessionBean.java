@@ -349,7 +349,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //    @Override
 //    public void addUserDetails(UserDetails user) {
 ////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-        //foregin keys    
+    //foregin keys    
 //        UserMaster user = (UserMaster) em.find(UserMaster.class, userId);
 //        GroupMaster gp = (GroupMaster) em.find(GroupMaster.class, grpId);
 //        DepartmentMaster dp = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
@@ -369,9 +369,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        ud.setSkillId(sk);
 //        ud.setActive("1");
 //        em.persist(ud);
-
 //    }
-
     @Override
     public void addLeaves(String leaveType) {
         LeaveMaster leave = new LeaveMaster();
@@ -415,7 +413,9 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //    }
     @Override
     public void UpddateUser(UserMaster user) {
-
+        if(user.getUserId()!=null){
+            em.merge(user);
+        }
     }
 
     @Override
@@ -425,6 +425,9 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public void updateProject(ProjectDetails project) {
-       
+      if(project.getProjectId()!= null)
+      {
+        em.merge(project);
+      }
     }
 }
