@@ -473,6 +473,11 @@ public class ManagerBeans implements Serializable {
         resetprojectfield();
     }
 
+    public void deleteProject(Integer projectId) {
+        managerClient.deleteProjectDetails(projectId);
+        projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
+    }
+
     public void resetprojectfield() {
         project.setProjectId(null);
         project.setProjectName(null);
@@ -484,43 +489,41 @@ public class ManagerBeans implements Serializable {
         project.setOnHoldReason(null);
         project.setStatus(null);
     }
-    ProjectDetails selectedproject = new ProjectDetails();
+//    ProjectDetails selectedproject = new ProjectDetails();
 
-//    public void editProject(ProjectDetails project) {
-//        this.selectedproject = project;
-//        project.getProjectId();
-//        project.getProjectName();
-//        project.getStatus();
-//        project.getDescription();
-//        project.getStartDate();
-//        project.getEndDate();
-//        project.getDueDate();
-//        project.getOnHoldDays();
-//        project.getOnHoldReason();
-//    }
+    public void editProject(ProjectDetails selectedProject) {
+        this.project = selectedProject; // Load selected project into the form.
+    }
 
-//    public void updateProject(ProjectDetails project) {
-//        try {
-//       
-//            // Call the client method to update the designation
-//            managerClient.updateProject(project);
-//
-//            projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
-//            resetprojectfield();
-//        } catch (ClientErrorException e) {
-//            e.printStackTrace(); // Handle exceptions appropriately
-//        }
-//    }
+    public void updateProject(ProjectDetails project) {
+        try {
+
+            // Call the client method to update the designation
+            managerClient.updateProject(project);
+
+            projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
+            resetprojectfield();
+        } catch (ClientErrorException e) {
+            e.printStackTrace(); // Handle exceptions appropriately
+        }
+    }
+
+    public void handleProjectAction() {
+        if (project.getProjectId() != null) {
+            updateProject(project); // Update if projectId is not null
+        } else {
+            addProject(); // Add if projectId is null
+        }
+    }
 
     // ====================================== GETTER AND SETTER ===============================================
-    public ProjectDetails getSelectedproject() {
-        return selectedproject;
-    }
-
-    public void setSelectedproject(ProjectDetails selectedproject) {
-        this.selectedproject = selectedproject;
-    }
-
+//    public ProjectDetails getSelectedproject() {
+//        return selectedproject;
+//    }
+//
+//    public void setSelectedproject(ProjectDetails selectedproject) {
+//        this.selectedproject = selectedproject;
+//    }
     public ProjectDetails getProject() {
         return project;
     }

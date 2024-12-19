@@ -127,6 +127,10 @@ public class ManagerClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
+    public void deleteProjectDetails(Integer proDetailsId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteProjectDetails/{0}", new Object[]{proDetailsId})).request().delete();
+    }
+
     public <T> T getAllGroups(GenericType<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
         resource = resource.path("groupdetails");

@@ -207,39 +207,54 @@
             <div class="pc-content">
                 <br/>
                 <h:form style="border: 2px solid gainsboro; padding: 20px;border-radius: 5px;background-color:whitesmoke;">
-                    <h2 align="center">Add Project</h2>
+                    <h2 align="center">#{managerBeans.project.projectId != null ? 'Edit Project' : 'Add Project'}</h2>
                     <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+
+                    <!-- Project Name -->
                     <div class="form-group mb-3">
                         <h:inputText id="pname" value="#{managerBeans.project.projectName}" 
                                      styleClass="form-control" required="true" pt:placeholder="Project Name" />
                     </div>
 
+                    <!-- Description -->
                     <div class="form-group mb-3">
                         <h:inputText id="desc" value="#{managerBeans.project.description}" 
                                      styleClass="form-control" required="true" pt:placeholder="Description" />
                     </div>
+
+                    <!-- Start Date -->
                     <div class="form-group mb-3">
                         <label>Start Date</label>
-                        <h:inputText id="startdate" value="#{managerBeans.project.startDate}" styleClass="form-control" required="true" pt:placeholder="Start Date">
+                        <h:inputText id="startdate" value="#{managerBeans.project.startDate}" 
+                                     styleClass="form-control" required="true" pt:placeholder="Start Date">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                             <f:passThroughAttribute name="type" value="date" />
                         </h:inputText>
                     </div>
+
+                    <!-- End Date -->
                     <div class="form-group mb-3">
                         <label>End Date</label>
-                        <h:inputText id="enddate" value="#{managerBeans.project.endDate}" styleClass="form-control" required="true" pt:placeholder="End Date">
+                        <h:inputText id="enddate" value="#{managerBeans.project.endDate}" 
+                                     styleClass="form-control" required="true" pt:placeholder="End Date">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                             <f:passThroughAttribute name="type" value="date" />
                         </h:inputText>
                     </div>
+
+                    <!-- Due Date -->
                     <div class="form-group mb-3">
                         <label>Due Date</label>
-                        <h:inputText id="duedate" value="#{managerBeans.project.dueDate}" styleClass="form-control" required="true" pt:placeholder="Due Date">
+                        <h:inputText id="duedate" value="#{managerBeans.project.dueDate}" 
+                                     styleClass="form-control" required="true" pt:placeholder="Due Date">
                             <f:convertDateTime pattern="yyyy-MM-dd"/>
                             <f:passThroughAttribute name="type" value="date" />
                         </h:inputText>
                     </div>
+
+                    <!-- Status -->
                     <div class="form-group mb-3">
+                        <label>Status</label>
                         <h:selectOneMenu id="status" value="#{managerBeans.project.status}" required="true" styleClass="form-control">
                             <f:selectItem itemLabel="Select Status" itemValue="" noSelectionOption="true" />
                             <f:selectItem itemLabel="Submitted" itemValue="Submitted" />
@@ -249,10 +264,11 @@
                         </h:selectOneMenu>
                     </div>
 
+                    <!-- Submit Button -->
                     <div class="d-grid mt">
-                        <h:commandButton value="Add Department" action="#{managerBeans.addProject()}" 
+                        <h:commandButton value="#{managerBeans.project.projectId != null ? 'Update Project' : 'Add Project'}" 
+                                         action="#{managerBeans.handleProjectAction()}"
                                          styleClass="btn btn-primary ms-2" />
-
                     </div>
                 </h:form>
                 <br/>
@@ -314,8 +330,8 @@
                                         <h:column>
                                             <f:facet name="header">Action</f:facet>
                                             <h:form>
-                                                <h:commandLink value="Delete" action="#{managerBeans.deleteDesgination(desg.designationId)}" /> /
-                                                <h:commandLink value="Edit" action="#{managerBeans.editProject(project)}" />
+                                                <h:commandLink value="Delete" action="#{managerBeans.deleteProject(pro.projectId)}" /> /
+                                                <h:commandLink value="Edit" action="#{managerBeans.editProject(pro)}" />
                                             </h:form>
                                         </h:column>
                                     </h:dataTable>

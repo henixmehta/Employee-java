@@ -131,7 +131,7 @@ public interface ManagerSessionBeanLocal {
       void deleteTaskDetails(Integer taskDetatilsId); ////set status
    
 //    void deleteDocument(Integer docid);
-//    void deleteProjectDetails(Integer proDetailsId);
+    void deleteProjectDetails(Integer proDetailsId);
 //    void deleteLeaves(Integer LeaveId);
 //    void deleteLeaveDetails(Integer leaveDetailsId);    ///approve reacject
 //    void deleteGroup(Integer GrpId);
