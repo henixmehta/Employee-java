@@ -71,6 +71,7 @@
                                 <li class="pc-item"><a class="pc-link" href="DisplayDepartment.xhtml">Department</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayDesignation.xhtml">Designation</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayAssets.xhtml">Assets</a></li>
+                                <li class="pc-item"><a class="pc-link" href="DisplayAssetsDetails.xhtml">Assets Details</a></li>
                             </ul>
                         </li>
                         <li class="pc-item pc-caption">
@@ -239,37 +240,37 @@
                                             </f:facet>
                                             #{user.age}
                                         </h:column>
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">
                                                 <span>Experience</span>
                                             </f:facet>
                                             #{user.currentExperience} / Years
                                         </h:column>
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">
                                                 <span>Email ID</span>
                                             </f:facet>
                                             #{user.emailId}
                                         </h:column>
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">
                                                 <span>Emergency Contact</span>
                                             </f:facet>
                                             #{user.emergencyContact}
                                         </h:column>
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">
                                                 <span>Department</span>
                                             </f:facet>
-                                              #{managerBeans.userdetails.deptId}
+                                            #{managerBeans.userdetails.deptId}
                                         </h:column>
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">
                                                 <span>Designation</span>
                                             </f:facet>
-                                             #{managerBeans.userdetails.designationId}
+                                            #{managerBeans.userdetails.designationId}
                                         </h:column>
-                                         <h:column>
+                                        <h:column>
                                             <f:facet name="header">Action</f:facet>
                                             <h:form>
                                                 <h:commandLink value="Delete" action="#{managerBeans.deleteUser(user.userId)}" /> /
