@@ -342,7 +342,7 @@ public class ManagerBeans implements Serializable {
     }
 
     //=============================================== Designation Details ================================================
-    public void addDesignation() {
+    public String addDesignation() {
         try {
 
             if (responsibility == null || responsibility.trim().isEmpty()) {
@@ -353,8 +353,20 @@ public class ManagerBeans implements Serializable {
             designationName = "";
             responsibility = "";
             deptId = null;
+            
         } catch (ClientErrorException e) {
             e.printStackTrace();
+        }
+        return "success";
+        
+    }
+
+    
+    public String saveDesignation() {
+        if (selectedDesgination == null) {
+            return addDesignation(); // Call the add method
+        } else {
+            return updateDesignation(); // Call the update method
         }
     }
 
@@ -368,7 +380,7 @@ public class ManagerBeans implements Serializable {
         this.deptId = desg.getDepartmentId().getDeptId();
     }
 
-    public void updateDesignation() {
+    public String updateDesignation() {
         try {
 
             DesignationMaster desgi = new DesignationMaster();
@@ -386,10 +398,12 @@ public class ManagerBeans implements Serializable {
             );
 
             designationList = managerClient.getAllDesignation(designationGenericType);
+             this.selectedDesgination = null;
             resetDesignationForm();
         } catch (ClientErrorException e) {
             e.printStackTrace(); // Handle exceptions appropriately
         }
+        return "success";
     }
 
 // Reset the designation form fields
@@ -1021,7 +1035,4 @@ public class ManagerBeans implements Serializable {
         return userCount;
     }
 
-    public void closeClient() {
-        managerClient.close();
-    }
 }

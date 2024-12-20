@@ -206,29 +206,55 @@
         <div class="pc-container">
             <div class="pc-content">
                 <br/>
-                <h:form style="border: 2px solid gainsboro; padding: 20px;border-radius: 5px;background-color:whitesmoke;">
-                    <h2 align="center">Add Designation</h2>
+                <h:form styleClass="designation-form">
+                    <h2 align="center">
+                        #{managerBeans.selectedDesgination == null ? 'Add New Designation' : 'Update Designation'}
+                    </h2>
                     <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+
+                    <!-- Designation Name -->
                     <div class="form-group mb-3">
-                        <h:inputText id="sname" value="#{managerBeans.designationName}" 
-                                     styleClass="form-control" required="true" pt:placeholder="Designation Name" />
+                        <h:outputLabel for="designationName" value="Designation Name:" styleClass="form-label" />
+                        <h:inputText id="designationName" value="#{managerBeans.designationName}" required="true"
+                                     requiredMessage="Designation Name is required." styleClass="form-control" pt:placeholder="Enter Designation Name" />
+                        <h:message for="designationName" styleClass="error-message" />
                     </div>
 
-                    <div class="form-group mb-3">
-                        <h:inputText id="desc" value="#{managerBeans.responsibility}" 
-                                     styleClass="form-control" required="true" pt:placeholder="Responsibility" />
-                    </div>
-                    <div class="form-group mb-3">
-                        <h:selectOneMenu id="managerId" value="#{managerBeans.deptId}" required="true" styleClass="form-control">
-                            <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
-                            <f:selectItems value="#{managerBeans.departmentList}" var="dept"    itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />
-                        </h:selectOneMenu>
-                    </div>
-                    <div class="d-grid mt">
-                        <h:commandButton value="Add Department" action="#{managerBeans.addDesignation()}" 
-                                         styleClass="btn btn-primary ms-2" />
+                    <!-- Responsibility -->
+                    <div class="form-group mb-3 row">
+                        <div class="col-md-3">                        <h:outputLabel for="responsibility" value="Responsibility:" styleClass="form-label" />
+                            <h:inputText id="responsibility" value="#{managerBeans.responsibility}" required="true"
+                                         requiredMessage="Responsibility is required." styleClass="form-control" pt:placeholder="Enter Responsibility" />
+                            <h:message for="responsibility" styleClass="error-message" />
+                        </div>
+
+                        <!-- Department -->
+                        <div class="form-group mb-3">
+                            <h:outputLabel for="deptId" value="Department:" styleClass="form-label" />
+                            <h:selectOneMenu id="deptId" value="#{managerBeans.deptId}" required="true"
+                                             requiredMessage="Please select a department." styleClass="form-select">
+                                <f:selectItem itemLabel="Select Department" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{managerBeans.departmentList}" var="dept"
+                                               itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />
+                            </h:selectOneMenu>
+                            <h:message for="deptId" styleClass="error-message" />
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="form-group mb-3 row">
+                            <div class="col-md-3">                        <!-- Add or Update Button -->
+                                <h:commandButton 
+                                    value="#{managerBeans.selectedDesgination == null ? 'Add Designation' : 'Update Designation'}" 
+                                    action="#{managerBeans.saveDesignation}" 
+                                    styleClass="btn btn-primary ms-2" />
+                                <!-- Add or Update Button -->
+                                <!-- Reset Button -->
+                                <h:commandButton value="Reset" type="reset" action="#{managerBeans.resetDesignationForm}" styleClass="btn btn-secondary ms-2" rendered="#{managerBeans.selectedDesgination == null}"  />
+                            </div>
+                        </div>
                     </div>
                 </h:form>
+
                 <br/>
                 <h2>Designation Details</h2>
                 <div class="card table-card">

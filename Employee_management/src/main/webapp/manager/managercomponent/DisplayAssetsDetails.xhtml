@@ -205,63 +205,112 @@
         <!-- [ Main Content ] start -->
         <div class="pc-container">
             <div class="pc-content">
-                <br/>
-                <h:form style="border: 2px solid gainsboro; padding: 20px;border-radius: 5px;background-color:whitesmoke;">
-                    <h2 align="center">Add New Skill</h2>
+                
+                
+
+                <hr/>
+                <h:form style="border: 2px solid gainsboro; padding: 20px; border-radius: 5px; background-color: whitesmoke;">
+                    <h2 align="center">Add Asset Details</h2>
                     <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+
                     <div class="form-group mb-3">
-                        <h:inputText id="sname" value="#{managerBeans.sname}" 
-                                     styleClass="form-control" required="true" pt:placeholder="Skill Name" />
+                        <h:outputLabel value="Asset Number:" for="assetNumber" />
+                        <h:inputText id="assetNumber" value="#{managerBeans.assetNumber}" 
+                                     styleClass="form-control" pt:placeholder="Enter Asset Number" />
                     </div>
 
                     <div class="form-group mb-3">
-                        <h:inputText id="desc" value="#{managerBeans.desc}" 
-                                     styleClass="form-control" required="true" pt:placeholder="Description" />
+                        <h:outputLabel for="assignDate" value="Assign Date:" />
+                        <h:inputText id="assignDate" value="#{managerBeans.assignDate}" required="true" 
+                                     styleClass="form-control">
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
                     </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel for="returnDate" value="Return Date:" />
+                        <h:inputText id="returnDate" value="#{managerBeans.returnDate}" required="true" 
+                                     styleClass="form-control">
+                            <f:passThroughAttribute name="type" value="date" />
+                        </h:inputText>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel value="Asset ID:" for="assetId" />
+                        <h:selectOneMenu id="assetId" value="#{managerBeans.assetId}" styleClass="form-select">
+                            <f:selectItems value="#{managerBeans.assetsList}" var="asset" 
+                                           itemLabel="#{asset.assetName}" itemValue="#{asset.assetId}" />
+                        </h:selectOneMenu>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <h:outputLabel value="User ID:" for="userId" />
+                        <h:selectOneMenu id="userId" value="#{managerBeans.userId}" styleClass="form-select">
+                            <f:selectItems value="#{managerBeans.usersList}" var="user" 
+                                           itemLabel="#{user.userName}" itemValue="#{user.userId}" />
+                        </h:selectOneMenu>
+                    </div>
+
                     <div class="d-grid mt">
-                        <h:commandButton value="Add Skill" action="#{managerBeans.addSkill}" 
+                        <h:commandButton value="Add Asset Details" action="#{managerBeans.addAssetDetails}" 
                                          styleClass="btn btn-primary ms-2" />
                     </div>
                 </h:form>
-                <br/>
-                <h2>Skill Details</h2>
-                <div class="card table-card">
-                    <div class="card-body p-0">
-                        <div class="card table-card" style="max-height: 200px; overflow-y: auto;">
-                            <div class="card-body p-0">
-                                <div class="table-responsive">
-                                    <h:dataTable value="#{managerBeans.skillsList}" var="skill" class="table table-striped table-hover">
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Skill ID</span>
-                                            </f:facet>
-                                            #{skill.skillId}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Skill Name</span>
-                                            </f:facet>
-                                            #{skill.skillName}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>Description</span>
-                                            </f:facet>
-                                            #{skill.description}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">Action</f:facet>
-                                            <h:form>
-                                                <h:commandLink value="Delete" action="#{managerBeans.deleteSkill(skill.skillId)}" /> /
-                                            </h:form>
-                                        </h:column>
-                                    </h:dataTable>
-                                </div>
+                <hr/>
+                <h:form>
+                    <h2>Assign  Assets  List</h2>
+                    <div class="card table-card">
+                        <div class="card-header">
+                            <h5>Asset Details</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <h:dataTable value="#{managerBeans.assetsDetailsList}" var="asset" class="table">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Asset ID</span>
+                                        </f:facet>
+                                        #{asset.assetId.assetId}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Asset Name</span>
+                                        </f:facet>
+                                        #{asset.assetId.assetName}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Asset Number</span>
+                                        </f:facet>
+                                        #{asset.assetNumber}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Assign Date</span>
+                                        </f:facet>
+                                        #{asset.assignDate}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>Return Date</span>
+                                        </f:facet>
+                                        #{asset.returnDate}
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <span>User Name</span>
+                                        </f:facet>
+                                        #{asset.userId.userName}
+                                    </h:column>
+                                </h:dataTable>
                             </div>
                         </div>
                     </div>
-                </div>
+                </h:form>
+
+                <!-- Recent Orders end -->
             </div>
+            <!-- [ Main Content ] end -->
         </div>
 
         <script src="../../assets/js/plugins/apexcharts.min.js"></script>
@@ -305,6 +354,5 @@
         <script type="text/javascript">
             header_change("header-1");
         </script>
-
     </h:body>
 </html>
