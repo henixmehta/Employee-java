@@ -2,8 +2,10 @@ package ejb;
 
 import entity.*;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -159,7 +161,20 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public Collection<UserMaster> getAllUsers() {
-        return em.createNamedQuery("UserMaster.findAll", UserMaster.class).getResultList();
+        Collection<UserDetails> activeUserDetails = em.createNamedQuery("UserDetails.findByActive", UserDetails.class)
+                .setParameter("active", "YES").getResultList();
+        Collection<UserMaster> allUsers = em.createNamedQuery("UserMaster.findAll", UserMaster.class).getResultList();
+        List<UserMaster> activeUsers = new ArrayList<>();
+        for(UserMaster user  : allUsers)
+        {
+           for(UserDetails ud : activeUserDetails){
+               if(user.getUserId().equals(ud.getUserId())){
+                   activeUsers.add(user);
+                   break;
+               }
+           }
+        }
+        return activeUsers;
     }
 
     @Override
@@ -193,7 +208,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void updateProjectStatus(Integer projectId, String newStatus) {
+    public void updateProjectStatus(Integer projectId, String newStatus
+    ) {
 //        ProjectDetails project = em.find(ProjectDetails.class, projectId);
 //        if (project != null) {
 //            project.setStatus(newStatus);
@@ -217,7 +233,9 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addDesig(String desginame, String desgirepo, Integer deptid) {
+    public void addDesig(String desginame, String desgirepo,
+             Integer deptid
+    ) {
         DepartmentMaster dept_id = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
         DesignationMaster d = new DesignationMaster();
         d.setDesignation(desginame);
@@ -227,7 +245,9 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void updateDesignation(Integer designationId, String designationName, String responsibility, Integer deptId) {
+    public void updateDesignation(Integer designationId, String designationName,
+             String responsibility, Integer deptId
+    ) {
         // Find the associated DepartmentMaster entity
         DepartmentMaster department = em.find(DepartmentMaster.class, deptId);
         if (designationId != null && designationId > 0) {
@@ -245,7 +265,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addUser(UserMaster usermaster,UserDetails userdetails) {
+    public void addUser(UserMaster usermaster, UserDetails userdetails
+    ) {
         em.persist(usermaster);
         em.persist(userdetails);
         em.flush();
@@ -254,7 +275,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addAssetsDetails(BigInteger assetNumber, Date assignDate, Date returnDate, Integer assetId, Integer userId) {
+    public void addAssetsDetails(BigInteger assetNumber, Date assignDate,
+             Date returnDate, Integer assetId,
+             Integer userId
+    ) {
         // Find the related AssetsMaster and UserMaster entities
         AssetsMaster asset = em.find(AssetsMaster.class, assetId);
         UserMaster user = em.find(UserMaster.class, userId);
@@ -274,7 +298,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addGroups(String gname) {
+    public void addGroups(String gname
+    ) {
         GroupMaster group = new GroupMaster();
         group.setGroupName(gname);
 
@@ -288,40 +313,41 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //        
 //    }
 //    
-//    @Override
-//    public void deleteUser(Integer userId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        UserMaster u = em.find(UserMaster.class, userId);
-//        em.remove(u);
-//    }
-//    
+
+    @Override
+    public void deleteUser(Integer userId
+    ) {
+        UserMaster user = em.find(UserMaster.class, userId);
+
+        if (user != null) {
+            // Query UserDetails by the userId
+            Query query = em.createQuery("SELECT a FROM UserDetails a WHERE a.userId = :userId");
+            query.setParameter("userId", userId); // Use userId directly
+            Collection<UserDetails> detailsList = query.getResultList();
+            for (UserDetails detail : detailsList) {
+                detail.setActive("NO"); // Set the active to 0
+                System.out.println("active Status : " + detail.getActive());
+                em.merge(detail); // Persist changes
+            }
+            System.out.println("Session Bean : " + userId);
+        }
+    }
+
 //    @Override
 //    public Collection<UserDetails> getAllUsersDetails() {
 //        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
 //
 //    }
-//    
-//    @Override
-//    public void addUserDetails(Integer userId, Integer grpId, Integer deptid, Integer skillId, Integer designationId, String e) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//    }
-//    
-//    @Override
-//    public void deleteUserDetails(Integer userId) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        UserDetails ud = em.find(UserDetails.class, userId);
-//        em.remove(ud);
-//        
-//    }
-
     @Override
-    public void deleteAssetsDetails(Integer assetsDetailsId) {
+    public void deleteAssetsDetails(Integer assetsDetailsId
+    ) {
         AssetsDetails ad = em.find(AssetsDetails.class, assetsDetailsId);
         em.remove(ad);
     }
 
     @Override
-    public void deleteAsset(Integer assetId) {
+    public void deleteAsset(Integer assetId
+    ) {
         // Fetch the AssetsMaster object by its ID
         AssetsMaster asset = em.find(AssetsMaster.class, assetId);
 
@@ -340,105 +366,54 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void deleteTaskDetails(Integer taskDetatilsId) {
+    public void deleteTaskDetails(Integer taskDetatilsId
+    ) {
         TaskMaster task = (TaskMaster) em.find(TaskMaster.class, taskDetatilsId);
         task.setTaskStatus("inactive");
         em.merge(task);
     }
 
-    @Override
-    public Collection<UserDetails> getAllUsersDetails() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 //    @Override
-//    public void addUserDetails(UserDetails user) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    //foregin keys    
-//        UserMaster user = (UserMaster) em.find(UserMaster.class, userId);
-//        GroupMaster gp = (GroupMaster) em.find(GroupMaster.class, grpId);
-//        DepartmentMaster dp = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
-//        DesignationMaster dg = (DesignationMaster) em.find(DesignationMaster.class, designationId);
-//        SkillsMaster sk = (SkillsMaster) em.find(SkillsMaster.class, skillId);
-//
-//        
-//        
-////        Collection<UserMaster> userMaster = user.get
-//        
-//        //insert
-//        UserDetails ud = new UserDetails();
-//        ud.setUserId(user);
-//        ud.setGroupId(gp);
-//        ud.setDeptId(dp);
-//        ud.setDesignationId(dg);
-//        ud.setSkillId(sk);
-//        ud.setActive("1");
-//        em.persist(ud);
+//    public Collection<UserDetails> getAllUsersDetails() {
+//        return em.createNamedQuery("UserDetails.findByActive", UserDetails.class).getResultList();
 //    }
+
     @Override
-    public void addLeaves(String leaveType) {
+    public void addLeaves(String leaveType
+    ) {
         LeaveMaster leave = new LeaveMaster();
         leave.setLeaveType(leaveType);
 
         em.persist(leave);
     }
 
-//    @Override
-//    public void UpdateUser(Integer userId, String userName, String emailId, BigInteger phoneNo, Date dateOfBirth,
-//            Integer age, String gender, Date joiningDate, String address, BigInteger emergencyContact,
-//            String profileImage, String companyEmail, String password, Integer reportingTo, BigInteger salary,
-//            String qualification, String currentExperience) {
-//
-//        if (userId != null) {
-//            UserMaster user = em.find(UserMaster.class, userId);
-//            if (user != null) {
-//                user.setUserId(userId);
-//                user.setUserName(userName);
-//                user.setAddress(address);
-//                user.setAge(age);
-//                user.setEmailId(emailId);
-//                user.setEmergencyContact(emergencyContact);
-//                user.setCurrentExperience(currentExperience);
-//                user.setDateOfBirth(dateOfBirth);
-//                user.setGender(gender);
-//                user.setJoiningDate(joiningDate);
-//                user.setPassword(password);
-//                user.setProfileImage(profileImage);
-//                user.setSalary(salary);
-//                user.setPhoneNo(phoneNo);
-//                user.setReportingTo(reportingTo);
-//                user.setQualification(qualification);
-//                em.merge(user);
-//            } else {
-//                System.out.println("Id not found ");
-//            }
-//        } else {
-//            System.out.println("Id Is Empty..Please Select Valid Id");
-//        }
-//    }
     @Override
-    public void UpddateUser(UserMaster user) {
-        if (user.getUserId() != null) {
-            em.merge(user);
-        }
-    }
-
-    @Override
-    public void addProject(ProjectDetails project) {
+    public void addProject(ProjectDetails project
+    ) {
         em.persist(project);
     }
 
     @Override
-    public void updateProject(ProjectDetails project) {
+    public void updateProject(ProjectDetails project
+    ) {
         if (project.getProjectId() != null) {
             em.merge(project);
         }
     }
 
     @Override
-    public void deleteProjectDetails(Integer proDetailsId) {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void deleteProjectDetails(Integer proDetailsId
+    ) {
         ProjectDetails project = (ProjectDetails) em.find(ProjectDetails.class, proDetailsId);
         em.remove(project);
+    }
+
+    @Override
+    public void UpddateUser(UserMaster user, UserDetails userdetails
+    ) {
+        if (user.getUserId() != null) {
+            em.merge(user);
+        }
+
     }
 }

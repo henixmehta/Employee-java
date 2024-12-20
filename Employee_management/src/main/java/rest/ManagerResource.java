@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 @Path("manager")
 @RequestScoped
 public class ManagerResource {
-    
+
     @EJB
     ManagerSessionBeanLocal msbl;
 
@@ -26,14 +26,14 @@ public class ManagerResource {
     public Collection<SkillsMaster> getAllSkills() {
         return msbl.getAllSkill();
     }
-    
+
     @POST
     @Path("addskill/{sname}/{desc}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addSkill(@PathParam("sname") String sname, @PathParam("desc") String desc) {
         msbl.addSkill(sname, desc);
     }
-    
+
     @DELETE
     @Path("deleteskills/{id}")
     public Response deleteSkills(@PathParam("id") int id) {
@@ -53,7 +53,7 @@ public class ManagerResource {
     public Collection<DepartmentMaster> getAllDepartments() {
         return msbl.getAllDepartments();
     }
-    
+
     @POST
     @Path("addOrUpdateDept/{deptId}/{deptName}/{deptDesc}/{managerId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -61,7 +61,7 @@ public class ManagerResource {
     public void addOrUpdateDepartment(@PathParam("deptId") Integer deptId, @PathParam("deptName") String deptName, @PathParam("deptDesc") String deptDesc, @PathParam("managerId") int managerId) {
         msbl.addOrUpdateDepartment(deptId, deptName, deptDesc, managerId);
     }
-    
+
     @DELETE
     @Path("deleteDepartment/{deptid}")
     public void deleteDepartment(@PathParam("deptid") Integer deptid) {
@@ -75,7 +75,7 @@ public class ManagerResource {
     public Collection<HolidayMaster> getAllHolidays() {
         return msbl.getAllHolidays();
     }
-    
+
     @POST
     @Path("addholiday/{Desc}/{HolidayDate}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -97,14 +97,14 @@ public class ManagerResource {
     public Collection<AssetsMaster> getAllAssets() {
         return msbl.getAllAssets();
     }
-    
+
     @POST
     @Path("addassets/{assetName}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void addAsset(@PathParam("assetName") String assetName) {
         msbl.addAsset(assetName);
     }
-    
+
     @DELETE
     @Path("deleteassets/{id}")
     public Response deleteAsset(@PathParam("id") int id) {
@@ -124,7 +124,7 @@ public class ManagerResource {
     public Collection<AssetsDetails> getAllAssetsDetails() {
         return msbl.getAllAssetsDetails();
     }
-    
+
     @POST
     @Path("addassetsdetails/{assetNumber}/{assignDate}/{returnDate}/{assetId}/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -146,7 +146,7 @@ public class ManagerResource {
             return Response.status(Response.Status.BAD_REQUEST).entity("Error adding asset details: " + e.getMessage()).build();
         }
     }
-    
+
     @DELETE
     @Path("deleteAssetsDetails/{assetsDetailsId}")
     public void deleteAssetsDetails(@PathParam("assetsDetailsId") Integer assetsDetailsId) {
@@ -168,7 +168,7 @@ public class ManagerResource {
     public Collection<UserMaster> getAllUsers() {
         return msbl.getAllUsers();
     }
-    
+
     @POST
     @Path("addusers")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -176,6 +176,13 @@ public class ManagerResource {
         UserMaster user = wrapper.getUserMaster();
         UserDetails userdetails = wrapper.getUserDetails();
         msbl.addUser(user, userdetails);
+    }
+
+    @DELETE
+    @Path("deleteUser/{userId}")
+    public void deleteUser(@PathParam("userId") int userId) {
+        msbl.deleteUser(userId);
+        System.out.println("User ID Resource : " + userId);
     }
     //====================== Document Details ==================================
 
@@ -185,7 +192,7 @@ public class ManagerResource {
     public Collection<DocumentMaster> getAllDocuments() {
         return msbl.getAllDocuments();
     }
-    
+
     @GET
     @Path("documentdetails")
     @Produces(MediaType.APPLICATION_JSON)
@@ -200,7 +207,7 @@ public class ManagerResource {
     public Collection<GroupMaster> getAllGroups() {
         return msbl.getAllGroups();
     }
-    
+
     @POST
     @Path("addgroups/{gname}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -215,7 +222,7 @@ public class ManagerResource {
     public Collection<LeaveMaster> getAllLeaves() {
         return msbl.getAllLeaves();
     }
-    
+
     @POST
     @Path("addleaves/{leavetype}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -238,21 +245,21 @@ public class ManagerResource {
     public void addProject(ProjectDetails project) {
         msbl.addProject(project);
     }
-    
+
     @POST
     @Path("updateproject")
     @Consumes(MediaType.APPLICATION_JSON)
     public void updateProject(ProjectDetails project) {
         msbl.updateProject(project);
     }
-    
+
     @GET
     @Path("projectdetails")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<ProjectDetails> getAllProjectDetails() {
         return msbl.getAllProjectDetails();
     }
-    
+
     @DELETE
     @Path("deleteProjectDetails/{proDetailsId}")
     public void deleteProjectDetails(@PathParam("proDetailsId") Integer proDetailsId) {
@@ -266,14 +273,14 @@ public class ManagerResource {
     public Collection<TaskMaster> getAllTask() {
         return msbl.getAllTask();
     }
-    
+
     @GET
     @Path("taskdetails")
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<TaskDetails> getAllTaskDetails() {
         return msbl.getAllTaskDetails();
     }
-    
+
     @DELETE
     @Path("deleteTaskDetails/{taskDetailsId}")
     public void deleteTaskDetails(@PathParam("taskDetailsId") Integer taskDetailsId) {
@@ -295,7 +302,7 @@ public class ManagerResource {
     public Collection<DesignationMaster> getAllDesignation() {
         return msbl.getAllDesignation();
     }
-    
+
     @POST
     @Path("adddesignation/{designationName}/{responsibility}/{departmentId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -310,13 +317,13 @@ public class ManagerResource {
                     .entity("Error adding designation: " + e.getMessage()).build();
         }
     }
-    
+
     @DELETE
     @Path("deleteDesgination/{designationId}")
     public void deleteDesgination(@PathParam("designationId") Integer designationId) {
         msbl.deleteDesiination(designationId);
     }
-    
+
     @PUT
     @Path("updateDesignation/{designationId}/{designationName}/{responsibility}/{deptId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -343,12 +350,6 @@ public class ManagerResource {
 //    @Path("deletetask/{taskid}")
 //    public void deleteTask(@PathParam("taskid") Integer taskid) {
 //        msbl.deleteTask(taskid);
-//    }
-//    @DELETE
-//    @Path("deleteUser/{userId}")
-//    public void deleteUser(@PathParam("userId") Integer userId) {
-//        msbl.deleteUser(userId);
-////        msbl.deleteUserDetails(userId);
 //    }
 //    @DELETE
 //    @Path("deleteUserDetails/{userId}")

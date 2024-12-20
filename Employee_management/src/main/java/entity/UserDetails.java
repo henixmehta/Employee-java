@@ -53,7 +53,7 @@ public class UserDetails implements Serializable {
     private Integer designationId;
     @Size(max = 3)
     @Column(name = "active")
-    private String active;
+    private String active="YES";
 
     public UserDetails() {
     }
@@ -142,5 +142,5 @@ public class UserDetails implements Serializable {
     public String toString() {
         return "entity.UserDetails[ id=" + id + " ]";
     }
-    
+
 }

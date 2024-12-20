@@ -38,7 +38,7 @@ public class ManagerBeans implements Serializable {
     private Collection<ProjectDetails> projectdetailsList;
     private Collection<TaskMaster> tasksList;
     private Collection<TaskDetails> taskdetailsList;
-//    private Collection<UserDetails> userDetails;
+    private Collection<UserDetails> userDetailsList;
 
     //============== Skill variables ===============
     private String sname;
@@ -106,8 +106,8 @@ public class ManagerBeans implements Serializable {
     };
     private final GenericType<Collection<TaskDetails>> taskdetailsGenericType = new GenericType<Collection<TaskDetails>>() {
     };
-//    private final GenericType<Collection<UserDetails>> userDetailsGenericType = new GenericType<Collection<UserDetails>>() {
-//    };
+    private final GenericType<Collection<UserDetails>> userDetailsGenericType = new GenericType<Collection<UserDetails>>() {
+    };
 
     // Generic types for REST client responses
     public ManagerBeans() {
@@ -126,6 +126,7 @@ public class ManagerBeans implements Serializable {
             assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
             attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType);
             usersList = managerClient.getAllUsers(usersGenericType);
+            userDetailsList = managerClient.getAllUserDetails(userDetailsGenericType);
             documentsList = managerClient.getAllDocuments(documnentmasterGenericType);
             documentsdetailsList = managerClient.getAllDocumentDetails(documnentdetailsGenericType);
             groupsList = managerClient.getAllGroups(groupsGenericType);
@@ -237,11 +238,14 @@ public class ManagerBeans implements Serializable {
     }
 
     // delete usermaster  
-//    public void deleteUser(Integer userMId) {
-//        managerClient.deleteUser(userMId);
-//        usersList = managerClient.getAllUsers(usersGenericType);
+    public void deleteUser(Integer userId) {
+        managerClient.deleteUser(userId);
+        System.out.println("User ID : " + userId);
+        usersList = managerClient.getAllUsers(usersGenericType);
+
 //        resetUserMasterFields();
-//    }
+    }
+
     //================================================ Department Details ================================================
     public Collection<DepartmentMaster> getDepartmentList() {
         return departmentList;

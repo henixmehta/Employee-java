@@ -22,7 +22,6 @@ import entity.TaskDetails;
 import entity.TaskMaster;
 import entity.UserDetails;
 import entity.UserMaster;
-import entity.UserRequestWrapper;
 import java.math.BigInteger;
 import java.util.Collection;
 import java.util.Date;
@@ -62,13 +61,11 @@ public interface ManagerSessionBeanLocal {
     //===================================  All Users Methods ================================================
     Collection<UserMaster> getAllUsers();
     void addUser(UserMaster usermaster,UserDetails userdetails);
-//    void UpdateUser(Integer userId,String userName,String emailId,BigInteger phoneNo,Date dateOfBirth,
-//    Integer age,String gender,Date joiningDate,String address,BigInteger emergencyContact,String profileImage,
-//    String companyEmail,String password,Integer reportingTo,BigInteger salary,String qualification,String currentExperience);
-    void UpddateUser(UserMaster user);
+    void deleteUser(Integer userId);
+    void UpddateUser(UserMaster user,UserDetails userdetails);
     
     //======================================= User Details ================================================
-    Collection<UserDetails> getAllUsersDetails();
+//    Collection<UserDetails> getAllUsersDetails();
 
     
     //=========================================  All Assets Methods =====================================
@@ -124,7 +121,7 @@ public interface ManagerSessionBeanLocal {
       void deleteSkill(Integer skillId);
    
 //    void deleteHoliday(Integer holidayInteger);
-//    void deleteUser(Integer userId); ////// status active in active
+      ////// status active in active
 //    void deleteUserDetails(Integer userId);
       void deleteAsset(Integer assetId);
       void deleteAssetsDetails(Integer assetsDetailsId);  /// status 

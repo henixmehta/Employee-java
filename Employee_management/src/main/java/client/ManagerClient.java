@@ -206,10 +206,6 @@ public class ManagerClient {
 
     }
 
-    public void deleteUser(Integer userId) throws ClientErrorException {
-        webTarget.path(java.text.MessageFormat.format("deleteUser/{0}", new Object[]{userId})).request().delete();
-    }
-
     public void deleteUserDetails(Integer userId) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("deleteUserDetails/{0}", new Object[]{userId})).request().delete();
     }
@@ -244,6 +240,17 @@ public class ManagerClient {
 
     public void addUser(Object requestEntity) throws ClientErrorException {
         webTarget.path("addusers").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public void deleteUser(Integer userId) throws ClientErrorException {
+        webTarget.path(java.text.MessageFormat.format("deleteUser/{0}", new Object[]{userId})).request().delete();
+        System.out.println("Client : " + userId);
+    }
+
+    public <T> T getAllUserDetails(GenericType<T> responseType) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path("usersdetails");
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
     public void close() {
