@@ -15,6 +15,10 @@ import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.core.GenericType;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Named(value = "managerBeans")
 @SessionScoped
@@ -112,35 +116,81 @@ public class ManagerBeans implements Serializable {
     // Generic types for REST client responses
     public ManagerBeans() {
 //        managerClient = new ManagerClient();
+        loadCounts();
+
     }
 
+    private void safeLoad(Runnable task) {
+        try {
+            task.run();
+        } catch (Exception e) {
+            e.printStackTrace(); // Log the exception
+        }
+    }
+
+//    @PostConstruct
+//    public void init() {
+//        try {
+//            managerClient = new ManagerClient();
+//            projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
+//            groupsList = managerClient.getAllGroups(groupsGenericType);
+//
+//            skillsList = managerClient.getAllSkills(skillsGenericType);
+//            holidaysList = managerClient.getAllHolidays(holidaysGenericType);
+//            assetsList = managerClient.getAllAssets(assetsGenericType);
+//            departmentList = managerClient.getAllDepartments(deptGenericType);
+//            designationList = managerClient.getAllDesignation(designationGenericType);
+//            assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
+//            attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType);
+//            usersList = managerClient.getAllUsers(usersGenericType);
+//            userDetailsList = managerClient.getAllUserDetails(userDetailsGenericType);
+//            documentsList = managerClient.getAllDocuments(documnentmasterGenericType);
+//            documentsdetailsList = managerClient.getAllDocumentDetails(documnentdetailsGenericType);
+//            leavesList = managerClient.getAllLeaves(leavesGenericType);
+//            LeavedetailsList = managerClient.getAllLeaveDetails(leavesdetailsGenericType);
+//            performanceList = managerClient.getPerformanceDetails(performanceGenericType);
+//            tasksList = managerClient.getAllTask(tasksGenericType);
+//            taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+//
+//        } catch (ClientErrorException e) {
+//            e.printStackTrace();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
     @PostConstruct
     public void init() {
-        try {
-            managerClient = new ManagerClient();
-            skillsList = managerClient.getAllSkills(skillsGenericType);
-            holidaysList = managerClient.getAllHolidays(holidaysGenericType);
-            assetsList = managerClient.getAllAssets(assetsGenericType);
-            departmentList = managerClient.getAllDepartments(deptGenericType);
-            designationList = managerClient.getAllDesignation(designationGenericType);
-            assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType);
-            attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType);
-            usersList = managerClient.getAllUsers(usersGenericType);
-            userDetailsList = managerClient.getAllUserDetails(userDetailsGenericType);
-            documentsList = managerClient.getAllDocuments(documnentmasterGenericType);
-            documentsdetailsList = managerClient.getAllDocumentDetails(documnentdetailsGenericType);
-            groupsList = managerClient.getAllGroups(groupsGenericType);
-            leavesList = managerClient.getAllLeaves(leavesGenericType);
-            LeavedetailsList = managerClient.getAllLeaveDetails(leavesdetailsGenericType);
-            performanceList = managerClient.getPerformanceDetails(performanceGenericType);
-            projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType);
-            tasksList = managerClient.getAllTask(tasksGenericType);
-            taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
-            loadCounts();
+        managerClient = new ManagerClient();
+        ExecutorService executor = Executors.newFixedThreadPool(4); // Use 4 threads, adjust as needed
 
-        } catch (ClientErrorException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
+        List<Runnable> tasks = List.of(
+                () -> safeLoad(() -> projectdetailsList = managerClient.getAllProjectDetails(projectdetailsGenericType)),
+                () -> safeLoad(() -> groupsList = managerClient.getAllGroups(groupsGenericType)),
+                () -> safeLoad(() -> skillsList = managerClient.getAllSkills(skillsGenericType)),
+                () -> safeLoad(() -> holidaysList = managerClient.getAllHolidays(holidaysGenericType)),
+                () -> safeLoad(() -> assetsList = managerClient.getAllAssets(assetsGenericType)),
+                () -> safeLoad(() -> departmentList = managerClient.getAllDepartments(deptGenericType)),
+                () -> safeLoad(() -> designationList = managerClient.getAllDesignation(designationGenericType)),
+                () -> safeLoad(() -> assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType)),
+                () -> safeLoad(() -> attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType)),
+                () -> safeLoad(() -> usersList = managerClient.getAllUsers(usersGenericType)),
+//                () -> safeLoad(() -> userDetailsList = managerClient.getAllUserDetails(userDetailsGenericType)),
+                () -> safeLoad(() -> documentsList = managerClient.getAllDocuments(documnentmasterGenericType)),
+                () -> safeLoad(() -> documentsdetailsList = managerClient.getAllDocumentDetails(documnentdetailsGenericType)),
+                () -> safeLoad(() -> leavesList = managerClient.getAllLeaves(leavesGenericType)),
+                () -> safeLoad(() -> LeavedetailsList = managerClient.getAllLeaveDetails(leavesdetailsGenericType)),
+                () -> safeLoad(() -> performanceList = managerClient.getPerformanceDetails(performanceGenericType)),
+                () -> safeLoad(() -> tasksList = managerClient.getAllTask(tasksGenericType)),
+                () -> safeLoad(() -> taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType))
+        );
+
+        tasks.forEach(executor::submit);
+
+        executor.shutdown();
+        try {
+            executor.awaitTermination(5, TimeUnit.SECONDS); // Wait up to 5 seconds for tasks to complete
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt(); // Restore interrupted state
             e.printStackTrace();
         }
     }
@@ -353,15 +403,14 @@ public class ManagerBeans implements Serializable {
             designationName = "";
             responsibility = "";
             deptId = null;
-            
+
         } catch (ClientErrorException e) {
             e.printStackTrace();
         }
         return "success";
-        
+
     }
 
-    
     public String saveDesignation() {
         if (selectedDesgination == null) {
             return addDesignation(); // Call the add method
@@ -398,7 +447,7 @@ public class ManagerBeans implements Serializable {
             );
 
             designationList = managerClient.getAllDesignation(designationGenericType);
-             this.selectedDesgination = null;
+            this.selectedDesgination = null;
             resetDesignationForm();
         } catch (ClientErrorException e) {
             e.printStackTrace(); // Handle exceptions appropriately

@@ -21,19 +21,7 @@
         <link rel="stylesheet" href="../../assets/css/style.css" id="main-style-link" />
         <link rel="stylesheet" href="../../assets/css/style-preset.css" />
         <script>
-            #{managerBeans.usermaster.userName="Demo"}
-            #{managerBeans.usermaster.emailId="demo@gmail.com"}
-            #{managerBeans.usermaster.phoneNo="9876543455"}
-            #{managerBeans.usermaster.address="surat"}
-            #{managerBeans.usermaster.companyEmail="democompany@gmail.com"}
-            #{managerBeans.usermaster.currentExperience="2"}
-            #{managerBeans.usermaster.emergencyContact="2041998"}
-            #{managerBeans.usermaster.password="ssdfgvb"}
-            #{managerBeans.usermaster.gender="Male"}
-            #{managerBeans.usermaster.reportingTo="02"}
-            #{managerBeans.usermaster.salary="03452"}
-            #{managerBeans.usermaster.qualification="bca"}
-            #{managerBeans.usermaster.profileImage="bsdfca"}
+
 
         </script>
     </h:head>
@@ -238,113 +226,176 @@
 
                             <div class="form-group mb-3 row">
                                 <div class="col-md-6">
-                                    <h:inputText id="userName" value="#{managerBeans.usermaster.userName}" styleClass="form-control" required="true" pt:placeholder="Full Name" />
+                                    <h:inputText id="userName" value="#{managerBeans.usermaster.userName}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Full Name is required" pt:placeholder="Full Name" />
+                                    <h:message for="userName" styleClass="text-danger" />
                                 </div>
                                 <div class="col-md-6">
-                                    <h:inputText id="emailId" value="#{managerBeans.usermaster.emailId}" styleClass="form-control" required="true" pt:placeholder="Email ID" />
+                                    <h:inputText id="emailId" value="#{managerBeans.usermaster.emailId}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Email ID is required" pt:placeholder="Email ID" />
+                                    <h:message for="emailId" styleClass="text-danger" />
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
                                 <div class="col-md-6">
-                                    <h:inputText id="phoneNo" value="#{managerBeans.usermaster.phoneNo}" styleClass="form-control" required="true" pt:placeholder="Mobile Number" />
+                                    <h:inputText id="phoneNo" value="#{managerBeans.usermaster.phoneNo}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Mobile Number is required" pt:placeholder="Mobile Number" >
+                                        <f:validateLength minimum="10" maximum="10" />
+
+                                    </h:inputText>
+                                    <h:message for="phoneNo" styleClass="text-danger" />
                                 </div>
                                 <div class="col-md-6">
-                                    <h:inputText id="address" value="#{managerBeans.usermaster.address}" styleClass="form-control" required="true" pt:placeholder="Address" />
+                                    <h:inputText id="address" value="#{managerBeans.usermaster.address}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Address is required" pt:placeholder="Address" />
+                                    <h:message for="address" styleClass="text-danger" />
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
                                 <div class="col-md-3">
                                     <h:outputLabel for="dateOfBirth" value="Date of Birth:" />
-                                    <h:inputText id="dateOfBirth" value="#{managerBeans.usermaster.dateOfBirth}" styleClass="form-control" required="true" pt:placeholder="Date of Birth">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    <h:inputText id="dateOfBirth" value="#{managerBeans.usermaster.dateOfBirth}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Date of Birth is required" pt:placeholder="Date of Birth">
+                                        <f:convertDateTime pattern="yyyy-MM-dd" />
                                         <f:passThroughAttribute name="type" value="date" />
                                         <f:ajax event="change" listener="#{managerBeans.calculateAge}" render="age" />
                                     </h:inputText>
+                                    <h:message for="dateOfBirth" styleClass="text-danger" />
                                 </div>
                                 <div class="col-md-3">
                                     <h:outputLabel for="age" value="Age:" />
-                                    <h:inputText id="age" value="#{managerBeans.usermaster.age}" styleClass="form-control" pt:placeholder="Age" disabled="true" />
+                                    <h:inputText id="age" value="#{managerBeans.usermaster.age}" 
+                                                 styleClass="form-control" pt:placeholder="Age" disabled="true" />
                                 </div>
                                 <div class="col-md-3">
                                     <div style="margin-bottom:10px;">Gender:</div>
-                                    <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" required="true" style="padding:10px;">   
+                                    <h:selectOneRadio id="gender" value="#{managerBeans.usermaster.gender}" 
+                                                      required="true" requiredMessage="Gender is required" style="padding:10px;">   
                                         <f:selectItem itemLabel="Male" itemValue="Male" />
                                         <f:selectItem itemLabel="Female" itemValue="Female" />
                                     </h:selectOneRadio>
+                                    <h:message for="gender" styleClass="text-danger" />
                                 </div>
                             </div>
+
                             <div class="form-group mb-3 row">
                                 <div class="col-md-3">
                                     <h:outputLabel for="joiningDate" value="Joining Date:" />
-                                    <h:inputText id="joiningDate" value="#{managerBeans.usermaster.joiningDate}" styleClass="form-control" required="true" pt:placeholder="Joining Date">
-                                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                    <h:inputText id="joiningDate" value="#{managerBeans.usermaster.joiningDate}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Joining Date is required" pt:placeholder="Joining Date">
+                                        <f:convertDateTime pattern="yyyy-MM-dd" />
                                         <f:passThroughAttribute name="type" value="date" />
                                     </h:inputText>
+                                    <h:message for="joiningDate" styleClass="text-danger" />
                                 </div>
                                 <div class="col-md-3" style="padding-top: 25px">
-                                    <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" styleClass="form-control" required="true" pt:placeholder="Emergency Contact" pt:type="number" />
+                                    <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Emergency Contact is required" pt:placeholder="Emergency Contact" pt:type="number">
+                                        <f:validateLength minimum="10" maximum="10" />
+                                    </h:inputText>
+                                    <h:message for="emergencyContact" styleClass="text-danger" />
                                 </div>
+
                                 <div class="col-md-6" style="padding-top: 25px">
-                                    <h:inputText id="profileImage" value="#{managerBeans.usermaster.profileImage}" styleClass="form-control" required="true" pt:placeholder="Profile Image URL" />
+                                    <h:inputText id="profileImage" value="#{managerBeans.usermaster.profileImage}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Profile Image URL is required" pt:placeholder="Profile Image URL" />
+                                    <h:message for="profileImage" styleClass="text-danger" />
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
                                 <div class="col-md-6">
-                                    <h:inputText id="companyEmail" value="#{managerBeans.usermaster.companyEmail}" styleClass="form-control" required="true" pt:placeholder="Company Email" />
+                                    <h:inputText id="companyEmail" value="#{managerBeans.usermaster.companyEmail}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Company Email is required" pt:placeholder="Company Email" />
+                                    <h:message for="companyEmail" styleClass="text-danger" />
                                 </div>
                                 <div class="col-md-6">
-                                    <h:inputSecret id="password" value="#{managerBeans.usermaster.password}" styleClass="form-control" required="true" pt:placeholder="Password" />
+                                    <h:inputSecret id="password" value="#{managerBeans.usermaster.password}" 
+                                                   styleClass="form-control" required="true" 
+                                                   requiredMessage="Password is required" pt:placeholder="Password" />
+                                    <h:message for="password" styleClass="text-danger" />
                                 </div>
                             </div>
 
                             <div class="form-group mb-3 row">
                                 <div class="col-md-3">
-                                    <h:selectOneMenu id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" styleClass="form-control" required="true">
+                                    <h:selectOneMenu id="reportingTo" value="#{managerBeans.usermaster.reportingTo}" 
+                                                     styleClass="form-control">
                                         <f:selectItem itemLabel="-- Select User --" itemValue="#{null}" />
                                         <f:selectItems value="#{managerBeans.usersList}" var="user" itemValue="#{user.userId}" itemLabel="#{user.userName}" />
                                     </h:selectOneMenu>
                                 </div>
                                 <div class="col-md-3">
-                                    <h:inputText id="salary" value="#{managerBeans.usermaster.salary}" styleClass="form-control" required="true" pt:placeholder="Salary" />
+                                    <h:inputText id="salary" value="#{managerBeans.usermaster.salary}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Salary is required" pt:placeholder="Salary" />
+                                    <h:message for="salary" styleClass="text-danger" />
                                 </div>
 
                                 <div class="col-md-3">
-                                    <h:inputText id="qualification" value="#{managerBeans.usermaster.qualification}" styleClass="form-control" required="true" pt:placeholder="Qualification" />
+                                    <h:inputText id="qualification" value="#{managerBeans.usermaster.qualification}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Qualification is required" pt:placeholder="Qualification" />
+                                    <h:message for="qualification" styleClass="text-danger" />
                                 </div>
 
                                 <div class="col-md-3">
-                                    <h:inputText id="currentExperience" value="#{managerBeans.usermaster.currentExperience}" styleClass="form-control" required="true" pt:placeholder="Current Experience(in Year)" />
+                                    <h:inputText id="currentExperience" value="#{managerBeans.usermaster.currentExperience}" 
+                                                 styleClass="form-control" required="true" 
+                                                 requiredMessage="Current Experience is required" pt:placeholder="Current Experience (in Years)" />
+                                    <h:message for="currentExperience" styleClass="text-danger" />
                                 </div>
                             </div>
+
                             <div class="form-group mb-3 row">
                                 <div class="col-md-3">
-                                    <h:selectOneMenu id="deptId" value="#{managerBeans.departmentId}" styleClass="form-control" required="true">
+                                    <h:selectOneMenu id="deptId" value="#{managerBeans.departmentId}" 
+                                                     styleClass="form-control" required="true" 
+                                                     requiredMessage="Department is required">
                                         <f:selectItem itemLabel="-- Select Department --" itemValue="#{null}" />
                                         <f:selectItems value="#{managerBeans.departmentList}" var="dept" itemValue="#{dept.deptId}" itemLabel="#{dept.deptName}" />
                                     </h:selectOneMenu>
+                                    <h:message for="deptId" styleClass="text-danger" />
                                 </div>
 
                                 <div class="col-md-3">
-                                    <h:selectOneMenu id="desgId" value="#{managerBeans.designationId}" styleClass="form-control" required="true">
+                                    <h:selectOneMenu id="desgId" value="#{managerBeans.designationId}" 
+                                                     styleClass="form-control" required="true" 
+                                                     requiredMessage="Designation is required">
                                         <f:selectItem itemLabel="-- Select Designation --" itemValue="#{null}" />
                                         <f:selectItems value="#{managerBeans.designationList}" var="desg" itemValue="#{desg.designationId}" itemLabel="#{desg.designation}" />
                                     </h:selectOneMenu>
+                                    <h:message for="desgId" styleClass="text-danger" />
                                 </div>
                                 <div class="col-md-3">
-                                    <h:selectOneMenu id="groupId" value="#{managerBeans.groupId}" styleClass="form-control" required="true">
+                                    <h:selectOneMenu id="groupId" value="#{managerBeans.groupId}" 
+                                                     styleClass="form-control" required="true" 
+                                                     requiredMessage="Group is required">
                                         <f:selectItem itemLabel="-- Select Group --" itemValue="#{null}" />
                                         <f:selectItems value="#{managerBeans.allGroupsList}" var="group" itemValue="#{group.groupId}" itemLabel="#{group.groupName}" />
                                     </h:selectOneMenu>
+                                    <h:message for="groupId" styleClass="text-danger" />
                                 </div>
 
                                 <div class="col-md-3">
-                                    <h:selectOneMenu id="skillId" value="#{managerBeans.skillId}" styleClass="form-control" required="true">
+                                    <h:selectOneMenu id="skillId" value="#{managerBeans.skillId}" 
+                                                     styleClass="form-control" required="true" 
+                                                     requiredMessage="Skill is required">
                                         <f:selectItem itemLabel="-- Select Skill --" itemValue="#{null}" />
                                         <f:selectItems value="#{managerBeans.skillsList}" var="skill" itemValue="#{skill.skillId}" itemLabel="#{skill.skillName}" />
                                     </h:selectOneMenu>
+                                    <h:message for="skillId" styleClass="text-danger" />
                                 </div>
                             </div>
                             <hr style="border: 2px solid black; width: 100%; opacity: 1;" />
@@ -353,6 +404,7 @@
                                 <h:commandButton value="Add User" action="#{managerBeans.addUser}" styleClass="btn btn-primary" />
                             </div>
                         </h:form>
+
                     </div>
                 </div>
             </div>

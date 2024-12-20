@@ -247,11 +247,11 @@ public class ManagerClient {
         System.out.println("Client : " + userId);
     }
 
-    public <T> T getAllUserDetails(GenericType<T> responseType) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("usersdetails");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-    }
+//    public <T> T getAllUserDetails(GenericType<T> responseType) throws ClientErrorException {
+//        WebTarget resource = webTarget;
+//        resource = resource.path("usersdetails");
+//        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+//    }
 
     public void close() {
         client.close();
