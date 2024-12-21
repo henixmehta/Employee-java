@@ -264,19 +264,15 @@
                             <f:selectItem itemLabel="Onhold" itemValue="Onhold" />
                             <f:selectItem itemLabel="Completed" itemValue="Completed" />
                         </h:selectOneMenu>
-
+                    </div>
+                    <div class="form-group mb-3">
                         <div class="form-group mb-3">
-                            <label>On Hold Days</label>
-                            <h:inputText id="OnHoldDays" value="#{managerBeans.project.onHoldDays}" 
-                                         styleClass="form-control"  >
-                                <f:convertDateTime pattern="yyyy-MM-dd"/>
-                                <f:passThroughAttribute name="type" value="date" />
-                            </h:inputText>
-                        </div>
-
+                            <h:inputText id="onHoldDays" value="#{managerBeans.project.onHoldDays}" 
+                                         styleClass="form-control"  pt:placeholder="On Hold Days" />
+                        </div>   
                         <div class="form-group mb-3">
                             <h:inputText id="onHoldReason" value="#{managerBeans.project.onHoldReason}" 
-                                         styleClass="form-control"  pt:placeholder="OnHoldReason" />
+                                         styleClass="form-control"  pt:placeholder="On Hold Reason" />
                         </div>                        
                     </div>
 
@@ -330,18 +326,6 @@
                                                 <span>Status</span>
                                             </f:facet>
                                             #{pro.status}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>On-Hold Days</span>
-                                            </f:facet>
-                                            #{pro.onHoldDays}
-                                        </h:column>
-                                        <h:column>
-                                            <f:facet name="header">
-                                                <span>On-Hold Reason</span>
-                                            </f:facet>
-                                            #{pro.onHoldReason}
                                         </h:column>
                                         <h:column>
                                             <f:facet name="header">Action</f:facet>

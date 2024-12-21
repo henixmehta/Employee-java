@@ -116,7 +116,7 @@ public class ManagerBeans implements Serializable {
     // Generic types for REST client responses
     public ManagerBeans() {
 //        managerClient = new ManagerClient();
-        loadCounts();
+//        loadCounts();
 
     }
 
@@ -174,7 +174,7 @@ public class ManagerBeans implements Serializable {
                 () -> safeLoad(() -> assetdetailsList = managerClient.getAllAssetsDetails(assetdetailsGenericType)),
                 () -> safeLoad(() -> attendanceDetailsList = managerClient.getAllAttendenceDetails(attendanceDetailsGenericType)),
                 () -> safeLoad(() -> usersList = managerClient.getAllUsers(usersGenericType)),
-//                () -> safeLoad(() -> userDetailsList = managerClient.getAllUserDetails(userDetailsGenericType)),
+                //                () -> safeLoad(() -> userDetailsList = managerClient.getAllUserDetails(userDetailsGenericType)),
                 () -> safeLoad(() -> documentsList = managerClient.getAllDocuments(documnentmasterGenericType)),
                 () -> safeLoad(() -> documentsdetailsList = managerClient.getAllDocumentDetails(documnentdetailsGenericType)),
                 () -> safeLoad(() -> leavesList = managerClient.getAllLeaves(leavesGenericType)),
@@ -193,6 +193,7 @@ public class ManagerBeans implements Serializable {
             Thread.currentThread().interrupt(); // Restore interrupted state
             e.printStackTrace();
         }
+        loadCounts();
     }
 
     //======================== Skill management methods ==================================================
@@ -243,7 +244,7 @@ public class ManagerBeans implements Serializable {
         } catch (ClientErrorException e) {
         }
     }
-    //================================================user Master================================================
+    //================================================ user Master ================================================
     private UserMaster usermaster = new UserMaster();
     private UserDetails userdetails = new UserDetails();
     private UserRequestWrapper wrapper = new UserRequestWrapper();
@@ -552,14 +553,47 @@ public class ManagerBeans implements Serializable {
         this.assetName = assetsMaster.getAssetName();
     }
 
-    //========================================== Task Master ============================================
-//    public void deleteTask(Integer taskid) {
-//        managerClient.deleteTask(taskid);
-//        tasksList = managerClient.getAllTask(tasksGenericType);
-//        taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
-//
-//    }
     //=========================================== Task Details ============================================
+    private TaskDetails taskdetails = new TaskDetails();
+    private TaskMaster taskmaster = new TaskMaster();
+    private UserMaster userMasterAssignBy = new UserMaster();
+    private UserMaster userMasterAssignTo = new UserMaster();
+    private TaskWrapper task = new TaskWrapper();
+    private Integer assignTo; // Example backing bean property
+    private Integer assignBy;
+
+    public void addTaskDetails() {
+        task.setTaskmaster(taskmaster);
+        userMasterAssignBy.setUserId(assignBy);
+        taskdetails.setAssignBy(userMasterAssignBy);
+        userMasterAssignTo.setUserId(assignTo);
+        taskdetails.setAssignTo(userMasterAssignTo);
+        task.setTaskDetails(taskdetails);
+
+//        taskdetails.setAssignBy(usermaster);
+//        taskdetails.setAssignTo(usermaster);
+        managerClient.addTaskDetails(task);
+        tasksList = managerClient.getAllTask(tasksGenericType);
+        System.out.println("Assign by CDI Bean : " + assignBy);
+        System.out.println("Assign To CDI Bean : " + assignTo);
+    }
+
+    public Integer getAssignTo() {
+        return assignTo;
+    }
+
+    public void setAssignTo(Integer assignTo) {
+        this.assignTo = assignTo;
+    }
+
+    public Integer getAssignBy() {
+        return assignBy;
+    }
+
+    public void setAssignBy(Integer assignBy) {
+        this.assignBy = assignBy;
+    }
+
     public void deleteTaskDetails(Integer taskdetailid) {
         managerClient.deleteTaskDetails(taskdetailid);
         tasksList = managerClient.getAllTask(tasksGenericType);
@@ -633,13 +667,38 @@ public class ManagerBeans implements Serializable {
     }
 
     // ====================================== GETTER AND SETTER ===============================================
-//    public ProjectDetails getSelectedproject() {
-//        return selectedproject;
-//    }
-//
-//    public void setSelectedproject(ProjectDetails selectedproject) {
-//        this.selectedproject = selectedproject;
-//    }
+    public Collection<UserDetails> getUserDetailsList() {
+        return userDetailsList;
+    }
+
+    public void setUserDetailsList(Collection<UserDetails> userDetailsList) {
+        this.userDetailsList = userDetailsList;
+    }
+
+    public TaskDetails getTaskdetails() {
+        return taskdetails;
+    }
+
+    public void setTaskdetails(TaskDetails taskdetails) {
+        this.taskdetails = taskdetails;
+    }
+
+    public TaskMaster getTaskmaster() {
+        return taskmaster;
+    }
+
+    public void setTaskmaster(TaskMaster taskmaster) {
+        this.taskmaster = taskmaster;
+    }
+
+    public TaskWrapper getTask() {
+        return task;
+    }
+
+    public void setTask(TaskWrapper task) {
+        this.task = task;
+    }
+
     public ProjectDetails getProject() {
         return project;
     }

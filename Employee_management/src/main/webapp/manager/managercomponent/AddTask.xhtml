@@ -215,57 +215,124 @@
                               outcome="DisplayTask.xhtml" />
                 </h:form>
 
-                <h2 align="center">Add Task</h2>
+                <h2 align="center">Add Task Details</h2>
                 <h:form style="border: 2px solid gainsboro; padding: 20px;border-radius: 5px;background-color:whitesmoke;">
                     <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
                     <div class="form-group mb-3">
-                        <h:inputText id="title" value="#{managerBeans.project.description}" 
-                                     styleClass="form-control" required="true" pt:placeholder="Project Name" />
+                        <h:inputText id="title" value="#{managerBeans.taskmaster.taskTitle}" 
+                                     styleClass="form-control" required="true" 
+                                     requiredMessage="Task Title is required" pt:placeholder="Task Title" />
+                        <h:message for="title" styleClass="text-danger" />
                     </div>
 
                     <div class="form-group mb-3">
-                        <h:inputText id="desc" value="#{managerBeans.project.description}" 
-                                     styleClass="form-control" required="true" pt:placeholder="Description" />
+                        <h:inputText id="desc" value="#{managerBeans.taskmaster.description}" 
+                                     styleClass="form-control" required="true"
+                                     requiredMessage="Description is required" pt:placeholder="Description" />
+                        <h:message for="desc" styleClass="text-danger" />
                     </div>
                     <div class="form-group mb-3">
-                        <label>Start Date</label>
-                        <h:inputText id="startdate" value="#{managerBeans.project.startDate}" styleClass="form-control" required="true" pt:placeholder="Start Date">
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>
-                            <f:passThroughAttribute name="type" value="date" />
-                        </h:inputText>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>End Date</label>
-                        <h:inputText id="enddate" value="#{managerBeans.project.endDate}" styleClass="form-control" required="true" pt:placeholder="End Date">
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>
-                            <f:passThroughAttribute name="type" value="date" />
-                        </h:inputText>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label>Due Date</label>
-                        <h:inputText id="duedate" value="#{managerBeans.project.dueDate}" styleClass="form-control" required="true" pt:placeholder="Due Date">
-                            <f:convertDateTime pattern="yyyy-MM-dd"/>
-                            <f:passThroughAttribute name="type" value="date" />
-                        </h:inputText>
-                    </div>
-                    <div class="form-group mb-3">
-                        <h:selectOneMenu id="status" value="#{managerBeans.project.status}" required="true" styleClass="form-control">
-                            <f:selectItem itemLabel="Select Status" itemValue="" noSelectionOption="true" />
-                            <f:selectItem itemLabel="Submitted" itemValue="Submitted" />
-                            <f:selectItem itemLabel="In Progress" itemValue="In Progress" />
-                            <f:selectItem itemLabel="Onhold" itemValue="Onhold" />
-                            <f:selectItem itemLabel="Completed" itemValue="Completed" />
+                        <h:selectOneMenu id="projectid" value="#{managerBeans.taskmaster.projectId}" 
+                                         requiredMessage="Project Id is required" styleClass="form-control">
+                            <f:selectItem itemLabel="-- Select Project --" itemValue="#{null}" />
+                            <f:selectItems value="#{managerBeans.projectDetailsList}" var="project" itemLabel="#{project.projectName}" itemValue="#{project.projectId}" />
                         </h:selectOneMenu>
+                        <h:message for="projectid" styleClass="text-danger" />
                     </div>
-                    <!--                    <div class="form-group mb-3">
-                                            <h:inputText id="status" value="#{managerBeans.project.status}" 
-                                                         styleClass="form-control" required="true" pt:placeholder="Status" />
-                                        </div>-->
+                    <div class="form-group mb-6 row">
+                        <div class="col-md-3" style="padding-top: 25px">
+                            <label>Due Date</label>
+                            <h:inputText id="duedate" value="#{managerBeans.taskmaster.dueDate}" 
+                                         styleClass="form-control" required="true"
+                                         requiredMessage="Due Date is required" pt:placeholder="Due Date">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                <f:passThroughAttribute name="type" value="date" />
+                            </h:inputText>
+                            <h:message for="duedate" styleClass="text-danger" />
+                        </div>
+                        <div class="col-md-3" style="padding-top: 25px">
+                            <label>Start Date</label>
+                            <h:inputText id="startdate" value="#{managerBeans.taskdetails.startDate}" 
+                                         styleClass="form-control" required="true" 
+                                         requiredMessage="Start Date is required" pt:placeholder="Start Date">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                <f:passThroughAttribute name="type" value="date" />
+                            </h:inputText>
+                            <h:message for="startdate" styleClass="text-danger" />
+                        </div>
+                        <div class="col-md-3" style="padding-top: 26px;margin-left: 20px;">
+                            <label>End Date</label>
+                            <h:inputText id="enddate" value="#{managerBeans.taskdetails.endDate}" 
+                                         styleClass="form-control" required="true" 
+                                         requiredMessage="End Date is required" pt:placeholder="End Date">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                                <f:passThroughAttribute name="type" value="date" />
+                            </h:inputText>
+                            <h:message for="enddate" styleClass="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <div class="col-md-6">
+                            <h:selectOneMenu id="status" value="#{managerBeans.taskmaster.taskStatus}" required="true" 
+                                             styleClass="form-control" requiredMessage="Status is required">
+                                <f:selectItem itemLabel="Select Task Status" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Submitted" itemValue="Submitted" />
+                                <f:selectItem itemLabel="In Progress" itemValue="In Progress" />
+                                <f:selectItem itemLabel="Onhold" itemValue="Onhold" />
+                                <f:selectItem itemLabel="Completed" itemValue="Completed" />
+                            </h:selectOneMenu>
+                            <h:message for="status" styleClass="text-danger" />
+                        </div>
+                        <div class="col-md-6">
+                            <h:selectOneMenu id="priority" value="#{managerBeans.taskmaster.priority}" required="true" styleClass="form-control">
+                                <f:selectItem itemLabel="Select Task Priority" itemValue="" noSelectionOption="true" />
+                                <f:selectItem itemLabel="Urgent" itemValue="Urgent" />
+                                <f:selectItem itemLabel="Highest" itemValue="Highest" />
+                                <f:selectItem itemLabel="High" itemValue="High" />
+                                <f:selectItem itemLabel="Medium" itemValue="Medium" />
+                                <f:selectItem itemLabel="Low" itemValue="Low" />
+                            </h:selectOneMenu>
+                            <h:message for="priority" styleClass="text-danger" />
+                        </div>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <h:selectOneMenu id="assignBy" value="#{managerBeans.assignBy}" styleClass="form-control">
+                            <f:selectItem itemLabel="Assign By" itemValue="#{null}" />
+                            <f:selectItems value="#{managerBeans.usersList}" 
+                                           var="user" 
+                                           itemLabel="#{user.userName}" 
+                                           itemValue="#{user.userId}" />
+                        </h:selectOneMenu>
+                        <h:message for="assignBy" styleClass="text-danger" />
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <h:selectOneMenu id="assignTo" value="#{managerBeans.assignTo}" styleClass="form-control">
+                            <f:selectItem itemLabel="Assign To" itemValue="#{null}" />
+                            <f:selectItems value="#{managerBeans.usersList}" 
+                                           var="user" 
+                                           itemLabel="#{user.userName}" 
+                                           itemValue="#{user.userId}" />
+                        </h:selectOneMenu>
+                        <h:message for="assignTo" styleClass="text-danger" />
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <div class="col-md-6">
+                            <h:inputText id="onholdday" value="#{managerBeans.taskdetails.onHoldDays}" 
+                                         styleClass="form-control" required="true" pt:placeholder="On-Hold Days" />
+                            <h:message for="onholdday" styleClass="text-danger" />
+                            <h:message for="onholdday" styleClass="text-danger" />
+                        </div>
+                        <div class="col-md-6">
+                            <h:inputText id="onholdreason" value="#{managerBeans.taskdetails.onHoldReason}" 
+                                         styleClass="form-control" required="true" pt:placeholder="On-Hold Reason" />
+                            <h:message for="onholdreason" styleClass="text-danger" />
+                        </div>
+                    </div>
+
                     <div class="d-grid mt">
-                        <h:commandButton value="Add Department" action="#{managerBeans.addProject()}" 
+                        <h:commandButton value="Add Task" action="#{managerBeans.addTaskDetails()}" 
                                          styleClass="btn btn-primary ms-2" />
                     </div>
-
                 </h:form>
             </div>
         </div>

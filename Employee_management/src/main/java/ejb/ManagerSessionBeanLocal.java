@@ -111,7 +111,8 @@ public interface ManagerSessionBeanLocal {
 
     //===================================  All Task Details Methods ========================================
     Collection<TaskDetails> getAllTaskDetails();
-
+    public void addTask(TaskMaster task,TaskDetails taskdetails);
+    
     //====================================  All Performance Methods =======================================
     Collection<PerformanceDetails> getPerformanceDetails();
 

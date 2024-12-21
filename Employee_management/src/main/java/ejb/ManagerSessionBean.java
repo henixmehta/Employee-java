@@ -165,14 +165,13 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
                 .setParameter("active", "YES").getResultList();
         Collection<UserMaster> allUsers = em.createNamedQuery("UserMaster.findAll", UserMaster.class).getResultList();
         List<UserMaster> activeUsers = new ArrayList<>();
-        for(UserMaster user  : allUsers)
-        {
-           for(UserDetails ud : activeUserDetails){
-               if(user.getUserId().equals(ud.getUserId())){
-                   activeUsers.add(user);
-                   break;
-               }
-           }
+        for (UserMaster user : allUsers) {
+            for (UserDetails ud : activeUserDetails) {
+                if (user.getUserId().equals(ud.getUserId())) {
+                    activeUsers.add(user);
+                    break;
+                }
+            }
         }
         return activeUsers;
     }
@@ -234,7 +233,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public void addDesig(String desginame, String desgirepo,
-             Integer deptid
+            Integer deptid
     ) {
         DepartmentMaster dept_id = (DepartmentMaster) em.find(DepartmentMaster.class, deptid);
         DesignationMaster d = new DesignationMaster();
@@ -246,7 +245,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public void updateDesignation(Integer designationId, String designationName,
-             String responsibility, Integer deptId
+            String responsibility, Integer deptId
     ) {
         // Find the associated DepartmentMaster entity
         DepartmentMaster department = em.find(DepartmentMaster.class, deptId);
@@ -276,8 +275,8 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @Override
     public void addAssetsDetails(BigInteger assetNumber, Date assignDate,
-             Date returnDate, Integer assetId,
-             Integer userId
+            Date returnDate, Integer assetId,
+            Integer userId
     ) {
         // Find the related AssetsMaster and UserMaster entities
         AssetsMaster asset = em.find(AssetsMaster.class, assetId);
@@ -377,7 +376,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 //    public Collection<UserDetails> getAllUsersDetails() {
 //        return em.createNamedQuery("UserDetails.findByActive", UserDetails.class).getResultList();
 //    }
-
     @Override
     public void addLeaves(String leaveType
     ) {
@@ -409,11 +407,19 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void UpddateUser(UserMaster user, UserDetails userdetails
-    ) {
+    public void UpddateUser(UserMaster user, UserDetails userdetails) {
         if (user.getUserId() != null) {
             em.merge(user);
         }
-
     }
+
+    @Override
+    public void addTask(TaskMaster task, TaskDetails taskdetails) {
+        em.persist(task);
+        em.persist(taskdetails);
+        em.flush();
+        taskdetails.setTaskId(task);
+        System.out.println("Task added successfully with ID: " + task.getTaskId());
+    }
+
 }

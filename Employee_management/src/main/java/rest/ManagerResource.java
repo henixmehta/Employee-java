@@ -281,6 +281,16 @@ public class ManagerResource {
         return msbl.getAllTaskDetails();
     }
 
+    @POST
+    @Path("addtask")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addTaskDetails(TaskWrapper task) {
+        TaskMaster taskmaster = task.getTaskmaster();
+        TaskDetails taskdetails = task.getTaskDetails();
+//       UserMaster users = task.getUsers();
+        msbl.addTask(taskmaster, taskdetails);
+    }
+
     @DELETE
     @Path("deleteTaskDetails/{taskDetailsId}")
     public void deleteTaskDetails(@PathParam("taskDetailsId") Integer taskDetailsId) {

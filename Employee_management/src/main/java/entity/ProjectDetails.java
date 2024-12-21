@@ -65,7 +65,7 @@ public class ProjectDetails implements Serializable {
     @Column(name = "status")
     private String status;
     @Column(name = "on_hold_days")
-    private Date onHoldDays;
+    private Integer onHoldDays;
     @Size(max = 50)
     @Column(name = "on_hold_reason")
     private String onHoldReason;
@@ -133,14 +133,15 @@ public class ProjectDetails implements Serializable {
         this.status = status;
     }
 
-    public Date getOnHoldDays() {
+    public Integer getOnHoldDays() {
         return onHoldDays;
     }
-
-    public void setOnHoldDays(Date onHoldDays) {
+    
+    public void setOnHoldDays(Integer onHoldDays) {
         this.onHoldDays = onHoldDays;
     }
 
+   
     public String getOnHoldReason() {
         return onHoldReason;
     }

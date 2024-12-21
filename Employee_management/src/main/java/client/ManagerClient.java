@@ -247,11 +247,9 @@ public class ManagerClient {
         System.out.println("Client : " + userId);
     }
 
-//    public <T> T getAllUserDetails(GenericType<T> responseType) throws ClientErrorException {
-//        WebTarget resource = webTarget;
-//        resource = resource.path("usersdetails");
-//        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
-//    }
+    public void addTaskDetails(Object requestEntity) throws ClientErrorException {
+        webTarget.path("addtask").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
 
     public void close() {
         client.close();
