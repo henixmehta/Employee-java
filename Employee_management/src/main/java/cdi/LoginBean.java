@@ -38,7 +38,7 @@ public class LoginBean implements Serializable {
         if (user != null) {
             // Find UserDetails using userId from UserMaster
             UserDetails userDetails = loginSessionBean.findUserDetailsByUserId(user.getUserId());
-
+//===============================================please set user id in session =================================================================================
             if (userDetails != null) {
                 // Find GroupMaster using groupId from UserDetails
                 GroupMaster group = loginSessionBean.findGroupById(userDetails.getGroupId());
