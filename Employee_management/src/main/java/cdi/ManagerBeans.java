@@ -188,7 +188,7 @@ public class ManagerBeans implements Serializable {
 
         executor.shutdown();
         try {
-            executor.awaitTermination(5, TimeUnit.SECONDS); // Wait up to 5 seconds for tasks to complete
+            executor.awaitTermination(15, TimeUnit.SECONDS); // Wait up to 5 seconds for tasks to complete
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt(); // Restore interrupted state
             e.printStackTrace();
