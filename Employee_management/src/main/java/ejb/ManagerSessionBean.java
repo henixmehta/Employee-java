@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -19,7 +20,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @PersistenceContext(unitName = "my_per_unit")
     private EntityManager em;
-
+   
     //=== Skills methods implementation
     @Override
     public Collection<SkillsMaster> getAllSkill() {

@@ -15,6 +15,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
+import javax.servlet.jsp.PageContext;
 
 @Named(value = "loginBean")
 @SessionScoped
@@ -38,7 +39,7 @@ public class LoginBean implements Serializable {
         if (user != null) {
             // Find UserDetails using userId from UserMaster
             UserDetails userDetails = loginSessionBean.findUserDetailsByUserId(user.getUserId());
-//===============================================please set user id in session =================================================================================
+            
             if (userDetails != null) {
                 // Find GroupMaster using groupId from UserDetails
                 GroupMaster group = loginSessionBean.findGroupById(userDetails.getGroupId());
@@ -46,28 +47,32 @@ public class LoginBean implements Serializable {
 
                 // You can now use the group data (e.g., group.getGroupName())
                 jwtToken = JWTUtil.generateToken(user.getCompanyEmail(), group.getGroupName());
-                System.out.print(" Henerated token " + jwtToken);
+                System.out.print(" Generated token " + jwtToken);
 
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userId", user.getUserId());
+                FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userName", user.getUserName());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("jwtToken", jwtToken);
-
+               
+                System.out.println("Role :" + group.getGroupName());
+                System.out.println("User Name : " + user.getUserName());
                 // Redirect to the appropriate dashboard based on user role
-                if (group != null) {
-                    if (group.getGroupName().equals("admin")) {
+                
+                if (group.getGroupName().equals("admin")) {
 //                        return "admin/adminDashboard.xhtml?faces-redirect=true";
-                        return "component/skill.xhtml?faces-redirect=true";
-
-                    } else if (group.getGroupName().equals("manager")) {
-                        return "manager/managerDashboard.xhtml?faces-redirect=true";
-                    } else {
-                        return "employee/employeeDashboard.xhtml?faces-redirect=true";
-                    }
+                    return "admin/adminDashboard.xhtml?faces-redirect=true";
+                    
+                } else if (group.getGroupName().equals("manager")) {
+                    return "manager/managerDashboard.xhtml?faces-redirect=true";
+                    
+                } else {
+                    return "employee/employeeDashboard.xhtml?faces-redirect=true";
                 }
             }
         }
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid credentials", ""));
         return null;
     }
-
+  
     // Getters and setters for the fields...
     public String getCompanyEmail() {
         return companyEmail;

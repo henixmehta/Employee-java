@@ -36,30 +36,34 @@ public class JWTAuthenticationFilter implements Filter {
             chain.doFilter(request, response); // Allow the request to proceed without filtering
             return;
         }
-
-        String token = httpRequest.getHeader("Authorization");
+        chain.doFilter(request, response);
+        
+//        String token = httpRequest.getHeader("Authorization");
 //        System.out.println("com.myproject.jwt.JWTAuthenticationFilter.doFilter()" + token);
+//        System.out.println("Token from session " + FacesContext.getCurrentInstance());
+////        System.out.println("Token from session " + FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("jwtToken"));
+//
+//        if (token != null && token.startsWith("Bearer ")) {
+//            token = token.substring(7); // Remove "Bearer " prefix
+//            try {
+//                // Validate token and extract the role
+//                String role = JWTUtil.getUserRoleFromToken(token);
+//                // Check if the user has the correct role (admin or manager)
+//                if (role.equals("admin") || role.equals("manager")) {
+//                    chain.doFilter(request, response); // User is authorized, proceed with the request
+//                } else {
+//                    // User is not authorized for this resource
+//                    httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied: Insufficient permissions");
+//                }
+//            } catch (Exception e) {
+//                // Handle invalid token
+//                httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token validation failed");
+//            }
+//        } else {
+//            // No token found, return unauthorized error
+//            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid token");
+//        }
 
-        if (token != null && token.startsWith("Bearer ")) {
-            token = token.substring(7); // Remove "Bearer " prefix
-            try {
-                // Validate token and extract the role
-                String role = JWTUtil.getUserRoleFromToken(token);
-                // Check if the user has the correct role (admin or manager)
-                if (role.equals("admin") || role.equals("manager")) {
-                    chain.doFilter(request, response); // User is authorized, proceed with the request
-                } else {
-                    // User is not authorized for this resource
-                    httpResponse.sendError(HttpServletResponse.SC_FORBIDDEN, "Access denied: Insufficient permissions");
-                }
-            } catch (Exception e) {
-                // Handle invalid token
-                httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token validation failed");
-            }
-        } else {
-            // No token found, return unauthorized error
-            httpResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Missing or invalid token");
-        }
     }
 
     @Override

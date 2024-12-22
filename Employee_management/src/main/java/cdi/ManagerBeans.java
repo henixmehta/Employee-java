@@ -195,8 +195,7 @@ public class ManagerBeans implements Serializable {
         }
         loadCounts();
     }
-
-    //======================== Skill management methods ==================================================
+      //======================== Skill management methods ==================================================
     public void addSkill() {
         try {
             boolean skillExists = skillsList.stream()

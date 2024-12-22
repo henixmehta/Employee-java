@@ -238,7 +238,7 @@ public class UserMaster implements Serializable {
         }
     }
 
-    private String hashPassword(String password) {
+    public String hashPassword(String password) {
         if (password == null) {
             throw new IllegalArgumentException("Password cannot be null");
         }

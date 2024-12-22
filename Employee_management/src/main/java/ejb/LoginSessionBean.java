@@ -24,13 +24,15 @@ public class LoginSessionBean implements LoginSessionBeanLocal {
 
     @Override
     public UserMaster authenticate(String email, String password) {
-      
+        UserMaster userMaster = new UserMaster();
 //        System.out.print(" ejb email" +email + " password" +password);
         try {
+            System.out.println("ejb.LoginSessionBean.authenticate() :: email : " + email + " password : " + password + " hash password : " + userMaster.hashPassword(password));
             return em.createQuery("SELECT u FROM UserMaster u WHERE u.companyEmail = :email AND u.password = :password", UserMaster.class)
                     .setParameter("email", email)
-                    .setParameter("password", password)
+                    .setParameter("password", userMaster.hashPassword(userMaster.hashPassword(password)))
                     .getSingleResult();
+
         } catch (NoResultException e) {
             return null; // Return null if no user found
         }
