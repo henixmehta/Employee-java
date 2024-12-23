@@ -596,7 +596,7 @@ public class ManagerBeans implements Serializable {
     private Integer assignTo; // Example backing bean property
     private Integer assignBy;
 
-    public void addTaskDetails() {
+    public String addTaskDetails() {
         task.setTaskmaster(taskmaster);
         userMasterAssignBy.setUserId(assignBy);
         taskdetails.setAssignBy(userMasterAssignBy);
@@ -608,8 +608,7 @@ public class ManagerBeans implements Serializable {
 //        taskdetails.setAssignTo(usermaster);
         managerClient.addTaskDetails(task);
         tasksList = managerClient.getAllTask(tasksGenericType);
-        System.out.println("Assign by CDI Bean : " + assignBy);
-        System.out.println("Assign To CDI Bean : " + assignTo);
+        return "DisplayTask.xhtml";
     }
 
     public Integer getAssignTo() {
@@ -628,10 +627,11 @@ public class ManagerBeans implements Serializable {
         this.assignBy = assignBy;
     }
 
-    public void deleteTaskDetails(Integer taskdetailid) {
+    public String deleteTaskDetails(Integer taskdetailid) {
         managerClient.deleteTaskDetails(taskdetailid);
         tasksList = managerClient.getAllTask(tasksGenericType);
         taskdetailsList = managerClient.getAllTaskDetails(taskdetailsGenericType);
+        return "DisplayTask.xhtml";
     }
 
     // Leave Master 
