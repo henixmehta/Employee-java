@@ -11,6 +11,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -25,6 +27,8 @@ public class EmployeeBeans implements Serializable {
     private Collection<UserMaster> employeeDetails;
     private Collection<AttendanceDetails> attendanceDetails;
     private int userId;
+    private boolean hasCheckedInToday;  // Tracks if user has checked in today
+    private boolean hasCheckedOutToday; // Tracks if user has checked out today
 
     @Inject
     private EmployeeSessionBeansLocal employeeSessionBeans;
@@ -38,11 +42,18 @@ public class EmployeeBeans implements Serializable {
         }
     }
 
+    @PostConstruct
+    public void init() {
+        // Check if the user has already checked in and checked out today
+        hasCheckedInToday = employeeSessionBeans.hasCheckedInToday(userId);
+        hasCheckedOutToday = employeeSessionBeans.hasCheckedOutToday(userId);
+    }
+
     public Collection<UserMaster> getEmployeeDetails() {
         if (employeeDetails == null) {
             employeeDetails = employeeSessionBeans.getEmployeeDetailsByUserId(userId);
         }
-        System.out.println("cdi.EmployeeBeans.getEmployeeDetails()" + employeeDetails);
+//        System.out.println("cdi.EmployeeBeans.getEmployeeDetails()" + employeeDetails);
         return employeeDetails;
     }
 
@@ -59,6 +70,67 @@ public class EmployeeBeans implements Serializable {
 
     public void setAttendanceDetails(Collection<AttendanceDetails> attendanceDetails) {
         this.attendanceDetails = attendanceDetails;
+    }
+
+    public void checkIn() {
+        if (hasCheckedInToday) {
+            System.out.println("User has already checked in today!");
+            return;
+        }
+
+        try {
+            AttendanceDetails attendance = new AttendanceDetails();
+            attendance.setDate(new Date());
+            attendance.setCheckIn(new Date());
+
+            UserMaster user = new UserMaster();
+            user.setUserId(userId);
+            attendance.setUserId(user);
+
+            employeeSessionBeans.addEmployeeAttendence(attendance);
+
+            System.out.println("Check-in recorded successfully for user ID: " + userId);
+            hasCheckedInToday = true; // Update the flag after a successful check-in
+        } catch (Exception e) {
+            System.err.println("Error during check-in: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public void checkOut() {
+        if (!hasCheckedInToday) {
+            System.out.println("User has not checked in today. Cannot check out.");
+            return;
+        }
+
+        if (hasCheckedOutToday) {
+            System.out.println("User has already checked out today!");
+            return;
+        }
+
+        try {
+            AttendanceDetails attendance = employeeSessionBeans.getTodayAttendanceByUserId(userId);
+
+            if (attendance != null) {
+                attendance.setCheckOut(new Date());
+                employeeSessionBeans.updateEmployeeAttendance(attendance); // Assuming this method updates attendance
+                System.out.println("Check-out recorded successfully for user ID: " + userId);
+                hasCheckedOutToday = true; // Update the flag after a successful check-out
+            } else {
+                System.out.println("Attendance record not found for user ID: " + userId);
+            }
+        } catch (Exception e) {
+            System.err.println("Error during check-out: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isHasCheckedInToday() {
+        return hasCheckedInToday;
+    }
+
+    public boolean isHasCheckedOutToday() {
+        return hasCheckedOutToday;
     }
 
     public int getUserId() {

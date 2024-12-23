@@ -273,6 +273,16 @@
                         </div>
                     </div>
                 </div>
+                <h:form>
+                    <!-- Check-In Button -->
+                    <h:commandButton value="Check-In" action="#{employeeBeans.checkIn}" rendered="#{!employeeBeans.hasCheckedInToday}" />
+
+                    <!-- Check-Out Button -->
+                    <h:commandButton value="Check-Out" action="#{employeeBeans.checkOut}" rendered="#{employeeBeans.hasCheckedInToday and !employeeBeans.hasCheckedOutToday}" />
+
+                    <!-- Message for Already Checked-Out Users -->
+                    <h:outputText value="You have already checked out today." rendered="#{employeeBeans.hasCheckedOutToday}" />
+                </h:form>
 
                 <h2>EmployeeDetails Details</h2>
                 <div class="card-body p-0">

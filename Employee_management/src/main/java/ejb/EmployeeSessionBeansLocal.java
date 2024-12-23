@@ -26,4 +26,13 @@ public interface EmployeeSessionBeansLocal {
     void addEmployeeLeave(LeaveDetails leave);
 
     void addEmployeeAttendence(AttendanceDetails attendence);
+
+    public boolean hasCheckedInToday(int userId);
+
+    boolean hasCheckedOutToday(int userId);
+
+    AttendanceDetails getTodayAttendanceByUserId(int userId);
+
+    void updateEmployeeAttendance(AttendanceDetails attendance);
+
 }
