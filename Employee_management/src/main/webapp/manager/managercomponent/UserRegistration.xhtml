@@ -243,7 +243,7 @@
                                 <div class="col-md-6">
                                     <h:inputText id="phoneNo" value="#{managerBeans.usermaster.phoneNo}" 
                                                  styleClass="form-control" required="true" 
-                                                 requiredMessage="Mobile Number is required" pt:placeholder="Mobile Number" >
+                                                 requiredMessage="Mobile Number is required" pt:placeholder="Mobile Number" pt:type="number">
                                         <f:validateLength minimum="10" maximum="10" />
 
                                     </h:inputText>
@@ -286,7 +286,7 @@
                             </div>
 
                             <div class="form-group mb-3 row">
-                                <div class="col-md-3">
+                                <div class="col-md-6">
                                     <h:outputLabel for="joiningDate" value="Joining Date:" />
                                     <h:inputText id="joiningDate" value="#{managerBeans.usermaster.joiningDate}" 
                                                  styleClass="form-control" required="true" 
@@ -296,7 +296,7 @@
                                     </h:inputText>
                                     <h:message for="joiningDate" styleClass="text-danger" />
                                 </div>
-                                <div class="col-md-3" style="padding-top: 25px">
+                                <div class="col-md-6" style="padding-top: 25px">
                                     <h:inputText id="emergencyContact" value="#{managerBeans.usermaster.emergencyContact}" 
                                                  styleClass="form-control" required="true" 
                                                  requiredMessage="Emergency Contact is required" pt:placeholder="Emergency Contact" pt:type="number">
@@ -305,12 +305,6 @@
                                     <h:message for="emergencyContact" styleClass="text-danger" />
                                 </div>
 
-                                <div class="col-md-6" style="padding-top: 25px">
-                                    <h:inputText id="profileImage" value="#{managerBeans.usermaster.profileImage}" 
-                                                 styleClass="form-control" required="true" 
-                                                 requiredMessage="Profile Image URL is required" pt:placeholder="Profile Image URL" />
-                                    <h:message for="profileImage" styleClass="text-danger" />
-                                </div>
                             </div>
 
                             <div class="form-group mb-3 row">
@@ -403,7 +397,7 @@
                             <div class="d-grid mt-4">
                                 <h:commandButton value="#{managerBeans.usermaster.userId != null ? 'Update User' : 'Add User'}" 
                                                  action="#{managerBeans.handleUserAction()}"
-                                         styleClass="btn btn-primary ms-2" />
+                                                 styleClass="btn btn-primary ms-2" />
                             </div>
                         </h:form>
 
