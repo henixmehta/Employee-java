@@ -47,9 +47,6 @@ public class ManagerClient {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
     }
 
-//    public void addOrUpdateDepartment(Object requestEntity, String deptId, String deptName, String deptDesc, String managerId) throws ClientErrorException {
-//        webTarget.path(java.text.MessageFormat.format("addOrUpdateDept/{0}/{1}/{2}/{3}", new Object[]{deptId, deptName, deptDesc, managerId})).request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
-//    }
     public void addOrUpdateDepartment(Object requestEntity, Integer deptId, String deptName, String deptDesc, int managerId) throws ClientErrorException {
         webTarget.path(java.text.MessageFormat.format("addOrUpdateDept/{0}/{1}/{2}/{3}",
                 new Object[]{deptId != null ? deptId : 0, deptName, deptDesc, managerId}))
@@ -249,6 +246,10 @@ public class ManagerClient {
 
     public void addTaskDetails(Object requestEntity) throws ClientErrorException {
         webTarget.path("addtask").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
+    }
+
+    public void updateUser(Object requestEntity) throws ClientErrorException {
+        webTarget.path("updateusers").request(javax.ws.rs.core.MediaType.APPLICATION_JSON).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_JSON));
     }
 
     public void close() {

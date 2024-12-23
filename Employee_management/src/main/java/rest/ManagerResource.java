@@ -177,6 +177,14 @@ public class ManagerResource {
         UserDetails userdetails = wrapper.getUserDetails();
         msbl.addUser(user, userdetails);
     }
+    @POST
+    @Path("updateusers")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateUser(UserRequestWrapper wrapper) {
+        UserMaster user = wrapper.getUserMaster();
+        UserDetails userdetails = wrapper.getUserDetails();
+        msbl.UpddateUser(user, userdetails);
+    }
 
     @DELETE
     @Path("deleteUser/{userId}")

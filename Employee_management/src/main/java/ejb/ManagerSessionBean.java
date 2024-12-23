@@ -7,8 +7,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
@@ -20,7 +20,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
     @PersistenceContext(unitName = "my_per_unit")
     private EntityManager em;
-   
+
     //=== Skills methods implementation
     @Override
     public Collection<SkillsMaster> getAllSkill() {
@@ -305,14 +305,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
 
         em.persist(group);
     }
-//    @Override
-//    public void deleteHoliday(Integer holidayInteger) {
-////        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//        HolidayMaster h = em.find(HolidayMaster.class, holidayInteger);
-//        em.remove(h);
-//        
-//    }
-//    
 
     @Override
     public void deleteUser(Integer userId
@@ -333,11 +325,6 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         }
     }
 
-//    @Override
-//    public Collection<UserDetails> getAllUsersDetails() {
-//        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-//
-//    }
     @Override
     public void deleteAssetsDetails(Integer assetsDetailsId
     ) {
@@ -393,16 +380,14 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void updateProject(ProjectDetails project
-    ) {
+    public void updateProject(ProjectDetails project) {
         if (project.getProjectId() != null) {
             em.merge(project);
         }
     }
 
     @Override
-    public void deleteProjectDetails(Integer proDetailsId
-    ) {
+    public void deleteProjectDetails(Integer proDetailsId) {
         ProjectDetails project = (ProjectDetails) em.find(ProjectDetails.class, proDetailsId);
         em.remove(project);
     }
@@ -411,6 +396,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     public void UpddateUser(UserMaster user, UserDetails userdetails) {
         if (user.getUserId() != null) {
             em.merge(user);
+            em.merge(userdetails);
         }
     }
 
@@ -423,4 +409,14 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         System.out.println("Task added successfully with ID: " + task.getTaskId());
     }
 
+    @Override
+    public UserDetails findUserDetailsByUserId(int userId) {
+        try {
+            return em.createQuery("SELECT ud FROM UserDetails ud WHERE ud.userId = :userId", UserDetails.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null; // Return null if no user details found
+        }
+    }
 }

@@ -105,7 +105,7 @@ public interface ManagerSessionBeanLocal {
     public void addProject(ProjectDetails project);
     public void updateProjectStatus(Integer projectId, String newStatus);
     public void updateProject(ProjectDetails project);
-
+    public UserDetails findUserDetailsByUserId(int userId);
     //===================================  All Task Methods =================================================
     Collection<TaskMaster> getAllTask();
 

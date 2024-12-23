@@ -401,7 +401,9 @@
                             <hr style="border: 2px solid black; width: 100%; opacity: 1;" />
 
                             <div class="d-grid mt-4">
-                                <h:commandButton value="Add User" action="#{managerBeans.addUser}" styleClass="btn btn-primary" />
+                                <h:commandButton value="#{managerBeans.usermaster.userId != null ? 'Update User' : 'Add User'}" 
+                                                 action="#{managerBeans.handleUserAction()}"
+                                         styleClass="btn btn-primary ms-2" />
                             </div>
                         </h:form>
 

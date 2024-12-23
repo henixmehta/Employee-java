@@ -1,6 +1,8 @@
 package cdi;
 
 import client.ManagerClient;
+import ejb.ManagerSessionBean;
+import ejb.ManagerSessionBeanLocal;
 import entity.*;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import javax.inject.Inject;
 
 @Named(value = "managerBeans")
 @SessionScoped
@@ -113,6 +116,9 @@ public class ManagerBeans implements Serializable {
     private final GenericType<Collection<UserDetails>> userDetailsGenericType = new GenericType<Collection<UserDetails>>() {
     };
 
+    @Inject
+    private ManagerSessionBeanLocal managerSessionBean;
+
     // Generic types for REST client responses
     public ManagerBeans() {
 //        managerClient = new ManagerClient();
@@ -195,7 +201,8 @@ public class ManagerBeans implements Serializable {
         }
         loadCounts();
     }
-      //======================== Skill management methods ==================================================
+    //======================== Skill management methods ==================================================
+
     public void addSkill() {
         try {
             boolean skillExists = skillsList.stream()
@@ -252,10 +259,6 @@ public class ManagerBeans implements Serializable {
 
     //add userMaster
     public String addUser() {
-        System.out.println("departmentId variable: " + departmentId);
-        System.out.println("Designation Id : " + designationId);
-        System.out.println("Group Id : " + groupId);
-        System.out.println("Skill Id : " + skillId);
         userdetails.setDeptId(departmentId);
         userdetails.setDesignationId(designationId);
         userdetails.setGroupId(groupId);
@@ -263,6 +266,38 @@ public class ManagerBeans implements Serializable {
         wrapper.setUserDetails(userdetails);
         wrapper.setUserMaster(usermaster);
         managerClient.addUser(wrapper);
+        usersList = managerClient.getAllUsers(usersGenericType);
+        resetUserMasterFields();
+        return "ViewUserDetails.xhtml";
+    }
+
+    public void handleUserAction() {
+        if (this.usermaster != null && this.usermaster.getUserId() != null) {
+            UpdateUser();
+        } else {
+            addUser();
+        }
+    }
+
+    public String editUser(UserMaster userMaster) {
+        this.usermaster = userMaster;
+        UserDetails userDetails = managerSessionBean.findUserDetailsByUserId(userMaster.getUserId());
+        this.departmentId = userDetails.getDeptId();
+        this.designationId = userDetails.getDesignationId();
+        this.groupId = userDetails.getGroupId();
+        this.skillId = userDetails.getSkillId();
+
+        return "UserRegistration.xhtml?faces-redirect=true";
+    }
+
+    public String UpdateUser() {
+        userdetails.setDeptId(departmentId);
+        userdetails.setDesignationId(designationId);
+        userdetails.setGroupId(groupId);
+        userdetails.setSkillId(skillId);
+        wrapper.setUserDetails(userdetails);
+        wrapper.setUserMaster(usermaster);
+        managerClient.updateUser(wrapper);
         usersList = managerClient.getAllUsers(usersGenericType);
         resetUserMasterFields();
         return "ViewUserDetails.xhtml";
@@ -1140,6 +1175,14 @@ public class ManagerBeans implements Serializable {
 
     public int getUserCount() {
         return userCount;
+    }
+
+    public ManagerSessionBeanLocal getManagerSessionBean() {
+        return managerSessionBean;
+    }
+
+    public void setManagerSessionBean(ManagerSessionBeanLocal managerSessionBean) {
+        this.managerSessionBean = managerSessionBean;
     }
 
 }
