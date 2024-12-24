@@ -6,6 +6,7 @@ package cdi;
 
 import ejb.EmployeeSessionBeansLocal;
 import entity.AttendanceDetails;
+import entity.LeaveDetails;
 import entity.UserMaster;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -29,6 +30,7 @@ public class EmployeeBeans implements Serializable {
     private int userId;
     private boolean hasCheckedInToday;  // Tracks if user has checked in today
     private boolean hasCheckedOutToday; // Tracks if user has checked out today
+    private Collection<LeaveDetails> leaveDetails; // Collection to store leave details
 
     @Inject
     private EmployeeSessionBeansLocal employeeSessionBeans;
@@ -49,6 +51,8 @@ public class EmployeeBeans implements Serializable {
         hasCheckedOutToday = employeeSessionBeans.hasCheckedOutToday(userId);
     }
 
+    
+//==========================================================================empdetails
     public Collection<UserMaster> getEmployeeDetails() {
         if (employeeDetails == null) {
             employeeDetails = employeeSessionBeans.getEmployeeDetailsByUserId(userId);
@@ -61,6 +65,18 @@ public class EmployeeBeans implements Serializable {
         this.employeeDetails = employeeDetails;
     }
 
+//==========================================================================Leave
+    public Collection<LeaveDetails> getLeaveDetails() {
+        if (leaveDetails == null) {
+            leaveDetails = employeeSessionBeans.getEmployeeLeaves(userId);
+        }
+        return leaveDetails;
+    }
+
+    public void setLeaveDetails(Collection<LeaveDetails> leaveDetails) {
+        this.leaveDetails = leaveDetails;
+    }
+//==========================================================================attendence
     public Collection<AttendanceDetails> getAttendanceDetails() {
         if (attendanceDetails == null) {
             attendanceDetails = employeeSessionBeans.getEmployeeAttendence(userId);

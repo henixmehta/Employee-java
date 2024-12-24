@@ -49,8 +49,17 @@ public class EmployeeSessionBeans implements EmployeeSessionBeansLocal {
     }
 
     @Override
-    public Collection<LeaveDetails> getEmployeeLeaves() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Collection<LeaveDetails> getEmployeeLeaves(int userId) {
+        try {
+            return em.createQuery("SELECT l FROM LeaveDetails l WHERE l.userId.userId = :userId", LeaveDetails.class)
+                    .setParameter("userId", userId)
+                    .getResultList();
+        } catch (Exception e) {
+            // Log the exception and return an empty collection
+            System.err.println("Error fetching leave details for user ID: " + userId);
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
     }
 
     @Override
