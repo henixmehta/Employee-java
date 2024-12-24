@@ -39,7 +39,7 @@ public class LoginBean implements Serializable {
         if (user != null) {
             // Find UserDetails using userId from UserMaster
             UserDetails userDetails = loginSessionBean.findUserDetailsByUserId(user.getUserId());
-            
+
             if (userDetails != null) {
                 // Find GroupMaster using groupId from UserDetails
                 GroupMaster group = loginSessionBean.findGroupById(userDetails.getGroupId());
@@ -52,18 +52,18 @@ public class LoginBean implements Serializable {
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userId", user.getUserId());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("userName", user.getUserName());
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("jwtToken", jwtToken);
-               
+
                 System.out.println("Role :" + group.getGroupName());
                 System.out.println("User Name : " + user.getUserName());
                 // Redirect to the appropriate dashboard based on user role
-                
+
                 if (group.getGroupName().equals("admin")) {
 //                        return "admin/adminDashboard.xhtml?faces-redirect=true";
                     return "admin/adminDashboard.xhtml?faces-redirect=true";
-                    
+
                 } else if (group.getGroupName().equals("manager")) {
                     return "manager/managerDashboard.xhtml?faces-redirect=true";
-                    
+
                 } else {
                     return "employee/employeeDashboard.xhtml?faces-redirect=true";
                 }
@@ -72,7 +72,7 @@ public class LoginBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid credentials", ""));
         return null;
     }
-  
+
     // Getters and setters for the fields...
     public String getCompanyEmail() {
         return companyEmail;
@@ -112,6 +112,18 @@ public class LoginBean implements Serializable {
 
     public void setLoginSessionBean(LoginSessionBeanLocal loginSessionBean) {
         this.loginSessionBean = loginSessionBean;
+    }
+
+    public String logout() {
+        // Invalidate the session to remove all attributes
+//        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.getExternalContext().invalidateSession(); // Invalidate the session
+        // Optionally, you can also remove individual session attributes if you don't want to invalidate the whole session
+//         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("userId");
+//         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("userName");
+//         Redirect to the login page after logging out
+        return "/index.xhtml?faces-redirect=true"; // Adjust the path based on your login page
     }
 
 }

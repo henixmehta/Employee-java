@@ -189,13 +189,16 @@
                                                 </a>
                                             </li>
                                             <li class="list-group-item">
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-power"></i>
-                                                        <span>Logout</span>
-                                                    </span>
-                                                </a>
+                                                <h:form style="margin: 0; padding: 0;">
+                                                    <h:commandLink action="#{loginBean.logout}" styleClass="dropdown-item">
+                                                        <span class="d-flex align-items-center">
+                                                            <i class="ph ph-power"></i>
+                                                            <span>Logout</span>
+                                                        </span>
+                                                    </h:commandLink>
+                                                </h:form>
                                             </li>
+
                                         </ul>
                                     </div>
                                 </div>
