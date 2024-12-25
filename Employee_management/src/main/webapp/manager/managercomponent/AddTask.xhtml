@@ -298,24 +298,26 @@
                         </div>
                     </div>
                     <div class="form-group mb-3 row">
-                        <h:selectOneMenu id="assignBy" value="#{managerBeans.assignBy}" styleClass="form-control">
-                            <f:selectItem itemLabel="Assign By" itemValue="#{null}" />
-                            <f:selectItems value="#{managerBeans.usersList}" 
-                                           var="user" 
-                                           itemLabel="#{user.userName}" 
-                                           itemValue="#{user.userId}" />
-                        </h:selectOneMenu>
-                        <h:message for="assignBy" styleClass="text-danger" />
-                    </div>
-                    <div class="form-group mb-3 row">
-                        <h:selectOneMenu id="assignTo" value="#{managerBeans.assignTo}" styleClass="form-control">
-                            <f:selectItem itemLabel="Assign To" itemValue="#{null}" />
-                            <f:selectItems value="#{managerBeans.usersList}" 
-                                           var="user" 
-                                           itemLabel="#{user.userName}" 
-                                           itemValue="#{user.userId}" />
-                        </h:selectOneMenu>
-                        <h:message for="assignTo" styleClass="text-danger" />
+                        <div class="col-md-6">
+                            <h:selectOneMenu id="assignBy" value="#{managerBeans.assignBy}" styleClass="form-control">
+                                <f:selectItem itemLabel="Assign By" itemValue="#{null}" />
+                                <f:selectItems value="#{managerBeans.usersList}" 
+                                               var="user" 
+                                               itemLabel="#{user.userName}" 
+                                               itemValue="#{user.userId}" />
+                            </h:selectOneMenu>
+                            <h:message for="assignBy" styleClass="text-danger" />
+                        </div>
+                        <div class="col-md-6">
+                            <h:selectOneMenu id="assignTo" value="#{managerBeans.assignTo}" styleClass="form-control">
+                                <f:selectItem itemLabel="Assign To" itemValue="#{null}" />
+                                <f:selectItems value="#{managerBeans.usersList}" 
+                                               var="user" 
+                                               itemLabel="#{user.userName}" 
+                                               itemValue="#{user.userId}" />
+                            </h:selectOneMenu>
+                            <h:message for="assignTo" styleClass="text-danger" />
+                        </div>
                     </div>
                     <div class="form-group mb-3 row">
                         <div class="col-md-6">

@@ -55,7 +55,7 @@
                             <i class="ph ph-compass-tool"></i>
                         </li>
                         <li class="pc-item">
-                            <a href="employeecomponent/AddLeave.xhtml" class="pc-link">
+                            <a href="AddLeave.xhtml" class="pc-link">
                                 <span class="pc-micon"><i class="ph ph-flower-lotus"></i></span>
                                 <span class="pc-mtext">Leave</span>
                             </a>
@@ -211,12 +211,11 @@
         <div class="pc-container">
             <div class="pc-content">
                 <h:form>
-                    <h:outputLabel value="Leave Type:" />
+                    <h:outputLabel value="Leave Type :" />
                     <h:selectOneMenu value="#{employeeBeans.leaveTypeId}">
                         <f:selectItems value="#{employeeBeans.leaveTypes}" var="leave" 
                                        itemValue="#{leave.leaveTypeId}" itemLabel="#{leave.leaveType}" />
                     </h:selectOneMenu>
-
                     <h:inputText id="startDate" value="#{employeeBeans.leaveStartDate}" 
                                  styleClass="form-control" required="true" 
                                  requiredMessage="Start Date is required" pt:placeholder="Start Date">
@@ -235,8 +234,7 @@
 
                     <h:commandButton value="Apply" action="#{employeeBeans.applyForLeave}" />
                 </h:form>
-
-                <h2>Task Details</h2>
+                <h2>Leave Details</h2>
                 <div class="card table-card" style="max-height: 200px; overflow-y: auto;">
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -250,12 +248,16 @@
                                         #{leave.leaveTypeId.leaveType}
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">Start Date</f:facet>
-                                        #{leave.fromDate}
+                                    <f:facet name="header">From Date</f:facet>
+                                    <h:outputText value="#{leave.fromDate}" >
+                                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+                                    </h:outputText>
                                 </h:column>
                                 <h:column>
-                                    <f:facet name="header">End Date</f:facet>
-                                        #{leave.toDate}
+                                    <f:facet name="header">To Date</f:facet>
+                                    <h:outputText value="#{leave.toDate}" >
+                                        <f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+                                    </h:outputText>
                                 </h:column>
                                 <h:column>
                                     <f:facet name="header">Status</f:facet>

@@ -177,6 +177,7 @@ public class ManagerResource {
         UserDetails userdetails = wrapper.getUserDetails();
         msbl.addUser(user, userdetails);
     }
+
     @POST
     @Path("updateusers")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -244,6 +245,13 @@ public class ManagerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Collection<LeaveDetails> getAllLeaveDetails() {
         return msbl.getAllLeaveDetails();
+    }
+
+    @POST
+    @Path("updateleavestatus")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void updateLeaveStatus(LeaveDetails leave) {
+        msbl.updateLeaveStatus(leave);
     }
 
     //=======================  Project Details Methods =========================

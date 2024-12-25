@@ -25,6 +25,7 @@ public interface EmployeeSessionBeansLocal {
     Collection<LeaveDetails> getEmployeeLeaves(int userId);
 
     void addEmployeeLeave(LeaveDetails leave);
+    void updateEmployeeStatus(LeaveDetails leave);
 
     void addEmployeeAttendence(AttendanceDetails attendence);
 

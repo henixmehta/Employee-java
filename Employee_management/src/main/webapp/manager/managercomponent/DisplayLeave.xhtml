@@ -208,7 +208,9 @@
         <!-- [ Main Content ] start -->
         <div class="pc-container">
             <div class="pc-content">
+
                 <!-- [ Main Content ] start -->
+
                 <h:form>
                     <h2>Employee Leave Details</h2>
                     <div class="card table-card">
@@ -240,13 +242,18 @@
                                         <f:facet name="header">
                                             <span>From Date</span>
                                         </f:facet>
-                                        #{leave.fromDate}
+                                        <h:outputText value="#{leave.fromDate}" >
+                                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+                                        </h:outputText>
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
                                             <span>To Date</span>
                                         </f:facet>
-                                        #{leave.toDate}
+                                        <h:outputText value="#{leave.toDate}" >
+                                            <f:convertDateTime pattern="dd-MM-yyyy HH:mm" />
+                                        </h:outputText>
+
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
@@ -256,15 +263,16 @@
                                     </h:column>
                                     <h:column>
                                         <f:facet name="header">
-                                            <span>Leave Status</span>
+                                            <span>Status</span>
                                         </f:facet>
-                                        #{leave.status}
+                                        <h:selectOneMenu id="status" value="#{leave.status}" styleClass="form-control">
+                                            <f:selectItem itemLabel="Select Status" itemValue="" noSelectionOption="true" />
+                                            <f:selectItem itemLabel="Approved" itemValue="Approved" />
+                                            <f:selectItem itemLabel="Rejected" itemValue="Rejected" />
+                                        </h:selectOneMenu>
                                     </h:column>
                                     <h:column>
-                                        <f:facet name="header">
-                                            <span>Rejected Reason</span>
-                                        </f:facet>
-                                        #{leave.rejectReason}
+                                        <h:commandButton value="Apply" action="#{managerBeans.updateLeaveStatus(leave)}" />
                                     </h:column>
                                 </h:dataTable>
                             </div>

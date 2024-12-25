@@ -96,6 +96,7 @@ public interface ManagerSessionBeanLocal {
     //=====================================  All Leaves Methods ===========================================
     Collection<LeaveMaster> getAllLeaves();
     void addLeaves(String leaveType);
+    public void updateLeaveStatus(LeaveDetails leave);
 
     //=====================================  All Leave Details Methods ====================================
     Collection<LeaveDetails> getAllLeaveDetails();

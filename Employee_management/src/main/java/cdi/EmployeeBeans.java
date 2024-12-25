@@ -37,6 +37,15 @@ public class EmployeeBeans implements Serializable {
     private Date leaveStartDate;
     private Date leaveEndDate;
     private String leaveReason;
+    private String leavestatus;
+
+    public String getStatus() {
+        return leavestatus;
+    }
+
+    public void setStatus(String leavestatus) {
+        this.leavestatus = leavestatus;
+    }
 
     @Inject
     private EmployeeSessionBeansLocal employeeSessionBeans;
@@ -88,6 +97,32 @@ public class EmployeeBeans implements Serializable {
         return leaveTypes;
     }
 
+    public void applyForStatus() {
+        try {
+            
+            LeaveDetails leave = new LeaveDetails();
+            leave.setStatus(leavestatus);
+
+            UserMaster user = new UserMaster();
+            user.setUserId(userId);
+            leave.setUserId(user);
+
+            employeeSessionBeans.updateEmployeeStatus(leave);
+            employeeSessionBeans.getEmployeeLeaves(userId);
+        } catch (Exception e) {
+            System.err.println("Error applying for leave Status: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public String getLeavestatus() {
+        return leavestatus;
+    }
+
+    public void setLeavestatus(String leavestatus) {
+        this.leavestatus = leavestatus;
+    }
+
     public void applyForLeave() {
         try {
             LeaveMaster leaveType = employeeSessionBeans.getLeaveTypeById(leaveTypeId); // Fetch LeaveMaster by ID
@@ -101,6 +136,7 @@ public class EmployeeBeans implements Serializable {
             leave.setFromDate(leaveStartDate);
             leave.setToDate(leaveEndDate);
             leave.setReason(leaveReason);
+            leave.setStatus("Requested");
 
             UserMaster user = new UserMaster();
             user.setUserId(userId);

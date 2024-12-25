@@ -149,4 +149,10 @@ public class EmployeeSessionBeans implements EmployeeSessionBeansLocal {
         }
     }
 
+    @Override
+    public void updateEmployeeStatus(LeaveDetails leave) {
+        em.merge(leave);
+        System.out.println("Status applied successfully!");
+    }
+
 }

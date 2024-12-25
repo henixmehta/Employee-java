@@ -208,8 +208,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void updateProjectStatus(Integer projectId, String newStatus
-    ) {
+    public void updateProjectStatus(Integer projectId, String newStatus) {
 //        ProjectDetails project = em.find(ProjectDetails.class, projectId);
 //        if (project != null) {
 //            project.setStatus(newStatus);
@@ -374,8 +373,7 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
     }
 
     @Override
-    public void addProject(ProjectDetails project
-    ) {
+    public void addProject(ProjectDetails project) {
         em.persist(project);
     }
 
@@ -418,5 +416,10 @@ public class ManagerSessionBean implements ManagerSessionBeanLocal {
         } catch (NoResultException e) {
             return null; // Return null if no user details found
         }
+    }
+
+    @Override
+    public void updateLeaveStatus(LeaveDetails leave) {
+        em.merge(leave);
     }
 }

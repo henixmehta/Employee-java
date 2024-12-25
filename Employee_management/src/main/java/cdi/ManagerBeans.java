@@ -634,7 +634,7 @@ public class ManagerBeans implements Serializable {
         return "DisplayTask.xhtml";
     }
 
-    // Leave Master 
+    // ============================= Leave Master ======================================================
     //addAssets
     public void addLeaves() {
         try {
@@ -648,6 +648,18 @@ public class ManagerBeans implements Serializable {
         }
     }
 
+    public void updateLeaveStatus(LeaveDetails leave) {
+        try {
+
+            // Call the client method to update the designation
+            managerClient.updateLeaveStatus(leave);
+
+            LeavedetailsList = managerClient.getAllLeaveDetails(leavesdetailsGenericType);
+           
+        } catch (ClientErrorException e) {
+            e.printStackTrace(); // Handle exceptions appropriately
+        }
+    }
     // ========================================== Project Details =========================================
     ProjectDetails project = new ProjectDetails();
 
