@@ -7,6 +7,7 @@ package cdi;
 import ejb.EmployeeSessionBeansLocal;
 import entity.AttendanceDetails;
 import entity.LeaveDetails;
+import entity.LeaveMaster;
 import entity.UserMaster;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -31,6 +32,11 @@ public class EmployeeBeans implements Serializable {
     private boolean hasCheckedInToday;  // Tracks if user has checked in today
     private boolean hasCheckedOutToday; // Tracks if user has checked out today
     private Collection<LeaveDetails> leaveDetails; // Collection to store leave details
+    private Collection<LeaveMaster> leaveTypes;    // Collection of leave types
+    private int leaveTypeId;                       // To store selected leave type ID
+    private Date leaveStartDate;
+    private Date leaveEndDate;
+    private String leaveReason;
 
     @Inject
     private EmployeeSessionBeansLocal employeeSessionBeans;
@@ -51,13 +57,11 @@ public class EmployeeBeans implements Serializable {
         hasCheckedOutToday = employeeSessionBeans.hasCheckedOutToday(userId);
     }
 
-    
-//==========================================================================empdetails
+    //========================================================================== Employee Details
     public Collection<UserMaster> getEmployeeDetails() {
         if (employeeDetails == null) {
             employeeDetails = employeeSessionBeans.getEmployeeDetailsByUserId(userId);
         }
-//        System.out.println("cdi.EmployeeBeans.getEmployeeDetails()" + employeeDetails);
         return employeeDetails;
     }
 
@@ -65,7 +69,7 @@ public class EmployeeBeans implements Serializable {
         this.employeeDetails = employeeDetails;
     }
 
-//==========================================================================Leave
+    //========================================================================== Leave Management
     public Collection<LeaveDetails> getLeaveDetails() {
         if (leaveDetails == null) {
             leaveDetails = employeeSessionBeans.getEmployeeLeaves(userId);
@@ -76,7 +80,75 @@ public class EmployeeBeans implements Serializable {
     public void setLeaveDetails(Collection<LeaveDetails> leaveDetails) {
         this.leaveDetails = leaveDetails;
     }
-//==========================================================================attendence
+
+    public Collection<LeaveMaster> getLeaveTypes() {
+        if (leaveTypes == null) {
+            leaveTypes = employeeSessionBeans.getLeaveTypes();
+        }
+        return leaveTypes;
+    }
+
+    public void applyForLeave() {
+        try {
+            LeaveMaster leaveType = employeeSessionBeans.getLeaveTypeById(leaveTypeId); // Fetch LeaveMaster by ID
+            if (leaveType == null) {
+                System.out.println("Invalid leave type ID");
+                return;
+            }
+
+            LeaveDetails leave = new LeaveDetails();
+            leave.setLeaveTypeId(leaveType);
+            leave.setFromDate(leaveStartDate);
+            leave.setToDate(leaveEndDate);
+            leave.setReason(leaveReason);
+
+            UserMaster user = new UserMaster();
+            user.setUserId(userId);
+            leave.setUserId(user);
+
+            employeeSessionBeans.addEmployeeLeave(leave);
+            leaveDetails = employeeSessionBeans.getEmployeeLeaves(userId);
+
+            System.out.println("Leave applied successfully!");
+        } catch (Exception e) {
+            System.err.println("Error applying for leave: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    public int getLeaveTypeId() {
+        return leaveTypeId;
+    }
+
+    public void setLeaveTypeId(int leaveTypeId) {
+        this.leaveTypeId = leaveTypeId;
+    }
+
+    public Date getLeaveStartDate() {
+        return leaveStartDate;
+    }
+
+    public void setLeaveStartDate(Date leaveStartDate) {
+        this.leaveStartDate = leaveStartDate;
+    }
+
+    public Date getLeaveEndDate() {
+        return leaveEndDate;
+    }
+
+    public void setLeaveEndDate(Date leaveEndDate) {
+        this.leaveEndDate = leaveEndDate;
+    }
+
+    public String getLeaveReason() {
+        return leaveReason;
+    }
+
+    public void setLeaveReason(String leaveReason) {
+        this.leaveReason = leaveReason;
+    }
+
+    //========================================================================== Attendance Management
     public Collection<AttendanceDetails> getAttendanceDetails() {
         if (attendanceDetails == null) {
             attendanceDetails = employeeSessionBeans.getEmployeeAttendence(userId);

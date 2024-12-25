@@ -6,6 +6,7 @@ package ejb;
 
 import entity.AttendanceDetails;
 import entity.LeaveDetails;
+import entity.LeaveMaster;
 import entity.UserMaster;
 import java.util.Collection;
 import javax.ejb.Local;
@@ -34,5 +35,9 @@ public interface EmployeeSessionBeansLocal {
     AttendanceDetails getTodayAttendanceByUserId(int userId);
 
     void updateEmployeeAttendance(AttendanceDetails attendance);
+
+    Collection<LeaveMaster> getLeaveTypes();
+
+    LeaveMaster getLeaveTypeById(int leaveTypeId);
 
 }

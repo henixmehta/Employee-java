@@ -6,6 +6,7 @@ package ejb;
 
 import entity.AttendanceDetails;
 import entity.LeaveDetails;
+import entity.LeaveMaster;
 import entity.UserMaster;
 import java.util.Collection;
 import java.util.Collections;
@@ -64,7 +65,12 @@ public class EmployeeSessionBeans implements EmployeeSessionBeansLocal {
 
     @Override
     public void addEmployeeLeave(LeaveDetails leave) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            em.persist(leave); // Persist the leave record
+        } catch (Exception e) {
+            System.err.println("Error adding employee leave: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -119,6 +125,28 @@ public class EmployeeSessionBeans implements EmployeeSessionBeansLocal {
     @Override
     public void updateEmployeeAttendance(AttendanceDetails attendance) {
         em.merge(attendance);
+    }
+
+    @Override
+    public Collection<LeaveMaster> getLeaveTypes() {
+        try {
+            return em.createQuery("SELECT l FROM LeaveMaster l", LeaveMaster.class).getResultList();
+        } catch (Exception e) {
+            System.err.println("Error fetching leave types: " + e.getMessage());
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }
+
+    @Override
+    public LeaveMaster getLeaveTypeById(int leaveTypeId) {
+        try {
+            return em.find(LeaveMaster.class, leaveTypeId);
+        } catch (Exception e) {
+            System.err.println("Error fetching LeaveMaster by ID: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }
