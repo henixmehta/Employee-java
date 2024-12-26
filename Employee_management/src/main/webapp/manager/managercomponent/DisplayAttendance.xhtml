@@ -39,7 +39,7 @@
                 <div class="navbar-content">
                     <ul class="pc-navbar">
                         <li class="pc-item pc-caption">
-                            <label>Manager</label>
+                           <h6>Welcome! #{session.getAttribute("userName")}</h6>
                         </li>
                         <li class="pc-item">
                             <a href="../managerDashboard.xhtml" class="pc-link">
@@ -85,9 +85,9 @@
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="ViewUserDetails.xhtml">Registration Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
+                                <!--<li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>-->
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>
+                                <!--<li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>-->
                                 <li class="pc-item"><a class="pc-link" href="DisplaySkill.xhtml">Skills</a></li>
                             </ul>
                         </li>
@@ -241,12 +241,6 @@
                                             <span>Check Out</span>
                                         </f:facet>
                                         #{attend.checkOut}
-                                    </h:column>
-                                    <h:column>
-                                        <f:facet name="header">
-                                            <span>Check Out</span>
-                                        </f:facet>
-                                        #{attend.date}
                                     </h:column>
                                 </h:dataTable>
                             </div>

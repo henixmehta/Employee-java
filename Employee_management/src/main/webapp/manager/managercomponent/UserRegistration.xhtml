@@ -45,7 +45,7 @@
                 <div class="navbar-content">
                     <ul class="pc-navbar">
                         <li class="pc-item pc-caption">
-                            <label>Manager</label>
+                            <h6>Welcome! #{session.getAttribute("userName")}</h6>
                         </li>
                         <li class="pc-item">
                             <a href="../managerDashboard.xhtml" class="pc-link">
@@ -91,9 +91,9 @@
                             <ul class="pc-submenu">
                                 <li class="pc-item"><a class="pc-link" href="ViewUserDetails.xhtml">Registration Details</a></li>
                                 <li class="pc-item"><a class="pc-link" href="DisplayAttendance.xhtml">Attendance</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>
+                                <!--<li class="pc-item"><a class="pc-link" href="DisplayDocument.xhtml">Document</a></li>-->
                                 <li class="pc-item"><a class="pc-link" href="DisplayLeave.xhtml">Leave Details</a></li>
-                                <li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>
+                                <!--<li class="pc-item"><a class="pc-link" href="DisplayPerformance.xhtml">Performance</a></li>-->
                                 <li class="pc-item"><a class="pc-link" href="DisplaySkill.xhtml">Skills</a></li>
                             </ul>
                         </li>
@@ -178,7 +178,7 @@
                                         class="profile-notification-scroll position-relative" 
                                         style="max-height: calc(100vh - 225px);">
                                         <ul class="list-group list-group-flush w-100">
-                                            <li class="list-group-item">
+<!--                                            <li class="list-group-item">
                                                 <a href="#" class="dropdown-item">
                                                     <span class="d-flex align-items-center">
                                                         <i class="ph ph-user-circle"></i>
@@ -191,7 +191,7 @@
                                                         <span>Settings</span>
                                                     </span>
                                                 </a>
-                                            </li>
+                                            </li>-->
                                             <li class="list-group-item">
                                                 <h:form style="margin: 0; padding: 0;">
                                                     <h:commandLink action="#{loginBean.logout}" styleClass="dropdown-item">
