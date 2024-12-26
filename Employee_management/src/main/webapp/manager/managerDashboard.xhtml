@@ -39,7 +39,7 @@
                 <div class="navbar-content">
                     <ul class="pc-navbar">
                         <li class="pc-item pc-caption">
-                            <label>#{session.getAttribute("userName")}</label>
+                            <h6>Welcome! #{session.getAttribute("userName")}</h6>
                         </li>
                         <li class="pc-item">
                             <a href="managerDashboard.xhtml" class="pc-link">
@@ -183,20 +183,6 @@
                                         style="max-height: calc(100vh - 225px);">
                                         <ul class="list-group list-group-flush w-100">
                                             <li class="list-group-item">
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-user-circle"></i>
-                                                        <span>Edit profile</span>
-                                                    </span>
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-gear-six"></i>
-                                                        <span>Settings</span>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
                                                 <h:form style="margin: 0; padding: 0;">
                                                     <h:commandLink action="#{loginBean.logout}" styleClass="dropdown-item">
                                                         <span class="d-flex align-items-center">
@@ -221,7 +207,7 @@
                 <!-- [ Main Content ] start -->
                 <div class="row">
                     <!-- Task Count -->
-                    <div class="col-md-6 col-xl-3">
+                    <div class="col-md-6 col-xl-4">
                         <div class="card bg-grd-warning order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Task</h6>
@@ -236,7 +222,7 @@
                         </div>
                     </div>
                     <!-- Projects Count -->
-                    <div class="col-md-6 col-xl-3">
+                    <div class="col-md-6 col-xl-4">
                         <div class="card bg-grd-primary order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Projects</h6>
@@ -251,7 +237,7 @@
                         </div>
                     </div>
                     <!-- Departments Count -->
-                    <div class="col-md-6 col-xl-3">
+                    <div class="col-md-6 col-xl-4">
                         <div class="card bg-grd-success order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Departments</h6>
@@ -266,8 +252,8 @@
                         </div>
                     </div>
                     <!-- Designations Count -->
-                    <div class="col-md-6 col-xl-3">
-                        <div class="card bg-grd-warning order-card">
+                    <div class="col-md-6 col-xl-4">
+                        <div class="card bg-gray-500 order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Designations</h6>
                                 <h2 class="text-end text-white">
@@ -281,7 +267,7 @@
                         </div>
                     </div>
                     <!-- Users Count -->
-                    <div class="col-md-6 col-xl-3">
+                    <div class="col-md-6 col-xl-4">
                         <div class="card bg-grd-danger order-card">
                             <div class="card-body">
                                 <h6 class="text-white">Users</h6>

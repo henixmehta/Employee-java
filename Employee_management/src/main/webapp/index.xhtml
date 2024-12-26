@@ -44,7 +44,7 @@
                         <div class="card-body">
                             <div class="text-center">
                                 <img src="assets/images/logo-white.svg" alt="logo" class="img-fluid mb-4" />
-                                <h4 class="f-w-500 mb-1">Login with your email</h4>
+                                <h4 class="f-w-500 mb-1">Login Here with Email</h4>
                                 <p class="mb-4">
                                     <!--Don't have an Account?-->
                                     <!--=========================================regiterlink-->
@@ -64,17 +64,9 @@
                                                    pt:placeholder="Enter Password"/>
                                 </div>
                                 <div class="d-flex mt-1 justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <h:selectBooleanCheckbox id="rememberMe" value="#{loginBean.rememberMe}" 
-                                                                 class="form-check-input input-primary" />
-                                        <label for="rememberMe" class="form-check-label text-muted">Remember me?</label>
-                                    </div>
-                                    <!--                                    <h:link outcome="forgot-password.xhtml">
-                                                                            <h6 class="f-w-400 mb-0">Forgot Password?</h6>
-                                                                        </h:link>-->
-                                </div>
+                               </div>
                                 <div class="d-grid mt-4">
-                                    <h:commandButton value="Login" action="#{loginBean.login}" class="btn btn-primary" />
+                                    <h:commandButton value="LOGIN" action="#{loginBean.login}" class="btn btn-primary" />
                                 </div>
                             </h:form>
                         </div>

@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Employee Deshboard</title>
+        <title>Employee Dashboard</title>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -39,9 +39,7 @@
                 <div class="navbar-content">
                     <ul class="pc-navbar">
                         <li class="pc-item pc-caption">
-                            <h5><label>Welcome: #{session.getAttribute("userName")}</label>
-                            </h5>
-
+                            <h6>Welcome! #{session.getAttribute("userName")}</h6>
                         </li>
                         <li class="pc-item">
                             <a href="employeeDashboard.xhtml" class="pc-link">
@@ -65,33 +63,10 @@
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a href="../pages/login-v1.html" class="pc-link">
-                                <span class="pc-micon"><i class="ph ph-lock"></i></span>
-                                <span class="pc-mtext">Login</span>
+                            <a href="employeecomponent/DisplayHolidayList.xhtml" class="pc-link">
+                                <span class="pc-micon"><i class="ph ph-flower-lotus"></i></span>
+                                <span class="pc-mtext">Holiday</span>
                             </a>
-                        </li>
-                        <li class="pc-item pc-caption">
-                            <label>Other</label>
-                            <i class="ph ph-suitcase"></i>
-                        </li>
-                        <li class="pc-item pc-hasmenu">
-                            <a href="#" class="pc-link">
-                                <span class="pc-micon"><i class="ph ph-tree-structure"></i></span>
-                                <span class="pc-mtext">Menu levels</span>
-                                <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
-                            </a>
-                            <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="#">Level 2.1</a></li>
-                                <li class="pc-item pc-hasmenu">
-                                    <a href="#" class="pc-link">
-                                        Level 2.2<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
-                                    </a>
-                                    <ul class="pc-submenu">
-                                        <li class="pc-item"><a class="pc-link" href="#">Level 3.1</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="#">Level 3.2</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>
@@ -174,20 +149,20 @@
                                         class="profile-notification-scroll position-relative" 
                                         style="max-height: calc(100vh - 225px);">
                                         <ul class="list-group list-group-flush w-100">
-                                            <li class="list-group-item">
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-user-circle"></i>
-                                                        <span>Edit profile</span>
-                                                    </span>
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-gear-six"></i>
-                                                        <span>Settings</span>
-                                                    </span>
-                                                </a>
-                                            </li>
+                                            <!--<li class="list-group-item">-->
+                                            <!--                                                <a href="#" class="dropdown-item">
+                                                                                                <span class="d-flex align-items-center">
+                                                                                                    <i class="ph ph-user-circle"></i>
+                                                                                                    <span>Edit profile</span>
+                                                                                                </span>
+                                                                                            </a>
+                                                                                            <a href="#" class="dropdown-item">
+                                                                                                <span class="d-flex align-items-center">
+                                                                                                    <i class="ph ph-gear-six"></i>
+                                                                                                    <span>Settings</span>
+                                                                                                </span>
+                                                                                            </a>-->
+                                            <!--</li>-->
                                             <li class="list-group-item">
                                                 <h:form style="margin: 0; padding: 0;">
                                                     <h:commandLink action="#{loginBean.logout}" styleClass="dropdown-item">
@@ -262,31 +237,21 @@
                     </div>
                     <!-- Users Count -->
                     <div class="col-md-6 col-xl-3">
-                        <div class="card bg-grd-danger order-card">
+                        <div class="card bg-blue-700 order-card">
                             <div class="card-body">
-                                <h6 class="text-white">Users</h6>
-                                <h2 class="text-end text-white">
-                                    <i class="feather icon-award float-start"></i>
-                                    <span>#{managerBeans.userCount}</span>
-                                </h2>
-                                <p class="m-b-0">
-                                    Employee Details<span class="float-end">#{managerBeans.userCount}</span>
-                                </p>
+                                <h:form>
+                                    <!-- Check-In Button -->
+                                    <h:commandButton value="Check-In" action="#{employeeBeans.checkIn}" rendered="#{!employeeBeans.hasCheckedInToday}" />
+                                     <!-- Check-Out Button -->
+                                    <h:commandButton value="Check-Out" action="#{employeeBeans.checkOut}" rendered="#{employeeBeans.hasCheckedInToday and !employeeBeans.hasCheckedOutToday}" />
+
+                                    <!-- Message for Already Checked-Out Users -->
+                                    <h:outputText value="You have already checked out today." rendered="#{employeeBeans.hasCheckedOutToday}" />
+                                </h:form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <h:form>
-                    <!-- Check-In Button -->
-                    <h:commandButton value="Check-In" action="#{employeeBeans.checkIn}" rendered="#{!employeeBeans.hasCheckedInToday}" />
-
-                    <!-- Check-Out Button -->
-                    <h:commandButton value="Check-Out" action="#{employeeBeans.checkOut}" rendered="#{employeeBeans.hasCheckedInToday and !employeeBeans.hasCheckedOutToday}" />
-
-                    <!-- Message for Already Checked-Out Users -->
-                    <h:outputText value="You have already checked out today." rendered="#{employeeBeans.hasCheckedOutToday}" />
-                </h:form>
-
                 <h2>Employee Details</h2>
                 <div class="card-body p-0">
                     <div class="card table-card" style="max-height: 200px; overflow-y: auto;">

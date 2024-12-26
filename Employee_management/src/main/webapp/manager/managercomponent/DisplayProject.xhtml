@@ -40,7 +40,7 @@
                 <div class="navbar-content">
                     <ul class="pc-navbar">
                         <li class="pc-item pc-caption">
-                            <label>Manager</label>
+                            <h6>Welcome! #{session.getAttribute("userName")}</h6>
                         </li>
                         <li class="pc-item">
                             <a href="../managerDashboard.xhtml" class="pc-link">
@@ -99,11 +99,7 @@
         <!-- [ Sidebar Menu ] end -->
         <!-- [ Header Topbar ] start -->
         <header class="pc-header">
-            <!--            <div class="m-header">
-                            <a href="../dashboard/index.html" class="b-brand text-primary">
-                                <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
-                            </a>
-                        </div>-->
+         
             <div class="header-wrapper">
                 <!-- [Mobile Media Block] start -->
                 <div class="me-auto pc-mob-drp">
@@ -173,20 +169,6 @@
                                         class="profile-notification-scroll position-relative" 
                                         style="max-height: calc(100vh - 225px);">
                                         <ul class="list-group list-group-flush w-100">
-                                            <li class="list-group-item">
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-user-circle"></i>
-                                                        <span>Edit profile</span>
-                                                    </span>
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-gear-six"></i>
-                                                        <span>Settings</span>
-                                                    </span>
-                                                </a>
-                                            </li>
                                             <li class="list-group-item">
                                                 <h:form style="margin: 0; padding: 0;">
                                                     <h:commandLink action="#{loginBean.logout}" styleClass="dropdown-item">

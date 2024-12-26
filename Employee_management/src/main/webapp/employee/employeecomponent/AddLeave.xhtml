@@ -33,16 +33,14 @@
         <nav class="pc-sidebar">
             <div class="navbar-wrapper">
                 <div class="m-header">
-                    <a href="../dashboard/index.html" class="b-brand text-primary">
+                    <a href="../employeeDashboard.xhtml" class="b-brand text-primary">
                         <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
                     </a>
                 </div>
                 <div class="navbar-content">
                     <ul class="pc-navbar">
                         <li class="pc-item pc-caption">
-
-                            <label>Welcome:#{session.getAttribute("userName")}</label>
-
+                            <h6>Welcome! #{session.getAttribute("userName")}</h6>
                         </li>
                         <li class="pc-item">
                             <a href="../employeeDashboard.xhtml" class="pc-link">
@@ -51,8 +49,6 @@
                             </a>
                         </li>
                         <li class="pc-item pc-caption">
-                            <label>Employee Leave</label>
-                            <i class="ph ph-compass-tool"></i>
                         </li>
                         <li class="pc-item">
                             <a href="AddLeave.xhtml" class="pc-link">
@@ -60,51 +56,25 @@
                                 <span class="pc-mtext">Leave</span>
                             </a>
                         </li>
-                        <li class="pc-item pc-caption">
-                            <label>Pages</label>
-                            <i class="ph ph-devices"></i>
+
+                        <li class="pc-item">
+                            <a href="DisplayAttendence.xhtml" class="pc-link">
+                                <span class="pc-micon"><i class="ph ph-flower-lotus"></i></span>
+                                <span class="pc-mtext">Attendance</span>
+                            </a>
                         </li>
                         <li class="pc-item">
-                            <a href="../pages/login-v1.html" class="pc-link">
-                                <span class="pc-micon"><i class="ph ph-lock"></i></span>
-                                <span class="pc-mtext">Login</span>
+                            <a href="DisplayHolidayList.xhtml" class="pc-link">
+                                <span class="pc-micon"><i class="ph ph-flower-lotus"></i></span>
+                                <span class="pc-mtext">Holiday</span>
                             </a>
-                        </li>
-                        <li class="pc-item pc-caption">
-                            <label>Other</label>
-                            <i class="ph ph-suitcase"></i>
-                        </li>
-                        <li class="pc-item pc-hasmenu">
-                            <a href="#" class="pc-link">
-                                <span class="pc-micon"><i class="ph ph-tree-structure"></i></span>
-                                <span class="pc-mtext">Menu levels</span>
-                                <span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
-                            </a>
-                            <ul class="pc-submenu">
-                                <li class="pc-item"><a class="pc-link" href="#">Level 2.1</a></li>
-                                <li class="pc-item pc-hasmenu">
-                                    <a href="#" class="pc-link">
-                                        Level 2.2<span class="pc-arrow"><i class="ph ph-chevron-right"></i></span>
-                                    </a>
-                                    <ul class="pc-submenu">
-                                        <li class="pc-item"><a class="pc-link" href="#">Level 3.1</a></li>
-                                        <li class="pc-item"><a class="pc-link" href="#">Level 3.2</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
                         </li>
                     </ul>
                 </div>
             </div>
-        </nav>
-        <!-- [ Sidebar Menu ] end -->
+        </nav> <!-- [ Sidebar Menu ] end -->
         <!-- [ Header Topbar ] start -->
         <header class="pc-header">
-            <!--            <div class="m-header">
-                            <a href="../dashboard/index.html" class="b-brand text-primary">
-                                <img src="../assets/images/logo-white.svg" alt="logo image" class="logo-lg" />
-                            </a>
-                        </div>-->
             <div class="header-wrapper">
                 <!-- [Mobile Media Block] start -->
                 <div class="me-auto pc-mob-drp">
@@ -175,20 +145,6 @@
                                         style="max-height: calc(100vh - 225px);">
                                         <ul class="list-group list-group-flush w-100">
                                             <li class="list-group-item">
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-user-circle"></i>
-                                                        <span>Edit profile</span>
-                                                    </span>
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                    <span class="d-flex align-items-center">
-                                                        <i class="ph ph-gear-six"></i>
-                                                        <span>Settings</span>
-                                                    </span>
-                                                </a>
-                                            </li>
-                                            <li class="list-group-item">
                                                 <h:form style="margin: 0; padding: 0;">
                                                     <h:commandLink action="#{loginBean.logout}" styleClass="dropdown-item">
                                                         <span class="d-flex align-items-center">
@@ -210,30 +166,48 @@
         <!-- [ Main Content ] start -->
         <div class="pc-container">
             <div class="pc-content">
-                <h:form>
-                    <h:outputLabel value="Leave Type :" />
-                    <h:selectOneMenu value="#{employeeBeans.leaveTypeId}">
-                        <f:selectItems value="#{employeeBeans.leaveTypes}" var="leave" 
-                                       itemValue="#{leave.leaveTypeId}" itemLabel="#{leave.leaveType}" />
-                    </h:selectOneMenu>
-                    <h:inputText id="startDate" value="#{employeeBeans.leaveStartDate}" 
-                                 styleClass="form-control" required="true" 
-                                 requiredMessage="Start Date is required" pt:placeholder="Start Date">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/>
-                        <f:passThroughAttribute name="type" value="date" />
-                    </h:inputText>
-                    <h:outputLabel value="End Date:" />
-                    <h:inputText id="endDate" value="#{employeeBeans.leaveEndDate}" 
-                                 styleClass="form-control" required="true" 
-                                 requiredMessage="End Date is required" pt:placeholder="End Date">
-                        <f:convertDateTime pattern="yyyy-MM-dd"/>
-                        <f:passThroughAttribute name="type" value="date" />
-                    </h:inputText>
-                    <h:outputLabel value="Reason:" />
-                    <h:inputTextarea value="#{employeeBeans.leaveReason}" />
+                <h:form style="border: 2px solid gainsboro; padding: 20px; border-radius: 5px; background-color: whitesmoke;">
+                    <h2 align="center">Add Leave Request</h2>
+                    <hr style="border: 2px solid gray; width: 100%; opacity: 0.5;" />
+                    <div class="form-group mb-3">
+                        <h:inputTextarea id="leaveReason" value="#{employeeBeans.leaveReason}" 
+                                         styleClass="form-control" required="true" pt:placeholder="Add Leave Reason" />
+                    </div>
 
-                    <h:commandButton value="Apply" action="#{employeeBeans.applyForLeave}" />
+                    <div class="form-group mb-3">
+                        <h:selectOneMenu id="leaveTypeId" value="#{employeeBeans.leaveTypeId}" 
+                                         requiredMessage="Project Id is required" styleClass="form-control">
+                            <f:selectItem itemLabel="-- Select Leave Type  --" itemValue="#{null}" />
+                            <f:selectItems value="#{employeeBeans.leaveTypes}" var="leave" 
+                                           itemValue="#{leave.leaveTypeId}" itemLabel="#{leave.leaveType}" />
+                        </h:selectOneMenu>
+                    </div>
+                    <div class="form-group mb-3 row">
+                        <div class="col-md-6" style="padding-top: 25px">
+                            <label>From Date</label>
+                            <h:inputText id="startDate" value="#{employeeBeans.leaveStartDate}" 
+                                         styleClass="form-control" required="true" 
+                                         requiredMessage="Start Date is required" pt:placeholder="Start Date">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                <f:passThroughAttribute name="type" value="date" />
+                            </h:inputText>
+                        </div>
+                        <div class="col-md-6" style="padding-top: 25px">
+                            <label>To Date</label>
+                            <h:inputText id="endDate" value="#{employeeBeans.leaveEndDate}" 
+                                         styleClass="form-control" required="true" 
+                                         requiredMessage="End Date is required" pt:placeholder="End Date">
+                                <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                <f:passThroughAttribute name="type" value="date" />
+                            </h:inputText>
+                        </div>
+                    </div>
+                    <div class="d-grid mt">
+                        <h:commandButton value="Leave Request" action="#{employeeBeans.applyForLeave}" 
+                                         styleClass="btn btn-primary ms-2" />
+                    </div>
                 </h:form>
+                <hr/>
                 <h2>Leave Details</h2>
                 <div class="card table-card" style="max-height: 200px; overflow-y: auto;">
                     <div class="card-body p-0">
